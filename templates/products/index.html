@@ -6,15 +6,35 @@ Products
 
 {% block body  -%}
 <h1>Products list</h1>
-<div>
-    <ul>
+    <div class="alert alert-info" role="alert">
+        Sale only today!
+    </div>
+ <style>
+   a {
+    text-decoration: none;
+   }
+  </style>
+<div class="row">
+    <div class="col col-12 col-md-8 col-lg-6 col-xl-4">
+    <ul class="list-group">
         {% for product_id in products %}
-        <li>
-            <a href="{{ url_for('product_app.product_detail', product_id=product_id) }}">
-                {{products[product_id]}}
-            </a>
-        </li>
+        <div>
+            <li class="my product-item list-group-item">
+                <a href="{{ url_for('product_app.product_detail', product_id=product_id) }}">
+                    {{products[product_id]}}
+                </a>
+            </li>
+        </div>
         {% endfor %}
     </ul>
+    </div>
 </div>
 {%- endblock %}
+{% block after_body %}
+<script>
+  $(function () {
+    const name = $('.product-item')
+    console.log(name)
+    })
+</script>
+{% endblock %}

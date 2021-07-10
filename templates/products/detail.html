@@ -5,7 +5,20 @@ Products #{{product_id}}
 {%- endblock %}
 
 {% block body  -%}
-<h1>Products <code>{{ product_name }}</code></h1>
-<!--<hr>-->
+<h1>Products <code id="product-name">{{ product_name }}</code></h1>
+ <style>
+   a {
+    text-decoration: none;
+   }
+  </style>
+<hr>
 <a href="{{ url_for('product_app.product_list') }}">Product list</a>
 {%- endblock %}
+{% block after_body %}
+<script>
+    $(function () {
+    const name = $('#product-name')
+    console.log(name.value)
+    })
+</script>
+{% endblock %}
