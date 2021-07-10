@@ -13,12 +13,22 @@ Products #{{product_id}}
   </style>
 <hr>
 <a href="{{ url_for('product_app.product_list') }}">Product list</a>
+
+<hr>
+{# Admin area #}
+ <div>
+     <button id="delete-product" class="btn btn-danger btn-lg">Delete</button>
+ </div>
 {%- endblock %}
 {% block after_body %}
-<script>
+ <script>
     $(function () {
     const name = $('#product-name')
-    console.log(name.value)
-    })
+    console.log(name.text())
+
+    $('#delete-product').click(function () {
+    console.log("clicked")
+      })
+    });
 </script>
 {% endblock %}
