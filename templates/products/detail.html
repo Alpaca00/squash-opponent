@@ -13,7 +13,6 @@ Products #{{product_id}}
   </style>
 <hr>
 <a href="{{ url_for('product_app.product_list') }}">Product list</a>
-
 <hr>
 {# Admin area #}
  <div>
@@ -27,7 +26,20 @@ Products #{{product_id}}
     console.log(name.text())
 
     $('#delete-product').click(function () {
-    console.log("clicked")
+
+    $.ajax({
+        method: 'DELETE',
+        success: function (res) {
+            console.log(res)
+            console.log(res.data)
+        },
+        error: function (err) {
+            console.error(err)
+            },
+        complete: function () {
+            window.location = '{{ url_for('product_app.product_list') }}'
+        },
+       })
       })
     });
 </script>
