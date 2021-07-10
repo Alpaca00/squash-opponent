@@ -6,7 +6,7 @@ name = "pypi"
 [packages]
 
 [dev-packages]
-flask = "*"
+flask = "==2.0.1"
 
 [requires]
 python_version = "3.8"
