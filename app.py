@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, render_template
 from views import product_app
 
 
@@ -8,9 +8,10 @@ app.register_blueprint(product_app, url_prefix='/products')
 
 @app.route("/", methods=['GET', 'POST'])
 def index():
+    name = "World"
     if request.method == 'POST':
-        return f"<h1>Hello {request.form.get('name', 'World!')}</h1>"
-    return "<h1>Hello world!</h1>"
+        name = request.form.get('name', 'World')
+    return render_template("base.html", name=name)
 
 
 @app.route("/hello/<string:name>/")
