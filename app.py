@@ -1,6 +1,5 @@
 from flask import Flask, request, render_template
 from flask_migrate import Migrate
-import psycopg2
 import config
 from views import product_app
 from models import db
