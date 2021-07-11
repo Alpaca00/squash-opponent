@@ -1,0 +1,14 @@
+version: '3.5'
+
+services:
+  pg:
+    image: postgres:13.3
+    environment:
+      POSTGRES_DB: alpaca
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      PGDATA: /var/lib/postgresql/data/pgdata
+    volumes:
+    - ./data/pgdata:/var/lib/postgresql/data/pgdata
+    ports:
+    - 5432:5432
