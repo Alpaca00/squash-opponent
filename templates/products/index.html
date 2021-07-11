@@ -17,12 +17,15 @@ Products
 <div class="row">
     <div class="col col-12 col-md-8 col-lg-6 col-xl-4">
     <ul class="list-group">
-        {% for product_id in products %}
+        {% for product in products %}
         <div>
-            <li class="my product-item list-group-item">
-                <a href="{{ url_for('product_app.product_detail', product_id=product_id) }}">
-                    {{products[product_id]}}
+            <li class="my product-item list-group-item" >
+                <a href="{{ url_for('product_app.product_detail', product_id=product.id) }}">
+                    {{ product.name -}}
                 </a>
+                {% if product.is_new %}
+                <span class="badge bg-primary">New</span>
+                {% endif %}
             </li>
         </div>
         {% endfor %}
