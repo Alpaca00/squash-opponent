@@ -6,7 +6,7 @@ COPY . .
 
 RUN /usr/local/bin/python -m pip install --upgrade pip && pip install pipenv
 
-#RUN pipenv install --system --deploy --ignore-pipfile
-RUN pipenv install flask
+RUN pipenv install --system --deploy --ignore-pipfile
+RUN pipenv install
 
 CMD ["pipenv", "run", "python", "main.py"]
