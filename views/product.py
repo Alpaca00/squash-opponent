@@ -1,21 +1,13 @@
 from flask import Blueprint, render_template, request, jsonify
 from werkzeug.exceptions import BadRequest
-from models import Product
+from models import Product, db
 
 product_app = Blueprint("product_app", __name__)
-
-PRODUCTS = {
-    1: 'Smartphone',
-    2: 'Tablet',
-    3: 'Laptop'
-}
 
 
 @product_app.route("/")
 def product_list():
-    product = Product.query.all()
-    for row in Product.query.all():
-        print(row.name, row.is_new)
+    product = Product.query.filter_by(deleted=False).all()
     return render_template("products/index.html", products=product)
 
 
@@ -25,7 +17,8 @@ def product_detail(product_id: int):
     if product is None:
         raise BadRequest(f"Invalid product id #{product_id}")
     if request.method == "DELETE":
-        PRODUCTS.pop(product_id)
+        product.deleted = True
+        db.session.commit()
         return jsonify(ok=True)
     return render_template(
         "products/detail.html",
