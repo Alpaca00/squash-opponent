@@ -12,3 +12,11 @@ services:
     - ./data/pgdata:/var/lib/postgresql/data/pgdata
     ports:
     - 5432:5432
+  app:
+    build:
+      dockerfile: ./Dockerfile
+      context: .
+    volumes:
+    - ./alpaca_web:/app
+    ports:
+    - 5000:5000
