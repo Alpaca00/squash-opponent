@@ -1,9 +1,9 @@
 from flask import Flask, request, render_template
 from flask_migrate import Migrate
-from flask_sqlalchemy import SQLAlchemy
 import psycopg2
 import config
 from views import product_app
+from models import db
 
 app = Flask(__name__)
 app.config.update(
@@ -11,7 +11,7 @@ app.config.update(
 )
 app.register_blueprint(product_app, url_prefix='/products')
 
-db = SQLAlchemy(app)
+db.init_app(app)
 migrate = Migrate(app, db)
 
 
