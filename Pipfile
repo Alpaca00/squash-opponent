@@ -6,7 +6,8 @@ name = "pypi"
 [packages]
 Flask-SQLAlchemy = "*"
 Flask-Migrate = "*"
-flask = "*"
+Flask = "*"
+psycopg2-binary = "*"
 
 [dev-packages]
 pytest = "*"
