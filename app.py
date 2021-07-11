@@ -1,9 +1,18 @@
 from flask import Flask, request, render_template
+from flask_migrate import Migrate
+from flask_sqlalchemy import SQLAlchemy
+import psycopg2
+import config
 from views import product_app
 
-
 app = Flask(__name__)
+app.config.update(
+    SQLALCHEMY_DATABASE_URI=config.SQLALCHEMY_DATABASE_URI,
+)
 app.register_blueprint(product_app, url_prefix='/products')
+
+db = SQLAlchemy(app)
+migrate = Migrate(app, db)
 
 
 @app.route("/", methods=['GET', 'POST'])
