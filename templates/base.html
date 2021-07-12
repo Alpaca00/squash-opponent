@@ -7,12 +7,13 @@
         Base title
         {% endblock %}
     </title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-        <img src="{{ url_for('static', filename='img/logo.png') }}" alt="" width="90" height="34" class="d-inline-block align-text-top">
+        <img src="{{ url_for('static', filename='img/logo.png') }}" alt="" width="130" height="130" class="d-inline-block align-text-top">
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -27,6 +28,11 @@
                     <a class="nav-link"
                        data-bs-toggle='tooltip' data-bs-placement='top' title='Go to Products'
                        href="{{ url_for('product_app.product_list') }}">Products</a>
+                </li>
+                 <li class="nav-item">
+                    <a class="nav-link"
+                       data-bs-toggle='tooltip' data-bs-placement='top' title='Go to Gallery'
+                       href="{{ url_for('gallery_app.gallery_list') }}">Photo Gallery</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link"
@@ -57,5 +63,41 @@
         crossorigin="anonymous">
 </script>
 <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
 {% block after_body %}
+<footer class="text-center text-white" style="background-color: #45637d;">
+  <!-- Grid container -->
+  <div class="container p-4">
+    <!-- Section: Iframe -->
+    <section class="">
+      <div class="row d-flex justify-content-center">
+        <div class="col-lg-6">
+          <div class="ratio ratio-16x9">
+            <iframe
+              class="shadow-1-strong rounded"
+              src="https://www.youtube.com/embed/1HAEX1c6wII"
+              title="YouTube video"
+              allowfullscreen
+            ></iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Section: Iframe -->
+  </div>
+  <!-- Grid container -->
+
+  <!-- Copyright -->
+
+  <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+    © 2021 Copyright:
+    <a class="text-white" href="https://squashteam.lviv.ua/">squashteam.lviv.ua</a>
+  </div>
+    <style>
+   a {
+    text-decoration: none;
+   }
+  </style>
+  <!-- Copyright -->
+</footer>
 {% endblock %}
