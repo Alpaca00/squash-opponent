@@ -1,6 +1,18 @@
 version: '3.5'
 
 services:
+  app:
+    build:
+      dockerfile: ./Dockerfile
+      context: .
+    environment:
+      PG_HOST: pg
+    volumes:
+      - /alpaca_web:/app
+    ports:
+      - 5000:5000
+    depends_on:
+      - pg
   pg:
     image: postgres:13.3
     environment:
@@ -12,11 +24,3 @@ services:
     - ./data/pgdata:/var/lib/postgresql/data/pgdata
     ports:
     - 5432:5432
-  app:
-    build:
-      dockerfile: ./Dockerfile
-      context: .
-    volumes:
-    - ./alpaca_web:/app
-    ports:
-    - 5000:5000
