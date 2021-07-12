@@ -1,7 +1,7 @@
 from flask import Flask, request, render_template
 from flask_migrate import Migrate
 import config
-from views import product_app
+from views import product_app, gallery_app
 from models import db
 
 app = Flask(__name__)
@@ -9,6 +9,7 @@ app.config.update(
     SQLALCHEMY_DATABASE_URI=config.SQLALCHEMY_DATABASE_URI,
 )
 app.register_blueprint(product_app, url_prefix='/products')
+app.register_blueprint(gallery_app, url_prefix='/gallery')
 
 db.init_app(app)
 migrate = Migrate(app, db)
