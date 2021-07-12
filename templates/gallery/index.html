@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block title -%}
+Gallery
+{%- endblock %}
+
+{% block body  -%}
+<h1><code id="gallery-name">Photo Gallery</code></h1>
+    <div class="alert alert-info" role="alert">
+        Lviv Squash Family!
+    </div>
+<section class="gallery min-vh-100">
+    <div class="container-lg">
+        <div class="row gy-4 row-cols-1 row-cols-sm-2 row-cols-md-3">
+            <div class="col">
+                <img src="{{ url_for('static', filename='img/img_squash/nikita.jpg') }}" class="gallery-item" alt="gallery">
+            </div>
+            <div class="col">
+                <img src="{{ url_for('static', filename='img/img_squash/junior.jpg') }}" class="gallery-item" alt="gallery">
+            </div>
+            <div class="col">
+                <img src="{{ url_for('static', filename='img/img_squash/1.jpg') }}" class="gallery-item" alt="gallery">
+            </div>
+            <div class="col">
+                <img src="{{ url_for('static', filename='img/img_squash/5.jpg') }}" class="gallery-item" alt="gallery">
+            </div>
+            <div class="col">
+                <img src="{{ url_for('static', filename='img/img_squash/4.jpg') }}" class="gallery-item" alt="gallery">
+            </div>
+             <div class="col">
+                <img src="{{ url_for('static', filename='img/img_squash/6.jpg') }}" class="gallery-item" alt="gallery">
+            </div>
+        </div>
+    </div>
+
+</section>
+
+
+<!-- Modal -->
+<div class="modal fade" id="gallery-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Our team</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <img src="{{ url_for('static', filename='img/img_squash/nikita.jpg') }}" class="modal-img" alt="modal img">
+      </div>
+    </div>
+  </div>
+</div>
+{%- endblock %}
