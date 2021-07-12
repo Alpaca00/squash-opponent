@@ -1,1 +1,1 @@
-Pet-project by flask, django and covered by tests.
+Web-site - Lviv squash team!
