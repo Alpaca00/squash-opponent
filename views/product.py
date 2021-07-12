@@ -7,7 +7,7 @@ product_app = Blueprint("product_app", __name__)
 
 @product_app.route("/")
 def product_list():
-    product = Product.query.filter_by(deleted=False).all()
+    product = Product.query.filter_by(deleted=False).order_by(Product.id).all()
     return render_template("products/index.html", products=product)
 
 
