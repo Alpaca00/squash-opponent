@@ -11,6 +11,7 @@ psycopg2-binary = "*"
 
 [dev-packages]
 pytest = "*"
+selene = "==2.0.0a38"
 
 [requires]
 python_version = "3.8"
