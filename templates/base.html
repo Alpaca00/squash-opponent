@@ -13,33 +13,44 @@
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-        <img src="{{ url_for('static', filename='img/logo.png') }}" alt="" width="130" height="130" class="d-inline-block align-text-top">
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
-            <ul class="navbar-nav">
+            <div id="logo_go">
+                <div class="myWrapper">
+                    <nav>
+                         <a href="/"><img src="{{ url_for('static', filename='img/logo.png') }}" alt="" width="130" height="130" class="d-inline-block align-text-top"></a>
+                    </nav>
+                </div>
+            </div>
+                <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page"
                        data-bs-toggle='tooltip' data-bs-placement='top' title='Back to Home'
                        href="{{ url_for('index') }}">Home</a>
                 </li>
-                <li class="nav-item">
+                    <li class="nav-item">
                     <a class="nav-link"
                        data-bs-toggle='tooltip' data-bs-placement='top' title='Go to Products'
                        href="{{ url_for('product_app.product_list') }}">Products</a>
                 </li>
-                 <li class="nav-item">
+                    <li class="nav-item">
                     <a class="nav-link"
-                       data-bs-toggle='tooltip' data-bs-placement='top' title='Go to Gallery'
+                       data-bs-toggle='tooltip' data-bs-placement='top' title='Go to Photo Gallery'
                        href="{{ url_for('gallery_app.gallery_list') }}">Photo Gallery</a>
                 </li>
-                <li class="nav-item">
+                    <li class="nav-item">
+                    <a class="nav-link"
+                       data-bs-toggle='tooltip' data-bs-placement='top' title='Go to Video Gallery'
+                       href="{{ url_for('video_gallery_app.video_gallery_list') }}">Video Gallery</a>
+                </li>
+                    <li class="nav-item">
                     <a class="nav-link"
                        data-bs-toggle='tooltip' data-bs-placement='top' title='Go to Cart'
                        href="#">Cart</a>
                 </li>
-                <li class="nav-item dropdown">
+                    <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Action
                     </a>
@@ -55,7 +66,78 @@
 </nav>
 <div class="container">
     {% block body %}
-    Base page
+    <table class="table table-success table-striped">
+        <thead>
+        <h1>Lviv Squash Team</h1>
+        </thead>
+  <tbody>
+    <tr class="table-active table-dark">
+      <th scope="row" class="table-active">#</th>
+      <td colspan="2" class="table-active">Team</td>
+      <td colspan="3" class="table-active">Points</td>
+      <td colspan="4" class="table-active">Matches</td>
+    </tr>
+    <tr class="table-active">
+      <th scope="row">1</th>
+      <td colspan="2">Warriors</td>
+      <td colspan="3" class="table-active">29</td>
+      <td colspan="4" class="table-active">3</td>
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td colspan="2" class="table-pos">Snails</td>
+      <td colspan="3" class="table-pos">16</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td colspan="2" class="table-pos">Gladiators</td>
+      <td colspan="3">10</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th scope="row">4</th>
+      <td colspan="2" class="table-pos">Anchors</td>
+      <td colspan="3">9</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+    </table>
+
+    <table class="table table-striped table-hover">
+     <tbody>
+        <tr class="table-active">
+            <th scope="row" class="table-active">Date</th>
+                <td colspan="2" class="table-active">Team #1</td>
+                <td colspan="3" class="table-active">Team #2</td>
+                <td colspan="4" class="table-active">Score</td>
+        </tr>
+        <tr>
+            <th scope="row">04.07.21</th>
+                <td colspan="2">Warriors</td>
+                <td colspan="3">Gladiators</td>
+                <td colspan="4">12:4</td>
+        </tr>
+        <tr>
+            <th scope="row">26.06.21</th>
+                <td colspan="2">Warriors</td>
+                <td colspan="3">Snails</td>
+                <td colspan="4">10:6</td>
+        </tr>
+         <tr>
+            <th scope="row">19.06.21</th>
+                <td colspan="2">Anchors</td>
+                <td colspan="3">Warriors</td>
+                <td colspan="4">9:7</td>
+        </tr>
+         <tr>
+            <th scope="row">04.06.21</th>
+                <td colspan="2">Snails</td>
+                <td colspan="3">Gladiators</td>
+                <td colspan="4">10:6</td>
+        </tr>
+     </tbody>
+    </table>
     {% endblock %}
 </div>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"
@@ -93,11 +175,6 @@
     © 2021 Copyright:
     <a class="text-white" href="https://squashteam.lviv.ua/">squashteam.lviv.ua</a>
   </div>
-    <style>
-   a {
-    text-decoration: none;
-   }
-  </style>
   <!-- Copyright -->
 </footer>
 {% endblock %}
