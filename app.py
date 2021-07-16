@@ -8,6 +8,9 @@ app = Flask(__name__)
 app.config.update(
     SQLALCHEMY_DATABASE_URI=config.SQLALCHEMY_DATABASE_URI,
 )
+
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
 app.register_blueprint(product_app, url_prefix='/products')
 app.register_blueprint(gallery_app, url_prefix='/gallery')
 app.register_blueprint(video_gallery_app, url_prefix='/video_gallery')
