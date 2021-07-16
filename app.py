@@ -1,7 +1,7 @@
 from flask import Flask, request, render_template
 from flask_migrate import Migrate
 import config
-from views import product_app, gallery_app, video_gallery_app
+from views import product_app, gallery_app, video_gallery_app, cart_app
 from models import db
 
 app = Flask(__name__)
@@ -14,6 +14,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.register_blueprint(product_app, url_prefix='/products')
 app.register_blueprint(gallery_app, url_prefix='/gallery')
 app.register_blueprint(video_gallery_app, url_prefix='/video_gallery')
+app.register_blueprint(cart_app, url_prefix='/cart')
 
 db.init_app(app)
 migrate = Migrate(app, db)
@@ -37,3 +38,4 @@ def home(name=None):
 @app.route('/post/<int:post_id>')
 def show_post(post_id):
     return f'Post {post_id}'
+
