@@ -24,5 +24,3 @@ def product_detail(product_id: int):
         "products/detail.html",
         product=product,
     )
-
-
