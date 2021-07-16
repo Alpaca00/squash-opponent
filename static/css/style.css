@@ -51,3 +51,12 @@ body {
 #back-list-id {
     text-decoration: none;
 }
+
+.desc-text {
+    background: linear-gradient( rgba(0, 0, 0, 0.9) 90%, rgba(0, 0, 0, 0.9)90%), url("/static/img/desc.png");
+}
+
+.lead {
+    color: #2E5156;
+    font-style: italic;
+}

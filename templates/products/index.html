@@ -47,7 +47,7 @@ Products
 
                   <button type="button" class="btn btn-sm btn-outline-secondary">
                        {% for product in products %}
-                        {% if product.name_product == "Man T-shirt" %}
+                        {% if product.name_product == "Man T-shirt" and product.id == 4 %}
                         <a href="{{ url_for('product_app.product_detail', product_id=product.id) }}">
                             {{ product.name -}}
 
