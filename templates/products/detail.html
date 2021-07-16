@@ -5,11 +5,11 @@ Products #{{product.id}}
 {%- endblock %}
 
 {% block body  -%}
-<h1>T-shirt <code id="product-name">{{ product.name }}</code>
+<h2 id="product-name">{{ product.name_product }}
     {% if product.is_new %}
-    <span class="badge bg-primary">New</span>
+    <span class="badge bg-warning">New</span>
     {% endif %}
-</h1>
+</h2>
  <style>
    a {
     text-decoration: none;
@@ -20,7 +20,12 @@ Products #{{product.id}}
 <hr>
 {# Admin area #}
  <div>
-     <button id="delete-product" class="btn btn-danger btn-lg">Delete</button>
+     <button id="add-product" class="btn btn-success">
+     <a href="{{ url_for('cart_app.cart_list') }}">Add to cart</a>
+     </button>
+ </div>
+ <div>
+     <button id="delete-product" class="btn btn-danger">Delete</button>
  </div>
 {%- endblock %}
 {% block after_body %}
