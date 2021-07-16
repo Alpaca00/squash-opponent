@@ -47,12 +47,12 @@ Products
 
                   <button type="button" class="btn btn-sm btn-outline-secondary">
                        {% for product in products %}
-                        {% if product.name_product == "Men t-shirt" %}
+                        {% if product.name_product == "Man T-shirt" %}
                         <a href="{{ url_for('product_app.product_detail', product_id=product.id) }}">
                             {{ product.name -}}
 
                                 {% endif %}
-                                {% if product.is_new and product.id == 1 %}
+                                {% if product.is_new and product.id == 4 %}
                              <span class="badge bg-warning">New</span>
                              {% endif %}
                         </a>
