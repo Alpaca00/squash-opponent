@@ -43,3 +43,11 @@ body {
 .album {
     background: linear-gradient( rgba(0, 0, 0, 0.5) 100%, rgba(0, 0, 0, 0.5)100%),url("/static/img/h_squash.png");
 }
+
+.btn {
+    border: 0;
+}
+
+#back-list-id {
+    text-decoration: none;
+}
