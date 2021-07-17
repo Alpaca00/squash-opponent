@@ -44,10 +44,17 @@ body {
     background: linear-gradient( rgba(0, 0, 0, 0.5) 100%, rgba(0, 0, 0, 0.5)100%),url("/static/img/h_squash.png");
 }
 
-.btn {
-    border: 0;
+.btn a{
+    color: yellow;
+    text-decoration: none;
 }
+#add-product{
 
+  position: relative;
+  top: -350px;
+  right: -650px;
+
+}
 #back-list-id {
     text-decoration: none;
 }

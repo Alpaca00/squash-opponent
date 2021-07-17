@@ -17,13 +17,44 @@ Products #{{product.id}}
   </style>
 <hr>
 <a href="{{ url_for('product_app.product_list') }}">Product list</a>
-<hr>
-{# Admin area #}
- <div>
+
+<section class="gallery min-vh-100">
+    <div class="container-lg">
+        <div class="row gy-4 row-cols-1 row-cols-sm-2 row-cols-md-3">
+            <div class="col">
+                <div class="col">
+                    <img src="{{ url_for('static', filename='img/t_shirt.jpeg') }}" class="gallery-item" alt="gallery">
+                </div>
+                <h3 class="item-cart">
+                    <code>{{ product.name_product -}}</code>
+                    <ul>
+                    {% for char in product.characters %}
+                    <li><code>Size:
+                        {{ char.size }}</code>
+                    </li>
+                    <li><code>Sex:
+                        {{ char.sex }}</code>
+                    </li>
+                    <li class="desc-text">
+                        <p class="lead">
+                        {{ char.character_description }}
+                        </p>
+
+                    </li>
+                    </ul>
+                </h3>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <div>
      <button id="add-product" class="btn btn-success">
      <a href="{{ url_for('cart_app.cart_list') }}">Add to cart</a>
      </button>
  </div>
+</section>
+<hr>
+{# Admin area #}
  <div>
      <button id="delete-product" class="btn btn-danger">Delete</button>
  </div>
