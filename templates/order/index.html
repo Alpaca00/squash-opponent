@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block title -%}
+Order
+{%- endblock %}
+{% block body  -%}
+{% for order_user in orders_user %}
+<ul class="list-group">
+      <li class="list-group-item">First name: <code>{{ order_user.first_name }}</code></li>
+      <li class="list-group-item">Last name: <code>{{ order_user.last_name }}</code></li>
+      <li class="list-group-item">Email: <code>{{ order_user.email }}</code></li>
+      <li class="list-group-item">Phone: <code>{{ order_user.phone }}</code></li>
+      <li class="list-group-item">Address: <code>{{ order_user.address }}</code></li>
+      <li class="list-group-item">Address2: <code>{{ order_user.address2 }}</code></li>
+      <li class="list-group-item">City: <code>{{ order_user.city }}</code></li>
+      <li class="list-group-item">State: <code>{{ order_user.state }}</code></li>
+      <li class="list-group-item">Zip code: <code>{{ order_user.zip_code }}</code></li>
+</ul>
+      <button type="button" class="button cart_button_checkout" ><a href="/" style="text-decoration: none; width:40%;">Confirm</a></button>
+{% endfor %}
+
+{%- endblock %}
+
+{% block after_body %}
+<script>
+      const name = $('.list-group-item')
+      console.log(name.value)
+</script>
+
+
+
+{%- endblock %}
+
+
