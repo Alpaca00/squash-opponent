@@ -1,5 +1,5 @@
-# import os
+import os
 
-# PG_HOST = os.environ['PG_HOST']
+PG_HOST = os.environ['PG_HOST']
 
-SQLALCHEMY_DATABASE_URI = "postgresql+psycopg2://user:password@0.0.0.0:5432/alpaca"
+SQLALCHEMY_DATABASE_URI = f"postgresql+psycopg2://user:password@{PG_HOST}:5432/alpaca"
