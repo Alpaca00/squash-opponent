@@ -1,49 +1,15 @@
 {% extends 'base.html' %}
 
 {% block title -%}
-Cart
+Cart #{{product.id}}
 {%- endblock %}
 
 {% block body  -%}
-<h1 id="gallery-name">Cart</h1>
+<h1 id="gallery-name" xmlns="http://www.w3.org/1999/html">Cart</h1>
     <div class="back-list">
         <a id='back-list-id' href="{{ url_for('product_app.product_list') }}">Product list</a>
     </div>
 
-<section class="gallery min-vh-70">
-    <div class="container-lg">
-        <div class="row gy-4 row-cols-1 row-cols-sm-3 row-cols-md-3">
-            <div class="col">
-                <input type="text" class="form-control" placeholder="First name" aria-label="First name">
-            </div>
-            <div class="col">
-                <input type="text" class="form-control" placeholder="Last name" aria-label="Last name">
-            </div>
-             <div class="col">
-                <input type="text" class="form-control" placeholder="Email" aria-label="Email">
-            </div>
-             <div class="col">
-                <input type="text" class="form-control" placeholder="Phone" aria-label="Phone">
-            </div>
-            <div class="col">
-                <input type="text" class="form-control" placeholder="Address" aria-label="Address">
-            </div>
-            <div class="col">
-                <input type="text" class="form-control" placeholder="Address 2" aria-label="Address2">
-            </div>
-            <div class="col">
-                <input type="text" class="form-control" placeholder="City" aria-label="City">
-            </div>
-            <div class="col">
-                <input type="text" class="form-control" placeholder="State" aria-label="State">
-            </div>
-            <div class="col">
-                <input type="text" class="form-control" placeholder="Zip" aria-label="Zip">
-            </div>
-        </div>
-      </div>
-    </div>
-</section>
  <div class="cart_section">
      <div class="container-fluid">
          <div class="row">
@@ -91,18 +57,39 @@ Cart
                      </div>
                      <div class="desc-text-tg-tt">
                          <div class="desc-text-tg">
-                             <div class="desc-desc">Description:
                              {% for char in product.characters %}
                              <code>{{ char.character_description }}</code></div>
-                              {% endfor %}
+                             {% endfor %}
                          </div>
                      </div>
-                     <div class="cart_buttons"><button type="button" class="button cart_button_clear"><a href="{{ url_for('cart_app.cart_list') }}" style="text-decoration: none;">CONFIRM</a></button> </div>
                  </div>
              </div>
          </div>
      </div>
- </div>
+
+
+
+<form method="POST">
+    <input type="text" class="form-control" placeholder="First name"
+           aria-label="First name" name="first_name"><br>
+    <input type="text" class="form-control" placeholder="Last name"
+           aria-label="Last name" name="last_name"><br>
+    <input type="text" class="form-control" placeholder="Email"
+                       value='' aria-label="Email" name="email"><br>
+    <input type="text" class="form-control" placeholder="Phone"
+                       value='' aria-label="Phone" name="phone"><br>
+    <input type="text" class="form-control" placeholder="Address"
+                       value='' aria-label="Address" name="address"><br>
+    <input type="text" class="form-control" placeholder="Address2"
+                       value='' aria-label="Address2"><br>
+    <input type="text" class="form-control" placeholder="City"
+                       value='' aria-label="City" name="city"><br>
+    <input type="text" class="form-control" placeholder="State"
+                       value='' aria-label="State" name="state"><br>
+    <input type="text" class="form-control" placeholder="Zip"
+                       value='' aria-label="Zip" name="zip_code"><br>
+    <input type="submit" class="btn-sub-form-control"  value="submit"><br>
+    </form>
 
 
 <!-- Modal -->
@@ -121,6 +108,3 @@ Cart
 </div>
 <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 {%- endblock %}
-
-
-
