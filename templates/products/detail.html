@@ -69,7 +69,7 @@ Products #{{product.id}}
                              <div class="order_total_amount"><code>800</code></div>
                          </div>
                      </div>
-                     <div class="cart_buttons"><button type="button" class="button cart_button_clear"><a href="{{ url_for('product_app.product_list') }}">Continue Shopping</a></button><button type="button" class="button cart_button_checkout"><a href="{{ url_for('cart_app.cart_list') }}">Add to cart</a></button> </div>
+                     <div class="cart_buttons"><button type="button" class="button cart_button_clear"><a href="{{ url_for('product_app.product_list') }}">Continue Shopping</a></button><button type="button" class="button cart_button_checkout"><a href="{{ url_for('cart_app.cart_list', product_id=product.id, cart_id=product.id) }}">Add to cart</a></button> </div>
                  </div>
              </div>
          </div>
@@ -99,8 +99,8 @@ Products #{{product.id}}
  </div>
 {%- endblock %}
 {% block after_body %}
- <script>
-    const lor = document.querySelector('#exampleColorInput').value;
+ <script src="{{ url_for('static', filename='js/color.js') }}">
+
     $(function () {
     const name = $('#product-name')
     console.log(name.text())
