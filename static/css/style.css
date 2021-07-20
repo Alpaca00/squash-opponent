@@ -103,7 +103,7 @@ ul {
 .cart_section {
     width: 100%;
     padding-top: 93px;
-    padding-bottom: 111px
+    padding-bottom: 55px
 }
 
 .cart_title {
@@ -255,4 +255,31 @@ ul {
     padding-right: 46px;
     padding-left: 15px;
     background-color: #fff
+}
+
+.form-control {
+    width: 40%;
+    height: 40px;
+    margin-top: 5px;
+    margin-left: 150px;
+
+}
+
+.btn-sub-form-control {
+    width: 15%;
+    height: 40px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    background-color: #16C663;
+    border: solid 1px #e8e8e8;
+    margin-left: 424px;
+}
+
+.list-group{
+    width: 33%;
+    background: linear-gradient( rgba(0, 0, 0, 0.5) 100%, rgba(0, 0, 0, 0.5)100%),url("/static/img/h_squash.png");
+    background-color: #16C663;
+    border: solid 1px #e8e8e8;
+    margin-top: 2px;
+    margin-bottom: 2px;
 }
