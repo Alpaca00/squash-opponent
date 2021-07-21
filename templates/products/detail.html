@@ -21,13 +21,19 @@ Products #{{product.id}}
  <div class="cart_section">
      <div class="container-fluid">
          <div class="row">
-             <div class="col-lg-10 offset-lg-1">
+             <div class="col-lg-14 offset-lg-1">
                  <div class="cart_container">
                      <div class="cart_title">Shopping Cart<small> (1 item in your cart) </small></div>
                      <div class="cart_items">
                          <ul class="cart_list">
                              <li class="cart_item clearfix">
-                                 <div class="cart_item_image"><img src="{{ url_for('static', filename='img/t_shirt.jpeg') }}" class="cart-item-image"  alt=""></div>
+                                 {% if product.id == 4 %}
+                                    <div class="cart_item_image"><img src="{{ url_for('static', filename='img/t_shirt.jpeg') }}" class="cart-item-image"  alt=""></div>
+                                 {% elif product.id == 6 %}
+                                    <div class="cart_item_image"><img src="{{ url_for('static', filename='img/t_shirt3.png') }}" class="cart-item-image"  alt=""></div>
+                                 {% else %}
+                                    <div class="cart_item_image"><img src="{{ url_for('static', filename='img/t_shirt2.jpeg') }}" class="cart-item-image"  alt=""></div>
+                                 {% endif %}
                                  <div class="cart_item_info d-flex flex-md-row flex-column justify-content-between">
                                      <div class="cart_item_name cart_info_col">
                                          <div class="cart_item_title">Name</div>
@@ -40,16 +46,27 @@ Products #{{product.id}}
                                        <div class="cart_item_quantity cart_info_col">
                                          <div class="cart_item_title">Size</div>
                                            {% for char in product.characters %}
-                                         <div class="cart_item_text"><code>{{ char.size }}</code></div>
+                                           <select name="size" id="size-select" style="margin-top: 27px;background-color: #d63384;border: solid 1px #fffff;border-radius: 10%;">
+                                               <option value=""><code>Size</code></option>
+                                               <option value="have"><code>{{ char.size }}</code></option>
+                                            </select>
                                      </div>
+                                     <div class="cart_item_quantity cart_info_col">
+                                         <div class="cart_item_title">Print</div>
+
+                                         <input id="print-value" value="TEAM">
+                                            <p id="log">You selected:</p>
+                                     </div>
+
+
                                       <div class="cart_item_quantity cart_info_col">
                                          <div class="cart_item_title">Sex</div>
-                                         <div class="cart_item_text"><code>{{ char.sex }}</code></div>
+                                         <div class="cart_item_text" id="select-sex"><code>{{ char.sex }}</code></div>
                                            {% endfor %}
                                      </div>
                                      <div class="cart_item_quantity cart_info_col">
                                          <div class="cart_item_title">Quantity</div>
-                                         <div class="cart_item_text"><code>1</code></div>
+                                         <input type="number" id="quantity" value="1" name="quantity" min="1" max="5" style="margin-top: 27px;border: solid 2px #fffff;border-radius: 5%;">
                                      </div>
                                      <div class="cart_item_price cart_info_col">
                                          <div class="cart_item_title">Price</div>
@@ -57,7 +74,7 @@ Products #{{product.id}}
                                      </div>
                                      <div class="cart_item_total cart_info_col">
                                          <div class="cart_item_title">Total</div>
-                                         <div class="cart_item_text"><code>800</code></div>
+                                         <div class="cart_item_text" id="total-order"><code>800</code></div>
                                      </div>
                                  </div>
                              </li>
@@ -69,7 +86,7 @@ Products #{{product.id}}
                              <div class="order_total_amount"><code>800</code></div>
                          </div>
                      </div>
-                     <div class="cart_buttons"><button type="button" class="button cart_button_clear"><a href="{{ url_for('product_app.product_list') }}">Continue Shopping</a></button><button type="button" class="button cart_button_checkout"><a href="{{ url_for('cart_app.cart_list', product_id=product.id, cart_id=product.id) }}">Add to cart</a></button> </div>
+                     <div class="cart_buttons"><button type="button" class="button cart_button_clear" style="background: #FFC633;"><a href="{{ url_for('product_app.product_list') }}">Continue Shopping</a></button><button type="button" class="button cart_button_checkout"><a href="{{ url_for('cart_app.cart_list', product_id=product.id, cart_id=product.id) }}" id="add-to-cart">Add to cart</a></button> </div>
                  </div>
              </div>
          </div>
@@ -99,7 +116,41 @@ Products #{{product.id}}
  </div>
 {%- endblock %}
 {% block after_body %}
- <script src="{{ url_for('static', filename='js/color.js') }}">
+<script>
+const arrColor = [];
+
+function logSelection(event) {
+        const log = document.getElementById('log');
+        const selection = event.target.value.substring(event.target.selectionStart, event.target.selectionEnd);
+        log.textContent = `You selected: ${selection}`;
+
+    $('#quantity').click(function cartSelection(event) {
+        const quantity = document.querySelector('#quantity');
+        const textQ = quantity.value;
+        console.log(textQ);
+        let getColor = document.querySelector('#exampleColorInput').value;
+        arrColor.push(getColor);
+        console.log(arrColor[0]);
+        const sel = document.querySelector('#size-select');
+        const text = sel.options[sel.selectedIndex].text;
+        console.log(text);
+        let totalOrder = document.querySelector('#total-order').textContent;
+        if (textQ <= 0) {
+            textQ.value = 1;
+            } else if (textQ > 5) {
+            textQ.value = 5;
+            };
+        let resTotal = 800 * textQ;
+        document.querySelector('#total-order').textContent = resTotal;
+    })
+}
+
+
+document.addEventListener('select', logSelection);
+
+
+</script>
+<script>
 
     $(function () {
     const name = $('#product-name')
