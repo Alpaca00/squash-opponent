@@ -31,7 +31,7 @@ def cart_list(cart_id: int):
         db.session.add(user)
         db.session.commit()
         order_user = User.query.filter_by(phone=phone).all()
-        return render_template("order/index.html", orders_user=order_user)
+        return render_template("order/index.html", orders_user=order_user, product=cart)
     return render_template("cart/index.html", product=cart)
 
 
