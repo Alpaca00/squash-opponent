@@ -54,7 +54,8 @@ Products #{{product.id}}
                                      <div class="cart_item_quantity cart_info_col">
                                          <div class="cart_item_title">Print</div>
 
-                                         <input id="print-value" value="TEAM">
+                                         <input id="print-value" value="TEAM" data-bs-toggle='tooltip' data-bs-placement='top'
+                                                title='If your select of quantity is greater than one, write each print through a comma and highlight the text.'>
                                             <p id="log">You selected:</p>
                                      </div>
 
@@ -83,10 +84,10 @@ Products #{{product.id}}
                      <div class="order_total">
                          <div class="order_total_content text-md-right">
                              <div class="order_total_title">Order Total:</div>
-                             <div class="order_total_amount"><code>800</code></div>
+                             <div class="order_total_amount" id="total-order2"><code>800</code></div>
                          </div>
                      </div>
-                     <div class="cart_buttons"><button type="button" class="button cart_button_clear" style="background: #FFC633;"><a href="{{ url_for('product_app.product_list') }}">Continue Shopping</a></button><button type="button" class="button cart_button_checkout"><a href="{{ url_for('cart_app.cart_list', product_id=product.id, cart_id=product.id) }}" id="add-to-cart">Add to cart</a></button> </div>
+                     <div class="cart_buttons"><button type="button" class="button cart_button_clear" style="background: #FFC633;"><a href="{{ url_for('product_app.product_list') }}">Back</a></button><button type="button" class="button cart_button_checkout"><a href="{{ url_for('cart_app.cart_list', product_id=product.id, cart_id=product.id) }}" id="add-to-cart">Add to cart</a></button> </div>
                  </div>
              </div>
          </div>
@@ -142,6 +143,7 @@ function logSelection(event) {
             };
         let resTotal = 800 * textQ;
         document.querySelector('#total-order').textContent = resTotal;
+        document.querySelector('#total-order2').textContent = resTotal;
     })
 }
 
