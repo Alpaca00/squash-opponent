@@ -9,7 +9,6 @@ Cart #{{product.id}}
     <div class="back-list">
         <a id='back-list-id' href="{{ url_for('product_app.product_list') }}">Product list</a>
     </div>
-
  <div class="cart_section">
      <div class="container-fluid">
          <div class="row">
@@ -57,9 +56,10 @@ Cart #{{product.id}}
                      </div>
                      <div class="desc-text-tg-tt">
                          <div class="desc-text-tg">
-                             {% for char in product.characters %}
-                             <code>{{ char.character_description }}</code></div>
-                             {% endfor %}
+                             <code>Show your support for The Lviv squash team with this T_Shirt
+                                 which features the teams iconic inscription on the chest
+                                 and the short sleeves and crewneck completes the look.</code>
+                         </div>
                          </div>
                      </div>
                  </div>
