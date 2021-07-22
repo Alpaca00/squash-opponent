@@ -47,15 +47,18 @@ Products
 
                   <button type="button" class="btn btn-sm btn-outline-secondary">
                        {% for product in products %}
-                        {% if product.name_product == "Man T-shirt" and product.id == 4 %}
-                        <a href="{{ url_for('product_app.product_detail', product_id=product.id) }}">
-                            Show
+                            {% if product.id == 9 %}
 
+
+                            <a href="{{ url_for('product_app.product_detail', product_id=product.id) }}">
+                                Show
                                 {% endif %}
-                                {% if product.is_new and product.id == 4 %}
+                                {% if product.is_new %}
                              <span class="badge bg-warning">New</span>
                              {% endif %}
                         </a>
+
+
                       {% endfor %}
                   </button>
 
@@ -77,11 +80,11 @@ Products
 
                   <button type="button" class="btn btn-sm btn-outline-secondary">
                       {% for product in products %}
-                        {% if product.name_product == "Woman T-shirt" and product.id == 6 %}
+                            {% if product.id == 10 %}
                             <a href="{{ url_for('product_app.product_detail', product_id=product.id) }}">
                             Show
-                            {% endif %}
-                            {% if product.is_new and product.id == 6 %}
+                                 {% endif %}
+                            {% if product.is_new%}
                             <span class="badge bg-primary">New</span>
                             {% endif %}
                         </a>
@@ -110,11 +113,12 @@ Products
 
                   <button type="button" class="btn btn-sm btn-outline-secondary">
                       {% for product in products %}
-                        {% if product.name_product == "Child T-shirt" and product.id == 7 %}
+                        {% if product.id == 11 %}
+
                             <a href="{{ url_for('product_app.product_detail', product_id=product.id) }}">
                             Show
-                            {% endif %}
-                            {% if product.is_new and product.id == 7 %}
+                                 {% endif %}
+                            {% if product.is_new %}
                           <span class="badge bg-primary">New</span>
                              {% endif %}
                       </a>
