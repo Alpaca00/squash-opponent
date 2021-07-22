@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String
+from sqlalchemy import Column, Integer, String, ForeignKey
 from models import db
 
 
@@ -14,13 +14,15 @@ class User(db.Model):
     city = Column(String, nullable=False)
     state = Column(String, nullable=False)
     zip_code = Column(Integer, nullable=False)
+    order_id = Column(Integer, ForeignKey('orders.id'))
+    order = db.relationship('Order')
 
 
     # @email.setter
-    def email(self, value):
-        if len(value) > self.email.type.length:
-            raise Exception("Value too long")
-        self.email = value
-        arr = [x for x in self.email]
-        if '@' not in arr:
-            raise Exception("The symbol @ must be in the field")
+    # def email(self, value):
+    #     if len(value) > self.email.type.length:
+    #         raise Exception("Value too long")
+    #     self.email = value
+    #     arr = [x for x in self.email]
+    #     if '@' not in arr:
+    #         raise Exception("The symbol @ must be in the field")
