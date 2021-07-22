@@ -1,21 +1,21 @@
-from sqlalchemy import Column, Integer, String, ForeignKey
-from models import db
-
-
-class User(db.Model):
-    __tablename__ = "users"
-    id = Column(Integer, primary_key=True)
-    first_name = Column(String, nullable=False)
-    last_name = Column(String, nullable=False)
-    email = Column(String(33), nullable=False, unique=True)
-    phone = Column(String, nullable=False, unique=True)
-    address = Column(String, nullable=False)
-    address2 = Column(String, nullable=False, server_default='null')
-    city = Column(String, nullable=False)
-    state = Column(String, nullable=False)
-    zip_code = Column(Integer, nullable=False)
-    order_id = Column(Integer, ForeignKey('orders.id'))
-    order = db.relationship('Order')
+# from sqlalchemy import Column, Integer, String, ForeignKey
+# from models import db
+#
+#
+# class User(db.Model):
+#     __tablename__ = "users"
+#     id = Column(Integer, primary_key=True)
+#     first_name = Column(String, nullable=False)
+#     last_name = Column(String, nullable=False)
+#     email = Column(String(33), unique=True)
+#     phone = Column(String, nullable=False, unique=True)
+#     address = Column(String, nullable=False)
+#     address2 = Column(String, nullable=False, server_default='null')
+#     city = Column(String, nullable=False)
+#     state = Column(String, nullable=False)
+#     zip_code = Column(Integer, nullable=False)
+#     order_id = Column(Integer, ForeignKey('orders.id'))
+#     order = db.relationship('Order')
 
 
     # @email.setter

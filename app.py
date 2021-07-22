@@ -2,14 +2,14 @@ from flask import Flask, request, render_template, jsonify
 from flask_migrate import Migrate
 import config
 from views import product_app, gallery_app, video_gallery_app, cart_app
-from models import db, User
+from models import db
 
 app = Flask(__name__)
 app.config.update(
     SQLALCHEMY_DATABASE_URI=config.SQLALCHEMY_DATABASE_URI,
 )
 
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 
 app.register_blueprint(product_app, url_prefix='/products')
 app.register_blueprint(gallery_app, url_prefix='/gallery')

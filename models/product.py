@@ -27,12 +27,12 @@ class Product(db.Model):
     __tablename__ = "products"
     id = Column(Integer, primary_key=True)
     name = Column(String, nullable=False)
-    price = Column(String, nullable=False)
+    price = Column(String)
     is_new = Column(Boolean, nullable=False, default=False)
     add = Column(Boolean, nullable=False, default=False, server_default='false')
     deleted = Column(Boolean, nullable=False, default=False, server_default='false')
-    t_shirts = db.relationship("t_shirts", backref="products", lazy=True)
-    orders = db.relationship("orders", backref="products", lazy=True)
+    t_shirts = db.relationship("TShirt", backref="products", lazy=True)
+    # orders = db.relationship("Orders", backref="products", lazy=True)
 
 
 class TShirt(db.Model):
@@ -47,12 +47,12 @@ class TShirt(db.Model):
     product = db.relationship('Product')
 
 
-class Order(db.Model):
-    __tablename__ = "orders"
-    id = Column(Integer, primary_key=True)
-    name_product = Column(String, nullable=False)
-    print = Column(String, nullable=False)
-    order_total = Column(Float, nullable=False)
-    product_id = Column(Integer, ForeignKey('products.id'))
-    product = db.relationship('Product')
-    users = db.relationship("users", backref="users", lazy=True)
+# class Order(db.Model):
+#     __tablename__ = "orders"
+#     id = Column(Integer, primary_key=True)
+#     name_product = Column(String, nullable=False)
+#     print = Column(String, nullable=False)
+#     order_total = Column(Float, nullable=False)
+#     product_id = Column(Integer, ForeignKey('products.id'))
+#     product = db.relationship('Product')
+#     users = db.relationship("Users", backref="orders", lazy=True)
