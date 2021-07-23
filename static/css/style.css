@@ -123,7 +123,7 @@ ul {
 
 .cart_item {
     width: 100%;
-    padding: 15px;
+    padding: 5px;
     padding-right: 46px;
 }
 
@@ -172,9 +172,7 @@ ul {
     transform: translateY(4px)
 }
 
-.cart_item_price {
-    text-align: right
-}
+
 
 .cart_item_total {
     text-align: right
@@ -292,5 +290,10 @@ ul {
     color: #d63384;
 }
 #total-order2 {
+    color: #d63384;
+}
+
+#print-value {
+    width: 75%;
     color: #d63384;
 }
