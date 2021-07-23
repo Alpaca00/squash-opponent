@@ -20,35 +20,40 @@ Cart #{{product.id}}
                              <li class="cart_item clearfix">
                                  <div class="cart_item_image"><img src="{{ url_for('static', filename='img/t_shirt.jpeg') }}" alt=""></div>
                                  <div class="cart_item_info d-flex flex-md-row flex-column justify-content-between">
+                                     {% for t_shirt in product.t_shirts %}
                                      <div class="cart_item_name cart_info_col">
                                          <div class="cart_item_title">Name</div>
-                                         <div class="cart_item_text"><code>{{ product.name_product -}}</code></div>
+                                         <div class="cart_item_text"><code>{{ t_shirt.name -}}</code></div>
                                      </div>
                                      <div class="cart_item_color cart_info_col">
                                          <div class="cart_item_title">Color</div>
-                                         <div class="cart_item_text"><span class="change-color" style="background-color:black;"></span><code>Black</code></div>
+                                         <div class="cart_item_text"><span class="change-color" style="background-color:{{ cart_items[2] }};"></span><code>{{ cart_items[2] }}</code></div>
                                      </div>
                                        <div class="cart_item_quantity cart_info_col">
                                          <div class="cart_item_title">Size</div>
-                                           {% for char in product.characters %}
-                                         <div class="cart_item_text"><code>{{ char.size }}</code></div>
+                                         <div class="cart_item_text"><code>{{ cart_items[3] }}</code></div>
                                      </div>
                                       <div class="cart_item_quantity cart_info_col">
                                          <div class="cart_item_title">Sex</div>
-                                         <div class="cart_item_text"><code>{{ char.sex }}</code></div>
+
+                                         <div class="cart_item_text"><code>{{ t_shirt.sex }}</code></div>
                                            {% endfor %}
                                      </div>
                                      <div class="cart_item_quantity cart_info_col">
+                                         <div class="cart_item_title">Print</div>
+                                         <div class="cart_item_text"><code>{{ cart_items[0][13:] }}</code></div>
+                                     </div>
+                                     <div class="cart_item_quantity cart_info_col">
                                          <div class="cart_item_title">Quantity</div>
-                                         <div class="cart_item_text"><code>1</code></div>
+                                         <div class="cart_item_text"><code>{{ cart_items[1] }}</code></div>
                                      </div>
                                      <div class="cart_item_price cart_info_col">
                                          <div class="cart_item_title">Price</div>
-                                         <div class="cart_item_text"><code>800</code></div>
+                                         <div class="cart_item_text"><code>{{ product.price }}</code></div>
                                      </div>
                                      <div class="cart_item_total cart_info_col">
                                          <div class="cart_item_title">Total</div>
-                                         <div class="cart_item_text"><code>800</code></div>
+                                         <div class="cart_item_text"><code>{{ cart_items[4] }}</code></div>
                                      </div>
                                  </div>
                              </li>
