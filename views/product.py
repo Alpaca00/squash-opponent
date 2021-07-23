@@ -1,9 +1,12 @@
 from flask import Blueprint, render_template, request, jsonify
 from werkzeug.exceptions import BadRequest
-from models import Product, db, TShirt
+import redis
+from ast import literal_eval
+from models import Product, db
 
 product_app = Blueprint("product_app", __name__)
 
+cache = redis.Redis()
 
 
 def sep_data(lst):
@@ -25,8 +28,10 @@ def product_detail(product_id: int):
     if request.method == "POST":
         res = request.values
         data = sep_data(res)
-        # data = map(sep_data, res)
-        print(data[0:5])
+        cache.setex(name='cart', time=120, value=str(data[0:5]))
+        convert = cache.get('cart')
+        lst = literal_eval(convert.decode('ascii'))
+        print(lst)
     if request.method == "DELETE":
         product.deleted = True
         db.session.commit()
