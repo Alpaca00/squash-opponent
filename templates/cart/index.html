@@ -18,7 +18,13 @@ Cart #{{product.id}}
                      <div class="cart_items">
                          <ul class="cart_list">
                              <li class="cart_item clearfix">
-                                 <div class="cart_item_image"><img src="{{ url_for('static', filename='img/t_shirt.jpeg') }}" alt=""></div>
+                                 {% if product.id == 9 %}
+                                    <div class="cart_item_image"><img src="{{ url_for('static', filename='img/t_shirt.jpeg') }}" class="cart-item-image"  alt=""></div>
+                                 {% elif product.id == 10 %}
+                                    <div class="cart_item_image"><img src="{{ url_for('static', filename='img/t_shirt3.png') }}" class="cart-item-image"  alt=""></div>
+                                 {% else %}
+                                    <div class="cart_item_image"><img src="{{ url_for('static', filename='img/t_shirt2.jpeg') }}" class="cart-item-image"  alt=""></div>
+                                 {% endif %}
                                  <div class="cart_item_info d-flex flex-md-row flex-column justify-content-between">
                                      {% for t_shirt in product.t_shirts %}
                                      <div class="cart_item_name cart_info_col">

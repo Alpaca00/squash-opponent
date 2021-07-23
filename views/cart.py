@@ -1,3 +1,4 @@
+from typing import Any, Optional
 from flask import Blueprint, render_template, request
 from werkzeug.exceptions import BadRequest, RequestTimeout
 from ast import literal_eval
@@ -6,10 +7,14 @@ from views.product import cache
 
 
 cart_app = Blueprint("cart_app", __name__)
+id: Any = None
 
 
 @cart_app.route("/<int:cart_id>/", methods=['GET', 'POST'])
 def cart_list(cart_id: int):
+    global id
+    id = cart_id
+    print(id)
     if cart_id is None:
         raise BadRequest(f"Invalid product id #{cart_id}")
     cart = Product.query.filter_by(id=cart_id).one_or_none()
@@ -44,6 +49,11 @@ def cart_list(cart_id: int):
     return render_template("cart/index.html", product=cart, cart_items=cart_items)
 
 
+
 @cart_app.route("/")
-def empty_list():
-    return render_template("cart/empty.html")
+def empty_list(id_cart=None):
+    id_cart = id
+    if id_cart is None:
+        return render_template("cart/empty.html")
+    else:
+        return cart_list(id_cart)
