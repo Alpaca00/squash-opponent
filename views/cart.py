@@ -1,6 +1,9 @@
 from flask import Blueprint, render_template, request
 from werkzeug.exceptions import BadRequest
+from ast import literal_eval
 from models import Product, db, User
+from views.product import cache
+
 
 cart_app = Blueprint("cart_app", __name__)
 
@@ -10,6 +13,9 @@ def cart_list(cart_id: int):
     if cart_id is None:
         raise BadRequest(f"Invalid product id #{cart_id}")
     cart = Product.query.filter_by(id=cart_id).one_or_none()
+    convert = cache.get('cart')
+    cart_items = literal_eval(convert.decode('ascii'))
+    print(cart_items)
     if request.method == 'GET':
         cart.add = True
         db.session.commit()
@@ -32,7 +38,7 @@ def cart_list(cart_id: int):
         db.session.commit()
         order_user = User.query.filter_by(phone=phone).all()
         return render_template("order/index.html", orders_user=order_user, product=cart)
-    return render_template("cart/index.html", product=cart)
+    return render_template("cart/index.html", product=cart, cart_items=cart_items)
 
 
 @cart_app.route("/")
