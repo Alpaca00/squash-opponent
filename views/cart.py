@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request
-from werkzeug.exceptions import BadRequest
+from werkzeug.exceptions import BadRequest, RequestTimeout
 from ast import literal_eval
 from models import Product, db, User
 from views.product import cache
@@ -14,8 +14,11 @@ def cart_list(cart_id: int):
         raise BadRequest(f"Invalid product id #{cart_id}")
     cart = Product.query.filter_by(id=cart_id).one_or_none()
     convert = cache.get('cart')
-    cart_items = literal_eval(convert.decode('ascii'))
-    print(cart_items)
+    if convert is not None:
+        cart_items = literal_eval(convert.decode('ascii'))
+    else:
+        link = "http://192.168.1.18:5000/products/"
+        raise RequestTimeout(f'Your order time has expired. Please follow the link: {link}')
     if request.method == 'GET':
         cart.add = True
         db.session.commit()
@@ -37,7 +40,7 @@ def cart_list(cart_id: int):
         db.session.add(user)
         db.session.commit()
         order_user = User.query.filter_by(phone=phone).all()
-        return render_template("order/index.html", orders_user=order_user, product=cart)
+        return render_template("order/index.html", orders_user=order_user, product=cart, cart_items=cart_items)
     return render_template("cart/index.html", product=cart, cart_items=cart_items)
 
 

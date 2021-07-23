@@ -27,7 +27,7 @@ def product_detail(product_id: int):
     if request.method == "POST":
         res = request.values
         data = sep_data(res)
-        cache.setex(name='cart', time=120, value=str(data[0:5]))
+        cache.setex(name='cart', time=3600, value=str(data[0:5]))
     if request.method == "DELETE":
         product.deleted = True
         db.session.commit()

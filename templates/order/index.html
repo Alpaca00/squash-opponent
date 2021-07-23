@@ -8,17 +8,20 @@ Order
    <tr>
     <td id="leftcol">
           <ul class="list-group" id="first-table">
-                <li class="list-group-item">Name: <code>{{ product.name_product }}</code></li>
-                <li class="list-group-item">Print: <code>{{ product.name }}</code></li>
+              <code>Thank you for your order and support!</code>
+              {% for t_shirt in product.t_shirts %}
+                <li class="list-group-item">Name: <code>{{ t_shirt.name }}</code></li>
 
-                {% for char in product.characters %}
-                <li class="list-group-item">Size: <code>{{ char.size }}</code></li>
-                <li class="list-group-item">Sex: <code>{{ char.sex }}</code></li>
+                <li class="list-group-item">Print: <code>{{ cart_items[0][13:] }}</code></li>
+
+
+                <li class="list-group-item">Size: <code>{{ cart_items[3] }}</code></li>
+                <li class="list-group-item">Sex: <code>{{ t_shirt.sex }}</code></li>
                 {% endfor %}
 
-                <li class="list-group-item">Quantity: <code>1</code></li>
-                <li class="list-group-item">Price: <code>800</code></li>
-                <li class="list-group-item">Order Total: <code>800</code></li>
+                <li class="list-group-item">Quantity: <code>{{ cart_items[1] }}</code></li>
+                <li class="list-group-item">Price: <code>{{ product.price }}</code></li>
+                <li class="list-group-item">Order Total: <code>{{ cart_items[4] }}</code></li>
           </ul>
     </td>
     <td id="rightcol">
