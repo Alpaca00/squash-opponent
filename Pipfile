@@ -9,6 +9,7 @@ Flask-Migrate = "*"
 Flask = "*"
 psycopg2-binary = "*"
 flask-migrate = "*"
+redis = "==3.5.3"
 
 [dev-packages]
 pytest = "*"
