@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block title -%}
+Support
+{%- endblock %}
+
+{% block body  -%}
+
+<form id="reg-form" method="POST">
+  <label>
+    <p class="label-txt">Question? Complaints? Suggestions?</p>
+    <input type="text" class="input" name="question">
+    <div class="line-box">
+      <div class="line"></div>
+    </div>
+  </label>
+  <label>
+    <p class="label-txt">Email</p>
+    <input type="text" class="input" name="email">
+    <div class="line-box">
+      <div class="line"></div>
+    </div>
+  </label>
+  <label>
+    <p class="label-txt">The subject of the message</p>
+    <input type="text" class="input" name="subject">
+    <div class="line-box">
+      <div class="line"></div>
+    </div>
+  </label>
+  <label>
+    <p class="label-txt">The text of the message</p>
+    <input type="text" class="input" name="text">
+    <div class="line-box">
+       <div class="line" id="text-area"></div>
+    </div>
+  </label>
+  <button type="submit">submit</button>
+
+</form>
+
+<script>
+  $(document).ready(function(){
+
+  $('.input').focus(function(){
+    $(this).parent().find(".label-txt").addClass('label-active');
+  });
+
+  $(".input").focusout(function(){
+    if ($(this).val() == '') {
+      $(this).parent().find(".label-txt").removeClass('label-active');
+    };
+  });
+
+});
+
+</script>
+
+
+{%- endblock %}
