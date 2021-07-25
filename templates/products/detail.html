@@ -91,7 +91,7 @@ Products #{{product.id}}
                              <div class="order_total_amount" id="total-order2"><code>800</code></div>
                          </div>
                      </div>
-                     <div class="cart_buttons"><button type="button" class="button cart_button_clear" style="background: #FFC633;"><a href="{{ url_for('product_app.product_list') }}">Back</a></button><button type="button" class="button cart_button_checkout"><a href="{{ url_for('cart_app.cart_list', product_id=product.id, cart_id=product.id) }}" id="add-to-cart">Add to cart</a></button> </div>
+                     <div class="pos-btn"><button type="button"><a href="{{ url_for('product_app.product_list') }}">Back</a></button><button type="button"><a href="{{ url_for('cart_app.cart_list', product_id=product.id, cart_id=product.id) }}">Add to cart</a></button> </div>
                  </div>
              </div>
          </div>
