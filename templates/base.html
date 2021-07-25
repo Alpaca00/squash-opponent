@@ -4,11 +4,16 @@
     <meta charset="UTF-8">
     <title>
         {% block title %}
-        Base title
+        Home
         {% endblock %}
     </title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+
+
+
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -50,13 +55,17 @@
                        data-bs-toggle='tooltip' data-bs-placement='top' title='Cart'
                         href="{{ url_for('cart_app.empty_list') }}">Cart</a>
                 </li>
+                    <li class="nav-item">
+                    <a class="nav-link"
+                       data-bs-toggle='tooltip' data-bs-placement='top' title='Cart'
+                        href="{{ url_for('support_app.support_list') }}">Support</a>
+                </li>
                     <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Action
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <li><a class="dropdown-item" href="#">Login</a></li>
-                        <li><a class="dropdown-item" href="#">Support</a></li>
+                        <li><a class="dropdown-item" href="{{ url_for('login_app.login') }}">Login</a></li>
                         <li><a class="dropdown-item" href="#">Logout</a></li>
                     </ul>
                 </li>
@@ -169,12 +178,12 @@
   </div>
   <!-- Grid container -->
 
-  <!-- Copyright -->
+
 
   <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-    © 2021 Copyright:
-    <a class="text-white" href="https://squashteam.lviv.ua/">squashteam.lviv.ua</a>
+    © 2021 All rights reserved. The use of materials from this site is possible only with reference to the source.
+    <a class="text-white" href="https://squashteam.lviv.ua/"></a>
   </div>
-  <!-- Copyright -->
+
 </footer>
 {% endblock %}
