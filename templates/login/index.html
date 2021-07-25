@@ -1,14 +1,147 @@
-{% extends 'base.html' %}
+<!DOCTYPE html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <title>
+        login
+    </title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 
-{% block title -%}
-Login
-{%- endblock %}
+</head>
+{% block body %}
 
-{% block body  -%}
-<!--<form action="http://0.0.0.0:5000/cart" method="GET">-->
-<!--  Username : <input type="text" name="username"><br>-->
-<!--  Password : <input type="password" name="password"><br>-->
-<!--  <input type="submit" value="submit">-->
-<!--</form>-->
-{% endblcok  -%}
 
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <div id="logo_go">
+                <div class="myWrapper">
+                    <nav>
+                         <a href="/"><img src="{{ url_for('static', filename='img/logo.png') }}" alt="" width="130" height="130" class="d-inline-block align-text-top"></a>
+                    </nav>
+                </div>
+            </div>
+                <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page"
+                       data-bs-toggle='tooltip' data-bs-placement='top' title='Home'
+                       href="{{ url_for('index') }}">Home</a>
+                </li>
+                    <li class="nav-item">
+                    <a class="nav-link"
+                       data-bs-toggle='tooltip' data-bs-placement='top' title='Products'
+                       href="{{ url_for('product_app.product_list') }}">Products</a>
+                </li>
+                    <li class="nav-item">
+                    <a class="nav-link"
+                       data-bs-toggle='tooltip' data-bs-placement='top' title='Photo Gallery'
+                       href="{{ url_for('gallery_app.gallery_list') }}">Photo Gallery</a>
+                </li>
+                    <li class="nav-item">
+                    <a class="nav-link"
+                       data-bs-toggle='tooltip' data-bs-placement='top' title='Video Gallery'
+                       href="{{ url_for('video_gallery_app.video_gallery_list') }}">Video Gallery</a>
+                </li>
+                    <li class="nav-item">
+                    <a class="nav-link"
+                       data-bs-toggle='tooltip' data-bs-placement='top' title='Cart'
+                        href="{{ url_for('cart_app.empty_list') }}">Cart</a>
+                </li>
+                    <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Action
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <li><a class="dropdown-item" href="{{ url_for('login_app.login') }}">Login</a></li>
+                        <li><a class="dropdown-item" href="#">Support</a></li>
+                        <li><a class="dropdown-item" href="#">Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container-login">
+	<div class="d-flex justify-content-center h-100">
+		<div class="card-nest">
+			<div class="card-header">
+				<h3>Sign In</h3>
+				<div class="d-flex justify-content-end social_icon" id="social-icon">
+
+					<span><i class="fab fa-facebook-square"></i></span>
+					<span><i class="fab fa-google-plus-square"></i></span>
+					<span><i class="fab fa-twitter-square"></i></span>
+				</div>
+			</div>
+			<div class="card-body">
+
+				<form method="POST">
+					<div class="input-group form-group">
+						<div class="input-group-prepend">
+
+							<input type="text" class="form-control" placeholder="email" name="email">
+						</div>
+
+
+					</div>
+					<div class="input-group form-group">
+						<div class="input-group-prepend">
+								<input type="password" class="form-control"  placeholder="password" name="password">
+						</div>
+					</div>
+					<div class="row align-items-center remember">
+						<input type="checkbox">Remember Me
+					</div>
+					<div class="form-group">
+                            <input type="submit" value="Login" class="btn float-right login_btn">
+					</div>
+				</form>
+			</div>
+			<div class="card-footer">
+				<div class="d-flex justify-content-center links">
+					Don't have an account?<a href="{{ url_for('register_app.register_list') }}">Sign Up</a>
+				</div>
+				<div class="d-flex justify-content-center">
+					<a href="#">Forgot your password?</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<footer class="text-center text-white" style="background: url('/static/img/racket.jpg');">
+  <!-- Grid container -->
+  <div class="container p-4">
+    <!-- Section: Iframe -->
+    <section class="footer-ref">
+      <div class="row d-flex justify-content-center">
+        <div class="col-lg-6">
+          <div class="ratio ratio-16x9">
+            <iframe
+              class="shadow-1-strong rounded"
+              src="https://www.youtube.com/embed/1HAEX1c6wII"
+              title="YouTube video"
+              allowfullscreen
+            ></iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Section: Iframe -->
+  </div>
+  <!-- Grid container -->
+
+  <!-- Copyright -->
+
+  <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+    © 2021 Copyright:
+    <a class="text-white" href="https://squashteam.lviv.ua/">squashteam.lviv.ua</a>
+  </div>
+  <!-- Copyright -->
+</footer>
+{% endblock %}
