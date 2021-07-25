@@ -67,9 +67,9 @@ Cart #{{product.id}}
                      </div>
                      <div class="desc-text-tg-tt">
                          <div class="desc-text-tg">
-                             <code>Show your support for The Lviv squash team with this T_Shirt
-                                 which features the teams iconic inscription on the chest
-                                 and the short sleeves.</code>
+                             <code>Show your support for the Lviv squash team with this T-shirt,
+                                    which has the inscriptions of the teams on the chest or back.
+                                    All funds will go to the organization of junior tournaments.</code>
                          </div>
                          </div>
                      </div>
@@ -80,27 +80,69 @@ Cart #{{product.id}}
 
 
 
-<form method="POST">
-    <input type="text" class="form-control" placeholder="First name"
-           aria-label="First name" name="first_name"><br>
-    <input type="text" class="form-control" placeholder="Last name"
-           aria-label="Last name" name="last_name"><br>
-    <input type="text" class="form-control" placeholder="Email"
-                       value='' aria-label="Email" name="email"><br>
-    <input type="text" class="form-control" placeholder="Phone"
-                       value='' aria-label="Phone" name="phone"><br>
-    <input type="text" class="form-control" placeholder="Address"
-                       value='' aria-label="Address" name="address"><br>
-    <input type="text" class="form-control" placeholder="Address2"
-                       value='' aria-label="Address2"><br>
-    <input type="text" class="form-control" placeholder="City"
-                       value='' aria-label="City" name="city"><br>
-    <input type="text" class="form-control" placeholder="State"
-                       value='' aria-label="State" name="state"><br>
-    <input type="text" class="form-control" placeholder="Zip"
-                       value='' aria-label="Zip" name="zip_code"><br>
-    <input type="submit" class="btn-sub-form-control" style="color: #FFFFFF;border-radius: 6px;"  value="submit"><br>
-    </form>
+<form id="reg-form" method="POST">
+    <label>
+        <p class="label-txt">ENTER YOUR FIRST NAME</p>
+        <input type="text" class="input">
+    <div class="line-box">
+      <div class="line"></div>
+    </div>
+    </label>
+    <label>
+        <p class="label-txt">ENTER YOUR LAST NAME</p>
+        <input type="text" class="input">
+    <div class="line-box">
+      <div class="line"></div>
+    </div>
+  </label>
+  <label>
+        <p class="label-txt">ENTER YOUR EMAIL</p>
+        <input type="text" class="input">
+    <div class="line-box">
+      <div class="line"></div>
+    </div>
+  </label>
+    <label>
+        <p class="label-txt">PHONE</p>
+        <input type="text" class="input">
+    <div class="line-box">
+      <div class="line"></div>
+    </div>
+  </label>
+     <label>
+        <p class="label-txt">ENTER YOUR ADDRESS</p>
+        <input type="text" class="input">
+    <div class="line-box">
+      <div class="line"></div>
+    </div>
+  </label>
+    <label>
+        <p class="label-txt">ENTER YOUR ADDRESS2</p>
+        <input type="text" class="input">
+    <div class="line-box">
+      <div class="line"></div>
+    </div>
+  </label> <label>
+        <p class="label-txt">ENTER YOUR CITY</p>
+        <input type="text" class="input">
+    <div class="line-box">
+      <div class="line"></div>
+    </div>
+  </label> <label>
+        <p class="label-txt">ENTER YOUR STATE</p>
+        <input type="text" class="input">
+    <div class="line-box">
+      <div class="line"></div>
+    </div>
+  </label> <label>
+        <p class="label-txt">ENTER YOUR ZIP CODE</p>
+        <input type="text" class="input">
+    <div class="line-box">
+      <div class="line"></div>
+    </div>
+  </label>
+    <button type="submit">submit</button>
+</form>
 
 
 <!-- Modal -->
@@ -118,4 +160,21 @@ Cart #{{product.id}}
   </div>
 </div>
 <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+<script>
+    <script>
+  $(document).ready(function(){
+
+  $('.input').focus(function(){
+    $(this).parent().find(".label-txt").addClass('label-active');
+  });
+
+  $(".input").focusout(function(){
+    if ($(this).val() == '') {
+      $(this).parent().find(".label-txt").removeClass('label-active');
+    };
+  });
+
+});
+</script>
+</script>
 {%- endblock %}
