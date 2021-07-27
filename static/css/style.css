@@ -332,13 +332,6 @@ cursor: pointer;
 color: white;
 }
 
-.social_icon{
-position: absolute;
-right: 480px;
-top: 210px;
-}
-
-
 
 .input-group-prepend span{
     font-size: 25px;
@@ -477,4 +470,87 @@ button {
 button:hover {
   background: #8BC34A;
   color: #ffffff;
+}
+
+.sidebar {
+    width: 20%;
+    padding-right: 0;
+    padding-top: 0;
+
+
+}
+
+.sidebar li .submenu{
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	padding-left: 1rem;
+	padding-right: 1rem;
+}
+
+
+.g-recaptcha{
+    padding: 12px 24px;
+}
+
+.visible {
+  visibility: visible !important;
+}
+.invisible {
+  visibility: hidden !important;
+}
+
+@import "bootstrap/scss/utilities";
+
+$utilities: (
+"visibility": (
+      property: visibility,
+      class: null,
+      values: (
+        visible: visible,
+        invisible: hidden,
+      )
+    )
+);
+
+
+
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.4);
+}
+
+
+.modal-content {
+  background: url("/static/img/bl-squash.jpg");
+  margin: 5% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  height: 30%;
+  color: #FFFFFF;
+}
+
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
 }
