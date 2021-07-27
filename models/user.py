@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, ForeignKey
+from sqlalchemy import Column, Integer, String, ForeignKey, Boolean
 from models import db
 
 
@@ -17,6 +17,16 @@ class User(db.Model):
     order_id = Column(Integer, ForeignKey('orders.id'))
     order = db.relationship('Order')
 
+
+
+
+class UserAccount(db.Model):
+    __tablename__ = "users_accounts"
+    id = Column(Integer, primary_key=True)
+    name = Column(String, nullable=False)
+    email = Column(String, nullable=False, unique=True)
+    password = Column(String, nullable=False)
+    logout = Column(Boolean, default=False, server_default='false')
 
     # @email.setter
     # def email(self, value):
