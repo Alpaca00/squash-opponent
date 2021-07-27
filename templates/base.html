@@ -9,11 +9,7 @@
     </title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
-
-
-
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
-
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -35,6 +31,11 @@
                        data-bs-toggle='tooltip' data-bs-placement='top' title='Home'
                        href="{{ url_for('index') }}">Home</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page"
+                       data-bs-toggle='tooltip' data-bs-placement='top' title='Finder opponent'
+                       href="#">Finder-Opponent</a>
+                </li>
                     <li class="nav-item">
                     <a class="nav-link"
                        data-bs-toggle='tooltip' data-bs-placement='top' title='Products'
@@ -43,12 +44,12 @@
                     <li class="nav-item">
                     <a class="nav-link"
                        data-bs-toggle='tooltip' data-bs-placement='top' title='Photo Gallery'
-                       href="{{ url_for('gallery_app.gallery_list') }}">Photo Gallery</a>
+                       href="{{ url_for('gallery_app.gallery_list') }}">Photo-Gallery</a>
                 </li>
                     <li class="nav-item">
                     <a class="nav-link"
                        data-bs-toggle='tooltip' data-bs-placement='top' title='Video Gallery'
-                       href="{{ url_for('video_gallery_app.video_gallery_list') }}">Video Gallery</a>
+                       href="{{ url_for('video_gallery_app.video_gallery_list') }}">Video-Gallery</a>
                 </li>
                     <li class="nav-item">
                     <a class="nav-link"
@@ -66,16 +67,21 @@
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <li><a class="dropdown-item" href="{{ url_for('login_app.login') }}">Login</a></li>
-                        <li><a class="dropdown-item" href="#">Logout</a></li>
+                        {% block user %}
+                    {% if user != None %}
+                        <li><a class="dropdown-item" href="{{ url_for('index') }}">{{ user }}</a></li>
+                        {% else %}
+                        <li><a class="dropdown-item" href="{{ url_for('login_app.login') }}">Logout</a></li>
+                        {% endif %}
                     </ul>
-                </li>
+                        {% endblock %}
             </ul>
         </div>
     </div>
 </nav>
 <div class="container">
     {% block body %}
-    <table class="table table-success table-striped">
+    <table class="table table-success">
         <thead>
         <h1>Lviv Squash Team</h1>
         </thead>
@@ -87,32 +93,63 @@
       <td colspan="4" class="table-active">Matches</td>
     </tr>
     <tr class="table-active">
-      <th scope="row">1</th>
-      <td colspan="2">Warriors</td>
-      <td colspan="3" class="table-active">29</td>
-      <td colspan="4" class="table-active">3</td>
+      <th scope="row">{{ result[0].position }}</th>
+    <td colspan="2" id="myBtn" style="cursor: pointer;">{{ result[0].team }}</td>
+<div id="myModal" class="modal">
+  <div class="modal-content">
+     {% for res in result[0].players %}
+      <span class="close">&times;</span>
+      <p>{{ res.full_name[2:-2] }}</p>
+        {% endfor %}
+  </div>
+</div>
+      <td colspan="3" class="table-active">{{ result[0].point }}</td>
+      <td colspan="4" class="table-active">{{ result[0].match }}</td>
     </tr>
     <tr>
-      <th scope="row">2</th>
-      <td colspan="2" class="table-pos">Snails</td>
-      <td colspan="3" class="table-pos">16</td>
-      <td>2</td>
+      <th scope="row">{{ result[1].position }}</th>
+      <td colspan="2" id="myBtn1" style="cursor: pointer;" class="table-pos">{{ result[1].team }}</td>
+        <div id="myModal1" class="modal">
+  <div class="modal-content">
+      {% for res in result[1].players %}
+      <span class="close">&times;</span>
+     {{ res.full_name[2:-2] }}
+        {% endfor %}
+  </div>
+</div>
+      <td colspan="3" class="table-pos">{{ result[1].point }}</td>
+      <td>{{ result[1].match }}</td>
     </tr>
     <tr>
-      <th scope="row">3</th>
-      <td colspan="2" class="table-pos">Gladiators</td>
-      <td colspan="3">10</td>
-      <td>2</td>
+      <th scope="row">{{ result[2].position }}</th>
+      <td colspan="2" id="myBtn2" style="cursor: pointer;" class="table-pos">{{ result[2].team }}</td>
+          <div id="myModal2" class="modal">
+  <div class="modal-content">
+     {% for res in result[2].players %}
+      <span class="close">&times;</span>
+     {{ res.full_name[2:-2] }}
+        {% endfor %}
+  </div>
+</div>
+      <td colspan="3">{{ result[2].point }}</td>
+      <td>{{ result[2].match }}</td>
     </tr>
     <tr>
-      <th scope="row">4</th>
-      <td colspan="2" class="table-pos">Anchors</td>
-      <td colspan="3">9</td>
-      <td>1</td>
+      <th scope="row">{{ result[3].position }}</th>
+      <td colspan="2" id="myBtn3" style="cursor: pointer;"class="table-pos">{{ result[3].team }}</td>
+              <div id="myModal3" class="modal">
+  <div class="modal-content">
+    {% for res in result[3].players %}
+      <span class="close">&times;</span>
+     {{ res.full_name[2:-2] }}
+        {% endfor %}
+  </div>
+</div>
+      <td colspan="3">{{ result[3].point }}</td>
+      <td>{{ result[3].match }}</td>
     </tr>
   </tbody>
     </table>
-
     <table class="table table-striped table-hover">
      <tbody>
         <tr class="table-active">
@@ -122,29 +159,36 @@
                 <td colspan="4" class="table-active">Score</td>
         </tr>
         <tr>
-            <th scope="row">04.07.21</th>
-                <td colspan="2">Warriors</td>
-                <td colspan="3">Gladiators</td>
-                <td colspan="4">12:4</td>
+            <th scope="row">{{ score[0].date }}</th>
+                <td colspan="2">{{ score[0].team1 }}</td>
+                <td colspan="3">{{ score[0].team2 }}</td>
+                <td colspan="4">{{ score[0].score }}</td>
         </tr>
         <tr>
-            <th scope="row">26.06.21</th>
-                <td colspan="2">Warriors</td>
-                <td colspan="3">Snails</td>
-                <td colspan="4">10:6</td>
+            <th scope="row">{{ score[1].date }}</th>
+                <td colspan="2">{{ score[1].team1 }}</td>
+                <td colspan="3">{{ score[1].team2 }}</td>
+                <td colspan="4">{{ score[1].score }}</td>
         </tr>
          <tr>
-            <th scope="row">19.06.21</th>
-                <td colspan="2">Anchors</td>
-                <td colspan="3">Warriors</td>
-                <td colspan="4">9:7</td>
+            <th scope="row">{{ score[2].date }}</th>
+                <td colspan="2">{{ score[2].team1 }}</td>
+                <td colspan="3">{{ score[2].team2 }}</td>
+                <td colspan="4">{{ score[2].score }}</td>
         </tr>
          <tr>
-            <th scope="row">04.06.21</th>
-                <td colspan="2">Snails</td>
-                <td colspan="3">Gladiators</td>
-                <td colspan="4">10:6</td>
+            <th scope="row">{{ score[3].date }}</th>
+                <td colspan="2">{{ score[3].team1 }}</td>
+                <td colspan="3">{{ score[3].team2 }}</td>
+                <td colspan="4">{{ score[3].score }}</td>
         </tr>
+        <tr>
+            <th scope="row">{{ score[4].date }}</th>
+                <td colspan="2">{{ score[4].team1 }}</td>
+                <td colspan="3">{{ score[4].team2 }}</td>
+                <td colspan="4">{{ score[4].score }}</td>
+        </tr>
+
      </tbody>
     </table>
     {% endblock %}
@@ -157,9 +201,7 @@
 <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 {% block after_body %}
 <footer class="text-center text-white" style="background: url('/static/img/racket.jpg');">
-  <!-- Grid container -->
   <div class="container p-4">
-    <!-- Section: Iframe -->
     <section class="footer-ref">
       <div class="row d-flex justify-content-center">
         <div class="col-lg-6">
@@ -174,16 +216,11 @@
         </div>
       </div>
     </section>
-    <!-- Section: Iframe -->
   </div>
-  <!-- Grid container -->
-
-
 
   <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
     © 2021 All rights reserved. The use of materials from this site is possible only with reference to the source.
     <a class="text-white" href="https://squashteam.lviv.ua/"></a>
   </div>
-
 </footer>
 {% endblock %}
