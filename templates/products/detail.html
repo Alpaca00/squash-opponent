@@ -119,8 +119,8 @@ Products #{{product.id}}
  <div>
      <button id="delete-product" class="btn btn-danger">Delete</button>
  </div>
-{%- endblock %}
-{% block after_body %}
+
+
 <script>
 
 const arrPostData = [];
@@ -190,4 +190,5 @@ document.addEventListener('select', logSelection);
       })
     });
 </script>
-{% endblock %}
+
+{%- endblock %}
