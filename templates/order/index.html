@@ -8,7 +8,7 @@ Order
    <tr>
     <td id="leftcol">
           <ul class="list-group" id="first-table">
-              <code>Thank you for your order and support!</code>
+              <code>Your order: {{ order }}</code>
               {% for t_shirt in product.t_shirts %}
                 <li class="list-group-item">Name: <code>{{ t_shirt.name }}</code></li>
 
@@ -28,8 +28,7 @@ Order
           {% for order_user in orders_user %}
           <ul class="list-group" id="second-table">
 
-                <li class="list-group-item">First name: <code>{{ order_user.first_name }}</code></li>
-                <li class="list-group-item">Last name: <code>{{ order_user.last_name }}</code></li>
+                <li class="list-group-item">Full name: <code>{{ order_user.full_name }}</code></li>
                 <li class="list-group-item">Email: <code>{{ order_user.email }}</code></li>
                 <li class="list-group-item">Phone: <code>{{ order_user.phone }}</code></li>
                 <li class="list-group-item">Address: <code>{{ order_user.address }}</code></li>
