@@ -11,8 +11,6 @@
 
 </head>
 {% block body %}
-
-
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -32,6 +30,11 @@
                        data-bs-toggle='tooltip' data-bs-placement='top' title='Home'
                        href="{{ url_for('index') }}">Home</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page"
+                       data-bs-toggle='tooltip' data-bs-placement='top' title='Finder opponent'
+                       href="#">Finder-Opponent</a>
+                </li>
                     <li class="nav-item">
                     <a class="nav-link"
                        data-bs-toggle='tooltip' data-bs-placement='top' title='Products'
@@ -40,17 +43,22 @@
                     <li class="nav-item">
                     <a class="nav-link"
                        data-bs-toggle='tooltip' data-bs-placement='top' title='Photo Gallery'
-                       href="{{ url_for('gallery_app.gallery_list') }}">Photo Gallery</a>
+                       href="{{ url_for('gallery_app.gallery_list') }}">Photo-Gallery</a>
                 </li>
                     <li class="nav-item">
                     <a class="nav-link"
                        data-bs-toggle='tooltip' data-bs-placement='top' title='Video Gallery'
-                       href="{{ url_for('video_gallery_app.video_gallery_list') }}">Video Gallery</a>
+                       href="{{ url_for('video_gallery_app.video_gallery_list') }}">Video-Gallery</a>
                 </li>
                     <li class="nav-item">
                     <a class="nav-link"
                        data-bs-toggle='tooltip' data-bs-placement='top' title='Cart'
                         href="{{ url_for('cart_app.empty_list') }}">Cart</a>
+                </li>
+                    <li class="nav-item">
+                    <a class="nav-link"
+                       data-bs-toggle='tooltip' data-bs-placement='top' title='Cart'
+                        href="{{ url_for('support_app.support_list') }}">Support</a>
                 </li>
                     <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -58,14 +66,20 @@
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <li><a class="dropdown-item" href="{{ url_for('login_app.login') }}">Login</a></li>
-                        <li><a class="dropdown-item" href="#">Support</a></li>
-                        <li><a class="dropdown-item" href="#">Logout</a></li>
+                        {% block user %}
+                    {% if user != None %}
+                        <li><a class="dropdown-item" href="{{ url_for('index') }}">{{ user }}</a></li>
+                        {% else %}
+                        <li><a class="dropdown-item" href="{{ url_for('login_app.login') }}">Logout</a></li>
+                        {% endif %}
                     </ul>
-                </li>
+                        {% endblock %}
             </ul>
         </div>
     </div>
 </nav>
+
+
 <div class="container-login">
 	<div class="d-flex justify-content-center h-100">
 		<div class="card-nest">
@@ -115,9 +129,7 @@
 </div>
 
 <footer class="text-center text-white" style="background: url('/static/img/racket.jpg');">
-  <!-- Grid container -->
   <div class="container p-4">
-    <!-- Section: Iframe -->
     <section class="footer-ref">
       <div class="row d-flex justify-content-center">
         <div class="col-lg-6">
@@ -132,16 +144,10 @@
         </div>
       </div>
     </section>
-    <!-- Section: Iframe -->
   </div>
-  <!-- Grid container -->
-
-  <!-- Copyright -->
-
   <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
     © 2021 Copyright:
     <a class="text-white" href="https://squashteam.lviv.ua/">squashteam.lviv.ua</a>
   </div>
-  <!-- Copyright -->
 </footer>
 {% endblock %}
