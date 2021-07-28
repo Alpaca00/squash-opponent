@@ -12,7 +12,7 @@ def login():
         user_login = UserAccount.query.filter_by(email=email).one_or_none()
         if user_login.password == password:
             user = user_login.name
-            return render_template("base.html", user=user)
+            return render_template("user.html", user=user)
         else:
             return render_template("login/index.html")
     return render_template("login/index.html")
