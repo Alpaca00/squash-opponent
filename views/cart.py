@@ -29,8 +29,7 @@ def cart_list(cart_id: int):
         cart.add = True
         db.session.commit()
     if request.method == "POST":
-        first_name = request.form.get("first_name")
-        last_name = request.form.get("last_name")
+        full_name = request.form.get("full_name")
         email = request.form.get("email")
         phone = request.form.get("phone")
         address = request.form.get("address")
@@ -39,15 +38,14 @@ def cart_list(cart_id: int):
         state = request.form.get("state")
         zip_code = request.form.get("zip_code")
         user = User(
-            first_name=first_name,
-            last_name=last_name,
             email=email,
             phone=phone,
             address=address,
             address2=address2,
             city=city,
             state=state,
-            zip_code=zip_code,
+            zip_code=int(zip_code),
+            full_name=full_name,
         )
         db.session.add(user)
         name_prod = [item.name for item in cart.t_shirts if item.name]
@@ -65,11 +63,13 @@ def cart_list(cart_id: int):
         db.session.add(order)
         db.session.commit()
         order_user = User.query.filter_by(phone=phone).all()
+        count_orders = Order.query.count()
         return render_template(
             "order/index.html",
             orders_user=order_user,
             product=cart,
             cart_items=cart_items,
+            order=str(count_orders).rjust(7, "0"),
         )
     return render_template("cart/index.html", product=cart, cart_items=cart_items)
 
