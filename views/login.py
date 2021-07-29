@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template, request
 from models import UserAccount
+from views.user_account import user_account
 
 login_app = Blueprint("login_app", __name__)
 
@@ -11,8 +12,7 @@ def login():
         password = request.form.get("password")
         user_login = UserAccount.query.filter_by(email=email).one_or_none()
         if user_login.password == password:
-            user = user_login.name
-            return render_template("user.html", user=user)
+            return user_account(user_id=user_login.id)
         else:
             return render_template("login/index.html")
     return render_template("login/index.html")
