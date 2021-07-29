@@ -64,6 +64,9 @@ def cart_list(cart_id: int):
         db.session.commit()
         order_user = User.query.filter_by(phone=phone).all()
         count_orders = Order.query.count()
+        cache.setex(name='user_order_count', time=100, value=count_orders)
+        cache.setex(name='user_order_phone', time=100, value=phone)
+        cache.setex(name='user_order_full_name', time=100, value=full_name)
         return render_template(
             "order/index.html",
             orders_user=order_user,
