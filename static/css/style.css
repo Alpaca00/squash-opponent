@@ -278,6 +278,7 @@ ul {
     margin-top: 2px;
     margin-bottom: 2px;
     margin: auto;
+    padding: 10%;
 }
 
 #log {
@@ -513,9 +514,6 @@ $utilities: (
     )
 );
 
-
-
-
 .modal {
   display: none;
   position: fixed;
@@ -553,4 +551,12 @@ $utilities: (
   color: black;
   text-decoration: none;
   cursor: pointer;
+}
+
+#contact{
+  margin-left: 85%;
+}
+.contact-ref{
+    text-decoration: none;
+    color: white;
 }
