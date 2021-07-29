@@ -5,7 +5,7 @@ Support
 {%- endblock %}
 
 {% block body  -%}
-
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/user_account.css') }}">
 <form id="reg-form" method="POST">
   <label>
     <p class="label-txt">Question? Complaints? Suggestions?</p>
@@ -38,7 +38,6 @@ Support
   <button type="submit">submit</button>
 
 </form>
-
 <script>
   $(document).ready(function(){
 
