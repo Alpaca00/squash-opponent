@@ -5,6 +5,8 @@ from flask_mail import Mail, Message
 from flask_migrate import Migrate
 from sqlalchemy import desc
 from loguru import logger
+import redis
+from ast import literal_eval
 import config
 from views import product_app, gallery_app, video_gallery_app, cart_app, login_app, register_app, support_app
 from models import db, TableResult, TableScore, UserAccount, Order, Product
@@ -57,6 +59,7 @@ mail_settings = {
 
 app.config.update(mail_settings)
 mail = Mail(app)
+r = redis.Redis()
 
 
 def messenger(subject, body):
@@ -73,6 +76,7 @@ def index():
     if request.method == 'GET':
         table_result = TableResult.query.order_by(TableResult.position).all()
         table_score = TableScore.query.order_by(desc(TableScore.date)).all()
+        send_email()
         return render_template("base.html", result=table_result, score=table_score)
     if request.method == "POST":
         email = request.form.get("email")
@@ -83,16 +87,19 @@ def index():
             return render_template("base.html", user=user)
 
 
-# @cart_app.route("/<int:cart_id>/", methods=["GET", "POST"])
-# def cart_list(cart_id: int):
-#     if request.method == "POST":
-#         cart = Product.query.filter_by(id=cart_id).one_or_none()
-#         count_orders = Order.query.count()
-#         full_name = request.form.get("full_name")
-#         phone = request.form.get("phone")
-#         print(phone)
-#         print(full_name)
-#         return messenger(
-#             subject="new_order",
-#             body=f"Order: {count_orders}, name: {full_name}, phone: {phone}, product: {cart}",
-#         )
+def send_email():
+    try:
+        c = r.get("user_order_count")
+        p = r.get("user_order_phone")
+        f = r.get("user_order_full_name")
+    except redis.ConnectionError as err_redis:
+        return err_redis
+    else:
+        if c and p and f is not None:
+            order_number = literal_eval(c.decode("ascii"))
+            phone = literal_eval(p.decode("ascii"))
+            full_name = f.decode("ascii")
+            return messenger(
+                subject="new_order",
+                body=f"Order: {order_number}, name: {full_name}, phone: {phone}",
+            )
