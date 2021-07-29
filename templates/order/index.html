@@ -4,11 +4,14 @@
 Order
 {%- endblock %}
 {% block body  -%}
+
+
+
 <table id="maket">
    <tr>
     <td id="leftcol">
           <ul class="list-group" id="first-table">
-              <code>Your order: {{ order }}</code>
+              <li class="list-group-item">Your order: <code>{{ order }}</code></li>
               {% for t_shirt in product.t_shirts %}
                 <li class="list-group-item">Name: <code>{{ t_shirt.name }}</code></li>
 
@@ -57,9 +60,7 @@ Order
 </script>
 {% block after_body %}
 <footer class="text-center text-white" style="background: url('/static/img/racket.jpg');">
-  <!-- Grid container -->
   <div class="container p-4">
-    <!-- Section: Iframe -->
     <section class="footer-ref">
       <div class="row d-flex justify-content-center">
         <div class="col-lg-6">
@@ -74,17 +75,11 @@ Order
         </div>
       </div>
     </section>
-    <!-- Section: Iframe -->
   </div>
-  <!-- Grid container -->
-
-  <!-- Copyright -->
-
   <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-    © 2021 Copyright:
+    © 2021 All rights reserved. The use of materials from this site is possible only with reference to the source.
     <a class="text-white" href="https://squashteam.lviv.ua/">squashteam.lviv.ua</a>
   </div>
-  <!-- Copyright -->
 </footer>
 {% endblock %}
 
