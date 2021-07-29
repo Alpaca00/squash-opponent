@@ -8,7 +8,7 @@ from loguru import logger
 import redis
 from ast import literal_eval
 import config
-from views import product_app, gallery_app, video_gallery_app, cart_app, login_app, register_app, support_app
+from views import product_app, gallery_app, video_gallery_app, cart_app, login_app, register_app, support_app, user_account_app
 from models import db, TableResult, TableScore, UserAccount, Order, Product
 
 app = Flask(__name__)
@@ -36,6 +36,7 @@ app.register_blueprint(cart_app, url_prefix='/cart')
 app.register_blueprint(login_app, url_prefix='/login')
 app.register_blueprint(register_app, url_prefix='/register')
 app.register_blueprint(support_app, url_prefix='/support')
+app.register_blueprint(user_account_app, url_prefix='/account')
 
 db.init_app(app)
 migrate = Migrate(app, db)
