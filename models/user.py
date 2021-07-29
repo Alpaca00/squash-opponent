@@ -53,4 +53,15 @@ class UserAccount(db.Model):
     email = Column(String, nullable=False, unique=True)
     password = Column(String, nullable=False)
     logout = Column(Boolean, default=False, server_default="false")
+    users_opponent = db.relationship("UserOpponent", backref="users_account", lazy=True)
+
+
+class UserOpponent(db.Model):
+    __tablename__ = "users_opponents"
+    id = Column(Integer, primary_key=True)
+    category = Column(String, nullable=True, default="Amateur")
+    city = Column(String, nullable=False)
+    district = Column(String, nullable=True)
+    user_account_id = Column(Integer, ForeignKey('users-accounts.id'))
+    user_account = db.relationship('UserAccount')
 
