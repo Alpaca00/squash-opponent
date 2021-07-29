@@ -6,4 +6,5 @@ from .order import order_app
 from .login import login_app
 from .register import register_app
 from .support import support_app
+from .user_account import user_account_app
 
