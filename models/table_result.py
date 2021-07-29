@@ -10,7 +10,7 @@ class TableResult(db.Model):
     team = Column(String, nullable=False)
     point = Column(Integer, nullable=False)
     match = Column(String, nullable=False)
-    players = db.relationship("Player", backref="table_results", lazy=True)
+    players = db.relationship("Player", backref="table_results", lazy="joined")
 
 
 class TableScore(db.Model):
