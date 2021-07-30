@@ -65,7 +65,7 @@
                     <li class="nav-item">
                     <a class="nav-link"
                        data-bs-toggle='tooltip' data-bs-placement='top' title='Account'
-                        href="{{ url_for('index') }}">Logout</a>
+                        href="{{ url_for('logout') }}">Logout</a>
                 </li>
             </ul>
         </div>
@@ -81,7 +81,7 @@
                         <div class="col-sm-4 bg-c-lite-green user-profile">
                             <div class="card-block text-center text-white">
                                 <div class="m-b-25"> <img src="{{ url_for('static', filename='img/squash_ball.png') }}" class="img-radius" alt="User-Profile-Image"> </div>
-                                <h6 class="f-w-600">{{ user.name }}</h6>
+                                <h6 class="f-w-600">{{ cur.name }}</h6>
                                 <p>Squash Player</p> <i class=" mdi mdi-square-edit-outline feather icon-edit m-t-10 f-16"></i>
                             </div>
                         </div>
@@ -91,18 +91,18 @@
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <p class="m-b-10 f-w-600">Email</p>
-                                        <h6 class="text-muted f-w-400">{{ user.email }}</h6>
+                                        <h6 class="text-muted f-w-400">{{ cur.email }}</h6>
                                     </div>
                                     <div class="col-sm-6">
                                         <p class="m-b-10 f-w-600">Phone</p>
-                                        <h6 class="text-muted f-w-400">98979989898</h6>
+                                        <h6 class="text-muted f-w-400">+38(___)-___-__-__</h6>
                                     </div>
                                 </div>
                                 <h6 class="m-b-20 m-t-40 p-b-5 b-b-default f-w-600">Location</h6>
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <p class="m-b-10 f-w-600">Lviv</p>
-                                        <h6 class="text-muted f-w-400">Sykhiv</h6>
+                                        <h6 class="text-muted f-w-400">___</h6>
                                     </div>
                                     <div class="col-sm-6">
                                         <p class="m-b-10 f-w-600">Category</p>
