@@ -65,14 +65,14 @@ def table_result_factory(date, score, team1, team2):
         db.session.commit()
 
 
-# for i in range(0, 4):
-#     table_factory(
-#         positions[i],
-#         teams[i],
-#         point=points[i],
-#         match=matches[i],
-#         team_composition=teams_compositions[i],
-#     )
+for i in range(0, 4):
+    table_factory(
+        positions[i],
+        teams[i],
+        point=points[i],
+        match=matches[i],
+        team_composition=teams_compositions[i],
+    )
 
 for i in range(0, 5):
     table_result_factory(
