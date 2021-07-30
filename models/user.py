@@ -1,12 +1,19 @@
 import re
 from sqlalchemy import Column, Integer, String, ForeignKey, Boolean
-from flask_validator import Validator, ValidateInteger, ValidateString, ValidateEmail
+from flask_security import SQLAlchemyUserDatastore, UserMixin, RoleMixin
+from flask_validator import (
+    Validator,
+    ValidateInteger,
+    ValidateString,
+    ValidateEmail,
+    ValidateBoolean,
+)
 from models import db
 from app import logger
 
 
 class ValidatePhone(Validator):
-    REGEX = r'^(?:\+38)?(?:\([0-9]{3}\D)[ .-]?[0-9]{3}[ .-]?[0-9]{2}[ .-]?[0-9]{2}|[0-9]{3}[ .-]?[0-9]{3}[ .-]?[0-9]{2}[ .-]?[0-9]{2}|[0-9]{3}[0-9]{7}$gm'
+    REGEX = r"^(?:\+38)?(?:\([0-9]{3}\D)[ .-]?[0-9]{3}[ .-]?[0-9]{2}[ .-]?[0-9]{2}|[0-9]{3}[ .-]?[0-9]{3}[ .-]?[0-9]{2}[ .-]?[0-9]{2}|[0-9]{3}[0-9]{7}$gm"
 
     def check_value(self, value):
         if re.findall(self.REGEX, value):
@@ -15,6 +22,20 @@ class ValidatePhone(Validator):
         else:
             raise AssertionError("Invalid phone number.")
 
+
+class ValidatePassword(Validator):
+    def check_value(self, value):
+        if (
+            not re.findall("\d", value)
+            and not re.findall("[A-Z]", value)
+            and len(value) >= 8
+        ):
+            raise AssertionError(
+                """The password must contain at least 1 digit, 0-9 and 1 uppercase letter,
+                 A-Z and characters long must have more than 7."""
+            )
+        else:
+            return True
 
 
 class User(db.Model):
@@ -31,7 +52,6 @@ class User(db.Model):
     order_id = Column(Integer, ForeignKey("orders.id"))
     order = db.relationship("Order")
 
-
     @classmethod
     def __declare_last__(cls):
         ValidateString(User.full_name)
@@ -44,24 +64,54 @@ class User(db.Model):
         ValidateInteger(User.zip_code)
 
 
+roles_users = db.Table('roles_users',
+                       Column('user_account_id', Integer, ForeignKey('users_accounts.id')),
+                       Column('role_id', Integer, ForeignKey('role.id')),
+                       )
 
 
-class UserAccount(db.Model):
+class UserAccount(db.Model, UserMixin):
     __tablename__ = "users_accounts"
     id = Column(Integer, primary_key=True)
-    name = Column(String, nullable=False)
-    email = Column(String, nullable=False, unique=True)
+    name = Column(String(255), nullable=False)
+    email = Column(String(33), nullable=False, unique=True)
     password = Column(String, nullable=False)
-    logout = Column(Boolean, default=False, server_default="false")
+    active = Column(Boolean)
     users_opponent = db.relationship("UserOpponent", backref="users_account", lazy=True)
+    roles = db.relationship(
+        "Role",
+        secondary=roles_users,
+        backref=db.backref('users_accounts', lazy='dynamic')
+    )
+
+    @classmethod
+    def __declare_last__(cls):
+        ValidateString(UserAccount.name)
+        ValidateEmail(UserAccount.email)
+        ValidatePassword(UserAccount.password)
+
+
+class Role(db.Model, RoleMixin):
+    id = Column(Integer, primary_key=True)
+    name = Column(String(40))
+    description = Column(String(255))
+
+
+user_datastore = SQLAlchemyUserDatastore(db, UserAccount, Role)
 
 
 class UserOpponent(db.Model):
     __tablename__ = "users_opponents"
     id = Column(Integer, primary_key=True)
-    category = Column(String, nullable=True, default="Amateur")
-    city = Column(String, nullable=False)
-    district = Column(String, nullable=True)
-    user_account_id = Column(Integer, ForeignKey('users-accounts.id'))
-    user_account = db.relationship('UserAccount')
+    category = Column(String(12), nullable=True, default="Amateur")
+    city = Column(String(33), nullable=False)
+    district = Column(String(33), nullable=True)
+    user_account_id = Column(Integer, ForeignKey("users_accounts.id"))
+    user_account = db.relationship("UserAccount")
+
+    @classmethod
+    def __declare_last__(cls):
+        ValidateString(UserOpponent.category)
+        ValidateString(UserOpponent.city)
+        ValidateString(UserOpponent.district)
 
