@@ -1,15 +1,20 @@
 import sys
 import os
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, redirect, url_for
 from flask_mail import Mail, Message
 from flask_migrate import Migrate
+from flask_admin import Admin, BaseView, AdminIndexView, expose
+from flask_login import UserMixin, LoginManager, current_user, login_user, logout_user, login_required, LoginManager
+from flask_security import Security, SQLAlchemyUserDatastore
+from flask_admin.contrib.sqla import ModelView
 from sqlalchemy import desc
 from loguru import logger
 import redis
 from ast import literal_eval
 import config
 from views import product_app, gallery_app, video_gallery_app, cart_app, login_app, register_app, support_app, user_account_app
-from models import db, TableResult, TableScore, UserAccount, Order, Product
+from models import db, TableResult, TableScore, UserAccount, AdminLogin, user_datastore
+
 
 app = Flask(__name__)
 
@@ -19,14 +24,13 @@ app.config.update(
 )
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
-
+app.config['SECURITY_PASSWORD_HASH'] = 'bcrypt'
+app.config['SECURITY_PASSWORD_SALT'] = os.environ['SPS']
 app.config['SECRET_KEY'] = '6Lf0rL8bAAAAAL0YqesYius-y0iQnYThoR-RWd0s'
 app.config['RECAPTCHA_USE_SSL'] = False
 app.config['RECAPTCHA_PUBLIC_KEY'] = 'public'
 app.config['RECAPTCHA_PRIVATE_KEY'] = 'private'
 app.config['RECAPTCHA_OPTIONS'] = {'theme': 'white'}
-
-
 
 
 app.register_blueprint(product_app, url_prefix='/products')
@@ -40,14 +44,15 @@ app.register_blueprint(user_account_app, url_prefix='/account')
 
 db.init_app(app)
 migrate = Migrate(app, db)
+login = LoginManager(app)
+security = Security(app, user_datastore)
+login_manager = LoginManager()
+login_manager.init_app(app)
+
 
 
 logger.add(sys.stderr, format="{time} {level} {message}", filter="my_module", level="INFO")
-# logger.add("file_1.log", rotation="500 MB")
-# logger.add("file_2.log", rotation="12:00")
-# logger.add("file_3.log", rotation="1 week")
-# logger.add("file_X.log", retention="10 days")
-# logger.add("file_Y.log", compression="zip")
+
 
 mail_settings = {
     "MAIL_SERVER": 'smtp.gmail.com',
@@ -104,3 +109,93 @@ def send_email():
                 subject="new_order",
                 body=f"Order: {order_number}, name: {full_name}, phone: {phone}",
             )
+
+
+@login.user_loader
+def load_user(user_id):
+    return AdminLogin.query.get(user_id)
+
+
+@login_manager.user_loader
+def load_user(user_id):
+    return UserAccount.query.get(int(user_id))
+
+
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    return "You are now logged out"
+
+
+class MyModelView(ModelView):
+    def is_accessible(self):
+        return current_user.is_authenticated
+
+    def inaccessible_callback(self, name, **kwargs):
+        return redirect(url_for('login_admin'))
+
+
+# class MyAdminIndexView(AdminIndexView):
+#     def is_accessible(self):
+#         return current_user.is_authenticated
+
+
+admin = Admin(app, template_mode='bootstrap4')
+admin.add_view(MyModelView(AdminLogin, db.session))
+
+
+@app.route('/admin/login')
+def login_admin():
+    admin_login = AdminLogin.query.get(1)
+    login_user(admin_login)
+    return "Logged in!"
+
+
+@app.route('/admin/logout')
+def logout_admin():
+    logout_user()
+    return "Logged out!"
+
+
+# class DashboardView(AdminIndexView):
+#
+#     @expose('/')
+#     def index(self):
+#         return self.render('admin/dashboard_index.html')
+
+
+
+# class FinderOpponentView(BaseView):
+#     @expose('/')
+#     def index(self):
+#         return self.render('admin/finder_opponent/index.html')
+#
+#
+# admin.add_view(FinderOpponentView(name='Finder-Opponent', endpoint='opponent'))
+
+
+# class SenderView(BaseView):
+#     @expose('/')
+#     def index(self):
+#         return self.render('admin/sender/index.html')
+#
+#
+# admin.add_view(SenderView(name='Sender', endpoint='sender'))
+#
+#
+# class CustomersView(BaseView):
+#
+#     @expose('/')
+#     def index(self, uid: int = 1):
+#
+#         customer = "John Doe"
+#         orders = 1
+#         stats = 'None'
+#
+#         return self.render('admin/customers/index.html', customer=customer, orders=orders, stats=stats)
+#
+#
+# admin.add_view(CustomersView(name='Customers', endpoint='customers/'))
+
+
