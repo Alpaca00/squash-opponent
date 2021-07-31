@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, url_for, redirect
 from flask_security.utils import hash_password
-from form import RegisterForm
+from models.form import RegisterForm
 from models import db, user_datastore
 
 register_app = Blueprint("register_app", __name__)
