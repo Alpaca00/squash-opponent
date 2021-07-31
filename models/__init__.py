@@ -4,6 +4,7 @@ from .gallery import Gallery
 from .user import User, UserAccount, UserOpponent, user_datastore
 from .table_result import TableResult, TableScore, Player
 from .admin import AdminLogin
+from .form import RegisterForm, AdminLoginForm
 
 __al__ = [
     'db',
@@ -19,4 +20,6 @@ __al__ = [
     'UserOpponent',
     'AdminLogin',
     'user_datastore'
+    'RegisterForm',
+    'AdminLoginForm',
 ]
