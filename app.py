@@ -1,19 +1,22 @@
 import sys
 import os
-from flask import Flask, request, render_template, redirect, url_for
+from flask import Flask, request, render_template, redirect, url_for, flash
+from flask_bootstrap import Bootstrap
 from flask_mail import Mail, Message
 from flask_migrate import Migrate
 from flask_admin import Admin, BaseView, AdminIndexView, expose
 from flask_login import UserMixin, LoginManager, current_user, login_user, logout_user, login_required, LoginManager
 from flask_security import Security, SQLAlchemyUserDatastore
 from flask_admin.contrib.sqla import ModelView
+from flask_wtf.csrf import CSRFProtect, CSRFError
 from sqlalchemy import desc
 from loguru import logger
 import redis
 from ast import literal_eval
+from sqlalchemy.orm import Session
 import config
 from views import product_app, gallery_app, video_gallery_app, cart_app, login_app, register_app, support_app, user_account_app
-from models import db, TableResult, TableScore, UserAccount, AdminLogin, user_datastore
+from models import db, TableResult, TableScore, UserAccount, AdminLogin, user_datastore, RegisterForm, AdminLoginForm
 
 
 app = Flask(__name__)
@@ -48,7 +51,15 @@ login = LoginManager(app)
 security = Security(app, user_datastore)
 login_manager = LoginManager()
 login_manager.init_app(app)
+login_manager.login_view = 'login_admin'
+Bootstrap(app)
+# csrf = CSRFProtect(app)
 
+
+# @app.errorhandler(CSRFError)
+# def handle_csrf_error(e):
+#     logger.info(e)
+#     return render_template('csrf_error.html', reason=e.description), 400
 
 
 logger.add(sys.stderr, format="{time} {level} {message}", filter="my_module", level="INFO")
@@ -59,13 +70,25 @@ mail_settings = {
     "MAIL_PORT": 465,
     "MAIL_USE_TLS": False,
     "MAIL_USE_SSL": True,
-    "MAIL_USERNAME": os.environ['EMAIL_USER'],
-    "MAIL_PASSWORD": os.environ['EMAIL_PASSWORD']
+    # "MAIL_USERNAME": os.environ['EMAIL_USER'],
+    # "MAIL_PASSWORD": os.environ['EMAIL_PASSWORD']
 }
 
 app.config.update(mail_settings)
 mail = Mail(app)
 r = redis.Redis()
+
+
+@login_manager.user_loader
+def load_user(user_id):
+    return UserAccount.query.get(int(user_id))
+
+
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    return "You are now logged out"
 
 
 def messenger(subject, body):
@@ -113,19 +136,38 @@ def send_email():
 
 @login.user_loader
 def load_user(user_id):
-    return AdminLogin.query.get(user_id)
+    logger.info('The user is load.')
+    return Session().query(AdminLogin).get(int(user_id))
 
 
-@login_manager.user_loader
-def load_user(user_id):
-    return UserAccount.query.get(int(user_id))
+@app.route('/admin/login', methods=['GET', 'POST'])
+def login_admin():
+    form = AdminLoginForm()
+    if form.validate_on_submit():
+        if request.method == "POST":
+            username = request.form.get('username')
+            password = request.form.get('password')
+            remember = True if request.form.get('remember') else False
+            admin_ = AdminLogin.query.filter_by(username=username).first()
+            if admin_:
+                if password == admin_.password and username == admin_.username:
+                    login_user(admin_, remember=remember)
+                    logger.info(current_user.username)
+                    if current_user.is_authenticated:
+                        return redirect(url_for('admin.index'))
+                else:
+                    flash('Invalid username or password.')
+                    return redirect(url_for('login_admin'))
+    return render_template('admin/login_index.html', form=form)
 
 
-@app.route('/logout')
-@login_required
-def logout():
+
+
+@app.route('/admin/logout')
+def logout_admin():
+    logger.info('The user is logged out.')
     logout_user()
-    return "You are now logged out"
+    return "Logged out!"
 
 
 class MyModelView(ModelView):
@@ -136,66 +178,61 @@ class MyModelView(ModelView):
         return redirect(url_for('login_admin'))
 
 
-# class MyAdminIndexView(AdminIndexView):
-#     def is_accessible(self):
-#         return current_user.is_authenticated
+class MyAdminIndexView(AdminIndexView):
+
+    def is_accessible(self):
+        logger.info(
+            f"The current user is authenticated: {current_user.is_authenticated}"
+        )
+        return current_user.is_authenticated
 
 
-admin = Admin(app, template_mode='bootstrap4')
+
+admin = Admin(app, name='Super', template_mode='bootstrap4', index_view=MyAdminIndexView())  # index_view inaccessible!
 admin.add_view(MyModelView(AdminLogin, db.session))
 
 
-@app.route('/admin/login')
-def login_admin():
-    admin_login = AdminLogin.query.get(1)
-    login_user(admin_login)
-    return "Logged in!"
+class FinderOpponentView(BaseView):
+    @expose('/')
+    def index(self):
+        opponents = UserAccount.query.all()
+        return self.render('admin/finder_opponent/index.html', user=current_user, opponents=opponents)
 
 
-@app.route('/admin/logout')
-def logout_admin():
-    logout_user()
-    return "Logged out!"
+admin.add_view(FinderOpponentView(name='Finder-Opponent', endpoint='opponent'))
 
 
-# class DashboardView(AdminIndexView):
-#
-#     @expose('/')
-#     def index(self):
-#         return self.render('admin/dashboard_index.html')
+class SenderView(BaseView):
+    @expose('/')
+    def index(self):
+        return self.render('admin/sender/index.html')
 
 
-
-# class FinderOpponentView(BaseView):
-#     @expose('/')
-#     def index(self):
-#         return self.render('admin/finder_opponent/index.html')
-#
-#
-# admin.add_view(FinderOpponentView(name='Finder-Opponent', endpoint='opponent'))
+admin.add_view(SenderView(name='Sender', endpoint='sender'))
 
 
-# class SenderView(BaseView):
-#     @expose('/')
-#     def index(self):
-#         return self.render('admin/sender/index.html')
-#
-#
-# admin.add_view(SenderView(name='Sender', endpoint='sender'))
-#
-#
-# class CustomersView(BaseView):
-#
-#     @expose('/')
-#     def index(self, uid: int = 1):
-#
-#         customer = "John Doe"
-#         orders = 1
-#         stats = 'None'
-#
-#         return self.render('admin/customers/index.html', customer=customer, orders=orders, stats=stats)
-#
-#
-# admin.add_view(CustomersView(name='Customers', endpoint='customers/'))
+class CustomersView(BaseView):
 
+    @expose('/')
+    def index(self, uid: int = 1):
+
+        customer = "John Doe"
+        orders = 1
+        stats = 'None'
+
+        return self.render('admin/customers/index.html', customer=customer, orders=orders, stats=stats)
+
+
+admin.add_view(CustomersView(name='Customers', endpoint='customers/'))
+
+
+class LogoutView(BaseView):
+    @expose('/')
+    def index(self):
+        logger.info('The admin is logged out.')
+        logout_user()
+        return redirect(url_for('login_admin'))
+
+
+admin.add_view(LogoutView(name='Login', endpoint='logout'))
 
