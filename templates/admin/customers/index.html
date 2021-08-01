@@ -1,8 +1,43 @@
 {% extends 'admin/master.html' %}
 
 {% block body %}
-
-    <h2 class="mt-3">Information about the client</h2>
-
+<table class="table table-success">
+    <thead>
+      <h1>Customers</h1>
+    </thead>
+  <tbody>
+    <tr class="table-active table-dark ">
+      <th scope="row" class="table-active">#</th>
+      <td colspan="2" class="table-active">Full name</td>
+      <td colspan="3" class="table-active">Phone</td>
+      <td colspan="4" class="table-active">City</td>
+      <td colspan="5" class="table-active">Address</td>
+      <td colspan="6" class="table-active">Email</td>
+      <td colspan="7" class="table-active">Product</td>
+      <td colspan="8" class="table-active">Print</td>
+      <td colspan="9" class="table-active">Total</td>
+      <td colspan="10" class="table-active">Color</td>
+      <td colspan="11" class="table-active">Size</td>
+      <td colspan="12" class="table-active">Sex</td>
+      <td colspan="13" class="table-active">Quantity</td>
+    </tr>
+    <tr class="table-active">
+        {% for item in customer %}
+      <th scope="row">{{ item.id }}</th>
+      <td colspan="2" >{{ item.full_name }}</td>
+      <td colspan="3" class="table-active">{{ item.phone }}</td>
+      <td colspan="4" class="table-active">{{ item.city }}</td>
+      <td colspan="5" class="table-active">{{ item.address }}</td>
+      <td colspan="6" class="table-active">{{ item.email }}</td>
+      <td colspan="7" class="table-active">{{ item.orders.name_product }}</td>
+      <td colspan="8" class="table-active">{{ item.orders.print }}</td>
+      <td colspan="9" class="table-active">{{ item.orders.order_total }}</td>
+      <td colspan="10" class="table-active">{{ item.orders.color }}</td>
+      <td colspan="11" class="table-active">{{ item.orders.size }}</td>
+      <td colspan="12" class="table-active">{{ item.orders.sex }}</td>
+      <td colspan="13" class="table-active">{{ item.orders.quantity }}</td>
+    </tr>
+  {% endfor %}
+  </tbody>
+    </table>
 {% endblock %}
-
