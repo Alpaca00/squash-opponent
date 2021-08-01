@@ -1,0 +1,29 @@
+{% extends 'admin/master.html' %}
+
+{% block body %}
+
+    <table class="table table-success">
+    <thead>
+      <h1>Customers</h1>
+    </thead>
+  <tbody>
+    <tr class="table-active table-dark ">
+      <th scope="row" class="table-active">#</th>
+      <td colspan="2" class="table-active">Question</td>
+      <td colspan="3" class="table-active">Email</td>
+      <td colspan="4" class="table-active">Subject</td>
+      <td colspan="5" class="table-active">Text</td>
+    </tr>
+    <tr class="table-active">
+        {% for item in support %}
+      <th scope="row">{{ item.id }}</th>
+        <td colspan="2" >{{ item.question }}</td>
+        <td colspan="3" class="table-active">{{ item.email }}</td>
+        <td colspan="4" class="table-active">{{ item.subject }}</td>
+        <td colspan="5" class="table-active">{{ item.text }}</td>
+    </tr>
+  {% endfor %}
+  </tbody>
+    </table>
+
+{% endblock %}
