@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "67fa9d82fda48964654cc2db3180ccaad285054293c7939c8bd5b966897d74cd"
+            "sha256": "ee1b5c3621989b2a5f0a76f05edbd6c2bf760d03c43bfabf90e077d1f9c558d7"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -124,11 +124,11 @@
         },
         "flask-migrate": {
             "hashes": [
-                "sha256:4d42e8f861d78cb6e9319afcba5bf76062e5efd7784184dd2a1cccd9de34a702",
-                "sha256:df9043d2050df3c0e0f6313f6b529b62c837b6033c20335e9d0b4acdf2c40e23"
+                "sha256:57d6060839e3a7f150eaab6fe4e726d9e3e7cffe2150fb223d73f92421c6d1d9",
+                "sha256:a6498706241aba6be7a251078de9cf166d74307bca41a4ca3e403c9d39e2f897"
             ],
             "index": "pypi",
-            "version": "==3.0.1"
+            "version": "==3.1.0"
         },
         "flask-principal": {
             "hashes": [
@@ -645,11 +645,11 @@
         },
         "selene": {
             "hashes": [
-                "sha256:13dc03d001365d63f5d139cb2a49fdf1ab577f9c2a46a1311d60c80d8cd53e0c",
-                "sha256:2cf26e98dc945aed2890d0d9dc317bbe0c68e9788c2e2ae3fe182770d177e131"
+                "sha256:2c6de6004461956467c5d8526dae0f853286d5c579c1fee248ff6a27c884cfd9",
+                "sha256:4ff9df760f1faf883007a2e664f298742944a0f82ee81a62ac3cdfbfa5affc21"
             ],
             "index": "pypi",
-            "version": "==2.0.0a38"
+            "version": "==2.0.0a39"
         },
         "selenium": {
             "hashes": [
@@ -674,10 +674,10 @@
         },
         "webdriver-manager": {
             "hashes": [
-                "sha256:00bb38c91a1aee23ef09699df074f7328a3618abbe5bf23944b7e835ad561dd6",
-                "sha256:254a3c58a253785433ce0d8afd1d6a46ebf0e62137bb05a963c033958610c6da"
+                "sha256:50a6e174106542f5335cacc387cec7ada26812babc1aeca61c208a1bab2ac2c5",
+                "sha256:c6d81590aae6fc0fb10cf7dd20c8c1b9bb043501f9cf62c316a854a0de841e32"
             ],
-            "version": "==3.4.1"
+            "version": "==3.4.2"
         }
     }
 }
