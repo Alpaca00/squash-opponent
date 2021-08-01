@@ -77,6 +77,7 @@ class UserAccount(db.Model, UserMixin):
     email = Column(String(33), nullable=False, unique=True)
     password = Column(String, nullable=False)
     active = Column(Boolean)
+    remember = Column(Boolean, default=False)
     users_opponent = db.relationship("UserOpponent", backref="users_account", lazy=True)
     roles = db.relationship(
         "Role",
@@ -114,4 +115,3 @@ class UserOpponent(db.Model):
         ValidateString(UserOpponent.category)
         ValidateString(UserOpponent.city)
         ValidateString(UserOpponent.district)
-
