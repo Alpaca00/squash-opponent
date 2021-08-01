@@ -3,7 +3,6 @@ from .product import Product, TShirt, Order
 from .gallery import Gallery
 from .user import User, UserAccount, UserOpponent, user_datastore
 from .table_result import TableResult, TableScore, Player
-from .admin import AdminLogin
 from .form import RegisterForm, AdminLoginForm
 
 __al__ = [
@@ -18,8 +17,7 @@ __al__ = [
     'TableScore',
     'Player',
     'UserOpponent',
-    'AdminLogin',
-    'user_datastore'
+    'user_datastore',
     'RegisterForm',
     'AdminLoginForm',
 ]
