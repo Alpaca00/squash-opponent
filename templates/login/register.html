@@ -1,38 +1,37 @@
 {% extends 'base.html' %}
-
 {% block title -%}
 Register
 {%- endblock %}
 {% block body  -%}
+{% import 'bootstrap/wtf.html' as wtf %}
 <form id="reg-form" method="POST">
     {{ form.csrf_token }}
+    {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="notification is-danger">
+                    <div class="alert alert-info" id="alert-message" role="alert">
+                    {{ messages[0] }}
+                    </div>
+                </div>
+            {% endif %}
+        {% endwith %}
     <label>
     <p class="label-txt">ENTER YOUR EMAIL</p>
-          <input type="text" class="input" name="email">
-          {% for error in form.email.error %}
-            <li style="coloured:red;">{{ error }}</li>
-          {% endfor %}
+        <input type="text" class="input" id="email-id" name="email">
     <div class="line-box">
       <div class="line"></div>
     </div>
   </label>
   <label>
     <p class="label-txt">ENTER YOUR NAME</p>
-      <input type="text" class="input" name="name">
-     {% for error in form.name.error %}
-        <li style="coloured:red;">{{ error }}</li>
-          {% endfor %}
-
+      <input type="text" class="input" id="name-id" name="name">
     <div class="line-box">
       <div class="line"></div>
     </div>
   </label>
   <label>
     <p class="label-txt">ENTER YOUR PASSWORD</p>
-      <input type="text" class="input" name="password">
-     {% for error in form.password.error %}
-        <li style="coloured:red;">{{ error }}</li>
-          {% endfor %}
+      <input type="text" class="input" id="password-id" name="password">
     <div class="line-box">
       <div class="line"></div>
     </div>
