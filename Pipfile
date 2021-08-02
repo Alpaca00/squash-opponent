@@ -18,6 +18,7 @@ Flask-Admin = "==1.5.8"
 Flask-Login = "*"
 Flask-Security = "*"
 Flask-Bootstrap = "==3.3.7.0"
+pydantic = "*"
 
 [dev-packages]
 pytest = "*"
