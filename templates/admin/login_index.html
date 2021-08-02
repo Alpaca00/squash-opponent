@@ -20,6 +20,7 @@
       <div class="main">
          <div class="col-md-6 col-sm-12">
             <div class="login-form">
+                   {{ form.csrf_token }}
                 {% with messages = get_flashed_messages() %}
                     {% if messages %}
                         <div class="notification is-danger">
@@ -33,7 +34,6 @@
                  {{ wtf.form_field(form.password) }}
                  {{ wtf.form_field(form.remember) }}
                   <button type="submit" class="btn btn-black">Login</button>
-<!--                  <button type="submit" class="btn btn-secondary">Back</button>-->
                </form>
             </div>
          </div>
