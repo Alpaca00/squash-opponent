@@ -27,38 +27,38 @@
             </div>
                 <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page"
+                    <a class="nav-link {% if request.url_rule.endpoint == 'index' %} active {% endif %}" aria-current="page"
                        data-bs-toggle='tooltip' data-bs-placement='top' title='Home'
                        href="{{ url_for('index') }}">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page"
+                    <a class="nav-link {% if request.url_rule.endpoint == '#' %} active {% endif %}" aria-current="page"
                        data-bs-toggle='tooltip' data-bs-placement='top' title='Finder opponent'
                        href="#">Finder-Opponent</a>
                 </li>
-                    <li class="nav-item">
+                    <li class="nav-item {% if request.url_rule.endpoint == '/products' %} active {% endif %}">
                     <a class="nav-link"
                        data-bs-toggle='tooltip' data-bs-placement='top' title='Products'
                        href="{{ url_for('product_app.product_list') }}">Products</a>
                 </li>
-                    <li class="nav-item">
+                    <li class="nav-item {% if request.url_rule.endpoint == '/gallery' %} active {% endif %}">
                     <a class="nav-link"
                        data-bs-toggle='tooltip' data-bs-placement='top' title='Photo Gallery'
                        href="{{ url_for('gallery_app.gallery_list') }}">Photo-Gallery</a>
                 </li>
-                    <li class="nav-item">
+                    <li class="nav-item {% if request.url_rule.endpoint == '/video_gallery' %} active {% endif %}">
                     <a class="nav-link"
                        data-bs-toggle='tooltip' data-bs-placement='top' title='Video Gallery'
                        href="{{ url_for('video_gallery_app.video_gallery_list') }}">Video-Gallery</a>
                 </li>
-                    <li class="nav-item">
+                    <li class="nav-item {% if request.url_rule.endpoint == '/cart' %} active {% endif %}">
                     <a class="nav-link"
-                       data-bs-toggle='tooltip' data-bs-placement='top' title='Cart'
+                       data-bs-toggle='tooltip' data-bs-placement='top' title='cart_app.empty_list'
                         href="{{ url_for('cart_app.empty_list') }}">Cart</a>
                 </li>
-                    <li class="nav-item">
+                    <li class="nav-item {% if request.url_rule.endpoint == '/support' %} active {% endif %}">
                     <a class="nav-link"
-                       data-bs-toggle='tooltip' data-bs-placement='top' title='Cart'
+                       data-bs-toggle='tooltip' data-bs-placement='top' title='support'
                         href="{{ url_for('support_app.support_list') }}">Support</a>
                 </li>
                     <li class="nav-item dropdown">
