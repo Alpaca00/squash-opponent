@@ -90,13 +90,6 @@ def load_user(user_id):
     return UserAccount.query.get(int(user_id))
 
 
-@app.route('/logout')
-@login_required
-def logout():
-    logout_user()
-    return "You are now logged out"
-
-
 def messenger(subject, body):
     with app.app_context():
         msg = Message(subject=subject,
@@ -155,18 +148,19 @@ def login_admin():
                     login_user(admin_, remember=remember)
                     logger.info(current_user.name)
                     if current_user.is_authenticated:
+                        logger.info('Admin role.')
                         return redirect(url_for('admin.index'))
                 else:
                     flash('Invalid username or password.')
                     return redirect(url_for('login_admin'))
     return render_template('admin/login_index.html', form=form)
 
-
-@app.route('/admin/logout')
-def logout_admin():
-    logger.info('The user is logged out.')
-    logout_user()
-    return "Logged out!"
+#
+# @app.route('/admin/logout')
+# def logout_admin():
+#     logger.info('The user is logged out.')
+#     logout_user()
+#     return "Logged out!"
 
 
 class MyModelView(ModelView):
