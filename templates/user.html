@@ -65,7 +65,7 @@
                     <li class="nav-item">
                     <a class="nav-link"
                        data-bs-toggle='tooltip' data-bs-placement='top' title='Account'
-                        href="{{ url_for('logout') }}">Logout</a>
+                        href="{{ url_for('user_account_app.logout') }}">Logout</a>
                 </li>
             </ul>
         </div>
@@ -89,7 +89,7 @@
                             <div class="card-block">
                                 <h6 class="m-b-20 p-b-5 b-b-default f-w-600">Information</h6>
                                 <div class="row">
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-6" id="user-card-email">
                                         <p class="m-b-10 f-w-600">Email</p>
                                         <h6 class="text-muted f-w-400">{{ cur.email }}</h6>
                                     </div>
