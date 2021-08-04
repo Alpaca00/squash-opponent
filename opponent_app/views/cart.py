@@ -1,10 +1,11 @@
 from typing import Any
 from flask import Blueprint, render_template, request
+from loguru import logger
+from sqlalchemy import desc
 from werkzeug.exceptions import BadRequest, RequestTimeout
 from ast import literal_eval
-from models import Product, db, User, Order
-from views.product import cache
-
+from opponent_app.models import Product, db, User, Order
+from opponent_app.views.product import cache
 
 cart_app = Blueprint("cart_app", __name__)
 id: Any = None
@@ -21,7 +22,7 @@ def cart_list(cart_id: int):
     if convert is not None:
         cart_items = literal_eval(convert.decode("ascii"))
     else:
-        link = "http://192.168.1.18:5000/products/"
+        link = "http://127.0.0.1:5000/products/"
         raise RequestTimeout(
             f"Your order time has expired. Please follow the link: {link}"
         )
@@ -62,7 +63,7 @@ def cart_list(cart_id: int):
         order.users.append(user)
         db.session.add(order)
         db.session.commit()
-        order_user = User.query.filter_by(phone=phone).all()
+        order_user = {'Full name: ': full_name, 'Email: ': email, 'Phone: ': phone, 'Address: ': address, 'Address2: ': address2, 'City: ': city, 'State: ': state, 'Zip code: ': zip_code}
         count_orders = Order.query.count()
         cache.setex(name='user_order_count', time=100, value=count_orders)
         cache.setex(name='user_order_phone', time=100, value=phone)
@@ -84,3 +85,10 @@ def empty_list(id_cart=None):
         return render_template("cart/empty.html")
     else:
         return cart_list(id_cart)
+
+
+
+@cart_app.errorhandler(408)
+def handle_request_timeout_error(exception):
+    logger.info(exception)
+    return render_template('408.html'), 408
