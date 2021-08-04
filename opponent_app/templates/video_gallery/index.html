@@ -12,78 +12,11 @@
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid">
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavDropdown">
-            <div id="logo_go">
-                <div class="myWrapper">
-                    <nav>
-                         <a href="/"><img src="{{ url_for('static', filename='img/logo.png') }}" alt="" width="130" height="130" class="d-inline-block align-text-top"></a>
-                    </nav>
-                </div>
-            </div>
-                <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page"
-                       data-bs-toggle='tooltip' data-bs-placement='top' title='Home'
-                       href="{{ url_for('index') }}">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page"
-                       data-bs-toggle='tooltip' data-bs-placement='top' title='Finder opponent'
-                       href="#">Finder-Opponent</a>
-                </li>
-                    <li class="nav-item">
-                    <a class="nav-link"
-                       data-bs-toggle='tooltip' data-bs-placement='top' title='Products'
-                       href="{{ url_for('product_app.product_list') }}">Products</a>
-                </li>
-                    <li class="nav-item">
-                    <a class="nav-link"
-                       data-bs-toggle='tooltip' data-bs-placement='top' title='Photo Gallery'
-                       href="{{ url_for('gallery_app.gallery_list') }}">Photo-Gallery</a>
-                </li>
-                    <li class="nav-item">
-                    <a class="nav-link"
-                       data-bs-toggle='tooltip' data-bs-placement='top' title='Video Gallery'
-                       href="{{ url_for('video_gallery_app.video_gallery_list') }}">Video-Gallery</a>
-                </li>
-                    <li class="nav-item">
-                    <a class="nav-link"
-                       data-bs-toggle='tooltip' data-bs-placement='top' title='Cart'
-                        href="{{ url_for('cart_app.empty_list') }}">Cart</a>
-                </li>
-                    <li class="nav-item">
-                    <a class="nav-link"
-                       data-bs-toggle='tooltip' data-bs-placement='top' title='Cart'
-                        href="{{ url_for('support_app.support_list') }}">Support</a>
-                </li>
-                    <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Action
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <li><a class="dropdown-item" href="{{ url_for('login_app.login') }}">Login</a></li>
-                        {% block user %}
-                    {% if user != None %}
-                        <li><a class="dropdown-item" href="{{ url_for('index') }}">{{ user }}</a></li>
-                        {% else %}
-                        <li><a class="dropdown-item" href="{{ url_for('login_app.login') }}">Logout</a></li>
-                        {% endif %}
-                    </ul>
-                        {% endblock %}
-            </ul>
-        </div>
-    </div>
-</nav>
+
+{% include 'navbar.html' %}
+
+
 <div class="container">
-
-
-
-
 <h1 id="gallery-name">Video Gallery</h1>
     <div class="alert alert-info" role="alert">
         Lviv Squash Team!
@@ -251,35 +184,5 @@
 </script>
 <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
 <script src="{{ url_for('static', filename='js/main.js') }}"></script>
-
-<footer class="text-center text-white" style="background: url('/static/img/racket.jpg');">
-  <div class="container p-4">
-    <section class="footer-ref">
-      <div class="row d-flex justify-content-center">
-        <div class="col-lg-6">
-          <div class="ratio ratio-16x9">
-            <iframe
-              class="shadow-1-strong rounded"
-              src="https://www.youtube.com/embed/1HAEX1c6wII"
-              title="YouTube video"
-              allowfullscreen
-            ></iframe>
-              <address id="contact">
-                    <i class="fa fa-facebook"></i>&nbsp;&nbsp;&nbsp;&nbsp;<a class='contact-ref' href="http://fb.me/LvivSquashTeam">Facebook</a><br/>
-                    <i class="fa fa-comment-o"></i>&nbsp;&nbsp;<a class='contact-ref' href="http://m.me/LvivSquashTeam">Facebook messenger</a><br/>
-                    <i class="fa fa-phone"></i>&nbsp;&nbsp;&nbsp;+38(063) 429 70 01<br/>
-                    <i class="fa fa-envelope-o"></i>&nbsp;&nbsp;<a class='contact-ref' href="http://lvivsquashteam@gmail.com">lvivsquashteam@gmail.com</a><br/>
-                </address>
-          </div>
-        </div>
-      </div>
-    </section>
-  </div>
-
-  <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-    © 2021 All rights reserved. The use of materials from this site is possible only with reference to the source.
-    <a class="text-white" href="https://squashteam.lviv.ua/"></a>
-  </div>
-</footer>
-
+{% include 'footer.html' %}
 </body>
