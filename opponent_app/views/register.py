@@ -1,9 +1,8 @@
-from flask import Blueprint, render_template, request, url_for, redirect, flash, jsonify
+from flask import Blueprint, render_template, request, url_for, redirect, flash
 from flask_security.utils import hash_password
-from models.form import RegisterForm
-from models import db, user_datastore, UserAccount
-
-from views.validate_form_registration import ValidateForm, ValidationFormError
+from opponent_app.models.form import RegisterForm
+from opponent_app.models import db, user_datastore, UserAccount
+from opponent_app.views.validate_form_registration import ValidateForm, ValidationFormError
 
 register_app = Blueprint("register_app", __name__)
 

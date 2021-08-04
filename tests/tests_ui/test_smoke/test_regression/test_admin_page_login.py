@@ -1,7 +1,7 @@
 import os
 import pytest
 from selene import be
-from doc.locators.dashboard_locators import AdminNavBarLocators, AdminLoginPageLocators
+from tests.locators.dashboard_locators import AdminNavBarLocators, AdminLoginPageLocators
 
 
 USERNAME = os.environ['USERNAME_ADMIN']

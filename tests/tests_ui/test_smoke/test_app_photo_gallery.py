@@ -1,7 +1,7 @@
 import pytest
 from selene import have, be, query
-from doc.locators.navbar_locators import NavBarLocators
-from doc.locators.photo_gallery_locators import PhotoGalleryLocators
+from tests.locators.navbar_locators import NavBarLocators
+from tests.locators.photo_gallery_locators import PhotoGalleryLocators
 
 
 class TestPhotoGallery:

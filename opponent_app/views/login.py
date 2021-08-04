@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
 from flask_login import login_user
 from flask_security.utils import verify_password
-from models import UserAccount
+from opponent_app.models import UserAccount
 
 
 login_app = Blueprint("login_app", __name__)
@@ -27,3 +27,8 @@ def login():
 def flash_message(text):
     flash(text)
     return render_template("login/index.html")
+
+# @login_app.errorhandler(CSRFError)
+    # def handle_csrf_error(e):
+    #     logger.info(e)
+    #     return render_template('400.html', reason=e.description), 400

@@ -1,6 +1,6 @@
 import pytest
 from sqlalchemy import desc
-from doc.locators.support_locators import SupportLocators
+from tests.locators.support_locators import SupportLocators
 from app import SupportMessage, db, app
 
 SUPPORT = SupportLocators()

@@ -1,8 +1,7 @@
 from flask import Blueprint, render_template, request
 from sqlalchemy import desc
-
-from models import db, TableResult, TableScore
-from models.support import SupportMessage
+from opponent_app.models import db, TableResult, TableScore
+from opponent_app.models.support import SupportMessage
 
 support_app = Blueprint("support_app", __name__)
 

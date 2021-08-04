@@ -1,16 +1,21 @@
+
 from unittest import mock
-from app import mail, app, Message
+# from app import mail, app, Message
+
+# TODO: requires refactoring, testing.
+from opponent_app import create_app
+from opponent_app.views.home import mail, Message
 
 
 def test_send_email_from_app():
     msg = Message(
         subject="test",
-        sender=app.config.get("MAIL_USERNAME"),
+        sender=create_app().config.get("MAIL_USERNAME"),
         recipients=["lvivsquashteam@gmail.com"],
         body="simple test99",
     )
     with mock.patch("app.mail.send", return_value=msg) as mocked_mail:
-        with app.app_context():
+        with create_app().app_context():
             test = mail.send(msg)
             mocked_mail.assert_called_once_with(test)
             mocked_mail.assert_called()

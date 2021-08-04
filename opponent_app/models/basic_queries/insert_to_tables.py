@@ -1,5 +1,5 @@
 from app import app
-from models import db, TableResult, TableScore, Player
+from opponent_app.models import db, TableResult, TableScore, Player
 
 positions = [1, 2, 3, 4]
 teams = ["Warriors", "Snails", "Anchors", "Gladiators"]

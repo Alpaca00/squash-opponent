@@ -1,5 +1,5 @@
 from sqlalchemy import Column, Integer, String, Date, ForeignKey, Text
-from models import db
+from opponent_app.models import db
 
 
 

@@ -1,7 +1,8 @@
 from flask import Blueprint, render_template, request, jsonify
+from loguru import logger
 from werkzeug.exceptions import BadRequest
 import redis
-from models import Product, db
+from opponent_app.models import Product, db
 
 product_app = Blueprint("product_app", __name__)
 
@@ -27,7 +28,7 @@ def product_detail(product_id: int):
     if request.method == "POST":
         res = request.values
         data = sep_data(res)
-        cache.setex(name='cart', time=3600, value=str(data[0:5]))
+        cache.setex(name='cart', time=30, value=str(data[0:5]))
     if request.method == "DELETE":
         product.deleted = True
         db.session.commit()
@@ -36,3 +37,9 @@ def product_detail(product_id: int):
         "products/detail.html",
         product=product,
     )
+
+
+@product_app.errorhandler(408)
+def handle_request_timeout_error(exception):
+    logger.info(exception)
+    return render_template('408.html'), 408

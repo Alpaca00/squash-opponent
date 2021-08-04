@@ -1,4 +1,5 @@
 import re
+from loguru import logger
 from sqlalchemy import Column, Integer, String, ForeignKey, Boolean
 from flask_security import SQLAlchemyUserDatastore, UserMixin, RoleMixin
 from flask_validator import (
@@ -6,10 +7,8 @@ from flask_validator import (
     ValidateInteger,
     ValidateString,
     ValidateEmail,
-    ValidateBoolean,
 )
-from models import db
-from app import logger
+from opponent_app.models import db
 
 
 class ValidatePhone(Validator):
@@ -42,8 +41,8 @@ class User(db.Model):
     __tablename__ = "users"
     id = Column(Integer, primary_key=True)
     full_name = Column(String(255), nullable=False)
-    email = Column(String(33), unique=True)
-    phone = Column(String, nullable=False, unique=True)
+    email = Column(String(33), nullable=False)
+    phone = Column(String, nullable=False)
     address = Column(String(255), nullable=False)
     address2 = Column(String(255), nullable=False)
     city = Column(String(255), nullable=False)

@@ -1,10 +1,10 @@
 import pytest
 from selene import query
 from app import app, db, UserAccount, desc
-from doc.locators.login_page_locators import LoginLocators
-from doc.locators.navbar_locators import NavBarLocators
-from doc.locators.registration_page_locators import RegistrationFormLocators
-from doc.locators.user_account_locators import UserCardLocators
+from tests.locators.login_page_locators import LoginLocators
+from tests.locators.navbar_locators import NavBarLocators
+from tests.locators.registration_page_locators import RegistrationFormLocators
+from tests.locators.user_account_locators import UserCardLocators
 
 
 @pytest.fixture

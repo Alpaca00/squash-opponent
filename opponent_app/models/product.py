@@ -1,5 +1,5 @@
-from sqlalchemy import Column, Integer, String, Boolean, Text, ForeignKey, Float
-from models import db
+from sqlalchemy import Column, Integer, String, Boolean, ForeignKey, Float
+from opponent_app.models import db
 
 
 
