@@ -1,10 +1,7 @@
-
 from unittest import mock
-# from app import mail, app, Message
-
-# TODO: requires refactoring, testing.
+from flask_mail import Message
+from opponent_app.extensions import mail
 from opponent_app import create_app
-from opponent_app.views.home import mail, Message
 
 
 def test_send_email_from_app():
@@ -14,7 +11,9 @@ def test_send_email_from_app():
         recipients=["lvivsquashteam@gmail.com"],
         body="simple test99",
     )
-    with mock.patch("app.mail.send", return_value=msg) as mocked_mail:
+    with mock.patch(
+        "opponent_app.extensions.mail.send", return_value=msg
+    ) as mocked_mail:
         with create_app().app_context():
             test = mail.send(msg)
             mocked_mail.assert_called_once_with(test)
@@ -23,8 +22,10 @@ def test_send_email_from_app():
 
 def test_send_data_to_web_site_email():
     msg = [{"subject": "test title", "body": "test data"}]
-    with mock.patch("app.mail.send_message", return_value=msg) as mocked_mail:
-        with app.app_context():
+    with mock.patch(
+        "opponent_app.extensions.mail.send_message", return_value=msg
+    ) as mocked_mail:
+        with create_app().app_context():
             message = mail.send_message(
                 subject="test title",
                 body="test data",
