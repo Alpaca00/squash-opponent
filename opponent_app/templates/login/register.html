@@ -5,7 +5,7 @@ Register
 {% block body  -%}
 {% import 'bootstrap/wtf.html' as wtf %}
 <form id="reg-form" method="POST">
-    {{ form.csrf_token }}
+
     {% with messages = get_flashed_messages() %}
             {% if messages %}
                 <div class="notification is-danger">
