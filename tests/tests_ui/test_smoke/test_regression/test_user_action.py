@@ -1,6 +1,9 @@
 import pytest
 from selene import query
-from app import app, db, UserAccount, desc
+
+from sqlalchemy import desc
+
+from opponent_app import db, UserAccount, create_app
 from tests.locators.login_page_locators import LoginLocators
 from tests.locators.navbar_locators import NavBarLocators
 from tests.locators.registration_page_locators import RegistrationFormLocators
@@ -8,7 +11,12 @@ from tests.locators.user_account_locators import UserCardLocators
 
 
 @pytest.fixture
-def clean_user_account_db():
+def app():
+    return create_app('test')
+
+
+@pytest.fixture
+def clean_user_account_db(app):
     yield
     with app.app_context():
         message = UserAccount.query.order_by(desc(UserAccount.id)).first()
