@@ -61,7 +61,7 @@ def user(request):
                     driver=webdriver.Chrome(
                         executable_path=ChromeDriverManager().install(), options=options
                     ),
-                    base_url="http://localhost:5000",
+                    base_url="http://127.0.0.1:5000",
                     timeout=3,
                 )
             )
