@@ -5,9 +5,10 @@ Cart #{{product.id}}
 {%- endblock %}
 
 {% block body  -%}
+<div class="container">
 <h1 id="gallery-name" xmlns="http://www.w3.org/1999/html">Cart</h1>
     <div class="back-list">
-        <a id='back-list-id' href="{{ url_for('product_app.product_list') }}">Product list</a>
+        <a id='back-list-id' href="{{ url_for('product_app.product_list') }}">Product list</a><hr>
     </div>
  <div class="cart_section">
      <div class="container-fluid">
@@ -77,8 +78,6 @@ Cart #{{product.id}}
              </div>
          </div>
      </div>
-
-
 
 <form id="reg-form" method="POST">
     <label>
@@ -167,5 +166,5 @@ Cart #{{product.id}}
 
 });
 </script>
-</script>
+
 {%- endblock %}
