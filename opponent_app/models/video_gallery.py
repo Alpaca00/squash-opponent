@@ -2,7 +2,6 @@ from sqlalchemy import Column, Integer, String
 from opponent_app.models import db
 
 
-# server
 class VideoGallery(db.Model):
     __tablename__ = "video"
     id = Column(Integer, primary_key=True)
