@@ -55,7 +55,7 @@ def login_admin():
                         return redirect(url_for('admin.index'))
                 else:
                     flash('Invalid username or password.')
-                    return redirect(url_for('login_admin'))
+                    return redirect(url_for('home_app.login_admin'))
     return render_template('admin/login_index.html', form=form)
 
 
