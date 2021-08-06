@@ -68,26 +68,16 @@ Gallery
 </div>
 <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
 <script src="{{ url_for('static', filename='js/main.js') }}"></script>
-<script type="text/javascript">
-    function validateFileUpload(fileName)
-{
+<script>
     let message = document.getElementById('label-text')
-    const allowedExtensions = new Array("jpg","png","gif");
-    const fileExtension = fileName.split('.').pop().toLowerCase();
+    const validate = document.getElementById('formFileSm')
 
-    for(var i = 0; i <= allowedExtensions.length; i++)
-    {
-        if(allowedExtensions[i]!=fileExtension)
-        {
-            return message.textContent = 'File is already to post.';
+    validate.oninput = function () {
+        if(validate.value.match(/\.(jpeg|jpg|gif|png)$/)){
+            message.innerText = 'File is already to post.';
+        } else {
+            message.innerText = 'It is not an image format.';
         }
-    }   else {
-            return message.textContent = 'File format or extension error.';
-            }
-    return true;
-}
-
-const validate = document.getElementById('formFileSm')
-validate.addEventListener('input', validateFileUpload('input-file-photo'));
+    }
 </script>
 {%- endblock %}
