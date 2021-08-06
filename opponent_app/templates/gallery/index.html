@@ -4,11 +4,23 @@
 Gallery
 {%- endblock %}
 {% block body  -%}
+<div class="container">
 <h1 id="gallery-name">Photo Gallery</h1>
     <div class="alert alert-info" role="alert">
-        Lviv Squash Team!
+        {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        {{ messages[0] }}
+            {% endif %}
+        {% endwith %}
+         <form method="POST" action="/gallery/upload" enctype='multipart/form-data'>
+        <div class="form-group">
+            <label for="formFileSm" id='label-text' class="form-label">You can upload your photos from squash court to our gallery.</label>
+            <input class="form-control form-control-sm" id="formFileSm" type="file" accept=".png,.jpg,.gif,.jpeg"name="input-file-photo">
+            <button type="submit" class="btn btn-dark" style='margin-top: 15px;'>POST</button>
+        </div>
+         </form>
     </div>
-<section class="gallery min-vh-100">
+<section class="gallery min-vh-100" style="margin-bottom: 25px;">
     <div class="container-lg">
         <div class="row gy-4 row-cols-1 row-cols-sm-2 row-cols-md-3">
             <div class="col">
@@ -29,9 +41,18 @@ Gallery
              <div class="col">
                 <img src="{{ url_for('static', filename='img/img_squash/24.jpg') }}" class="gallery-item" alt="gallery">
             </div>
+            {% set dir = '/static/img/user_photo/' %}
+             {% for file in files %}
+            {% set full_dir = dir + file %}
+            <div class="col">
+                <img src="{{ full_dir }}" class="gallery-item" alt="gallery">
+            </div>
+             {% endfor %}
         </div>
     </div>
 </section>
+</div>
+
 <div class="modal fade" id="gallery-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-lg">
     <div class="modal-content">
@@ -45,4 +66,6 @@ Gallery
     </div>
   </div>
 </div>
+<script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
 {%- endblock %}
