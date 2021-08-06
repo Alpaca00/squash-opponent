@@ -1,7 +1,11 @@
 import pytest
 from sqlalchemy import desc
+from opponent_app import db, create_app
+from opponent_app.models.support import SupportMessage
 from tests.locators.support_locators import SupportLocators
-from app import SupportMessage, db, app
+
+
+
 
 SUPPORT = SupportLocators()
 QUESTION = "TEST QUESTION"
@@ -11,7 +15,12 @@ TEXT = "TEST TEXT"
 
 
 @pytest.fixture
-def clean_support_db():
+def app():
+    return create_app('test')
+
+
+@pytest.fixture
+def clean_support_db(app):
     yield
     with app.app_context():
         message = SupportMessage.query.order_by(desc(SupportMessage.id)).first()
