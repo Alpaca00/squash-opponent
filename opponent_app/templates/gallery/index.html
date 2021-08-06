@@ -15,7 +15,7 @@ Gallery
          <form method="POST" action="/gallery/upload" enctype='multipart/form-data'>
         <div class="form-group">
             <label for="formFileSm" id='label-text' class="form-label">You can upload your photos from squash court to our gallery.</label>
-            <input class="form-control form-control-sm" id="formFileSm" type="file" accept=".png,.jpg,.gif,.jpeg"name="input-file-photo">
+            <input class="form-control form-control-sm" id="formFileSm" type="file" accept=".png,.jpg,.gif,.jpeg" name="input-file-photo">
             <button type="submit" class="btn btn-dark" style='margin-top: 15px;'>POST</button>
         </div>
          </form>
@@ -68,4 +68,26 @@ Gallery
 </div>
 <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
 <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+<script type="text/javascript">
+    function validateFileUpload(fileName)
+{
+    let message = document.getElementById('label-text')
+    const allowedExtensions = new Array("jpg","png","gif");
+    const fileExtension = fileName.split('.').pop().toLowerCase();
+
+    for(var i = 0; i <= allowedExtensions.length; i++)
+    {
+        if(allowedExtensions[i]!=fileExtension)
+        {
+            return message.textContent = 'File is already to post.';
+        }
+    }   else {
+            return message.textContent = 'File format or extension error.';
+            }
+    return true;
+}
+
+const validate = document.getElementById('formFileSm')
+validate.addEventListener('input', validateFileUpload('input-file-photo'));
+</script>
 {%- endblock %}
