@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, jsonify
+from flask import Blueprint, render_template, request, jsonify, abort
 from loguru import logger
 from werkzeug.exceptions import BadRequest
 import redis
@@ -24,11 +24,11 @@ def product_list():
 def product_detail(product_id: int):
     product = Product.query.filter_by(id=product_id).one_or_none()
     if product is None:
-        raise BadRequest(f"Invalid product id #{product_id}")
+        abort(404)
     if request.method == "POST":
         res = request.values
         data = sep_data(res)
-        cache.setex(name='cart', time=30, value=str(data[0:5]))
+        cache.setex(name='cart', time=3600, value=str(data[0:5]))
     if request.method == "DELETE":
         product.deleted = True
         db.session.commit()
@@ -43,3 +43,9 @@ def product_detail(product_id: int):
 def handle_request_timeout_error(exception):
     logger.info(exception)
     return render_template('408.html'), 408
+
+
+@product_app.errorhandler(404)
+def handle_not_found_error(exception):
+    logger.info(exception)
+    return render_template('404.html'), 404
