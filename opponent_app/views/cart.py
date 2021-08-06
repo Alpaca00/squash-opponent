@@ -1,5 +1,5 @@
 from typing import Any
-from flask import Blueprint, render_template, request
+from flask import Blueprint, render_template, request, abort
 from loguru import logger
 from sqlalchemy import desc
 from werkzeug.exceptions import BadRequest, RequestTimeout
@@ -13,7 +13,7 @@ id: Any = None
 
 @cart_app.route("/<int:cart_id>/", methods=["GET", "POST"])
 def cart_list(cart_id: int):
-    global id
+    global id, cart_items
     id = cart_id
     if cart_id is None:
         raise BadRequest(f"Invalid product id #{cart_id}")
@@ -22,10 +22,7 @@ def cart_list(cart_id: int):
     if convert is not None:
         cart_items = literal_eval(convert.decode("ascii"))
     else:
-        link = "http://127.0.0.1:5000/products/"
-        raise RequestTimeout(
-            f"Your order time has expired. Please follow the link: {link}"
-        )
+        abort(408)
     if request.method == "GET":
         cart.add = True
         db.session.commit()
