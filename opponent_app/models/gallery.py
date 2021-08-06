@@ -1,10 +1,10 @@
-from sqlalchemy import Column, Integer, String
+from sqlalchemy import Column, Integer, String, LargeBinary
 from opponent_app.models import db
 
 
-# server
+
 class Gallery(db.Model):
     __tablename__ = "gallery"
     id = Column(Integer, primary_key=True)
-    name = Column(String, nullable=False)
-    link = Column(String, nullable=False, unique=True)
+    name = Column(String(250))
+    data = Column(LargeBinary)
