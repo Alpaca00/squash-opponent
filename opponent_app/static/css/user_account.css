@@ -1,5 +1,5 @@
 body {
-    background-color: #f9f9fa
+    background-color: #A0A0A0;
 }
 
 .padding {
@@ -32,7 +32,7 @@ body {
 
 .bg-c-lite-green {
     background: -webkit-gradient(linear, left top, right top, from(#f29263), to(#ee5a6f));
-    background: url("/static/img/bl-squash.jpg")
+    background: #363636;
 }
 
 .user-profile {
