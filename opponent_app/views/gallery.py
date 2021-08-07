@@ -1,5 +1,7 @@
 import os
 import re
+import sys
+
 from PIL import Image
 import io
 from flask import Blueprint, render_template, request, flash
@@ -40,5 +42,9 @@ def handle_image():
 
 
 def validate_image(file_name):
-    if re.findall('([-\w]+\.(?:jpg|gif|png))', file_name):
+    file_size = sys.getsizeof(file_name)
+    if (
+        re.findall('([-\w]+\.(?:jpg|gif|png))', file_name)
+            and file_size != 0 or file_size < 150000
+    ):
         return True
