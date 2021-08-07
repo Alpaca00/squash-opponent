@@ -49,7 +49,7 @@ class User(db.Model):
     state = Column(String(255), nullable=False)
     zip_code = Column(Integer, nullable=False)
     order_id = Column(Integer, ForeignKey("orders.id"))
-    order = db.relationship("Order")
+    order = db.relationship("Order", overlaps="orders,users")
 
     @classmethod
     def __declare_last__(cls):
@@ -107,7 +107,7 @@ class UserOpponent(db.Model):
     city = Column(String(33), nullable=False)
     district = Column(String(33), nullable=True)
     user_account_id = Column(Integer, ForeignKey("users_accounts.id"))
-    user_account = db.relationship("UserAccount")
+    user_account = db.relationship("UserAccount", overlaps="users_account,users_opponent")
 
     @classmethod
     def __declare_last__(cls):

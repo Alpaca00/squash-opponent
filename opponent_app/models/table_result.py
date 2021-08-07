@@ -27,4 +27,4 @@ class Player(db.Model):
     id = Column(Integer, primary_key=True)
     full_name = Column(Text, nullable=False)
     table_result_id = Column(Integer, ForeignKey('table_results.id'))
-    table_result = db.relationship('TableResult')
+    table_result = db.relationship('TableResult', overlaps="players,table_results")

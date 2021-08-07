@@ -23,7 +23,7 @@ class TShirt(db.Model):
     sex = Column(String, nullable=False)
     quantity = Column(Integer, nullable=False)
     product_id = Column(Integer, ForeignKey('products.id'))
-    product = db.relationship('Product')
+    product = db.relationship('Product', overlaps="products, t_shirts")
 
 
 class Order(db.Model):
