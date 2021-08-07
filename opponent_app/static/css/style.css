@@ -26,13 +26,13 @@ html, body {
 }
 body {
     background:linear-gradient( rgba(0, 0, 0, 0.5) 100%, rgba(0, 0, 0, 0.5)100%);
-    background: #CCD3C4;
+    background: #625050;
 }
 
 .navbar {
   width: 100%;
   height: 16%;
-  background: linear-gradient(x1: 0, y1: 0, x2: 0.5, y2: 0.5, stop: 0 #646363, stop: 1 black);
+  background: #515050;
   background-size: cover;
 }
 
@@ -304,6 +304,7 @@ ul {
 .pos-btn {
     margin-left: 825px;
     padding-top: 5px;
+    text-decoration: none;
 }
 
 
@@ -555,9 +556,14 @@ $utilities: (
 }
 
 #contact{
-  margin-left: 85%;
+  margin-left: 100%;
+
 }
 .contact-ref{
     text-decoration: none;
     color: white;
+}
+
+#info-text{
+    color: black;
 }
