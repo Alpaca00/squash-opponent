@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+
+{% block title -%}
+Products
+{%- endblock %}
+
+{% block body  -%}
+<div class="container">
+<h1>Products list</h1>
+    <div class="alert alert-info" role="alert">
+        Sorry, this is an imitation of an online store!
+    </div>
+ <style>
+   a {
+    text-decoration: none;
+   }
+  </style>
+<main>
+  <section class="py-5 text-center container">
+    <div class="row py-lg-5">
+      <div class="col-lg-6 col-md-8 mx-auto">
+        <h3 class="fw-light">The shop for Squash People.</h3>
+        <p class="lead text-muted">Sorry, this is an imitation of an online store!</p>
+      </div>
+    </div>
+  </section>
+  <div class="album py-5">
+    <div class="container">
+      <div class="row row-cols-1 row-cols-sm-3 row-cols-md-3 g-3">
+        <div class="col">
+          <div class="card shadow-sm" style="height: 17em;">
+              <img src="{{ url_for('static', filename='img/img_squash/t24.png') }}" width="180" height="180" class="cart" alt="gallery">
+            <div class="card-body">
+              <p class="card-text">MAN T-shirt with our print</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-outline-secondary">
+                       {% for product in products %}
+                            {% if product.id == 9 %}
+                            <a href="{{ url_for('product_app.product_detail', product_id=product.id) }}">
+                                Show
+                                {% endif %}
+                                {% if product.is_new %}
+                             <span class="badge bg-warning">New</span>
+                             {% endif %}
+                        </a>
+                      {% endfor %}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card shadow-sm" style="height: 17em;">
+              <img src="{{ url_for('static', filename='img/img_squash/t23.png') }}" width="180" height="180" class="cart" alt="gallery">
+            <div class="card-body">
+              <p class="card-text">WOMAN T-shirt with our print</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-outline-secondary">
+                      {% for product in products %}
+                            {% if product.id == 10 %}
+                            <a href="{{ url_for('product_app.product_detail', product_id=product.id) }}">
+                            Show
+                                 {% endif %}
+                            {% if product.is_new%}
+                            <span class="badge bg-primary">New</span>
+                            {% endif %}
+                        </a>
+                      {% endfor %}
+                  </button>
+                    </li>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card shadow-sm" style="height: 17em;">
+              <img src="{{ url_for('static', filename='img/img_squash/t22.png') }}" width="180" height="180" class="cart" alt="gallery">
+            <div class="card-body">
+              <p class="card-text">CHILD T-shirt with our print</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-outline-secondary">
+                      {% for product in products %}
+                        {% if product.id == 11 %}
+                            <a href="{{ url_for('product_app.product_detail', product_id=product.id) }}">
+                            Show
+                                 {% endif %}
+                            {% if product.is_new %}
+                          <span class="badge bg-primary">New</span>
+                             {% endif %}
+                      </a>
+                            {% endfor %}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+</div>
+{%- endblock %}

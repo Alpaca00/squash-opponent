@@ -19,10 +19,13 @@ Flask-Login = "*"
 Flask-Security = "*"
 Flask-Bootstrap = "==3.3.7.0"
 pydantic = "*"
+pillow = "*"
 
 [dev-packages]
 pytest = "*"
 selene = "==2.0.0a39"
+coverage = "*"
+pytest-flask = "*"
 
 [requires]
 python_version = "3.8"
