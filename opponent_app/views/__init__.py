@@ -8,4 +8,5 @@ from .register import register_app
 from .support import support_app
 from .user_account import user_account_app
 from .home import home_app, admin
+from .about import about_app
 
