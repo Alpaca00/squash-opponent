@@ -15,8 +15,8 @@ Gallery
          <form method="POST" action="/gallery/upload" enctype='multipart/form-data'>
         <div class="form-group">
             <label for="formFileSm" id='label-text' class="form-label">You can upload your photos from squash court to our gallery.</label>
-            <input class="form-control form-control-sm" id="formFileSm" type="file" accept=".png,.jpg,.gif,.jpeg" name="input-file-photo">
-            <button type="submit" class="btn btn-dark" style='margin-top: 15px;'>SEND</button>
+            <input class="form-control form-control-sm" id="formFileSm" type="file" accept=".png,.jpg,.gif,.jpeg" name="input-file-photo"required>
+            <button type="submit" id="btn-send-img" class="btn btn-dark" style='margin-top: 15px;'>SEND</button>
         </div>
          </form>
     </div>
@@ -80,4 +80,13 @@ Gallery
         }
     }
 </script>
+<!--<script type="text/javascript">-->
+<!--    function success() {-->
+<!--	    if(document.getElementById("formFileSm").value === "") {-->
+<!--            document.getElementById('btn-send-img').disabled = true;-->
+<!--        } else {-->
+<!--            document.getElementById('btn-send-img').disabled = false;-->
+<!--        }-->
+<!--    }-->
+<!--</script>-->
 {%- endblock %}
