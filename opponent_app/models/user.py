@@ -27,7 +27,7 @@ class ValidatePassword(Validator):
         if (
             not re.findall("\d", value)
             and not re.findall("[A-Z]", value)
-            and len(value) >= 8
+            and not len(value) >= 8
         ):
             raise AssertionError(
                 """The password must contain at least 1 digit, 0-9 and 1 uppercase letter,
@@ -108,9 +108,3 @@ class UserOpponent(db.Model):
     district = Column(String(33), nullable=True)
     user_account_id = Column(Integer, ForeignKey("users_accounts.id"))
     user_account = db.relationship("UserAccount", overlaps="users_account,users_opponent")
-
-    @classmethod
-    def __declare_last__(cls):
-        ValidateString(UserOpponent.category)
-        ValidateString(UserOpponent.city)
-        ValidateString(UserOpponent.district)
