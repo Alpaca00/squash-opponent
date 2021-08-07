@@ -23,17 +23,17 @@ Products #{{product.id}}
                          <ul class="cart_list">
                              <li class="cart_item clearfix">
                                  {% if product.id == 9 %}
-                                    <div class="cart_item_image"><img src="{{ url_for('static', filename='img/t_shirt.jpeg') }}" class="cart-item-image"  alt=""></div>
+                                    <div class="cart_item_image"><img src="{{ url_for('static', filename='img/img_squash/t24.png') }}" width="80" height="80" class="cart-item-image"  alt=""></div>
                                  {% elif product.id == 10 %}
-                                    <div class="cart_item_image"><img src="{{ url_for('static', filename='img/t_shirt3.png') }}" class="cart-item-image"  alt=""></div>
+                                    <div class="cart_item_image"><img src="{{ url_for('static', filename='img/img_squash/t23.png') }}" width="80" height="80" class="cart-item-image"  alt=""></div>
                                  {% else %}
-                                    <div class="cart_item_image"><img src="{{ url_for('static', filename='img/t_shirt2.jpeg') }}" class="cart-item-image"  alt=""></div>
+                                    <div class="cart_item_image"><img src="{{ url_for('static', filename='img/img_squash/t22.png') }}" width="80" height="80" class="cart-item-image"  alt=""></div>
                                  {% endif %}
                                  <div class="cart_item_info d-flex flex-md-row flex-column justify-content-between">
                                      <div class="cart_item_name cart_info_col">
                                           {% for t_shirt in product.t_shirts %}
                                          <div class="cart_item_title">Name</div>
-                                         <div class="cart_item_text"><code>{{ t_shirt.name -}}</code></div>
+                                         <div class="cart_item_text">{{ t_shirt.name -}}</div>
                                      </div>
                                      <div class="cart_item_color cart_info_col">
                                          <div class="cart_item_title">Color</div>
@@ -61,7 +61,7 @@ Products #{{product.id}}
 
                                       <div class="cart_item_quantity cart_info_col">
                                          <div class="cart_item_title">Sex</div>
-                                         <div class="cart_item_text" id="select-sex"><code>{{ t_shirt.sex }}</code></div>
+                                         <div class="cart_item_text" id="select-sex">{{ t_shirt.sex }}</div>
                                            {% endfor %}
                                      </div>
                                      <div class="cart_item_quantity cart_info_col">
@@ -70,23 +70,30 @@ Products #{{product.id}}
                                      </div>
                                      <div class="cart_item_price cart_info_col">
                                          <div class="cart_item_title">Price</div>
-                                         <div class="cart_item_text"><code>800</code></div>
+                                         <div class="cart_item_text">550</div>
                                      </div>
                                      <div class="cart_item_total cart_info_col">
                                          <div class="cart_item_title">Total</div>
-                                         <div class="cart_item_text" id="total-order"><code>800</code></div>
+                                         <div class="cart_item_text" id="total-order">550</div>
                                      </div>
                                  </div>
                              </li>
                          </ul>
                      </div>
-                     <div class="order_total">
+                     <div class="order_total" style="background: gray;">
                          <div class="order_total_content text-md-right">
                              <div class="order_total_title">Order Total:</div>
-                             <div class="order_total_amount" id="total-order2"><code>800</code></div>
+                             <div class="order_total_amount" id="total-order2">550</div>
                          </div>
                      </div>
-                     <div class="pos-btn"><button type="button"><a href="{{ url_for('product_app.product_list') }}">Back</a></button><button type="button"><a href="{{ url_for('cart_app.cart_list', product_id=product.id, cart_id=product.id) }}">Add to cart</a></button> </div>
+                     <div class="pos-btn">
+                         <button type="button">
+                             <a href="{{ url_for('product_app.product_list') }}" style="text-decoration: none;">Back</a>
+                         </button>
+                         <button type="button">
+                             <a href="{{ url_for('cart_app.cart_list', product_id=product.id, cart_id=product.id) }}"  style="text-decoration: none;">Add to cart</a>
+                         </button>
+                     </div>
                  </div>
              </div>
          </div>
@@ -109,9 +116,11 @@ Products #{{product.id}}
 
 <hr>
 {# Admin area #}
+    {% if current_user.is_authenticated %}
  <div>
      <button id="delete-product" class="btn btn-danger">Delete</button>
  </div>
+    {% endif %}
 </div>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"
         integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
@@ -147,7 +156,7 @@ function logSelection(event) {
             } else if (textQ > 5) {
             textQ.value = 5;
             };
-        let resTotal = 800 * textQ;
+        let resTotal = 550 * textQ;
         document.querySelector('#total-order').textContent = resTotal;
         document.querySelector('#total-order2').textContent = resTotal;
         arrPostData.push(resTotal, text, textCol, textQ, log.textContent);
