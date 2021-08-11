@@ -5,7 +5,7 @@ Gallery
 {%- endblock %}
 {% block body  -%}
 <div class="container">
-<h1 id="gallery-name">Photo Gallery</h1>
+<h1 id="gallery-name">{{ _('Photo Gallery') }}</h1>
     <div class="alert alert-warning" role="alert">
         {% with messages = get_flashed_messages() %}
                     {% if messages %}
@@ -14,9 +14,9 @@ Gallery
         {% endwith %}
          <form method="POST" action="/gallery/upload" enctype='multipart/form-data'>
         <div class="form-group">
-            <label for="formFileSm" id='label-text' class="form-label">You can upload your photos from squash court to our gallery.</label>
+            <label for="formFileSm" id='label-text' class="form-label">{{ _('You can upload your photos from squash court to our gallery.') }}</label>
             <input class="form-control form-control-sm" id="formFileSm" type="file" accept=".png,.jpg,.gif,.jpeg" name="input-file-photo"required>
-            <button type="submit" id="btn-send-img" class="btn btn-dark" style='margin-top: 15px;'>SEND</button>
+            <button type="submit" id="btn-send-img" class="btn btn-dark" style='margin-top: 15px;'>{{ _('SEND') }}</button>
         </div>
          </form>
     </div>
@@ -57,7 +57,7 @@ Gallery
   <div class="modal-dialog modal-dialog-centered modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Our team</h5>
+        <h5 class="modal-title" id="exampleModalLabel">{{ _('Our team') }}</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">

@@ -24,45 +24,45 @@
                             <div class="card-block text-center text-white">
                                 <div class="m-b-25"> <img src="{{ url_for('static', filename='img/squash_ball.png') }}" class="img-radius" alt="User-Profile-Image"> </div>
                                 <h6 class="f-w-600">{{ cur.name }}</h6>
-                                <p>Squash Player</p> <i class=" mdi mdi-square-edit-outline feather icon-edit m-t-10 f-16"></i>
+                                <p>{{ _('Squash Player') }}</p> <i class=" mdi mdi-square-edit-outline feather icon-edit m-t-10 f-16"></i>
                             </div>
                         </div>
                         <div class="col-sm-8">
                             <div class="card-block">
-                                <h6 class="m-b-20 p-b-5 b-b-default f-w-600">Information</h6>
+                                <h6 class="m-b-20 p-b-5 b-b-default f-w-600">{{ _('Information') }}</h6>
                                 <div class="row">
                                     <div class="col-sm-6" id="user-card-email">
-                                        <p class="m-b-10 f-w-600">Email</p>
+                                        <p class="m-b-10 f-w-600">{{ _('Email') }}</p>
                                         <h6 class="text-muted f-w-400">{{ cur.email }}</h6>
                                     </div>
                                     <div class="col-sm-8">
-                                        <p class="m-b-10 f-w-600">Phone</p>
+                                        <p class="m-b-10 f-w-600">{{ _('Phone') }}</p>
                                         <input class="form-control form-control-sm" id='user-phone' type="text" placeholder="phone number" aria-label=".form-control-sm example">
                                     </div>
                                 </div>
-                                <h6 class="m-b-20 m-t-40 p-b-5 b-b-default f-w-600">Location</h6>
+                                <h6 class="m-b-20 m-t-40 p-b-5 b-b-default f-w-600">{{ _('Location') }}</h6>
                                 <div class="row">
                                 <form>
-                                        <p class="m-b-10 f-w-600">Lviv</p>
+                                        <p class="m-b-10 f-w-600">{{ _('Lviv') }}</p>
                                         <select class="form-select form-select-sm" id='location-select' style='margin-bottom: 15px;' aria-label=".form-select-sm example">
-                                            <option selected>DISTRICT</option>
-                                            <option value="Sychivskyi">Sychivskyi</option>
-                                            <option value="Zaliznychnyi">Zaliznychnyi</option>
-                                            <option value="Shevchenkivskyi">Shevchenkivskyi</option>
+                                            <option selected>{{ _('DISTRICT') }}</option>
+                                            <option value="Sychivskyi">{{ _('Sychivskyi') }}</option>
+                                            <option value="Zaliznychnyi">{{ _('Zaliznychnyi') }}</option>
+                                            <option value="Shevchenkivskyi">{{ _('Shevchenkivskyi') }}</option>
                                         </select>
 
                                    <select class="form-select form-select-sm" id='category-select' style='margin-bottom: 15px;' aria-label=".form-select-sm example">
-                                        <option selected>CATEGORY</option>
-                                        <option value="PRO">PRO</option>
+                                        <option selected>{{ _('CATEGORY') }}</option>
+                                        <option value="PRO">{{ _('PRO') }}</option>
                                         <option value="M1">M1</option>
                                         <option value="M2">M2</option>
                                         <option value="M2">M3</option>
-                                        <option value="AMATEUR">AMATEUR</option>
+                                        <option value="AMATEUR">{{ _('AMATEUR') }}</option>
                                    </select>
-                                    <label for="party">Enter the optimal date and time of the game:</label>
+                                    <label for="party">{{ _('Enter the optimal date and time of the game:') }}</label>
                                         <input id="party" class='row' type="datetime-local" name="partydate" value="2021-09-04T18:30" style='margin-bottom: 15px;'>
-                                    <button type="button" class="btn btn-dark" style='margin-bottom: 15px;'>POST</button>
-                                    <button type="button" class="btn btn-dark" style='margin-bottom: 15px;'>FINDER OPPONENT</button>
+                                    <button type="button" class="btn btn-dark" style='margin-bottom: 15px;'>{{ _('POST') }}</button>
+                                    <button type="button" class="btn btn-dark" style='margin-bottom: 15px;'>{{ _('FINDER OPPONENT') }}</button>
                                 </form>
                                 </div>
                             </div>

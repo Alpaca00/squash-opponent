@@ -16,28 +16,28 @@ Register
             {% endif %}
         {% endwith %}
     <label>
-    <p class="label-txt">ENTER YOUR EMAIL</p>
+    <p class="label-txt">{{ _('ENTER YOUR EMAIL') }}</p>
         <input type="text" class="input" id="email-id" name="email">
     <div class="line-box">
       <div class="line"></div>
     </div>
   </label>
   <label>
-    <p class="label-txt">ENTER YOUR NAME</p>
+    <p class="label-txt">{{ _('ENTER YOUR NAME') }}</p>
       <input type="text" class="input" id="name-id" name="name">
     <div class="line-box">
       <div class="line"></div>
     </div>
   </label>
   <label>
-    <p class="label-txt">ENTER YOUR PASSWORD</p>
+    <p class="label-txt">{{ _('ENTER YOUR PASSWORD') }}</p>
       <input type="text" class="input" id="password-id" name="password">
     <div class="line-box">
       <div class="line"></div>
     </div>
   </label>
     <div class="g-recaptcha" data-sitekey="6Lf0rL8bAAAAACclQV7Ty8PAlzLX1SFSNoeMcgqW"></div>
-  <button type="submit">submit</button>
+  <button type="submit">{{ _('SUBMIT') }}</button>
 </form>
 
 <script src="https://www.google.com/recaptcha/api.js" async defer></script>

@@ -7,34 +7,34 @@ Support
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/user_account.css') }}">
 <form id="reg-form" method="POST">
   <label>
-    <p class="label-txt">Question? Complaints? Suggestions?</p>
+    <p class="label-txt">{{ _('Question? Complaints? Suggestions?') }}</p>
     <input type="text" class="input" name="question">
     <div class="line-box">
       <div class="line"></div>
     </div>
   </label>
   <label>
-    <p class="label-txt">Email</p>
+    <p class="label-txt">{{ _('Email') }}</p>
     <input type="text" class="input" name="email">
     <div class="line-box">
       <div class="line"></div>
     </div>
   </label>
   <label>
-    <p class="label-txt">The subject of the message</p>
+    <p class="label-txt">{{ _('The subject of the message') }}</p>
     <input type="text" class="input" name="subject">
     <div class="line-box">
       <div class="line"></div>
     </div>
   </label>
   <label>
-    <p class="label-txt">The text of the message</p>
+    <p class="label-txt">{{ _('The text of the message') }}</p>
     <input type="text" class="input" name="text">
     <div class="line-box">
        <div class="line" id="text-area"></div>
     </div>
   </label>
-  <button type="submit">submit</button>
+  <button type="submit">{{ _('SUBMIT') }}</button>
 
 </form>
 
