@@ -34,6 +34,7 @@ body {
   height: 16%;
   background: #515050;
   background-size: cover;
+  font-size: 16px;
 }
 
 .alert {
@@ -302,7 +303,7 @@ ul {
 
 
 .pos-btn {
-    margin-left: 825px;
+    margin-left: 800px;
     padding-top: 5px;
     text-decoration: none;
 }
@@ -567,3 +568,26 @@ $utilities: (
 #info-text{
     color: black;
 }
+
+
+.en_lang{
+	position: absolute
+	top: -9999px
+	left: -9999px
+	}
+.lang_buttons{
+	text-align: right
+	}
+.button{
+		display: inline-block
+		text-decoration: none
+		border: 1px solid gray
+		padding: 5px 15px
+		margin-top: 20px
+		margin-right: 0
+		}
+.en_lang{
+		position: absolute
+		top: -9999px
+		left: -9999px
+		}
