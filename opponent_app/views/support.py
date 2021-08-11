@@ -1,9 +1,19 @@
-from flask import Blueprint, render_template, request
+from flask import Blueprint, render_template, request, g
 from sqlalchemy import desc
 from opponent_app.models import db, TableResult, TableScore
 from opponent_app.models.support import SupportMessage
 
 support_app = Blueprint("support_app", __name__)
+
+
+@support_app.url_defaults
+def add_language_code(endpoint, values):
+    values.setdefault('lang_code', g.lang_code)
+
+
+@support_app.url_value_preprocessor
+def pull_lang_code(endpoint, values):
+    g.lang_code = values.pop('lang_code')
 
 
 @support_app.route("/", methods=["GET", "POST", "HEAD"])
