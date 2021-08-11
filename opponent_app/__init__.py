@@ -47,7 +47,6 @@ def create_app(environment_name='development'):
 
     app.register_blueprint(home_app, url_prefix='/<lang_code>')
     app.register_blueprint(product_app, url_prefix='/<lang_code>/products')
-    app.register_blueprint(product_app, url_prefix='/<lang_code>/products/')
     app.register_blueprint(gallery_app, url_prefix='/<lang_code>/gallery')
     app.register_blueprint(video_app, url_prefix='/<lang_code>/video')
     app.register_blueprint(cart_app, url_prefix='/<lang_code>/cart')
