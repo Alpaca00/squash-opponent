@@ -15,6 +15,8 @@ class BaseConfig:
     SECURITY_PASSWORD_HASH = 'bcrypt'
     SECURITY_PASSWORD_SALT = os.environ['SPS']
     SECRET_KEY = '6Lf0rL8bAAAAAL0YqesYius-y0iQnYThoR-RWd0s'
+    BABEL_DEFAULT_LOCALE = 'en'
+    LANGUAGES = ['en', 'uk']
 
 
 class DevConfig(BaseConfig):
@@ -46,3 +48,13 @@ mail_settings = {
     # "MAIL_USERNAME": os.environ['EMAIL_USER'],
     # "MAIL_PASSWORD": os.environ['EMAIL_PASSWORD']
 }
+
+# -*- coding: utf-8 -*-
+# ...
+# available languages
+# LANGUAGES = {
+#     'en': 'English',
+#     'uk': 'Ukrainian',
+#     'ru': 'Russian',
+#     'es': 'Español',
+# }
