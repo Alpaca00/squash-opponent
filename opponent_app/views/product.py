@@ -1,6 +1,6 @@
-from flask import Blueprint, render_template, request, jsonify, abort
+from flask import Blueprint, render_template, request, jsonify, abort, g
+from flask_babel import refresh
 from loguru import logger
-from werkzeug.exceptions import BadRequest
 import redis
 from opponent_app.models import Product, db
 
@@ -12,6 +12,16 @@ cache = redis.Redis()
 def sep_data(lst):
     res = [item.split(",") for item in lst]
     return res[0][::-1]
+
+
+@product_app.url_defaults
+def add_language_code(endpoint, values):
+    values.setdefault('lang_code', g.lang_code)
+
+
+@product_app.url_value_preprocessor
+def pull_lang_code(endpoint, values):
+    g.lang_code = values.pop('lang_code')
 
 
 @product_app.route("/")

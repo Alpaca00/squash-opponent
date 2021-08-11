@@ -1,10 +1,20 @@
-from flask import Blueprint, render_template, request, redirect, url_for, flash
+from flask import Blueprint, render_template, request, redirect, url_for, flash, g
 from flask_login import login_user
 from flask_security.utils import verify_password
 from opponent_app.models import UserAccount
 
 
 login_app = Blueprint("login_app", __name__)
+
+
+@login_app.url_defaults
+def add_language_code(endpoint, values):
+    values.setdefault('lang_code', g.lang_code)
+
+
+@login_app.url_value_preprocessor
+def pull_lang_code(endpoint, values):
+    g.lang_code = values.pop('lang_code')
 
 
 @login_app.route("/", methods=["GET", "POST", "HEAD"])

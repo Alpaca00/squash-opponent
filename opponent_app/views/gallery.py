@@ -1,14 +1,25 @@
 import os
 import re
 import sys
-
 from PIL import Image
 import io
-from flask import Blueprint, render_template, request, flash
+from flask import Blueprint, render_template, request, flash, g
+from flask_babel import gettext
+
 from opponent_app import db
 from opponent_app.models import Gallery
 
 gallery_app = Blueprint("gallery_app", __name__)
+
+
+@gallery_app.url_defaults
+def add_language_code(endpoint, values):
+    values.setdefault('lang_code', g.lang_code)
+
+
+@gallery_app.url_value_preprocessor
+def pull_lang_code(endpoint, values):
+    g.lang_code = values.pop('lang_code')
 
 
 @gallery_app.route("/", methods=['GET', 'POST'])
@@ -28,7 +39,7 @@ def upload_photo():
             images = Gallery.query.filter_by(name=img.filename).first()
             img = Image.open(io.BytesIO(images.data))
             img.save(f'opponent_app/static/img/user_photo/{images.name}')
-            flash('Successful. Will soon appear in the gallery.')
+            flash(gettext('Successful. Will soon appear in the gallery.'))
             return render_template('gallery/index.html')
         else:
             flash('File does not match a format')

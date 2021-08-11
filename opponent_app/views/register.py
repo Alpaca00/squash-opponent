@@ -1,10 +1,20 @@
-from flask import Blueprint, render_template, request, url_for, redirect, flash
+from flask import Blueprint, render_template, request, url_for, redirect, flash, g
 from flask_security.utils import hash_password
 from opponent_app.models.form import RegisterForm
 from opponent_app.models import db, user_datastore, UserAccount
 from opponent_app.views.validate_form_registration import ValidateForm, ValidationFormError
 
 register_app = Blueprint("register_app", __name__)
+
+
+@register_app.url_defaults
+def add_language_code(endpoint, values):
+    values.setdefault('lang_code', g.lang_code)
+
+
+@register_app.url_value_preprocessor
+def pull_lang_code(endpoint, values):
+    g.lang_code = values.pop('lang_code')
 
 
 @register_app.route('/', methods=['GET', 'POST'])

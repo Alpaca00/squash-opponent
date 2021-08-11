@@ -1,5 +1,5 @@
 from typing import Any
-from flask import Blueprint, render_template, request, abort
+from flask import Blueprint, render_template, request, abort, g
 from loguru import logger
 from sqlalchemy import desc
 from werkzeug.exceptions import BadRequest, RequestTimeout
@@ -9,6 +9,16 @@ from opponent_app.views.product import cache
 
 cart_app = Blueprint("cart_app", __name__)
 id: Any = None
+
+
+@cart_app.url_defaults
+def add_language_code(endpoint, values):
+    values.setdefault('lang_code', g.lang_code)
+
+
+@cart_app.url_value_preprocessor
+def pull_lang_code(endpoint, values):
+    g.lang_code = values.pop('lang_code')
 
 
 @cart_app.route("/<int:cart_id>/", methods=["GET", "POST"])

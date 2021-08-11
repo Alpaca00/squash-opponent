@@ -1,9 +1,18 @@
-from flask import Blueprint, render_template, request, flash
-
+from flask import Blueprint, render_template, request, flash, g
 from opponent_app import db
 from opponent_app.models.video_gallery import VideoGallery
 
 video_app = Blueprint("video_app", __name__)
+
+
+@video_app.url_defaults
+def add_language_code(endpoint, values):
+    values.setdefault('lang_code', g.lang_code)
+
+
+@video_app.url_value_preprocessor
+def pull_lang_code(endpoint, values):
+    g.lang_code = values.pop('lang_code')
 
 
 @video_app.route("/")
