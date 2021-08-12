@@ -12,7 +12,7 @@ Gallery
                         {{ messages[0] }}
             {% endif %}
         {% endwith %}
-         <form method="POST" action="/gallery/upload" enctype='multipart/form-data'>
+         <form method="POST" action="{% if request.url_rule.endpoint == 'gallery_app.gallery_list' %} /uk/gallery/upload {% endif %}"  enctype='multipart/form-data'>
         <div class="form-group">
             <label for="formFileSm" id='label-text' class="form-label">{{ _('You can upload your photos from squash court to our gallery.') }}</label>
             <input class="form-control form-control-sm" id="formFileSm" type="file" accept=".png,.jpg,.gif,.jpeg" name="input-file-photo"required>
