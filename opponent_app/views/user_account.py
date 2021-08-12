@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template, jsonify, request, url_for, g
 from flask_login import current_user, logout_user, login_required
 from werkzeug.utils import redirect
+from opponent_app.models import db, UserOpponent
 
 user_account_app = Blueprint("user_account_app", __name__)
 
@@ -17,7 +18,21 @@ def pull_lang_code(endpoint, values):
 
 @user_account_app.route("/", methods=["GET", "POST"])
 def user_account():
+    if request.method == "POST":
+        date_time = request.form.get("partydate")
+        category = request.form.get("category")
+        district = request.form.get("district")
+        phone = request.form.get("phone")
+        opponent = UserOpponent(
+            category=category, city='Lviv',
+            district=district, phone=phone,
+            date=date_time, user_account_id=current_user.id
+        )
+        db.session.add(opponent)
+        db.session.commit()
+        return render_template("user.html", cur=current_user)
     return render_template("user.html", cur=current_user)
+
 
 
 @user_account_app.route('/login', methods=["GET", "POST"])
