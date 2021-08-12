@@ -1,3 +1,4 @@
-<img src="https://github.com/Alpaca00/alpaca_web/blob/main/static/img/logo.png?raw=true" alt="team"/>
+<img src="https://github.com/Alpaca00/alpaca_web/blob/main/opponent_app/static/img/squash-ball.png" width="40" height="40" alt="team"/>
 
-Web-site - Lviv squash team!
+
+web application
