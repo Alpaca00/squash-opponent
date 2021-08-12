@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title -%}
+Finder-opponent
+{%- endblock %}
+{% block body  -%}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/finder.css') }}">
+
+
+
+<div class="container ls">
+  <h1>{{ _('Finder opponent') }}</h1>
+
+    <div id="wrap">
+        <form action="" autocomplete="on">
+            <input id="search" name="search" type="text" placeholder="Who're we looking for ? Search by any parameter" style="font-size: 24px;"><input id="search_submit" value="Rechercher" type="submit">
+        </form>
+    </div>
+    <div class="alert alert-info" role="alert" style="width:20%;">
+      <a target="_blank" rel="noopener noreferrer" href="http://squasharena.com.ua/#" style="text-decoration: none; color: orange;">Booking court: squasharena.com.ua</a>
+    </div>
+   <div class="alert alert-info" role="alert" style="width:37%;">
+   <a class="time-now" id="clock" style="text-decoration: none; color: orange;"></a>
+   </div>
+</div>
+
+
+{% include 'finder/content.html' %}
+
+<script>
+    function doDate() {
+      let currentDate = document.getElementById('clock');
+      let current = new Date();
+    currentDate.innerHTML = `<b>${current}</b> `;
+    }
+
+setInterval(doDate, 1000);
+</script>
+
+{%- endblock %}
+
