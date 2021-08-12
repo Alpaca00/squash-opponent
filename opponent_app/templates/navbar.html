@@ -2,8 +2,8 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
      <div class="language">
          <nav>
-             <a href="{{ url_for(request.endpoint, lang_code='en', product_id=9) }}"><img src="{{ url_for('static', filename='img/icon/english2.png') }}" style='margin-left: 15px;' alt="language" width="32" height="32"></a>
-             <a href="{{ url_for(request.endpoint, lang_code='uk', product_id=9) }}"><img src="{{ url_for('static', filename='img/icon/english.png') }}" style='margin-left: 15px;' alt="language" width="32" height="32"></a>
+             <a href="{{ url_for(request.endpoint, lang_code='en', product_id=9, cart_id=9) }}"><img src="{{ url_for('static', filename='img/icon/english2.png') }}" style='margin-left: 15px;' alt="language" width="32" height="32"></a>
+             <a href="{{ url_for(request.endpoint, lang_code='uk', product_id=9, cart_id=9) }}"><img src="{{ url_for('static', filename='img/icon/english.png') }}" style='margin-left: 15px;' alt="language" width="32" height="32"></a>
          </nav>
      </div>
     <div class="container-fluid">
@@ -14,7 +14,7 @@
             <div id="logo_go">
                 <div class="myWrapper">
                     <nav>
-                         <a href="/"><img src="{{ url_for('static', filename='img/logo.png') }}" alt="" width="80" height="80" class="d-inline-block align-text-top"></a>
+                         <a href="/"><img src="{{ url_for('static', filename='img/squash-ball.png') }}" alt="" width="40" height="40" class="d-inline-block align-text-top"></a>
                     </nav>
                 </div>
             </div>
@@ -25,9 +25,9 @@
                        href="{{ url_for('home_app.index') }}">{{ _('Home') }}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {% if request.url_rule.endpoint == '#' %} active {% endif %}" style="{% if request.url_rule.endpoint == 'admin.index' %} color: white; {% endif %}" aria-current="page"
+                    <a class="nav-link {% if request.url_rule.endpoint == 'finder_app.index' %} active {% endif %}" style="{% if request.url_rule.endpoint == 'finder_app.index' %} color: white; {% endif %}" aria-current="page"
                        data-bs-toggle='tooltip' data-bs-placement='top' title="{{ _('Finder-Opponent') }}"
-                       href="#">{{ _('Finder-Opponent') }}</a>
+                       href="{{ url_for('finder_app.index') }}">{{ _('Finder-Opponent') }}</a>
                 </li>
                     <li class="nav-item">
                     <a class="nav-link {% if request.url_rule.endpoint == 'product_app.product_list' %} active {% endif %}" style="{% if request.url_rule.endpoint == 'product_app.product_list' %} color: white; {% endif %}"
@@ -82,3 +82,5 @@
         </div>
     </div>
 </nav>
+
+
