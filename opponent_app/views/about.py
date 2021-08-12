@@ -15,4 +15,7 @@ def pull_lang_code(endpoint, values):
 
 @about_app.route("/", methods=['GET'])
 def about():
-    return render_template("about.html")
+    if g.lang_code == 'en':
+        return render_template("about.html")
+    else:
+        return render_template("about_ua.html")
