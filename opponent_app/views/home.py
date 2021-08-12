@@ -1,4 +1,4 @@
-from flask import request, render_template, redirect, url_for, flash, Blueprint, g, current_app, abort
+from flask import request, render_template, redirect, url_for, flash, Blueprint, g, current_app, abort, Response
 from flask_admin import Admin, BaseView, AdminIndexView, expose
 from flask_babel import refresh
 from flask_login import current_user, login_user, logout_user
@@ -26,7 +26,7 @@ from opponent_app.models.basic_queries.junior_result import (
 from opponent_app.models.support import SupportMessage
 
 
-home_app = Blueprint("home_app", __name__, )
+home_app = Blueprint("home_app", __name__)
 
 
 @home_app.url_defaults
