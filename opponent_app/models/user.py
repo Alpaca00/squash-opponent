@@ -103,8 +103,10 @@ user_datastore = SQLAlchemyUserDatastore(db, UserAccount, Role)
 class UserOpponent(db.Model):
     __tablename__ = "users_opponents"
     id = Column(Integer, primary_key=True)
-    category = Column(String(12), nullable=True, default="Amateur")
-    city = Column(String(33), nullable=False)
-    district = Column(String(33), nullable=True)
+    category = Column(String(50), nullable=True, default="Amateur")
+    city = Column(String(50))
+    district = Column(String(50))
+    date = Column(String(50))
+    phone = Column(String(50))
     user_account_id = Column(Integer, ForeignKey("users_accounts.id"))
     user_account = db.relationship("UserAccount", overlaps="users_account,users_opponent")
