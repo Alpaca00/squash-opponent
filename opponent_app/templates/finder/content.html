@@ -1,0 +1,42 @@
+
+
+<div class="container">
+<div class="row">
+    {% for op in opponents %}
+    <div class="col-lg-4">
+        <div class="card card-margin">
+            <div class="card-header no-border">
+                <h5 class="card-title">Opponent</h5>
+            </div>
+            <div class="card-body pt-0">
+                <div class="widget-49">
+                    <div class="widget-49-title-wrapper">
+                        <div class="widget-49-date-primary">
+                            <span class="widget-49-date-day">12</span>
+                            <span class="widget-49-date-month">Aug</span>
+                        </div>
+                        <div class="widget-49-meeting-info">
+                            <span class="widget-49-pro-title">{{ op.name }}</span>
+                            {% for o in op.users_opponent %}
+                            <span class="widget-49-meeting-time">{{ o.date }}</span>
+                        </div>
+                    </div>
+                    <ul class="widget-49-meeting-points" style="list-style-type: circle;">
+                        <li class="widget-49-meeting-item">City:<span>{{ o.city }}</span></li>
+                        <li class="widget-49-meeting-item">District:<span>{{ o.district }}</span></li>
+                        <li class="widget-49-meeting-item">Category:<span>{{ o.category }}</span></li>
+                        <li class="widget-49-meeting-item">Email:<span>{{ op.email }}</span></li>
+                        <li class="widget-49-meeting-item">Phone:<span>{{ o.phone }}</span></li>
+                    </ul>
+                    <div class="widget-49-meeting-action">
+                        <a href="#" class="btn btn-sm btn-flash-border-primary">OFFER</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+        {% endfor %}
+        {% endfor %}
+    </div>
+</div>
+<script src="{{ url_for('static', filename='js/finder.js') }}"></script>

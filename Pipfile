@@ -4,14 +4,29 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-Flask-SQLAlchemy = "*"
-Flask-Migrate = "*"
 Flask = "*"
+Flask-SQLAlchemy = "*"
 psycopg2-binary = "*"
+redis = "==3.5.3"
+Flask-Migrate = "*"
+Flask-WTF = "*"
+black = "==21.7b0"
+Flask-Validator = "==1.4"
+loguru = "==0.5.3"
+Flask-Mail = "*"
+Flask-Admin = "==1.5.8"
+Flask-Login = "*"
+Flask-Security = "*"
+Flask-Bootstrap = "==3.3.7.0"
+pydantic = "*"
+pillow = "*"
+flask-babel = "*"
 
 [dev-packages]
 pytest = "*"
-selene = "==2.0.0a38"
+selene = "==2.0.0a39"
+coverage = "*"
+pytest-flask = "*"
 
 [requires]
 python_version = "3.8"

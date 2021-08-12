@@ -3,8 +3,8 @@ version: '3.5'
 services:
   app:
     build:
-      dockerfile: ./Dockerfile
-      context: .
+      dockerfile: Dockerfile
+      context: ""
     environment:
       PG_HOST: pg
     volumes:
@@ -13,6 +13,7 @@ services:
       - 5000:5000
     depends_on:
       - pg
+      - redis
   pg:
     image: postgres:13.3
     environment:
@@ -24,3 +25,10 @@ services:
     - ./data/pgdata:/var/lib/postgresql/data/pgdata
     ports:
     - 5432:5432
+  redis:
+    image: redis:6.2
+    ports:
+      - 6379:6379
+    volumes:
+      - ./config/redis-docker/redis.conf:/redis.conf
+    command: [ "redis-server", "/redis.conf" ]

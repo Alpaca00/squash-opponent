@@ -1,0 +1,10 @@
+{% extends 'admin/master.html' %}
+
+{% block body %}
+
+    <h2 class="mt-3">Opponents</h2>
+    {{ user.username }}
+    {% for item in opponents %}
+        {{ item.email }}
+    {% endfor %}
+{% endblock %}

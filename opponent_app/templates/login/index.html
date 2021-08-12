@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <title>
+        login
+    </title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+</head>
+{% block body %}
+{% include 'navbar.html' %}
+<div class="container-login">
+	<div class="d-flex justify-content-center h-100">
+		<div class="card-nest">
+			<div class="card-header">
+				<h3>{{ _('Sign In') }}</h3>
+				<div class="d-flex justify-content-end social_icon" id="social-icon">
+
+					<span><i class="fab fa-facebook-square"></i></span>
+					<span><i class="fab fa-google-plus-square"></i></span>
+					<span><i class="fab fa-twitter-square"></i></span>
+				</div>
+			</div>
+			<div class="card-body">
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        <div class="notification is-danger">
+                        <div class="alert alert-info" id="alert-message" role="alert">
+                        {{ messages[0] }}
+                        </div>
+                        </div>
+            {% endif %}
+        {% endwith %}
+				<form method="POST">
+					<div class="input-group form-group">
+						<div class="input-group-prepend">
+							<input type="text" class="form-control" placeholder="email" name="email">
+						</div>
+					</div>
+					<div class="input-group form-group">
+						<div class="input-group-prepend">
+								<input type="password" class="form-control"  placeholder="password" name="password">
+						</div>
+					</div>
+					<div class="row align-items-center remember">
+						<input type="checkbox" id="remember-me">{{ _('Remember Me') }}
+					</div>
+					<div class="form-group">
+                            <input type="submit" id='submit-user-login' value="Login" class="btn float-right login_btn">
+					</div>
+				</form>
+			</div>
+			<div class="card-footer">
+				<div class="d-flex justify-content-center links">
+					{{ _("Don't have an account?") }}<a href="{{ url_for('register_app.register') }}" id="sign-up-unique">{{ _('Sign Up') }}</a>
+				</div>
+				<div class="d-flex justify-content-center">
+					<a href="#">{{ _('Forgot your password?') }}</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% include 'footer.html' %}
+{% endblock %}

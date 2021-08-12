@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/admin_style.css') }}">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+</head>
+{% block content %}
+{% import 'bootstrap/wtf.html' as wtf %}
+<body>
+    <div class="sidenav">
+         <div class="login-main-text">
+            <h2>Lviv Squash Team<br> Login Page</h2>
+            <p>Login from here to access.</p>
+         </div>
+      </div>
+      <div class="main">
+         <div class="col-md-6 col-sm-12">
+            <div class="login-form">
+                   {{ form.csrf_token }}
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        <div class="notification is-danger">
+                         {{ messages[0] }}
+                         </div>
+                        {% endif %}
+                        {% endwith %}
+               <form method="POST" active="{{ url_for('admin.index') }}">
+                 {{ form.hidden_tag() }}
+                 {{ wtf.form_field(form.username) }}
+                 {{ wtf.form_field(form.password) }}
+                 {{ wtf.form_field(form.remember) }}
+                  <button type="submit" class="btn btn-black">Login</button>
+               </form>
+            </div>
+         </div>
+      </div>
+</body>
+</html>
+{% endblock %}

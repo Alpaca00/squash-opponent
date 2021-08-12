@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+
+{% block title -%}
+Gallery
+{%- endblock %}
+{% block body  -%}
+<div class="container">
+<h1 id="gallery-name">{{ _('Photo Gallery') }}</h1>
+    <div class="alert alert-warning" role="alert">
+        {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        {{ messages[0] }}
+            {% endif %}
+        {% endwith %}
+         <form method="POST" action="{% if request.url_rule.endpoint == 'gallery_app.gallery_list' %} /uk/gallery/upload {% endif %}"  enctype='multipart/form-data'>
+        <div class="form-group">
+            <label for="formFileSm" id='label-text' class="form-label">{{ _('You can upload your photos from squash court to our gallery.') }}</label>
+            <input class="form-control form-control-sm" id="formFileSm" type="file" accept=".png,.jpg,.gif,.jpeg" name="input-file-photo"required>
+            <button type="submit" id="btn-send-img" class="btn btn-dark" style='margin-top: 15px;'>{{ _('SEND') }}</button>
+        </div>
+         </form>
+    </div>
+<section class="gallery min-vh-100" style="margin-bottom: 25px;">
+    <div class="container-lg">
+        <div class="row gy-4 row-cols-1 row-cols-sm-2 row-cols-md-3">
+            <div class="col">
+                <img src="{{ url_for('static', filename='img/img_squash/nikita.jpg') }}" class="gallery-item" alt="gallery">
+            </div>
+            <div class="col">
+                <img src="{{ url_for('static', filename='img/img_squash/junior.jpg') }}" class="gallery-item" alt="gallery">
+            </div>
+            <div class="col">
+                <img src="{{ url_for('static', filename='img/img_squash/1.jpg') }}" class="gallery-item" alt="gallery">
+            </div>
+            <div class="col">
+                <img src="{{ url_for('static', filename='img/img_squash/5.jpg') }}" class="gallery-item" alt="gallery">
+            </div>
+            <div class="col">
+                <img src="{{ url_for('static', filename='img/img_squash/4.jpg') }}" class="gallery-item" alt="gallery">
+            </div>
+             <div class="col">
+                <img src="{{ url_for('static', filename='img/img_squash/24.jpg') }}" class="gallery-item" alt="gallery">
+            </div>
+            {% set dir = '/static/img/user_photo/' %}
+             {% for file in files %}
+            {% set full_dir = dir + file %}
+            <div class="col">
+                <img src="{{ full_dir }}" class="gallery-item" alt="gallery">
+            </div>
+             {% endfor %}
+        </div>
+    </div>
+</section>
+</div>
+
+<div class="modal fade" id="gallery-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{ _('Our team') }}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <img src="{{ url_for('static', filename='img/img_squash/nikita.jpg') }}" class="modal-img" alt="modal img">
+      </div>
+    </div>
+  </div>
+</div>
+<script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+<script>
+    let message = document.getElementById('label-text')
+    const validate = document.getElementById('formFileSm')
+
+    validate.oninput = function () {
+        if(validate.value.match(/\.(jpeg|jpg|gif|png)$/)){
+            message.innerText = 'File is already to post.';
+        } else {
+            message.innerText = 'It is not an image format.';
+        }
+    }
+</script>
+<!--<script type="text/javascript">-->
+<!--    function success() {-->
+<!--	    if(document.getElementById("formFileSm").value === "") {-->
+<!--            document.getElementById('btn-send-img').disabled = true;-->
+<!--        } else {-->
+<!--            document.getElementById('btn-send-img').disabled = false;-->
+<!--        }-->
+<!--    }-->
+<!--</script>-->
+{%- endblock %}

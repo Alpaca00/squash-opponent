@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% block title -%}
+Register
+{%- endblock %}
+{% block body  -%}
+{% import 'bootstrap/wtf.html' as wtf %}
+<form id="reg-form" method="POST">
+
+    {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="notification is-danger">
+                    <div class="alert alert-info" id="alert-message" role="alert">
+                    {{ messages[0] }}
+                    </div>
+                </div>
+            {% endif %}
+        {% endwith %}
+    <label>
+    <p class="label-txt">{{ _('ENTER YOUR EMAIL') }}</p>
+        <input type="text" class="input" id="email-id" name="email">
+    <div class="line-box">
+      <div class="line"></div>
+    </div>
+  </label>
+  <label>
+    <p class="label-txt">{{ _('ENTER YOUR NAME') }}</p>
+      <input type="text" class="input" id="name-id" name="name">
+    <div class="line-box">
+      <div class="line"></div>
+    </div>
+  </label>
+  <label>
+    <p class="label-txt">{{ _('ENTER YOUR PASSWORD') }}</p>
+      <input type="text" class="input" id="password-id" name="password">
+    <div class="line-box">
+      <div class="line"></div>
+    </div>
+  </label>
+    <div class="g-recaptcha" data-sitekey="6Lf0rL8bAAAAACclQV7Ty8PAlzLX1SFSNoeMcgqW"></div>
+  <button type="submit">{{ _('SUBMIT') }}</button>
+</form>
+
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+<script type="text/javascript">
+  var onloadCallback = function() {
+    alert("grecaptcha is ready!");
+  };
+</script>
+<script>
+  $(document).ready(function(){
+
+  $('.input').focus(function(){
+    $(this).parent().find(".label-txt").addClass('label-active');
+  });
+
+  $(".input").focusout(function(){
+    if ($(this).val() == '') {
+      $(this).parent().find(".label-txt").removeClass('label-active');
+    };
+  });
+
+});
+
+</script>
+{% endblock %}
