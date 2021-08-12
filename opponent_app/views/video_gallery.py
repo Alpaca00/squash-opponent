@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template, request, flash, g
+from flask_babel import gettext
 from opponent_app import db
 from opponent_app.models.video_gallery import VideoGallery
 
@@ -24,11 +25,16 @@ def video_list():
 def upload_link():
     if request.method == "POST":
         link = request.form.get("video-link")
-        new_link = VideoGallery(name=get_name_file(link), link=link)
-        db.session.add(new_link)
-        db.session.commit()
-        flash("Successful. Will soon appear in the gallery.")
-        return render_template("video_gallery/index.html")
+        unique_link = VideoGallery.query.filter_by(link=link).first()
+        if unique_link is None:
+            new_link = VideoGallery(name=get_name_file(link), link=link)
+            db.session.add(new_link)
+            db.session.commit()
+            flash(gettext("Successful. Will soon appear in the gallery."))
+            return render_template("video_gallery/index.html")
+        else:
+            flash(gettext("Warning. The link is already in our gallery."))
+            return render_template("video_gallery/index.html")
 
 
 def get_name_file(file: str):
