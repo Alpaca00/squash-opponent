@@ -3,7 +3,7 @@ import re
 import sys
 from PIL import Image
 import io
-from flask import Blueprint, render_template, request, flash, g
+from flask import Blueprint, render_template, request, flash, g, url_for
 from flask_babel import gettext
 
 from opponent_app import db
