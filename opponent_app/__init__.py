@@ -11,7 +11,7 @@ from opponent_app.views import (product_app, gallery_app,
                                 video_app, cart_app,
                                 login_app, register_app,
                                 support_app, user_account_app, home_app,
-                                admin, about_app
+                                admin, about_app, finder_app
                                 )
 
 
@@ -55,6 +55,7 @@ def create_app(environment_name='development'):
     app.register_blueprint(support_app, url_prefix='/<lang_code>/support')
     app.register_blueprint(user_account_app, url_prefix='/<lang_code>/account')
     app.register_blueprint(about_app, url_prefix='/<lang_code>/about')
+    app.register_blueprint(finder_app, url_prefix='/<lang_code>/finder')
 
     @app.route('/')
     def home():
