@@ -1,8 +1,8 @@
 
-
+ {% for op in opponents %}
+ {% for date in dates %}
 <div class="container">
 <div class="row">
-    {% for op in opponents %}
     <div class="col-lg-4">
         <div class="card card-margin">
             <div class="card-header no-border">
@@ -12,31 +12,31 @@
                 <div class="widget-49">
                     <div class="widget-49-title-wrapper">
                         <div class="widget-49-date-primary">
-                            <span class="widget-49-date-day">12</span>
-                            <span class="widget-49-date-month">Aug</span>
+                            <span class="widget-49-date-day">{{ date[1] }}</span>
+                            <span class="widget-49-date-month">{{ date[0] }}</span>
                         </div>
                         <div class="widget-49-meeting-info">
                             <span class="widget-49-pro-title">{{ op.name }}</span>
-                            {% for o in op.users_opponent %}
-                            <span class="widget-49-meeting-time">{{ o.date }}</span>
+
+                            <span class="widget-49-meeting-time" style="font-size: 16px; color: #555;">{{ date[2] }}</span>
                         </div>
                     </div>
                     <ul class="widget-49-meeting-points" style="list-style-type: circle;">
-                        <li class="widget-49-meeting-item">City:<span>{{ o.city }}</span></li>
-                        <li class="widget-49-meeting-item">District:<span>{{ o.district }}</span></li>
-                        <li class="widget-49-meeting-item">Category:<span>{{ o.category }}</span></li>
+                        <li class="widget-49-meeting-item">City:<span>{{ date[3] }}</span></li>
+                        <li class="widget-49-meeting-item">District:<span>{{ date[4] }}</span></li>
+                        <li class="widget-49-meeting-item">Category:<span>{{ date[5] }}</span></li>
                         <li class="widget-49-meeting-item">Email:<span>{{ op.email }}</span></li>
-                        <li class="widget-49-meeting-item">Phone:<span>{{ o.phone }}</span></li>
+                        <li class="widget-49-meeting-item">Phone:<span>{{ date[6] }}</span></li>
                     </ul>
                     <div class="widget-49-meeting-action">
-                        <a href="#" class="btn btn-sm btn-flash-border-primary">OFFER</a>
+                        <a href="#" class="btn btn-sm btn-flash-border-primary">{% if request.url_rule.endpoint == 'finder_app.index' %} OFFER {% else %} CHANGE {% endif %}</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-        {% endfor %}
-        {% endfor %}
     </div>
 </div>
 <script src="{{ url_for('static', filename='js/finder.js') }}"></script>
+ {% endfor %}
+ {% endfor %}
