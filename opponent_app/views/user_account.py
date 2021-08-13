@@ -1,9 +1,10 @@
 import calendar
 from datetime import datetime
-
 import humanize
-from flask import Blueprint, render_template, jsonify, request, url_for, g, redirect
+from flask import Blueprint, render_template, jsonify, request, url_for, g, redirect, abort
 from flask_login import current_user, logout_user, login_required
+from loguru import logger
+
 from opponent_app.models import db, UserOpponent, UserAccount
 
 user_account_app = Blueprint("user_account_app", __name__)
@@ -31,7 +32,7 @@ def user_account():
                 day_ = humanize.naturaldate(convert_dt.day)
                 time_ = humanize.naturaltime(convert_dt.time())
                 lst_history.append(
-                    [abr_month, day_, time_, i.city, i.district, i.category, i.phone]
+                    [abr_month, day_, time_, i.city, i.district, i.category, i.phone, i.id]
                 )
         return render_template("user.html", cur=current_user, opponents=user_history, dates=lst_history)
     if request.method == "POST":
@@ -49,6 +50,29 @@ def user_account():
         return render_template("user.html", cur=current_user)
     return render_template("user.html", cur=current_user)
 
+
+@user_account_app.route("/update/<post_id>", methods=["GET", "POST", "PATCH"])
+def update_post_request(post_id: int):
+    if request.method == "POST":
+        card_opponent = UserOpponent.query.filter_by(id=post_id).join(UserAccount).one_or_none()
+        if card_opponent is None:
+            abort(404)
+        else:
+            # card_opponent.phone = request.form.get('phone')
+            # card_opponent.category = request.form.get('category')
+            # card_opponent.district = request.form.get("district")
+            # card_opponent.date = request.form.get("date")
+            # db.session.commit()
+            # print(card_opponent.date)
+            print(request.form.get("date"))
+            return redirect(url_for("user_account_app.user_account"))
+    return render_template("user_update.html", cur=current_user, post_id=post_id)
+
+
+@user_account_app.errorhandler(404)
+def handle_not_found_error(exception):
+    logger.info(exception)
+    return render_template("404.html"), 404
 
 
 @user_account_app.route('/login', methods=["GET", "POST"])
