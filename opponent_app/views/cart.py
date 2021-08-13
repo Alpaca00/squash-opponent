@@ -13,12 +13,12 @@ id: Any = None
 
 @cart_app.url_defaults
 def add_language_code(endpoint, values):
-    values.setdefault('lang_code', g.lang_code)
+    values.setdefault("lang_code", g.lang_code)
 
 
 @cart_app.url_value_preprocessor
 def pull_lang_code(endpoint, values):
-    g.lang_code = values.pop('lang_code')
+    g.lang_code = values.pop("lang_code")
 
 
 @cart_app.route("/<int:cart_id>/", methods=["GET", "POST"])
@@ -70,11 +70,20 @@ def cart_list(cart_id: int):
         order.users.append(user)
         db.session.add(order)
         db.session.commit()
-        order_user = {'Full name: ': full_name, 'Email: ': email, 'Phone: ': phone, 'Address: ': address, 'Address2: ': address2, 'City: ': city, 'State: ': state, 'Zip code: ': zip_code}
+        order_user = {
+            "Full name: ": full_name,
+            "Email: ": email,
+            "Phone: ": phone,
+            "Address: ": address,
+            "Address2: ": address2,
+            "City: ": city,
+            "State: ": state,
+            "Zip code: ": zip_code,
+        }
         count_orders = Order.query.count()
-        cache.setex(name='user_order_count', time=100, value=count_orders)
-        cache.setex(name='user_order_phone', time=100, value=phone)
-        cache.setex(name='user_order_full_name', time=100, value=full_name)
+        cache.setex(name="user_order_count", time=100, value=count_orders)
+        cache.setex(name="user_order_phone", time=100, value=phone)
+        cache.setex(name="user_order_full_name", time=100, value=full_name)
         return render_template(
             "order/index.html",
             orders_user=order_user,
@@ -94,8 +103,7 @@ def empty_list(id_cart=None):
         return cart_list(id_cart)
 
 
-
 @cart_app.errorhandler(408)
 def handle_request_timeout_error(exception):
     logger.info(exception)
-    return render_template('408.html'), 408
+    return render_template("408.html"), 408
