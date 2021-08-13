@@ -21,6 +21,7 @@ Flask-Bootstrap = "==3.3.7.0"
 pydantic = "*"
 pillow = "*"
 flask-babel = "*"
+humanize = "*"
 
 [dev-packages]
 pytest = "*"
