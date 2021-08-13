@@ -29,7 +29,7 @@ def index():
                 day_ = humanize.naturaldate(convert_dt.day)
                 time_ = humanize.naturaltime(convert_dt.time())
                 dates.append(
-                    [abr_month, day_, time_, i.city, i.district, i.category, i.phone]
+                    [abr_month, day_, time_, i.city, i.district, i.category, i.phone, i.id]
                 )
         return render_template("finder/index.html", opponents=opponents, dates=dates)
 
