@@ -1,7 +1,8 @@
 import calendar
 from datetime import datetime
 import humanize
-from flask import Blueprint, render_template, jsonify, request, url_for, g, redirect, abort
+from flask import Blueprint, render_template, jsonify, request, url_for, g, redirect, abort, flash
+from flask_babel import gettext
 from flask_login import current_user, logout_user, login_required
 from loguru import logger
 
@@ -47,26 +48,39 @@ def user_account():
         )
         db.session.add(opponent)
         db.session.commit()
-        return render_template("user.html", cur=current_user)
+        flash(gettext("Successfully. Your post has been added."))
+        return redirect(url_for("user_account_app.user_account"))
     return render_template("user.html", cur=current_user)
 
 
-@user_account_app.route("/update/<post_id>", methods=["GET", "POST", "PATCH"])
+@user_account_app.route("/update/<post_id>", methods=["GET", "POST", "DELETE"])
 def update_post_request(post_id: int):
     if request.method == "POST":
         card_opponent = UserOpponent.query.filter_by(id=post_id).join(UserAccount).one_or_none()
         if card_opponent is None:
             abort(404)
         else:
-            # card_opponent.phone = request.form.get('phone')
-            # card_opponent.category = request.form.get('category')
-            # card_opponent.district = request.form.get("district")
-            # card_opponent.date = request.form.get("date")
-            # db.session.commit()
-            # print(card_opponent.date)
-            print(request.form.get("date"))
+            card_opponent.phone = request.form.get('phone')
+            card_opponent.category = request.form.get('category')
+            card_opponent.district = request.form.get("district")
+            card_opponent.date = request.form.get("partydate")
+            db.session.commit()
             return redirect(url_for("user_account_app.user_account"))
     return render_template("user_update.html", cur=current_user, post_id=post_id)
+
+
+@user_account_app.route("/delete/<post_id>", methods=["GET", "POST", "DELETE"])
+def delete_post_request(post_id: int):
+    if request.method == "GET":
+        card_opponent_for_delete = UserOpponent.query.filter_by(id=post_id).join(UserAccount).one_or_none()
+        if card_opponent_for_delete is None:
+            abort(404)
+        else:
+            db.session.delete(card_opponent_for_delete)
+            db.session.commit()
+            flash(gettext("Successfully. Your post has been deleted."))
+        return redirect(url_for("user_account_app.user_account"))
+    return render_template("user.html", cur=current_user)
 
 
 @user_account_app.errorhandler(404)
