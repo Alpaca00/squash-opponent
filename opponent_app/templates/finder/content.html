@@ -30,6 +30,8 @@
                     </ul>
                     <div class="widget-49-meeting-action">
                         <a href="{% if request.url_rule.endpoint == 'user_account_app.user_account' %} {{ url_for('user_account_app.update_post_request', post_id=date[7]) }} {% endif %}" class="btn btn-sm btn-flash-border-primary">{% if request.url_rule.endpoint == 'finder_app.index' %} OFFER {% else %} CHANGE {% endif %}</a>
+
+                        <a href="{{ url_for('user_account_app.delete_post_request', post_id=date[7]) }}" class="btn btn-sm btn-flash-border-primary" id="delete-post-opponent">{% if request.url_rule.endpoint == 'user_account_app.user_account' %} DELETE {% endif %}</a>
                     </div>
                 </div>
             </div>
