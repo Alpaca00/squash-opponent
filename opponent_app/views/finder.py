@@ -1,8 +1,8 @@
 from datetime import datetime
 import calendar
 import humanize
-from flask import request, Blueprint, render_template, g
-from opponent_app.models import UserAccount, UserOpponent
+from flask import request, Blueprint, render_template, g, redirect, url_for
+from opponent_app.models import UserAccount, UserOpponent, OfferOpponent, db
 
 finder_app = Blueprint("finder_app", __name__)
 
@@ -31,7 +31,41 @@ def index():
                 dates.append(
                     [abr_month, day_, time_, i.city, i.district, i.category, i.phone, i.id]
                 )
-        return render_template("finder/index.html", opponents=opponents, dates=dates)
+        offer_data = []
+        offer_opponent = OfferOpponent.query.all()
+        if offer_opponent is not None:
+            for i in offer_opponent:
+                convert_dt = datetime.strptime(i.date, "%Y-%m-%dT%H:%M")
+                abr_month = calendar.month_abbr[int(convert_dt.date().month)]
+                day_ = humanize.naturaldate(convert_dt.day)
+                time_ = humanize.naturaltime(convert_dt.time())
+                offer_data.append(
+                        [abr_month, day_, time_, i.phone, i.name, i.email, i.city, i.district, i.category, i.phone, i.user_opponent_id, i.id]
+                    )
+        return render_template("finder/index.html", opponents=opponents, dates=dates, offer_data=offer_data)
+    if request.method == "POST":
+        phone = request.form.get('user_phone')
+        name = request.form.get('user_name')
+        email = request.form.get('user_email')
+        category = request.form.get('user_category')
+        district = request.form.get("user_district")
+        date = request.form.get("user_partydate")
+        opponent_id = request.form.get("opponent_id_user")
+        offer_opponent = OfferOpponent(
+            phone=phone,
+            name=name,
+            email=email,
+            category=category,
+            city='Lviv',
+            district=district,
+            date=date,
+            user_opponent_id=opponent_id
+        )
+        db.session.add(offer_opponent)
+        db.session.commit()
+        return redirect(url_for('finder_app.index'))
+    return redirect(url_for('finder_app.index'))
+
 
 
 # for delete outdated posts
