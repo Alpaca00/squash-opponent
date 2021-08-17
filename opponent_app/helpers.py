@@ -1,9 +1,13 @@
+import os
 from flask_mail import Message
 import redis
 from ast import literal_eval
 from opponent_app import mail_settings, mail
 
-r = redis.Redis()
+
+R_HOST = os.environ['R_HOST']
+
+r = redis.Redis(host=R_HOST)
 
 
 def admin_messenger(subject, body):
