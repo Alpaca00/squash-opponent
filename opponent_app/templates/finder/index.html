@@ -9,7 +9,7 @@ Finder-opponent
 
 
 <div class="container ls">
-  <h1>{{ _('Finder opponent') }}</h1>
+  <h1>{{ _('Finder opponent') }}</h1><hr>
 
     <div id="wrap">
         <form action="" autocomplete="on">
@@ -19,14 +19,18 @@ Finder-opponent
     <div class="alert alert-info" role="alert" style="width:20%;">
       <a target="_blank" rel="noopener noreferrer" href="http://squasharena.com.ua/#" style="text-decoration: none; color: orange;">Booking court: squasharena.com.ua</a>
     </div>
-   <div class="alert alert-info" role="alert" style="width:37%;">
+   <div class="alert alert-info" role="alert" style="width:60%;">
    <a class="time-now" id="clock" style="text-decoration: none; color: orange;"></a>
+   </div>
+
+
+    <div class="alert alert-info" role="alert" style="width:60%;">
+        <h5 class="visually-visible" style="text-align: center">Free Opponents</h5>
+        <h5 class="visually-hidden">Paid Opponent</h5>
    </div>
 </div>
 
-
 {% include 'finder/content.html' %}
-
 <script>
     function doDate() {
       let currentDate = document.getElementById('clock');
