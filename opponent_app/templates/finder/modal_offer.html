@@ -1,0 +1,44 @@
+
+<div class="modal" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" >
+    <div class="modal-content" style="background-color: #515050;">
+        <span class="close" style="margin-left: auto;">&times;</span>
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">New Offer</h5>
+      </div>
+      <div class="modal-body">
+        {% include 'user_post_offer.html' %}
+      </div>
+      <div class="modal-footer">
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<script>
+let modal = document.getElementById("myModal");
+let allButtons = document.getElementsByClassName("show-modal-btn");
+let span = document.getElementsByClassName("close")[0];
+
+for (const btn of allButtons) {
+  btn.addEventListener('click', function() {
+  let userPostId = document.getElementById("id-opponent-user-cart");
+  userPostId.value = btn.value;
+  modal.style.display = "block";
+  });
+}
+
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+</script>
+
