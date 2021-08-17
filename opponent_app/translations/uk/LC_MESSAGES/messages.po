@@ -1,0 +1,474 @@
+# Ukrainian translations for PROJECT.
+# Copyright (C) 2021 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2021.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2021-08-12 09:38+0300\n"
+"PO-Revision-Date: 2021-08-08 13:40+0300\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: uk\n"
+"Language-Team: uk <LL@li.org>\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.9.1\n"
+
+#: templates/content.html:7
+msgid "Last Event"
+msgstr "Остання подія"
+
+#: templates/content.html:16
+msgid "Lviv Squash Team"
+msgstr "Львівський командний турнір"
+
+#: templates/content.html:21 templates/content.html:87
+#: templates/content.html:88
+msgid "Team"
+msgstr "Команда"
+
+#: templates/content.html:22
+msgid "Points"
+msgstr "Очків"
+
+#: templates/content.html:23
+msgid "Matches"
+msgstr "Матчів"
+
+#: templates/content.html:86
+msgid "Date"
+msgstr "Дата"
+
+#: templates/content.html:89
+msgid "Score"
+msgstr "Рахунок"
+
+#: templates/content.html:137
+msgid "Lviv Junior Tour"
+msgstr "Львівський Юніорський Турнір"
+
+#: templates/content.html:146
+msgid "Result"
+msgstr "Результат"
+
+#: templates/content.html:147
+msgid "All Junior Categories of Lviv Junior Tour"
+msgstr "Усі категорії"
+
+#: templates/content.html:148
+msgid "Position up to 9"
+msgstr "До 9 років"
+
+#: templates/content.html:149 templates/content.html:162
+#: templates/content.html:176 templates/content.html:191
+msgid "Name Surname"
+msgstr "Гравець"
+
+#: templates/content.html:161
+msgid "Position up to 11"
+msgstr "До 11 років"
+
+#: templates/content.html:175
+msgid "Position up to 13"
+msgstr "До 13 років"
+
+#: templates/content.html:190
+msgid "Position up to 15"
+msgstr "До 15 років"
+
+#: templates/content.html:209
+msgid "Waiting Event"
+msgstr "Очікування події"
+
+#: templates/footer.html:37
+msgid "Copyright © 2021 Oleg Matskiv. All rights reserved."
+msgstr ""
+
+#: templates/navbar.html:24 templates/navbar.html:25
+msgid "Home"
+msgstr "Головна"
+
+#: templates/navbar.html:29 templates/navbar.html:30
+msgid "Finder-Opponent"
+msgstr "Пошук-опонента"
+
+#: templates/navbar.html:34 templates/navbar.html:35
+msgid "Products"
+msgstr "Продукція"
+
+#: templates/navbar.html:39 templates/navbar.html:40
+msgid "Photo-Gallery"
+msgstr "Фото-галарея"
+
+#: templates/navbar.html:44 templates/navbar.html:45
+msgid "Video-Gallery"
+msgstr "Відео-галерея"
+
+#: templates/cart/empty.html:9 templates/cart/index.html:9
+#: templates/navbar.html:49 templates/navbar.html:50
+msgid "Cart"
+msgstr "Корзина"
+
+#: templates/navbar.html:54 templates/navbar.html:55
+msgid "Support"
+msgstr "Підтримка"
+
+#: templates/navbar.html:59 templates/navbar.html:60
+msgid "About"
+msgstr "Про нас"
+
+#: templates/login/index.html:18 templates/navbar.html:65
+#: templates/navbar.html:66
+msgid "Sign In"
+msgstr "Увійти"
+
+#: templates/navbar.html:74 templates/navbar.html:75
+msgid "Account"
+msgstr "Обліковий запис"
+
+#: templates/navbar.html:78 templates/navbar.html:79
+msgid "Logout"
+msgstr "Вийти"
+
+#: templates/user.html:27
+msgid "Squash Player"
+msgstr "Сквошист"
+
+#: templates/user.html:32
+msgid "Information"
+msgstr "Інфомарція"
+
+#: templates/support/index.html:17 templates/user.html:35
+msgid "Email"
+msgstr "Емейл"
+
+#: templates/user.html:39
+msgid "Phone"
+msgstr "Телефон"
+
+#: templates/user.html:43
+msgid "Location"
+msgstr "Локація"
+
+#: templates/user.html:46
+msgid "Lviv"
+msgstr "Львів"
+
+#: templates/user.html:48
+msgid "DISTRICT"
+msgstr "Район"
+
+#: templates/user.html:49
+msgid "Sychivskyi"
+msgstr "Сихівський"
+
+#: templates/user.html:50
+msgid "Zaliznychnyi"
+msgstr "Залізничний"
+
+#: templates/user.html:51
+msgid "Shevchenkivskyi"
+msgstr "Шевченківський"
+
+#: templates/user.html:55
+msgid "CATEGORY"
+msgstr "Категорія"
+
+#: templates/user.html:56
+msgid "PRO"
+msgstr "Про"
+
+#: templates/user.html:60
+msgid "AMATEUR"
+msgstr "Аматор"
+
+#: templates/user.html:62
+msgid "Enter the optimal date and time of the game:"
+msgstr "Введіть оптимальний день та годину для гри"
+
+#: templates/user.html:64
+msgid "POST"
+msgstr "Публікація"
+
+#: templates/user.html:65
+msgid "FINDER OPPONENT"
+msgstr "Пошук-опонента"
+
+#: templates/cart/empty.html:11 templates/cart/index.html:11
+#: templates/products/detail.html:14
+#, fuzzy
+msgid "Product list"
+msgstr "Продукція"
+
+#: templates/cart/empty.html:18
+msgid "Shopping Cart<small> (is empty in your cart)"
+msgstr "Онлайн магазин ( ваша корзина є пустою)"
+
+#: templates/cart/empty.html:25 templates/cart/index.html:32
+#: templates/products/detail.html:35
+msgid "Name"
+msgstr "Назва"
+
+#: templates/cart/empty.html:29 templates/cart/index.html:36
+#: templates/products/detail.html:39
+#, fuzzy
+msgid "Color"
+msgstr "Колір"
+
+#: templates/cart/empty.html:30
+msgid "Black"
+msgstr "Чорний"
+
+#: templates/cart/empty.html:33 templates/cart/index.html:40
+#: templates/products/detail.html:46 templates/products/detail.html:49
+msgid "Size"
+msgstr "Розмір"
+
+#: templates/cart/empty.html:38 templates/cart/index.html:44
+#: templates/products/detail.html:63
+msgid "Sex"
+msgstr "Стать"
+
+#: templates/cart/empty.html:43 templates/cart/index.html:54
+#: templates/products/detail.html:68
+msgid "Quantity"
+msgstr "Кількість"
+
+#: templates/cart/empty.html:47 templates/cart/index.html:58
+#: templates/products/detail.html:72
+msgid "Price"
+msgstr "Ціна"
+
+#: templates/cart/empty.html:51 templates/cart/index.html:62
+#: templates/products/detail.html:76
+msgid "Total"
+msgstr "Загально"
+
+#: templates/cart/empty.html:59
+msgid "Go to Product list"
+msgstr "Перейдіть до списку продукцій"
+
+#: templates/cart/index.html:18 templates/products/detail.html:21
+msgid "Shopping Cart<small> (1 item in your cart)"
+msgstr "Онлайн магазин"
+
+#: templates/cart/index.html:50 templates/products/detail.html:54
+msgid "Print"
+msgstr "Принт"
+
+#: templates/cart/index.html:71
+msgid ""
+"Show your support for the Lviv squash team with this shirt\n"
+"                             with a print on the chest or back.\n"
+"                             All proceeds will be used to organize youth "
+"tournaments."
+msgstr ""
+"Висловіть свою підтримку львівській команді зі сквошу покупкою цією "
+"футболки з відбитком на грудях або спині. Усі виручені кошти будуть "
+"спрямовані на організацію юніорських турнірів."
+
+#: templates/cart/index.html:84
+msgid "ENTER YOUR FULL NAME"
+msgstr "ВВЕДІТЬ ПОВНЕ ІМЯ"
+
+#: templates/cart/index.html:91 templates/login/register.html:19
+msgid "ENTER YOUR EMAIL"
+msgstr "ВВЕДІТЬ ЕЛЕКТРОННУ ПОШТУ"
+
+#: templates/cart/index.html:98
+msgid "PHONE"
+msgstr "ТЕЛЕФОН"
+
+#: templates/cart/index.html:105
+msgid "ENTER YOUR ADDRESS"
+msgstr "ВВЕДІТЬ АДРЕС"
+
+#: templates/cart/index.html:112
+msgid "ENTER YOUR ADDRESS2"
+msgstr "ВВЕДІТЬ АДРЕС2"
+
+#: templates/cart/index.html:118
+msgid "ENTER YOUR CITY"
+msgstr "ВВЕДІТЬ МІСТО"
+
+#: templates/cart/index.html:124
+msgid "ENTER YOUR STATE"
+msgstr "ВВЕДІТЬ ОБЛАСТЬ"
+
+#: templates/cart/index.html:130
+msgid "ENTER YOUR ZIP CODE"
+msgstr "ВВЕДІТЬ ПОШТОВИЙ ІНДЕКС "
+
+#: templates/cart/index.html:136 templates/login/register.html:40
+#: templates/support/index.html:37
+msgid "SUBMIT"
+msgstr "ПІДТВЕРДИТИ"
+
+#: templates/cart/index.html:143
+msgid "T-shirt"
+msgstr "ФУТБОЛКА"
+
+#: templates/gallery/index.html:8
+#, fuzzy
+msgid "Photo Gallery"
+msgstr "Фото-галарея"
+
+#: templates/gallery/index.html:17
+msgid "You can upload your photos from squash court to our gallery."
+msgstr "Ви можете завантажити свої фотографії з сквош -корту в нашу галерею."
+
+#: templates/gallery/index.html:19 templates/video_gallery/index.html:31
+msgid "SEND"
+msgstr "ВІДПРАВИТИ"
+
+#: templates/gallery/index.html:60 templates/products/detail.html:107
+msgid "Our team"
+msgstr "Наша команда"
+
+#: templates/login/index.html:48
+msgid "Remember Me"
+msgstr "Запамятай мене"
+
+#: templates/login/index.html:57
+msgid "Don't have an account?"
+msgstr "Не маєте облікового запису?"
+
+#: templates/login/index.html:57
+msgid "Sign Up"
+msgstr "Зареєструйтесь"
+
+#: templates/login/index.html:60
+msgid "Forgot your password?"
+msgstr "Забули свій пароль?"
+
+#: templates/login/register.html:26
+msgid "ENTER YOUR NAME"
+msgstr "ВВЕДІТЬ ІМЯ"
+
+#: templates/login/register.html:33
+msgid "ENTER YOUR PASSWORD"
+msgstr "ВВЕДІТЬ ПАРОЛЬ"
+
+#: templates/order/index.html:11
+msgid "Your order:"
+msgstr "Ваше замовлення"
+
+#: templates/order/index.html:13
+msgid "Name:"
+msgstr "Назва"
+
+#: templates/order/index.html:15
+msgid "Print:"
+msgstr "Принт"
+
+#: templates/order/index.html:18
+msgid "Size:"
+msgstr "Розмір"
+
+#: templates/order/index.html:19
+msgid "Sex:"
+msgstr "Стать"
+
+#: templates/order/index.html:22
+msgid "Quantity:"
+msgstr "Кількість"
+
+#: templates/order/index.html:23
+msgid "Price:"
+msgstr "Принт"
+
+#: templates/order/index.html:24 templates/products/detail.html:85
+msgid "Order Total:"
+msgstr "Загально:"
+
+#: templates/order/index.html:38
+msgid "Confirm"
+msgstr "Підтвердити"
+
+#: templates/products/detail.html:11 templates/products/index.html:44
+#: templates/products/index.html:93
+msgid "New"
+msgstr "Новий"
+
+#: templates/products/detail.html:41
+msgid "Select"
+msgstr "Колір"
+
+#: templates/products/detail.html:58
+msgid "You selected:"
+msgstr "Ви обрали:"
+
+#: templates/products/detail.html:91
+msgid "Back"
+msgstr "Назад"
+
+#: templates/products/detail.html:94
+msgid "Add to cart"
+msgstr "Добавити"
+
+#: templates/products/index.html:9
+msgid "Products list"
+msgstr "Продукція"
+
+#: templates/products/index.html:11 templates/products/index.html:23
+msgid "Sorry, this is an imitation of an online store!"
+msgstr "Вибачте - це імітація онлайн магазину! "
+
+#: templates/products/index.html:22
+msgid "The shop for Squash People."
+msgstr "Онлайн магазин"
+
+#: templates/products/index.html:34
+msgid "MAN T-shirt with our print"
+msgstr "Чоловіча футболка з принтом"
+
+#: templates/products/index.html:41 templates/products/index.html:65
+#: templates/products/index.html:90
+msgid "Show"
+msgstr "Переглянути"
+
+#: templates/products/index.html:58
+msgid "WOMAN T-shirt with our print"
+msgstr "Жіноча футболка з принтом"
+
+#: templates/products/index.html:83
+msgid "CHILD T-shirt with our print"
+msgstr "Дитяча футболка з принтом"
+
+#: templates/support/index.html:10
+msgid "Question? Complaints? Suggestions?"
+msgstr "Запитання? Скарги? Пропозиції?"
+
+#: templates/support/index.html:24
+msgid "The subject of the message"
+msgstr "Тема повідомлення"
+
+#: templates/support/index.html:31
+msgid "The text of the message"
+msgstr "Текст повідомлення"
+
+#: templates/video_gallery/index.html:20
+#, fuzzy
+msgid "Video Gallery"
+msgstr "Відео-галерея"
+
+#: templates/video_gallery/index.html:29
+msgid ""
+"You can send us a link to your squash game and we will add it to our "
+"gallery."
+msgstr ""
+"Ви можете надіслати нам посилання на вашу гру в сквош, і ми додамо її до "
+"нашої галерея."
+
+#: views/gallery.py:42 views/video_gallery.py:31
+msgid "Successful. Will soon appear in the gallery."
+msgstr "Успішно. Незабаром з’явиться в галереї."
+
+#: views/video_gallery.py:36
+msgid "Warning. The link is already in our gallery."
+msgstr "Посилання вже існує у нашій галереї."
