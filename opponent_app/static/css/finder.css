@@ -363,6 +363,7 @@ input[type="text"]:focus {
   border-bottom: 1px solid #BBB;
   cursor: text;
 }
+
 input[type="submit"] {
   height: 67px;
   width: 63px;
@@ -384,4 +385,17 @@ input[type="submit"] {
 
 input[type="submit"]:hover {
   opacity: 0.8;
+}
+
+
+
+
+// Usage as a mixin
+
+.visually-hidden-title {
+  @include visually-hidden;
+}
+
+.skip-navigation {
+  @include visually-hidden-focusable;
 }
