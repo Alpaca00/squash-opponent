@@ -1,12 +1,18 @@
 
  {% for op in opponents %}
  {% for date in dates %}
+
 <div class="container">
 <div class="row">
     <div class="col-lg-4">
         <div class="card card-margin">
             <div class="card-header no-border">
                 <h5 class="card-title">Opponent</h5>
+            </div>
+                <div class="card-waiting">
+
+                    <h6 class="card-title" style="color: orange; text-align: center;">Waiting opponent ..</h6>
+
             </div>
             <div class="card-body pt-0">
                 <div class="widget-49">
@@ -29,15 +35,68 @@
                         <li class="widget-49-meeting-item">Phone:<span>{{ date[6] }}</span></li>
                     </ul>
                     <div class="widget-49-meeting-action">
-                        <a href="{% if request.url_rule.endpoint == 'user_account_app.user_account' %} {{ url_for('user_account_app.update_post_request', post_id=date[7]) }} {% endif %}" class="btn btn-sm btn-flash-border-primary">{% if request.url_rule.endpoint == 'finder_app.index' %} OFFER {% else %} CHANGE {% endif %}</a>
+                        {% if not request.url_rule.endpoint == 'user_account_app.user_account'%}
+                        <button type="button" class="show-modal-btn" data-bs-toggle="modal" data-bs-target="#exampleModal" value="{{ date[7] }}" id="offer-show-modal">OFFER</button>
+                        {% endif %}
 
+                        <a href="{{ url_for('user_account_app.update_post_request', post_id=date[7]) }}" class="btn btn-sm btn-flash-border-primary" id="change-post-opponent">{% if request.url_rule.endpoint == 'user_account_app.user_account' %} CHANGE {% endif %}</a>
                         <a href="{{ url_for('user_account_app.delete_post_request', post_id=date[7]) }}" class="btn btn-sm btn-flash-border-primary" id="delete-post-opponent">{% if request.url_rule.endpoint == 'user_account_app.user_account' %} DELETE {% endif %}</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+         <!--test aria-->
+     {% for offer in offer_data %}
+    {% if date[7] == offer[10] %}
+     <div class="col-lg-4">
+         <div class="container">
+              <div class="card card-margin">
+            <div class="card-header no-border">
+                <h5 class="card-title">Opponent</h5>
+            </div>
+                <div class="card-waiting">
+                    <h6 class="card-title" style="color: orange; text-align: center;">OFFER</h6>
+            </div>
+            <div class="card-body pt-0">
+                <div class="widget-49">
+                    <div class="widget-49-title-wrapper">
+                        <div class="widget-49-date-primary">
+                            <span class="widget-49-date-day">{{ offer[1] }}</span>
+                            <span class="widget-49-date-month">{{ offer[0] }}</span>
+                        </div>
+                        <div class="widget-49-meeting-info">
+                            <span class="widget-49-pro-title">{{ offer[4] }}</span>
+
+                            <span class="widget-49-meeting-time" style="font-size: 16px; color: #555;">{{ offer[2] }}</span>
+                        </div>
+                    </div>
+                    <ul class="widget-49-meeting-points" style="list-style-type: circle;">
+                        <li class="widget-49-meeting-item">City:<span>{{ offer[6] }}</span></li>
+                        <li class="widget-49-meeting-item">District:<span>{{ offer[7] }}</span></li>
+                        <li class="widget-49-meeting-item">Category:<span>{{ offer[8] }}</span></li>
+                        <li class="widget-49-meeting-item">Email:<span>{{ offer[5] }}</span></li>
+                        <li class="widget-49-meeting-item">Phone:<span>{{ offer[3] }}</span></li>
+                    </ul>
+                    <div class="widget-49-meeting-action">
+
+                        <a href="{{ url_for('user_account_app.cancel_post_offer', post_id=offer[11]) }}" class="btn btn-sm btn-flash-border-primary" id="cancel-post-opponent">{% if request.url_rule.endpoint == 'user_account_app.user_account' %} CANCEL {% endif %}</a>
+                        <a href="{{ url_for('user_account_app.agree_post_offer', post_id=offer[11]) }}" class="btn btn-sm btn-flash-border-primary" id="agree-post-opponent">{% if request.url_rule.endpoint == 'user_account_app.user_account' %} AGREE {% endif %}</a>
+                    </div>
+                </div>
+         </div>
+     </div>
+        {% endif %}
+             {% endfor %}
+<!--test aria-->
+
+
     </div>
+</div>
+</div>
 </div>
  {% endfor %}
  {% endfor %}
+ {% include 'finder/modal_offer.html' %}
+
