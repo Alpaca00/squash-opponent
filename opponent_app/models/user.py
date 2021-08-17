@@ -110,3 +110,17 @@ class UserOpponent(db.Model):
     phone = Column(String(50))
     user_account_id = Column(Integer, ForeignKey("users_accounts.id"))
     user_account = db.relationship("UserAccount", overlaps="users_account,users_opponent")
+
+
+
+class OfferOpponent(db.Model):
+    __tablename__ = "offers_opponents"
+    id = Column(Integer, primary_key=True)
+    name = Column(String(50))
+    email = Column(String(50))
+    phone = Column(String(50))
+    category = Column(String(50), nullable=True, default="Amateur")
+    city = Column(String(50), default='Lviv')
+    district = Column(String(50))
+    date = Column(String(50))
+    user_opponent_id = Column(Integer)
