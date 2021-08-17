@@ -1,12 +1,11 @@
 import calendar
 from datetime import datetime
 import humanize
-from flask import Blueprint, render_template, jsonify, request, url_for, g, redirect, abort, flash
+from flask import Blueprint, render_template, request, url_for, g, redirect, abort, flash
 from flask_babel import gettext
 from flask_login import current_user, logout_user, login_required
 from loguru import logger
-
-from opponent_app.models import db, UserOpponent, UserAccount
+from opponent_app.models import db, UserOpponent, UserAccount, OfferOpponent
 
 user_account_app = Blueprint("user_account_app", __name__)
 
@@ -35,7 +34,18 @@ def user_account():
                 lst_history.append(
                     [abr_month, day_, time_, i.city, i.district, i.category, i.phone, i.id]
                 )
-        return render_template("user.html", cur=current_user, opponents=user_history, dates=lst_history)
+        offer_data = []
+        offer_opponent = OfferOpponent.query.all()
+        if offer_opponent is not None:
+            for i in offer_opponent:
+                convert_dt = datetime.strptime(i.date, "%Y-%m-%dT%H:%M")
+                abr_month = calendar.month_abbr[int(convert_dt.date().month)]
+                day_ = humanize.naturaldate(convert_dt.day)
+                time_ = humanize.naturaltime(convert_dt.time())
+                offer_data.append(
+                        [abr_month, day_, time_, i.phone, i.name, i.email, i.city, i.district, i.category, i.phone, i.user_opponent_id, i.id]
+                    )
+        return render_template("user.html", cur=current_user, opponents=user_history, dates=lst_history, offer_data=offer_data)
     if request.method == "POST":
         date_time = request.form.get("partydate")
         category = request.form.get("category")
@@ -81,6 +91,26 @@ def delete_post_request(post_id: int):
             flash(gettext("Successfully. Your post has been deleted."))
         return redirect(url_for("user_account_app.user_account"))
     return render_template("user.html", cur=current_user)
+
+
+@user_account_app.route("/cancel/<post_id>", methods=["GET", "POST", "DELETE"])
+def cancel_post_offer(post_id: int):
+    if request.method == "GET":
+        offer_opponent = OfferOpponent.query.filter_by(id=post_id).one_or_none()
+        if offer_opponent is None:
+            abort(404)
+        else:
+            db.session.delete(offer_opponent)
+            db.session.commit()
+            flash(gettext("Successfully. The offer has been deleted."))
+            # send_list_to_mail
+        return redirect(url_for("user_account_app.user_account"))
+    return render_template("user.html", cur=current_user)
+
+
+@user_account_app.route("/agree/<post_id>", methods=["GET", "POST", "DELETE"])
+def agree_post_offer(post_id: int):
+    pass
 
 
 @user_account_app.errorhandler(404)
