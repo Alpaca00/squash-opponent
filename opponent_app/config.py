@@ -1,11 +1,12 @@
 import os
 
-# PG_HOST = os.environ['PG_HOST']
-# SECRET_KEY_CA = os.environ['SECRET_KEY']
+PG_HOST = os.environ['PG_HOST']
+SECRET_KEY_CA = os.environ['SECRET_KEY']
+SEC_PASS_SALT = os.environ['SPS']
 
 
 class BaseConfig:
-    SQLALCHEMY_DATABASE_URI = "postgresql+psycopg2://user:password@0.0.0.0:5432/alpaca"
+    SQLALCHEMY_DATABASE_URI = f"postgresql+psycopg2://user:password@{PG_HOST}:5432/alpaca"
     SECURITY_LOGIN_URL = "/login"
     SECURITY_LOGOUT_URL = "/account/logout"
     SECURITY_REGISTER_URL = "/register"
@@ -13,8 +14,8 @@ class BaseConfig:
     SECURITY_POST_LOGOUT_VIEW = "/admin/logout"
     SQLALCHEMY_TRACK_MODIFICATIONS = True
     SECURITY_PASSWORD_HASH = 'bcrypt'
-    SECURITY_PASSWORD_SALT = os.environ['SPS']
-    SECRET_KEY = '6Lf0rL8bAAAAAL0YqesYius-y0iQnYThoR-RWd0s'
+    SECURITY_PASSWORD_SALT = SEC_PASS_SALT
+    SECRET_KEY = SECRET_KEY_CA
     BABEL_DEFAULT_LOCALE = 'en'
     LANGUAGES = ['en', 'uk']
 
@@ -49,12 +50,3 @@ mail_settings = {
     # "MAIL_PASSWORD": os.environ['EMAIL_PASSWORD']
 }
 
-# -*- coding: utf-8 -*-
-# ...
-# available languages
-# LANGUAGES = {
-#     'en': 'English',
-#     'uk': 'Ukrainian',
-#     'ru': 'Russian',
-#     'es': 'Español',
-# }
