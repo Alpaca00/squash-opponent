@@ -77,7 +77,7 @@ class UserAccount(db.Model, UserMixin):
     password = Column(String, nullable=False)
     active = Column(Boolean)
     remember = Column(Boolean, default=False)
-    users_opponent = db.relationship("UserOpponent", backref="users_account", lazy=True)
+    users_opponent = db.relationship("UserOpponent", backref="users_accounts", lazy=True)
     roles = db.relationship(
         "Role",
         secondary=roles_users,
@@ -103,24 +103,27 @@ user_datastore = SQLAlchemyUserDatastore(db, UserAccount, Role)
 class UserOpponent(db.Model):
     __tablename__ = "users_opponents"
     id = Column(Integer, primary_key=True)
-    category = Column(String(50), nullable=True, default="Amateur")
-    city = Column(String(50))
-    district = Column(String(50))
-    date = Column(String(50))
-    phone = Column(String(50))
+    opponent_category = Column(String(50), nullable=True, default="Amateur")
+    opponent_city = Column(String(50))
+    opponent_district = Column(String(50))
+    opponent_date = Column(String(50))
+    opponent_phone = Column(String(50))
     user_account_id = Column(Integer, ForeignKey("users_accounts.id"))
-    user_account = db.relationship("UserAccount", overlaps="users_account,users_opponent")
+    user_account = db.relationship("UserAccount", overlaps="users_account,users_opponent,users_accounts")
+    offers_opponent = db.relationship("OfferOpponent",  backref="users_opponents", lazy='dynamic')
 
 
 
 class OfferOpponent(db.Model):
     __tablename__ = "offers_opponents"
     id = Column(Integer, primary_key=True)
-    name = Column(String(50))
-    email = Column(String(50))
-    phone = Column(String(50))
-    category = Column(String(50), nullable=True, default="Amateur")
-    city = Column(String(50), default='Lviv')
-    district = Column(String(50))
-    date = Column(String(50))
-    user_opponent_id = Column(Integer)
+    offer_name = Column(String(50))
+    offer_email = Column(String(50))
+    offer_phone = Column(String(50))
+    offer_category = Column(String(50), nullable=True, default="Amateur")
+    offer_city = Column(String(50), default='Lviv')
+    offer_district = Column(String(50))
+    offer_date = Column(String(50))
+    offer_accept = Column(Boolean, unique=False, default=False)
+    user_opponent_id = Column(Integer, ForeignKey("users_opponents.id"))
+    user_opponent = db.relationship("UserOpponent", overlaps="users_opponents,offers_opponent")
