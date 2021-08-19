@@ -40,27 +40,43 @@
                                     <form method="POST">
                                         <div class="col-sm-8">
                                             <p class="m-b-10 f-w-600">{{ _('Phone') }}</p>
-                                            <input class="form-control form-control-sm" id='user-phone' name="phone" type="text" placeholder="phone number" aria-label=".form-control-sm example" required>
+                                            <input class="form-control form-control-sm" value="{{ phone }}" id='user-phone' name="phone" type="text" placeholder="phone number" aria-label=".form-control-sm example" required>
                                         </div>
                                 <h6 class="m-b-20 m-t-40 p-b-5 b-b-default f-w-600">{{ _('Location') }}</h6>
                                 <div class="row">
                                         <p class="m-b-10 f-w-600">{{ _('Lviv') }}</p>
                                         <select class="form-select form-select-sm" id='location-select' name="district" style='margin-bottom: 15px;' aria-label=".form-select-sm example" required>
+                                            {% if district is not none %}
+                                            <option selected style="color: orange;">{{ district }}</option>
+                                            <option value="Sychivskyi">{{ _('Sychivskyi') }}</option>
+                                            <option value="Zaliznychnyi">{{ _('Zaliznychnyi') }}</option>
+                                            <option value="Shevchenkivskyi">{{ _('Shevchenkivskyi') }}</option>
+                                            {% else %}
                                             <option selected>{{ _('DISTRICT') }}</option>
                                             <option value="Sychivskyi">{{ _('Sychivskyi') }}</option>
                                             <option value="Zaliznychnyi">{{ _('Zaliznychnyi') }}</option>
                                             <option value="Shevchenkivskyi">{{ _('Shevchenkivskyi') }}</option>
+                                            {% endif %}
                                         </select>
                                    <select class="form-select form-select-sm" id='category-select' name="category" style='margin-bottom: 15px;' aria-label=".form-select-sm example" required>
-                                        <option selected>{{ _('CATEGORY') }}</option>
+                                       {% if category is not none %}
+                                       <option selected style="color: orange;">{{ category }}</option>
                                         <option value="PRO">{{ _('PRO') }}</option>
                                         <option value="M1">M1</option>
                                         <option value="M2">M2</option>
-                                        <option value="M2">M3</option>
+                                        <option value="M3">M3</option>
                                         <option value="AMATEUR">{{ _('AMATEUR') }}</option>
+                                       {% else %}
+                                       <option selected>{{ _('CATEGORY') }}</option>
+                                        <option value="PRO">{{ _('PRO') }}</option>
+                                        <option value="M1">M1</option>
+                                        <option value="M2">M2</option>
+                                        <option value="M3">M3</option>
+                                        <option value="AMATEUR">{{ _('AMATEUR') }}</option>
+                                        {% endif %}
                                    </select>
                                     <label for="party">{{ _('Enter the optimal date and time of the game:') }}</label>
-                                        <input id="party" class='row' type="datetime-local" name="partydate" value="2021-09-04T18:30" style='margin-bottom: 15px;' required>
+                                        <input id="party" class='row' type="datetime-local" name="partydate" value="{{ date }}" style='margin-bottom: 15px;' required>
                                     <input type="submit" class="btn btn-dark" value="{{ _('UPDATE') }}" style='margin-bottom: 15px;'>
                                 </div>
                                     </form>
