@@ -1,0 +1,51 @@
+
+ {% for offer in offer_data %}
+    {% if date[7] == offer[10] %}
+     <div class="col-lg-4">
+         <div class="container">
+              <div class="card card-margin">
+            <div class="card-header no-border">
+                <h5 class="card-title">Opponent</h5>
+            </div>
+                <div class="card-waiting">
+                    {% if offer[12] == True %}
+                    <h6 class="card-title" id='alert-accept' style="color: orange; text-align: center;">Accept</h6>
+                    {% else %}
+                    <h6 class="card-title" id='alert-offer' style="color: orange; text-align: center;">Offer</h6>
+                    {% endif %}
+            </div>
+            <div class="card-body pt-0">
+                <div class="widget-49">
+                    <div class="widget-49-title-wrapper">
+                        <div class="widget-49-date-primary">
+                            <span class="widget-49-date-day">{{ offer[1] }}</span>
+                            <span class="widget-49-date-month">{{ offer[0] }}</span>
+                        </div>
+                        <div class="widget-49-meeting-info">
+                            <span class="widget-49-pro-title">{{ offer[4] }}</span>
+
+                            <span class="widget-49-meeting-time" style="font-size: 16px; color: #555;">{{ offer[2] }}</span>
+                        </div>
+                    </div>
+                    <ul class="widget-49-meeting-points" style="list-style-type: circle;">
+                        <li class="widget-49-meeting-item">City:<span>{{ offer[6] }}</span></li>
+                        <li class="widget-49-meeting-item">District:<span>{{ offer[7] }}</span></li>
+                        <li class="widget-49-meeting-item">Category:<span>{{ offer[8] }}</span></li>
+                        <li class="widget-49-meeting-item">Email:<span>{{ offer[5] }}</span></li>
+                        <li class="widget-49-meeting-item">Phone:<span>{{ offer[3] }}</span></li>
+                    </ul>
+                    <div class="widget-49-meeting-action">
+                        {% if request.url_rule.endpoint == 'user_account_app.user_account' %}
+                        <a href="{{ url_for('user_account_app.cancel_post_offer', post_id=offer[11]) }}" class="btn btn-sm btn-flash-border-primary" id="cancel-post-opponent">CANCEL</a>
+                        {% endif %}
+                        {% if request.url_rule.endpoint == 'user_account_app.user_account' %}
+                        <a href="{{ url_for('user_account_app.accept_post_offer', post_id=offer[11]) }}" class="btn btn-sm btn-flash-border-primary" id="agree-post-opponent"> ACCEPT</a>
+                        {% endif %}
+                    </div>
+                </div>
+         </div>
+     </div>
+        {% endif %}
+             {% endfor %}
+         </div>
+     </div>
