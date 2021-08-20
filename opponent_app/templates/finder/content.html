@@ -34,13 +34,15 @@
                     </ul>
                     <div class="widget-49-meeting-action">
 
-                                 {% for offer in offer_data %}
 
-                             {% if not request.url_rule.endpoint == 'user_account_app.user_account' and offer[12] == False and offer[10] == date[7] %}
 
-                                <button type="button" class="show-modal-btn" data-bs-toggle="modal" data-bs-target="#exampleModal" value="{{ date[7] }}" id="offer-show-modal">OFFER</button>
+                             {% if not request.url_rule.endpoint == 'user_account_app.user_account' %}
+
+
+                                <button type="button" class="show-modal-btn" data-bs-toggle="modal" data-bs-target="#exampleModal" value="{{ date[7] }}" id="offer-show-modal" style="display: visible;">Offer</button>
+
                             {% endif %}
-                             {% endfor %}
+
 
 
                         {% if request.url_rule.endpoint == 'user_account_app.user_account' %}
@@ -65,9 +67,8 @@
 
 </div>
 </div>
+
  {% endfor %}
  {% endfor %}
-
-
- {% include 'finder/modal_offer.html' %}
+{% include 'finder/modal_offer.html' %}
 
