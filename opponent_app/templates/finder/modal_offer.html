@@ -20,16 +20,31 @@
 
 <script>
 let modal = document.getElementById("myModal");
+let blockBtn = document.getElementById("blockBtn");
 let allButtons = document.getElementsByClassName("show-modal-btn");
 let span = document.getElementsByClassName("close")[0];
+
+
 
 for (const btn of allButtons) {
   btn.addEventListener('click', function() {
   let userPostId = document.getElementById("id-opponent-user-cart");
   userPostId.value = btn.value;
   modal.style.display = "block";
+  {% for date2 in dates2 %}
+    var id_del = `{{ date2[7] }}`;
+     if ( id_del === btn.value ) {
+        modal.remove();
+        alert("You need to wait for the answer of the opponent on the last offer.");
+        window.location.reload();
+    }
+
+    {% endfor %}
+
   });
 }
+
+
 
 span.onclick = function() {
   modal.style.display = "none";
