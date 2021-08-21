@@ -1,18 +1,13 @@
 {% extends 'base.html' %}
-
 {% block title -%}
 Finder-opponent
 {%- endblock %}
 {% block body  -%}
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/finder.css') }}">
-
-
-
 <div class="container ls">
   <h1>{{ _('Finder opponent') }}</h1><hr>
-
     <div id="wrap">
-        <form action="" autocomplete="on">
+        <form action="{{ url_for('finder_app.search') }}" method="get" autocomplete="on">
             <input id="search" name="search" type="text" placeholder="Who're we looking for ? Search by any parameter" style="font-size: 24px;"><input id="search_submit" value="Rechercher" type="submit">
         </form>
     </div>
@@ -22,14 +17,16 @@ Finder-opponent
    <div class="alert alert-info" role="alert" style="width:60%;">
    <a class="time-now" id="clock" style="text-decoration: none; color: orange;"></a>
    </div>
-
-
-    <div class="alert alert-info" role="alert" style="width:60%;">
-        <h5 class="visually-visible" style="text-align: center">Find an opponent for the game</h5>
+    <div class="alert alert-info" role="alert" style="width:60%;text-align: center; color: red;">
+        <h5 class="visually-visible" style="text-align: center; color: white;">Find an opponent for the game</h5>
+        {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                <h1 class="display-6">{{ messages[0] }}</h1>
+            {% endif %}
+        {% endwith %}
         <h5 class="visually-hidden">Paid Opponent</h5>
    </div>
 </div>
-
 {% include 'finder/content.html' %}
 <script>
     function doDate() {
@@ -37,10 +34,7 @@ Finder-opponent
       let current = new Date();
     currentDate.innerHTML = `<b>${current}</b> `;
     }
-
 setInterval(doDate, 1000);
 </script>
-
-
 {%- endblock %}
 
