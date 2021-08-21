@@ -1,16 +1,14 @@
 
- {% for op in opponents %}
  {% for date in dates %}
 
-<div class="container">
-<div class="row">
+<div class="container" style="">
+<div class="row"><hr style="height:1px; border:none; color:#000; background-color: white;">
     <div class="col-lg-4">
-        <div class="card card-margin">
+        <div class="card card-margin" style="box-shadow: rgba(3, 102, 214, 0.3) 0px 0px 0px 3px;">
             <div class="card-header no-border">
                 <h5 class="card-title">Opponent</h5>
             </div>
                 <div class="card-waiting">
-
             </div>
             <div class="card-body pt-0">
                 <div class="widget-49">
@@ -20,7 +18,7 @@
                             <span class="widget-49-date-month">{{ date[0] }}</span>
                         </div>
                         <div class="widget-49-meeting-info">
-                            <span class="widget-49-pro-title">{{ op.name }}</span>
+                            <span class="widget-49-pro-title">{{ date[8] }}</span>
 
                             <span class="widget-49-meeting-time" style="font-size: 16px; color: #555;">{{ date[2] }}</span>
                         </div>
@@ -29,46 +27,26 @@
                         <li class="widget-49-meeting-item">City:<span>{{ date[3] }}</span></li>
                         <li class="widget-49-meeting-item">District:<span>{{ date[4] }}</span></li>
                         <li class="widget-49-meeting-item">Category:<span>{{ date[5] }}</span></li>
-                        <li class="widget-49-meeting-item">Email:<span>{{ op.email }}</span></li>
+                        <li class="widget-49-meeting-item">Email:<span>{{ date[9] }}</span></li>
                         <li class="widget-49-meeting-item">Phone:<span>{{ date[6] }}</span></li>
                     </ul>
                     <div class="widget-49-meeting-action">
-
-
-
                              {% if not request.url_rule.endpoint == 'user_account_app.user_account' %}
-
-
                                 <button type="button" class="show-modal-btn" data-bs-toggle="modal" data-bs-target="#exampleModal" value="{{ date[7] }}" id="offer-show-modal" style="display: visible;">Offer</button>
-
                             {% endif %}
-
-
-
                         {% if request.url_rule.endpoint == 'user_account_app.user_account' %}
-
                         <a href="{{ url_for('user_account_app.update_post_request', post_id=date[7]) }}" class="btn btn-sm btn-flash-border-primary" id="change-post-opponent">CHANGE</a>
-
-
-
                         <a href="{{ url_for('user_account_app.delete_post_request', post_id=date[7]) }}" class="btn btn-sm btn-flash-border-primary" id="delete-post-opponent">DELETE</a>
                         {% endif %}
-
-
-
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-
       {% include 'finder/content2.html' %}
-
 </div>
 </div>
+ {% endfor %}
 
- {% endfor %}
- {% endfor %}
 {% include 'finder/modal_offer.html' %}
 
