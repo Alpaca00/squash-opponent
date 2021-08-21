@@ -1,7 +1,7 @@
-
-<div class="modal" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+     style="box-shadow: rgba(255,255,255, 0.9) 0px 0px 0px 3px;">
   <div class="modal-dialog" >
-    <div class="modal-content" style="background-color: #515050;">
+    <div class="modal-content" style="background-color: 255,255,255, 0.9;">
         <span class="close" style="margin-left: auto;">&times;</span>
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">New Offer</h5>
@@ -15,36 +15,28 @@
     </div>
   </div>
 </div>
-
-
-
 <script>
 let modal = document.getElementById("myModal");
 let blockBtn = document.getElementById("blockBtn");
 let allButtons = document.getElementsByClassName("show-modal-btn");
 let span = document.getElementsByClassName("close")[0];
 
-
-
 for (const btn of allButtons) {
   btn.addEventListener('click', function() {
   let userPostId = document.getElementById("id-opponent-user-cart");
   userPostId.value = btn.value;
   modal.style.display = "block";
-  {% for date2 in dates2 %}
-    var id_del = `{{ date2[7] }}`;
+  {% for date2 in offer_data %}
+    var id_del = `{{ date2[10] }}`;
      if ( id_del === btn.value ) {
         modal.remove();
         alert("You need to wait for the answer of the opponent on the last offer.");
         window.location.reload();
     }
-
-    {% endfor %}
+  {% endfor %}
 
   });
 }
-
-
 
 span.onclick = function() {
   modal.style.display = "none";
@@ -56,4 +48,3 @@ window.onclick = function(event) {
   }
 }
 </script>
-
