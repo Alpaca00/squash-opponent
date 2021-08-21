@@ -141,6 +141,7 @@ def update_post_request(post_id: int):
                 district=card_opponent.opponent_district,
                 date=card_opponent.opponent_date,
             )
+         # send_list_to_mail
     return render_template("user_update.html", cur=current_user, post_id=post_id)
 
 
@@ -150,12 +151,17 @@ def delete_post_request(post_id: int):
         card_opponent_for_delete = (
             UserOpponent.query.filter_by(id=post_id).join(UserAccount).one_or_none()
         )
-        if card_opponent_for_delete is None:
+        card_offer = (
+            OfferOpponent.query.filter_by(user_opponent_id=post_id).one_or_none()
+        )
+        if card_opponent_for_delete is None and card_offer is None:
             abort(404)
         else:
             db.session.delete(card_opponent_for_delete)
+            db.session.delete(card_offer)
             db.session.commit()
             flash(gettext("Successfully. Your post has been deleted."))
+             # send_list_to_mail
         return redirect(url_for("user_account_app.user_account"))
     return render_template("user.html", cur=current_user)
 
@@ -186,6 +192,7 @@ def accept_post_offer(post_id: int):
                 offer_opponent.offer_accept = True
                 db.session.commit()
                 flash(gettext("Successfully. The offer has been accepted."))
+                 # send_list_to_mail
                 return redirect(url_for("user_account_app.user_account"))
     return render_template("user.html", cur=current_user)
 
