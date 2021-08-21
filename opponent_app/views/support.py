@@ -30,5 +30,6 @@ def support_list():
         )
         db.session.add(message)
         db.session.commit()
+         # send_list_to_mail
         return render_template("base.html", result=table_result, score=table_score)
     return render_template("support/index.html")
