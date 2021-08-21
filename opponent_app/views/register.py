@@ -41,6 +41,7 @@ def register():
                 )
                 db.session.commit()
                 flash("Thanks for registering")
+                 # send_list_to_mail
                 return redirect(url_for("login_app.login"))
     except ValidationFormError as err:
         flash(f"{err}")
