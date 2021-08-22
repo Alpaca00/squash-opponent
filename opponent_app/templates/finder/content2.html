@@ -37,11 +37,14 @@
                     <div class="widget-49-meeting-action">
                         {% if offer[12] == False %}
                         {% if request.url_rule.endpoint == 'user_account_app.user_account' %}
-                        <a href="{{ url_for('user_account_app.cancel_post_offer', post_id=offer[11]) }}" class="btn btn-sm btn-flash-border-primary" id="cancel-post-opponent">CANCEL</a>
+                        <a href="{{ url_for('user_account_app.cancel_post_offer', post_id=offer[11]) }}" class="btn btn-outline-danger btn-sm" id="cancel-post-opponent">CANCEL</a>
                         {% endif %}
                         {% if request.url_rule.endpoint == 'user_account_app.user_account' %}
-                        <a href="{{ url_for('user_account_app.accept_post_offer', post_id=offer[11]) }}" class="btn btn-sm btn-flash-border-primary" id="agree-post-opponent"> ACCEPT</a>
+                        <a href="{{ url_for('user_account_app.accept_post_offer', post_id=offer[11]) }}" class="btn btn-outline-success btn-sm" id="agree-post-opponent"> ACCEPT</a>
                         {% endif %}
+
+
+
                         {% endif %}
                     </div>
                 </div>
@@ -51,3 +54,5 @@
              {% endfor %}
          </div>
      </div>
+
+

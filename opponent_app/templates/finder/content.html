@@ -30,13 +30,13 @@
                         <li class="widget-49-meeting-item">Email:<span>{{ date[9] }}</span></li>
                         <li class="widget-49-meeting-item">Phone:<span>{{ date[6] }}</span></li>
                     </ul>
-                    <div class="widget-49-meeting-action">
+                    <div class="widget-49-meeting-action" style="margin-top: 15px;">
                              {% if not request.url_rule.endpoint == 'user_account_app.user_account' %}
-                                <button type="button" class="show-modal-btn" data-bs-toggle="modal" data-bs-target="#exampleModal" value="{{ date[7] }}" id="offer-show-modal" style="display: visible;">Offer</button>
+                                <button type="button" class="show-modal-btn" data-bs-toggle="modal" data-bs-target="#exampleModal" value="{{ date[7] }}" id="offer-show-modal"><span class="bn39span">Offer</span></button>
                             {% endif %}
                         {% if request.url_rule.endpoint == 'user_account_app.user_account' %}
-                        <a href="{{ url_for('user_account_app.update_post_request', post_id=date[7]) }}" class="btn btn-sm btn-flash-border-primary" id="change-post-opponent">CHANGE</a>
-                        <a href="{{ url_for('user_account_app.delete_post_request', post_id=date[7]) }}" class="btn btn-sm btn-flash-border-primary" id="delete-post-opponent">DELETE</a>
+                        <a href="{{ url_for('user_account_app.update_post_request', post_id=date[7]) }}" class="btn btn-outline-info btn-sm" id="change-post-opponent">CHANGE</a>
+                        <a href="{{ url_for('user_account_app.delete_post_request', post_id=date[7]) }}" class="btn btn-outline-danger btn-sm" id="delete-post-opponent">DELETE</a>
                         {% endif %}
                     </div>
                 </div>
