@@ -44,14 +44,6 @@ html, body {
 }
 
 
-.navbar {
-  width: 100%;
-  height: 10%;
-  background: #515050;
-  background-size: cover;
-  font-size: 16px;
-}
-
 .alert {
     background-color: #dbddf1;
 }
@@ -547,13 +539,13 @@ $utilities: (
 
 
 .modal-content {
-  background: silver;
+  background: white;
   margin: 5% auto;
   padding: 20px;
   border: 1px solid #888;
   width: 80%;
-  height: 30%;
-  color: #FFFFFF;
+  height: 15%;
+  color: black;
 }
 
 
@@ -606,3 +598,107 @@ $utilities: (
 		top: -9999px
 		left: -9999px
 		}
+
+
+
+
+.send-data-btn {
+  background-image: linear-gradient(135deg, #008aff, #86d472);
+  margin-left: auto;
+  border-radius: 6px;
+  box-sizing: border-box;
+  color: #ffffff;
+  display: block;
+  height: 45px;
+  font-size: 1.4em;
+  font-weight: 600;
+  padding: 4px;
+  position: relative;
+  text-decoration: none;
+  width: 5em;
+  z-index: 2;
+}
+
+.send-data-btn:hover {
+  color: #fff;
+}
+
+.send-data-btn .bn39span {
+  align-items: center;
+  background: #0e0e10;
+  border-radius: 6px;
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  transition: background 0.5s ease;
+  width: 100%;
+}
+
+.bn39:hover .bn39span {
+  background: transparent;
+}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+
+nav {
+  max-width: 960px;
+
+  mask-image: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, #ffffff 25%, #ffffff 75%, rgba(255, 255, 255, 0) 100%);
+  margin: 0 auto;
+  padding: 60px 0;
+}
+
+nav ul {
+  text-align: center;
+
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.2) 25%, rgba(255, 255, 255, 0.2) 75%, rgba(255, 255, 255, 0) 100%);
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.1), inset 0 0 1px rgba(255, 255, 255, 0.6);
+}
+
+nav ul li {
+  display: inline-block;
+}
+
+nav ul li a {
+  padding: 18px;
+  font-family: "Open Sans";
+  font-weight: bolder;
+  text-transform:uppercase;
+  color: rgba(0, 35, 122, 0.5);
+  font-size: 11px;
+  text-decoration: none;
+  display: block;
+}
+
+nav ul li a:hover {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1), inset 0 0 1px rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(0, 35, 122, 0.7);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
