@@ -11,10 +11,10 @@
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 </head>
 {% block body  -%}
-{% include 'navbar.html' %}
+{% include 'navbar2.html' %}
 
 <div class="container ls">
-  <h1>{{ _('Account Update') }}</h1>
+  <h1>{{ _('Post Update') }}</h1>
 </div>
     <div class="page-content page-container" id="page-content">
         <div class="padding">
@@ -77,7 +77,7 @@
                                    </select>
                                     <label for="party">{{ _('Enter the optimal date and time of the game:') }}</label>
                                         <input id="party" class='row' type="datetime-local" name="partydate" value="{{ date }}" style='margin-bottom: 15px;' required>
-                                    <input type="submit" class="btn btn-dark" value="{{ _('UPDATE') }}" style='margin-bottom: 15px;'>
+                                    <input type="submit" class="post-btn" value="{{ _('UPDATE') }}" style='margin-bottom: 15px;'>
                                 </div>
                                     </form>
                                 </div>

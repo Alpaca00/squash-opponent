@@ -13,12 +13,12 @@
 </head>
 
 
-{% include 'navbar.html' %}
+{% include 'navbar2.html' %}
 
 <body>
 <div class="container">
 <h1 id="gallery-name">{{ _('Video Gallery') }}</h1>
-    <div class="alert alert-warning" role="alert">
+    <div class="alert alert-warning" role="alert" style="width:70%;">
         {% with messages = get_flashed_messages() %}
                     {% if messages %}
                         {{ messages[0] }}
@@ -28,7 +28,7 @@
          <div class="form-group">
              <label for="link-for-video"  id='label-text-video' class="form-label">{{ _('You can send us a link to your squash game and we will add it to our gallery.') }}</label>
              <input class="form-control form-control-sm" id='link-for-video' type="text" placeholder="link example: https://www.youtube.com/embed/G3hIexjAb_c" aria-label=".form-control-sm example" name="video-link" required>
-             <button type="submit" class="btn btn-dark" style='margin-top: 15px;'>{{ _('SEND') }}</button>
+             <button type="submit" class="send-data-btn" style='margin-top: 15px;'><span class="bn39span">{{ _('SEND') }}</span></button>
         </div>
          </form>
     </div>
