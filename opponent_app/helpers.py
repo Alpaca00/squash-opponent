@@ -10,10 +10,10 @@ R_HOST = os.environ['R_HOST']
 r = redis.Redis(host=R_HOST)
 
 
-def admin_messenger(subject, body):
+def send_order(subject, body):
     msg = Message(subject=subject,
                   sender=mail_settings.get("MAIL_USERNAME"),
-                  recipients=["lvivsquashteam@gmail.com"],
+                  recipients=["squashopponent@gmail.com"],
                   body=body
                   )
     mail.send(msg)
@@ -31,7 +31,7 @@ def send_order_data_to_user_email():
             order_number = literal_eval(c.decode("ascii"))
             phone = literal_eval(p.decode("ascii"))
             full_name = f.decode("ascii")
-            return admin_messenger(
+            return send_order(
                 subject="New order",
                 body=f"Order: {order_number}, Name: {full_name}, Phone: {phone}",
             )
@@ -39,3 +39,4 @@ def send_order_data_to_user_email():
         r.delete("user_order_count")
         r.delete("user_order_phone")
         r.delete("user_order_full_name")
+
