@@ -5,7 +5,7 @@ from PIL import Image
 import io
 from flask import Blueprint, render_template, request, flash, g, url_for
 from flask_babel import gettext
-
+from opponent_app.helpers import mail, mail_settings, Message
 from opponent_app import db
 from opponent_app.models import Gallery
 
@@ -40,9 +40,12 @@ def upload_photo():
             img = Image.open(io.BytesIO(images.data))
             img.save(f"opponent_app/static/img/user_photo/{images.name}")
             flash(gettext("Successful. Will soon appear in the gallery."))
+            subject = 'The user uploaded new photos from squash court to our gallery.'
+            send_info_about_gallery(subject=subject, body=f"Verify {images.name}")
             return render_template("gallery/index.html")
         else:
             flash("File does not match a format")
+            return render_template("gallery/index.html")
 
 
 def handle_image():
@@ -60,3 +63,12 @@ def validate_image(file_name):
         or file_size < 150000
     ):
         return True
+
+
+def send_info_about_gallery(subject, body):
+    msg = Message(subject=subject,
+                  sender=mail_settings.get("MAIL_USERNAME"),
+                  recipients=["squashopponent@gmail.com"],
+                  body=body
+                  )
+    return mail.send(msg)
