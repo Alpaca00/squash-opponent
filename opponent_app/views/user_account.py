@@ -52,6 +52,8 @@ def user_account():
                         i.opponent_category,
                         i.opponent_phone,
                         i.id,
+                        x.name,
+                        x.email,
                     ]
                 )
         offer_data = []
