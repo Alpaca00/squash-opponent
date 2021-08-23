@@ -77,6 +77,11 @@ class UserAccount(db.Model, UserMixin):
     password = Column(String, nullable=False)
     active = Column(Boolean)
     remember = Column(Boolean, default=False)
+    registered_on = db.Column(db.DateTime, nullable=False)
+    admin = db.Column(db.Boolean, nullable=False, default=False)
+    confirmed = db.Column(db.Boolean, nullable=False, default=False)
+    confirmed_on = db.Column(db.DateTime, nullable=True)
+
     users_opponent = db.relationship("UserOpponent", backref="users_accounts", lazy=True)
     roles = db.relationship(
         "Role",
