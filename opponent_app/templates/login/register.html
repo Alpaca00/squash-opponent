@@ -4,6 +4,8 @@ Register
 {%- endblock %}
 {% block body  -%}
 {% import 'bootstrap/wtf.html' as wtf %}
+<div class="container">
+  <h1 style="text-align: center;">{{ _('Registration') }}</h1>
 <form id="reg-form" method="POST">
 
     {% with messages = get_flashed_messages() %}
@@ -39,7 +41,7 @@ Register
     <div class="g-recaptcha" data-sitekey="6Lf0rL8bAAAAACclQV7Ty8PAlzLX1SFSNoeMcgqW"></div>
   <button type="submit">{{ _('SUBMIT') }}</button>
 </form>
-
+</div>
 <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 <script type="text/javascript">
   var onloadCallback = function() {
