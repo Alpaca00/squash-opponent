@@ -16,7 +16,7 @@
 
 <div class="container ls">
   <h1>{{ _('Account') }}</h1>
-    <div class="alert alert-info" role="alert">
+    <div class="alert alert-info" role="alert" style="width: 40%;">
         {% with messages = get_flashed_messages() %}
             {% if messages %}
                 {{ messages[0] }}
@@ -45,7 +45,7 @@
                                 <div class="row">
                                     <div class="col-sm-6" id="user-card-email">
                                         <p class="m-b-10 f-w-600">{{ _('Email') }}</p>
-                                        <h6 class="text-muted f-w-400">{{ cur.email }}</h6>
+                                        <h6 class="text-muted f-w-400" style="font-size: 9px;">{{ cur.email }}</h6>
                                     </div>
                                     <form method="POST">
                                         <div class="col-sm-8">
