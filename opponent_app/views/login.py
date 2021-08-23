@@ -38,7 +38,3 @@ def flash_message(text):
     flash(text)
     return render_template("login/index.html")
 
-# @login_app.errorhandler(CSRFError)
-    # def handle_csrf_error(e):
-    #     logger.info(e)
-    #     return render_template('400.html', reason=e.description), 400
