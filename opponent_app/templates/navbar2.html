@@ -59,14 +59,10 @@
                         href="{{ url_for('user_account_app.logout') }}">{{ _('Logout') }}</a>
     </li>
     {% endif %}
-
-
-
     <select class="selectpicker" data-width="fit" id="select-option-lang">
-      <option value="eng" data-content='<span class="flag-icon flag-icon-us"></span> English'>English</option>
-      <option  value="ukr" data-content='<span class="flag-icon flag-icon-mx"></span> Español'>Українська</option>
-  </select>
-
+      <option value="{{ url_for(request.endpoint, lang_code='en', post_id=1, product_id=9, cart_id=9 ) }}">English</option>
+      <option  value="{{ url_for(request.endpoint, lang_code='uk', product_id=9, cart_id=9, post_id=1) }}">Українська</option>
+    </select>
   </ul>
 </nav>
 
@@ -76,15 +72,9 @@
 </script>
 <script>
 document.getElementById('select-option-lang').addEventListener('click', function() {
-  val = $( "#select-option-lang" ).val();
-
-  if(val === 'eng') {
-    window.location.href = '{{ url_for(request.endpoint, lang_code='en', post_id=1 ) }}';
-    }
-  if(val === 'ukr') {
-    window.location.href = '{{ url_for(request.endpoint, lang_code='uk', product_id=9, cart_id=9, post_id=1) }}';
-
-  }
+  const select = document.getElementById('select-option-lang');
+  const option = select.options[select.selectedIndex];
+  window.location = option.value;
 });
 </script>
 
