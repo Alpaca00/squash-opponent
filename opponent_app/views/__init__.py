@@ -10,4 +10,4 @@ from .user_account import user_account_app
 from .home import home_app, admin
 from .about import about_app
 from .finder import finder_app
-
+from .password_recovery import recovery_password_app
