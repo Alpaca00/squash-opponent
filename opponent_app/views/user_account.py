@@ -15,6 +15,8 @@ from flask_babel import gettext
 from flask_login import current_user, logout_user, login_required
 from loguru import logger
 from opponent_app.models import db, UserOpponent, UserAccount, OfferOpponent
+from opponent_app.helpers import mail, mail_settings, Message
+from opponent_app.decorators import check_confirmed
 
 user_account_app = Blueprint("user_account_app", __name__)
 
@@ -30,6 +32,7 @@ def pull_lang_code(endpoint, values):
 
 
 @user_account_app.route("/", methods=["GET", "POST"])
+@check_confirmed
 def user_account():
     if request.method == "GET":
         user_history = (
@@ -143,27 +146,33 @@ def update_post_request(post_id: int):
                 district=card_opponent.opponent_district,
                 date=card_opponent.opponent_date,
             )
-         # send_list_to_mail
+        # send_list_to_mail
     return render_template("user_update.html", cur=current_user, post_id=post_id)
 
 
 @user_account_app.route("/delete/<post_id>", methods=["GET", "POST", "DELETE"])
 def delete_post_request(post_id: int):
     if request.method == "GET":
-        card_opponent_for_delete = (
+        card_opponent = (
             UserOpponent.query.filter_by(id=post_id).join(UserAccount).one_or_none()
         )
-        card_offer = (
-            OfferOpponent.query.filter_by(user_opponent_id=post_id).one_or_none()
-        )
-        if card_opponent_for_delete is None and card_offer is None:
+        card_offer = OfferOpponent.query.filter_by(
+            user_opponent_id=post_id
+        ).one_or_none()
+        if card_opponent is None and card_offer is None:
             abort(404)
         else:
-            db.session.delete(card_opponent_for_delete)
-            db.session.delete(card_offer)
+            body = f"Sorry, {card_opponent.user_account.name} deleted this post\nGame time: {card_opponent.opponent_date},\nOpponent info:\n{card_opponent.user_account.name}\n{card_opponent.user_account.email}\n{card_opponent.opponent_phone}\n{card_opponent.opponent_district}\n{card_opponent.opponent_category}"
+            if card_offer is not None:
+                send_info_by_user(
+                    subject="Opponent's post deleted.",
+                    recipient=card_offer.offer_email,
+                    body=body,
+                )
+                db.session.delete(card_offer)
+            db.session.delete(card_opponent)
             db.session.commit()
             flash(gettext("Successfully. Your post has been deleted."))
-             # send_list_to_mail
         return redirect(url_for("user_account_app.user_account"))
     return render_template("user.html", cur=current_user)
 
@@ -175,10 +184,15 @@ def cancel_post_offer(post_id: int):
         if offer_opponent is None:
             abort(404)
         else:
+            body = f"Sorry, {offer_opponent.user_opponent.user_account.name} canceled your offer\nGame time: {offer_opponent.user_opponent.opponent_date},\nOpponent info:\n{offer_opponent.user_opponent.user_account.name}\n{offer_opponent.user_opponent.user_account.email}\n{offer_opponent.user_opponent.opponent_phone}\n{offer_opponent.user_opponent.opponent_district}\n{offer_opponent.user_opponent.opponent_category}"
+            send_info_by_user(
+                subject="Your offer canceled.",
+                recipient=offer_opponent.offer_email,
+                body=body,
+            )
             db.session.delete(offer_opponent)
             db.session.commit()
             flash(gettext("Successfully. The offer has been deleted."))
-            # send_list_to_mail
         return redirect(url_for("user_account_app.user_account"))
     return render_template("user.html", cur=current_user)
 
@@ -191,12 +205,27 @@ def accept_post_offer(post_id: int):
             abort(404)
         else:
             if not offer_opponent.offer_accept:
+                body = f"Wow! {offer_opponent.user_opponent.user_account.name} accepted your offer\nGame time: {offer_opponent.user_opponent.opponent_date},\nOpponent info:\n{offer_opponent.user_opponent.user_account.name}\n{offer_opponent.user_opponent.user_account.email}\n{offer_opponent.user_opponent.opponent_phone}\n{offer_opponent.user_opponent.opponent_district}\n{offer_opponent.user_opponent.opponent_category}"
+                send_info_by_user(
+                    subject="Your offer accepted.",
+                    recipient=offer_opponent.offer_email,
+                    body=body,
+                )
                 offer_opponent.offer_accept = True
                 db.session.commit()
                 flash(gettext("Successfully. The offer has been accepted."))
-                 # send_list_to_mail
                 return redirect(url_for("user_account_app.user_account"))
     return render_template("user.html", cur=current_user)
+
+
+def send_info_by_user(subject, recipient, body):
+    msg = Message(
+        subject=subject,
+        sender=mail_settings.get("MAIL_USERNAME"),
+        recipients=[recipient],
+        body=body,
+    )
+    return mail.send(msg)
 
 
 @user_account_app.errorhandler(404)
