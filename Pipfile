@@ -23,6 +23,7 @@ pillow = "*"
 flask-babel = "*"
 humanize = "*"
 bcrypt = "*"
+itsdangerous = "==2.0.1"
 
 [dev-packages]
 pytest = "*"
