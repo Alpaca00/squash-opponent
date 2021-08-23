@@ -4,6 +4,7 @@
 Support
 {%- endblock %}
 {% block body -%}
+<div class="container">
 <form id="reg-form" method="POST">
   <label>
     <p class="label-txt">{{ _('Question? Complaints? Suggestions?') }}</p>
@@ -36,7 +37,7 @@ Support
   <button type="submit">{{ _('SUBMIT') }}</button>
 
 </form>
-
+</div>
 <script>
   $(document).ready(function(){
 
