@@ -118,6 +118,7 @@ def handle_resource_is_forbidden_error(exception):
     return render_template("403.html"), 403
 
 
+
 class MyModelView(ModelView):
     def is_accessible(self):
         return current_user.is_authenticated
