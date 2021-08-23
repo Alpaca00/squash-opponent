@@ -6,7 +6,6 @@ from opponent_app import mail_settings, mail
 
 
 R_HOST = os.environ['R_HOST']
-
 r = redis.Redis(host=R_HOST)
 
 
