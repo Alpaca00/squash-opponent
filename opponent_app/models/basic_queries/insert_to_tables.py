@@ -1,5 +1,9 @@
 from opponent_app import create_app
 from opponent_app.models import db, TableResult, TableScore, Player
+import datetime
+from opponent_app import db, UserAccount, user_datastore
+from flask_security.utils import hash_password
+
 
 positions = [1, 2, 3, 4]
 teams = ["Anchors", "Warriors", "Snails", "Gladiators"]
@@ -24,9 +28,9 @@ teams_compositions = [
     ],
     [
         """
-1.Кравс Юрій 
-2.Шеремет Михайло 
-3.Воськало Володимир 
+1.Кравс Юрій
+2.Шеремет Михайло
+3.Воськало Володимир
 4.Мацьків Олег
 """
     ],
@@ -35,7 +39,7 @@ teams_compositions = [
 1.Завінський Ростислав
 2.Томенчук Михайло
 3.Стьопкін Євген
-4.Семерак Максим                    
+4.Семерак Максим
 """
     ],
 ]
