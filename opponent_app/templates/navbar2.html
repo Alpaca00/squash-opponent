@@ -60,8 +60,8 @@
     </li>
     {% endif %}
     <select class="selectpicker" data-width="fit" id="select-option-lang">
-      <option value="{{ url_for(request.endpoint, lang_code='en', post_id=1, product_id=9, cart_id=9 ) }}">English</option>
-      <option  value="{{ url_for(request.endpoint, lang_code='uk', product_id=9, cart_id=9, post_id=1) }}">Українська</option>
+      <option value="{{ url_for(request.endpoint, lang_code='en', post_id=1, product_id=9, cart_id=9, email=1 ) }}">English</option>
+      <option  value="{{ url_for(request.endpoint, lang_code='uk', product_id=9, cart_id=9, post_id=1, email=1 ) }}">Українська</option>
     </select>
   </ul>
 </nav>
