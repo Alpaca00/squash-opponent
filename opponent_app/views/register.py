@@ -50,8 +50,10 @@ def register():
                 user = UserAccount.query.filter_by(email=form.email.data).first_or_404()
                 token = generate_confirmation_token(user.email)
 
-                confirm_url = url_for('register_app.confirm_email', token=token, _external=True)
-                html = render_template('gmail.html', confirm_url=confirm_url)
+                confirm_url = url_for(
+                    "register_app.confirm_email", token=token, _external=True
+                )
+                html = render_template("gmail.html", confirm_url=confirm_url)
                 subject = "Please confirm your email"
                 send_info_by_user(recipient=user.email, subject=subject, template=html)
                 login_user(user)
@@ -62,45 +64,45 @@ def register():
         return render_template("login/register.html", form=form)
 
 
-@register_app.route('/confirm/<token>')
+@register_app.route("/confirm/<token>")
 @login_required
 def confirm_email(token):
     try:
         email = confirm_token(token)
     except:
-        flash('The confirmation link is invalid or has expired.', 'danger')
+        flash("The confirmation link is invalid or has expired.", "danger")
     else:
         user = UserAccount.query.filter_by(email=email).first_or_404()
         if user.confirmed:
-            flash('Account already confirmed. Please login.', 'success')
+            flash("Account already confirmed. Please login.", "success")
         else:
             user.confirmed = True
             user.confirmed_on = datetime.datetime.now()
             db.session.add(user)
             db.session.commit()
-            flash('You have confirmed your account. Thanks!', 'success')
-        return redirect(url_for('home_app.index'))
+            flash("You have confirmed your account. Thanks!", "success")
+        return redirect(url_for("home_app.index"))
 
 
-@register_app.route('/unconfirmed')
+@register_app.route("/unconfirmed")
 @login_required
 def unconfirmed():
     if current_user.confirmed:
-        return redirect('home_app.index')
-    flash('Please confirm your account!', 'warning')
-    return render_template('unconfirmed.html')
+        return redirect("home_app.index")
+    flash("Please confirm your account!", "warning")
+    return render_template("unconfirmed.html")
 
 
-@register_app.route('/resend')
+@register_app.route("/resend")
 @login_required
 def resend_confirmation():
     token = generate_confirmation_token(current_user.email)
-    confirm_url = url_for('register_app.confirm_email', token=token, _external=True)
-    html = render_template('gmail.html', confirm_url=confirm_url)
+    confirm_url = url_for("register_app.confirm_email", token=token, _external=True)
+    html = render_template("gmail.html", confirm_url=confirm_url)
     subject = "Please confirm your email"
     send_info_by_user(recipient=current_user.email, subject=subject, template=html)
-    flash('A new confirmation email has been sent.', 'success')
-    return redirect(url_for('register_app.unconfirmed'))
+    flash("A new confirmation email has been sent.", "success")
+    return redirect(url_for("register_app.unconfirmed"))
 
 
 def send_info_by_user(subject, recipient, template):
