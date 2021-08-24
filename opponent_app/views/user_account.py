@@ -84,6 +84,7 @@ def user_account():
                         i.user_opponent_id,
                         i.id,
                         i.offer_accept,
+                        i.offer_message,
                     ]
                 )
         return render_template(

@@ -65,6 +65,7 @@ def index():
                         i.user_opponent_id,
                         i.id,
                         i.offer_accept,
+                        i.offer_message,
                     ]
                 )
         return render_template(
@@ -85,6 +86,7 @@ def post_offer():
     category = request.form.get("user_category")
     district = request.form.get("user_district")
     date = request.form.get("user_partydate")
+    message = request.form.get("user_message_text")
     opponent_id = request.form.get("opponent_id_user")
     offer_opponent = OfferOpponent(
         offer_phone=phone,
@@ -95,6 +97,7 @@ def post_offer():
         offer_district=district,
         offer_date=date,
         user_opponent_id=opponent_id,
+        offer_message=message,
     )
     db.session.add(offer_opponent)
     db.session.commit()
@@ -161,6 +164,7 @@ def search_render(opponent_search=None, offer_search=None):
                         i.user_opponent_id,
                         i.id,
                         i.offer_accept,
+                        i.offer_message,
                     ]
                 )
         return render_template(

@@ -1,6 +1,6 @@
 import re
 from loguru import logger
-from sqlalchemy import Column, Integer, String, ForeignKey, Boolean
+from sqlalchemy import Column, Integer, String, ForeignKey, Boolean, Text
 from flask_security import SQLAlchemyUserDatastore, UserMixin, RoleMixin
 from flask_validator import (
     Validator,
@@ -130,5 +130,6 @@ class OfferOpponent(db.Model):
     offer_district = Column(String(50))
     offer_date = Column(String(50))
     offer_accept = Column(Boolean, unique=False, default=False)
+    offer_message = Column(Text(), nullable=True)
     user_opponent_id = Column(Integer, ForeignKey("users_opponents.id"))
     user_opponent = db.relationship("UserOpponent", overlaps="users_opponents,offers_opponent")
