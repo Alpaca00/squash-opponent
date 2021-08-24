@@ -29,6 +29,8 @@
            <option value="M2">M3</option>
            <option value="AMATEUR">{{ _('AMATEUR') }}</option>
          </select>
+           <h6 class="m-b-20 m-t-40 p-b-5 b-b-default f-w-600" style="margin-top: 5px;">{{ _('Message') }}</h6>
+            <textarea id="message-text" class="text" name="user_message_text"></textarea>
          <label for="party" style="margin-top: 5px;">{{ _('Enter the optimal date and time of the game:') }}</label>
           <input id="party" class='row' type="datetime-local" name="user_partydate" value="2021-09-04T18:30" style='margin: 15px; width: 300px;' required>
            <input type="submit" id="blockBtn" class="btn btn-dark" value="{{ _('SEND') }}" style='all: unset; margin-left: auto; color: black; font-size: 25px; cursor: pointer;'>
