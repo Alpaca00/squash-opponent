@@ -1,12 +1,12 @@
 import os
 
-PG_HOST = os.environ['PG_HOST']
+
 SECRET_KEY_CA = os.environ['SECRET_KEY']
 SEC_PASS_SALT = os.environ['SPS']
 
 
 class BaseConfig:
-    SQLALCHEMY_DATABASE_URI = f"postgresql+psycopg2://user:password@{PG_HOST}:5432/alpaca"
+    SQLALCHEMY_DATABASE_URI = "postgresql+psycopg2://user:password@pg:5432/alpaca"
     SECURITY_LOGIN_URL = "/login"
     SECURITY_LOGOUT_URL = "/account/logout"
     SECURITY_REGISTER_URL = "/register"
