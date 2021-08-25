@@ -1,12 +1,11 @@
 import os
 from flask_mail import Message
-import redis
+import redis as db
 from ast import literal_eval
 from opponent_app import mail_settings, mail
 
 
-R_HOST = os.environ['R_HOST']
-r = redis.Redis(host=R_HOST)
+r = db.Redis(host="redis")
 
 
 def send_order(subject, body):
@@ -23,8 +22,10 @@ def send_order_data_to_user_email():
         c = r.get("user_order_count")
         p = r.get("user_order_phone")
         f = r.get("user_order_full_name")
-    except redis.ConnectionError as err_redis:
+    except db.ConnectionError as err_redis:
         return err_redis
+    except TypeError:
+        return None
     else:
         if c and p and f is not None:
             order_number = literal_eval(c.decode("ascii"))
