@@ -12,7 +12,7 @@ services:
     volumes:
       - /alpaca_web:/app
     ports:
-      - 5000:5000
+      - 8000:8000
     depends_on:
       - pg
       - redis
