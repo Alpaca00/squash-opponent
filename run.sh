@@ -2,5 +2,6 @@ export SPS="Mozi2229659Ozi" export SECRET_KEY="6Lf0rL8bAAAAAL0YqesYius-y0iQnYTho
 
 #FLASK_ENV=development FLASK_APP="opponent_app:create_app" flask run --host=0.0.0.0
 
-gunicorn -b 0.0.0.0:8000 wsgi:app
+#gunicorn -b 0.0.0.0:8000 wsgi:app
+gunicorn wsgi:app
 
