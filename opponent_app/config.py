@@ -24,7 +24,7 @@ class DevConfig(BaseConfig):
 
 
 class ProdConfig(BaseConfig):
-    SQLALCHEMY_DATABASE_URI = os.environ['DATABASE_URL']
+    SQLALCHEMY_DATABASE_URI = "postgresql+psycopg2://user:password@pg:5432/alpaca"
 
 
 class TestConfig(BaseConfig):
