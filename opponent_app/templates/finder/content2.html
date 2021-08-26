@@ -1,11 +1,11 @@
- {% for offer in offer_data %}
+{% for offer in offer_data %}
     {% if date[7] == offer[10] %}
      <div class="col-lg-4">
          <div class="custom-model-main">
                     <div class="custom-model-inner">
                      <div class="custom-model-wrap">
                     <div class="pop-up-content-wrap">
-                      <h4>Message</h4>
+                        <h6><i class="fa fa-comments" aria-hidden="true" style="margin-right: 5px;"></i>Message</h6><hr>
                         {% if offer[13] == None %}
                       <p>Empty</p>
                         {% else %}

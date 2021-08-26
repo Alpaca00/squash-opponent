@@ -16,7 +16,7 @@ class BaseConfig:
 
 
 class DevConfig(BaseConfig):
-    SQLALCHEMY_DATABASE_URI = "postgresql+psycopg2://user:password@pg:5432/alpaca"
+    SQLALCHEMY_DATABASE_URI = "postgresql+psycopg2://user:password@0.0.0.0:5432/alpaca"
     RECAPTCHA_USE_SSL = False
     RECAPTCHA_PUBLIC_KEY = 'public'
     RECAPTCHA_PRIVATE_KEY = 'private'
