@@ -1,12 +1,7 @@
 import os
 
 
-SECRET_KEY_CA = os.environ['SECRET_KEY']
-SEC_PASS_SALT = os.environ['SPS']
-
-
 class BaseConfig:
-    SQLALCHEMY_DATABASE_URI = "postgresql+psycopg2://user:password@pg:5432/alpaca"
     SECURITY_LOGIN_URL = "/login"
     SECURITY_LOGOUT_URL = "/account/logout"
     SECURITY_REGISTER_URL = "/register"
@@ -14,13 +9,14 @@ class BaseConfig:
     SECURITY_POST_LOGOUT_VIEW = "/admin/logout"
     SQLALCHEMY_TRACK_MODIFICATIONS = True
     SECURITY_PASSWORD_HASH = 'bcrypt'
-    SECURITY_PASSWORD_SALT = SEC_PASS_SALT
-    SECRET_KEY = SECRET_KEY_CA
+    SECURITY_PASSWORD_SALT = os.environ['SPS']
+    SECRET_KEY = os.environ['SECRET_KEY']
     BABEL_DEFAULT_LOCALE = 'en'
     LANGUAGES = ['en', 'uk']
 
 
 class DevConfig(BaseConfig):
+    SQLALCHEMY_DATABASE_URI = "postgresql+psycopg2://user:password@pg:5432/alpaca"
     RECAPTCHA_USE_SSL = False
     RECAPTCHA_PUBLIC_KEY = 'public'
     RECAPTCHA_PRIVATE_KEY = 'private'
@@ -28,7 +24,7 @@ class DevConfig(BaseConfig):
 
 
 class ProdConfig(BaseConfig):
-    pass
+    SQLALCHEMY_DATABASE_URI = os.environ['DATABASE_URL']
 
 
 class TestConfig(BaseConfig):

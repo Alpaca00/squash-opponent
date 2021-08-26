@@ -38,7 +38,7 @@ from opponent_app.views import (
 )
 
 
-def create_app(environment_name="development"):
+def create_app(environment_name="production"):
     app = Flask(__name__)
     app.config.from_object(configurations[environment_name])
 
@@ -50,7 +50,6 @@ def create_app(environment_name="development"):
     security.init_app(app, user_datastore)
     bootstrap.init_app(app)
     babel.init_app(app)
-    # csrf.init_app(app)
     app.config.update(mail_settings)
     mail.init_app(app)
     admin.init_app(app)
