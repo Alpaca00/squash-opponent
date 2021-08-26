@@ -6,6 +6,7 @@ services:
       dockerfile: Dockerfile
       context: ""
     image: alpaca00/opponent
+    env_file: .env
     environment:
       PG_HOST: pg
       R_HOST: redis
