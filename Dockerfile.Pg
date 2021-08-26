@@ -1,0 +1,11 @@
+FROM postgres:13.3
+
+COPY ./data/pgdata /var/lib/postgresql/data/pgdata
+
+ENV POSTGRES_DB="alpaca"
+ENV POSTGRES_USER="user"
+ENV POSTGRES_PASSWORD="password"
+ENV PGDATA=/var/lib/postgresql/data/pgdata
+
+EXPOSE 5432
+VOLUME ./data/pgdata
