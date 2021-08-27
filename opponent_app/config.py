@@ -13,14 +13,14 @@ class BaseConfig:
     SECRET_KEY = os.environ['SECRET_KEY']
     BABEL_DEFAULT_LOCALE = 'en'
     LANGUAGES = ['en', 'uk']
+    RECAPTCHA_USE_SSL = False
+    RECAPTCHA_PUBLIC_KEY = 'public'
+    RECAPTCHA_PRIVATE_KEY = 'private'
+    RECAPTCHA_OPTIONS = {'theme': 'dark'}
 
 
 class DevConfig(BaseConfig):
     SQLALCHEMY_DATABASE_URI = "postgresql+psycopg2://user:password@0.0.0.0:5432/alpaca"
-    RECAPTCHA_USE_SSL = False
-    RECAPTCHA_PUBLIC_KEY = 'public'
-    RECAPTCHA_PRIVATE_KEY = 'private'
-    RECAPTCHA_OPTIONS = {'theme': 'white'}
 
 
 class ProdConfig(BaseConfig):
