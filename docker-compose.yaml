@@ -6,7 +6,7 @@ services:
       dockerfile: Dockerfile
       context: ""
     image: alpaca00/opponent
-    env_file: .env
+    env_file: var.env
     environment:
       PG_HOST: pg
       R_HOST: redis
@@ -17,6 +17,7 @@ services:
     depends_on:
       - pg
       - redis
+    command: gunicorn -w 1 -b 0.0.0.0:8000 wsgi:app
   pg:
     image: postgres:13.3
     environment:
@@ -35,3 +36,11 @@ services:
     volumes:
       - ./config/redis-docker/redis.conf:/redis.conf
     command: [ "redis-server", "/redis.conf" ]
+  nginx:
+    container_name: nginx
+    restart: always
+    build: ./nginx
+    ports:
+      - "80:80"
+    depends_on:
+      - app
