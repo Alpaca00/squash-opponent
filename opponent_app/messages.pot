@@ -1,0 +1,464 @@
+# Translations template for PROJECT.
+# Copyright (C) 2021 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2021.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2021-08-12 09:49+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.9.1\n"
+
+#: templates/content.html:7
+msgid "Last Event"
+msgstr ""
+
+#: templates/content.html:16
+msgid "Lviv Squash Team"
+msgstr ""
+
+#: templates/content.html:21 templates/content.html:87
+#: templates/content.html:88
+msgid "Team"
+msgstr ""
+
+#: templates/content.html:22
+msgid "Points"
+msgstr ""
+
+#: templates/content.html:23
+msgid "Matches"
+msgstr ""
+
+#: templates/content.html:86
+msgid "Date"
+msgstr ""
+
+#: templates/content.html:89
+msgid "Score"
+msgstr ""
+
+#: templates/content.html:137
+msgid "Lviv Junior Tour"
+msgstr ""
+
+#: templates/content.html:146
+msgid "Result"
+msgstr ""
+
+#: templates/content.html:147
+msgid "All Junior Categories of Lviv Junior Tour"
+msgstr ""
+
+#: templates/content.html:148
+msgid "Position up to 9"
+msgstr ""
+
+#: templates/content.html:149 templates/content.html:162
+#: templates/content.html:176 templates/content.html:191
+msgid "Name Surname"
+msgstr ""
+
+#: templates/content.html:161
+msgid "Position up to 11"
+msgstr ""
+
+#: templates/content.html:175
+msgid "Position up to 13"
+msgstr ""
+
+#: templates/content.html:190
+msgid "Position up to 15"
+msgstr ""
+
+#: templates/content.html:209
+msgid "Waiting Event"
+msgstr ""
+
+#: templates/footer.html:37
+msgid "Copyright © 2021 Oleg Matskiv. All rights reserved."
+msgstr ""
+
+#: templates/navbar.html:24 templates/navbar.html:25
+msgid "Home"
+msgstr ""
+
+#: templates/navbar.html:29 templates/navbar.html:30
+msgid "Finder-Opponent"
+msgstr ""
+
+#: templates/navbar.html:34 templates/navbar.html:35
+msgid "Products"
+msgstr ""
+
+#: templates/navbar.html:39 templates/navbar.html:40
+msgid "Photo-Gallery"
+msgstr ""
+
+#: templates/navbar.html:44 templates/navbar.html:45
+msgid "Video-Gallery"
+msgstr ""
+
+#: templates/cart/empty.html:9 templates/cart/index.html:9
+#: templates/navbar.html:49 templates/navbar.html:50
+msgid "Cart"
+msgstr ""
+
+#: templates/navbar.html:54 templates/navbar.html:55
+msgid "Support"
+msgstr ""
+
+#: templates/navbar.html:59 templates/navbar.html:60
+msgid "About"
+msgstr ""
+
+#: templates/login/index.html:18 templates/navbar.html:65
+#: templates/navbar.html:66
+msgid "Sign In"
+msgstr ""
+
+#: templates/navbar.html:74 templates/navbar.html:75
+msgid "Account"
+msgstr ""
+
+#: templates/navbar.html:78 templates/navbar.html:79
+msgid "Logout"
+msgstr ""
+
+#: templates/user.html:27
+msgid "Squash Player"
+msgstr ""
+
+#: templates/user.html:32
+msgid "Information"
+msgstr ""
+
+#: templates/support/index.html:17 templates/user.html:35
+msgid "Email"
+msgstr ""
+
+#: templates/user.html:39
+msgid "Phone"
+msgstr ""
+
+#: templates/user.html:43
+msgid "Location"
+msgstr ""
+
+#: templates/user.html:46
+msgid "Lviv"
+msgstr ""
+
+#: templates/user.html:48
+msgid "DISTRICT"
+msgstr ""
+
+#: templates/user.html:49
+msgid "Sychivskyi"
+msgstr ""
+
+#: templates/user.html:50
+msgid "Zaliznychnyi"
+msgstr ""
+
+#: templates/user.html:51
+msgid "Shevchenkivskyi"
+msgstr ""
+
+#: templates/user.html:55
+msgid "CATEGORY"
+msgstr ""
+
+#: templates/user.html:56
+msgid "PRO"
+msgstr ""
+
+#: templates/user.html:60
+msgid "AMATEUR"
+msgstr ""
+
+#: templates/user.html:62
+msgid "Enter the optimal date and time of the game:"
+msgstr ""
+
+#: templates/user.html:64
+msgid "POST"
+msgstr ""
+
+#: templates/user.html:65
+msgid "FINDER OPPONENT"
+msgstr ""
+
+#: templates/cart/empty.html:11 templates/cart/index.html:11
+#: templates/products/detail.html:14
+msgid "Product list"
+msgstr ""
+
+#: templates/cart/empty.html:18
+msgid "Shopping Cart<small> (is empty in your cart)"
+msgstr ""
+
+#: templates/cart/empty.html:25 templates/cart/index.html:32
+#: templates/products/detail.html:35
+msgid "Name"
+msgstr ""
+
+#: templates/cart/empty.html:29 templates/cart/index.html:36
+#: templates/products/detail.html:39
+msgid "Color"
+msgstr ""
+
+#: templates/cart/empty.html:30
+msgid "Black"
+msgstr ""
+
+#: templates/cart/empty.html:33 templates/cart/index.html:40
+#: templates/products/detail.html:46 templates/products/detail.html:49
+msgid "Size"
+msgstr ""
+
+#: templates/cart/empty.html:38 templates/cart/index.html:44
+#: templates/products/detail.html:63
+msgid "Sex"
+msgstr ""
+
+#: templates/cart/empty.html:43 templates/cart/index.html:54
+#: templates/products/detail.html:68
+msgid "Quantity"
+msgstr ""
+
+#: templates/cart/empty.html:47 templates/cart/index.html:58
+#: templates/products/detail.html:72
+msgid "Price"
+msgstr ""
+
+#: templates/cart/empty.html:51 templates/cart/index.html:62
+#: templates/products/detail.html:76
+msgid "Total"
+msgstr ""
+
+#: templates/cart/empty.html:59
+msgid "Go to Product list"
+msgstr ""
+
+#: templates/cart/index.html:18 templates/products/detail.html:21
+msgid "Shopping Cart<small> (1 item in your cart)"
+msgstr ""
+
+#: templates/cart/index.html:50 templates/products/detail.html:54
+msgid "Print"
+msgstr ""
+
+#: templates/cart/index.html:71
+msgid ""
+"Show your support for the Lviv squash team with this shirt\n"
+"                             with a print on the chest or back.\n"
+"                             All proceeds will be used to organize youth "
+"tournaments."
+msgstr ""
+
+#: templates/cart/index.html:84
+msgid "ENTER YOUR FULL NAME"
+msgstr ""
+
+#: templates/cart/index.html:91 templates/login/register.html:19
+msgid "ENTER YOUR EMAIL"
+msgstr ""
+
+#: templates/cart/index.html:98
+msgid "PHONE"
+msgstr ""
+
+#: templates/cart/index.html:105
+msgid "ENTER YOUR ADDRESS"
+msgstr ""
+
+#: templates/cart/index.html:112
+msgid "ENTER YOUR ADDRESS2"
+msgstr ""
+
+#: templates/cart/index.html:118
+msgid "ENTER YOUR CITY"
+msgstr ""
+
+#: templates/cart/index.html:124
+msgid "ENTER YOUR STATE"
+msgstr ""
+
+#: templates/cart/index.html:130
+msgid "ENTER YOUR ZIP CODE"
+msgstr ""
+
+#: templates/cart/index.html:136 templates/login/register.html:40
+#: templates/support/index.html:37
+msgid "SUBMIT"
+msgstr ""
+
+#: templates/cart/index.html:143
+msgid "T-shirt"
+msgstr ""
+
+#: templates/gallery/index.html:8
+msgid "Photo Gallery"
+msgstr ""
+
+#: templates/gallery/index.html:17
+msgid "You can upload your photos from squash court to our gallery."
+msgstr ""
+
+#: templates/gallery/index.html:19 templates/video_gallery/index.html:31
+msgid "SEND"
+msgstr ""
+
+#: templates/gallery/index.html:60 templates/products/detail.html:107
+msgid "Our team"
+msgstr ""
+
+#: templates/login/index.html:48
+msgid "Remember Me"
+msgstr ""
+
+#: templates/login/index.html:57
+msgid "Don't have an account?"
+msgstr ""
+
+#: templates/login/index.html:57
+msgid "Sign Up"
+msgstr ""
+
+#: templates/login/index.html:60
+msgid "Forgot your password?"
+msgstr ""
+
+#: templates/login/register.html:26
+msgid "ENTER YOUR NAME"
+msgstr ""
+
+#: templates/login/register.html:33
+msgid "ENTER YOUR PASSWORD"
+msgstr ""
+
+#: templates/order/index.html:11
+msgid "Your order:"
+msgstr ""
+
+#: templates/order/index.html:13
+msgid "Name:"
+msgstr ""
+
+#: templates/order/index.html:15
+msgid "Print:"
+msgstr ""
+
+#: templates/order/index.html:18
+msgid "Size:"
+msgstr ""
+
+#: templates/order/index.html:19
+msgid "Sex:"
+msgstr ""
+
+#: templates/order/index.html:22
+msgid "Quantity:"
+msgstr ""
+
+#: templates/order/index.html:23
+msgid "Price:"
+msgstr ""
+
+#: templates/order/index.html:24 templates/products/detail.html:85
+msgid "Order Total:"
+msgstr ""
+
+#: templates/order/index.html:38
+msgid "Confirm"
+msgstr ""
+
+#: templates/products/detail.html:11 templates/products/index.html:44
+#: templates/products/index.html:93
+msgid "New"
+msgstr ""
+
+#: templates/products/detail.html:41
+msgid "Select"
+msgstr ""
+
+#: templates/products/detail.html:58
+msgid "You selected:"
+msgstr ""
+
+#: templates/products/detail.html:91
+msgid "Back"
+msgstr ""
+
+#: templates/products/detail.html:94
+msgid "Add to cart"
+msgstr ""
+
+#: templates/products/index.html:9
+msgid "Products list"
+msgstr ""
+
+#: templates/products/index.html:11 templates/products/index.html:23
+msgid "Sorry, this is an imitation of an online store!"
+msgstr ""
+
+#: templates/products/index.html:22
+msgid "The shop for Squash People."
+msgstr ""
+
+#: templates/products/index.html:34
+msgid "MAN T-shirt with our print"
+msgstr ""
+
+#: templates/products/index.html:41 templates/products/index.html:65
+#: templates/products/index.html:90
+msgid "Show"
+msgstr ""
+
+#: templates/products/index.html:58
+msgid "WOMAN T-shirt with our print"
+msgstr ""
+
+#: templates/products/index.html:83
+msgid "CHILD T-shirt with our print"
+msgstr ""
+
+#: templates/support/index.html:10
+msgid "Question? Complaints? Suggestions?"
+msgstr ""
+
+#: templates/support/index.html:24
+msgid "The subject of the message"
+msgstr ""
+
+#: templates/support/index.html:31
+msgid "The text of the message"
+msgstr ""
+
+#: templates/video_gallery/index.html:20
+msgid "Video Gallery"
+msgstr ""
+
+#: templates/video_gallery/index.html:29
+msgid ""
+"You can send us a link to your squash game and we will add it to our "
+"gallery."
+msgstr ""
+
+#: views/gallery.py:42 views/video_gallery.py:33
+msgid "Successful. Will soon appear in the gallery."
+msgstr ""
+
+#: views/video_gallery.py:36
+msgid "Warning. The link is already in our gallery."
+msgstr ""
+
