@@ -12,6 +12,7 @@ Gallery
                         {{ messages[0] }}
             {% endif %}
         {% endwith %}
+        {% if current_user.is_authenticated %}
          <form method="POST" action="{% if request.url_rule.endpoint == 'gallery_app.gallery_list' %} /uk/gallery/upload {% endif %}"  enctype='multipart/form-data'>
         <div class="form-group">
             <label for="formFileSm" id='label-text' class="form-label">{{ _('You can upload your photos from squash court to our gallery.') }}</label>
@@ -19,6 +20,9 @@ Gallery
             <button type="submit" id="btn-send-img" class="send-data-btn" style='margin-top: 15px;'><span class="bn39span">{{ _('SEND') }}</span></button>
         </div>
          </form>
+        {% else %}
+        <h6>You can upload your squash court photos to our gallery, but you must be logged in.</h6>
+        {% endif %}
     </div>
 <section class="gallery min-vh-100" style="margin-bottom: 25px;">
     <div class="container-lg">
