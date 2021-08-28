@@ -9,3 +9,6 @@ www.squashopponent.com.ua<hr>
 
 This is alpha version of the site for testing:
 www.alpaca00.website<hr>
+
+The idea of this application is to popularize squash in Lviv. 
+The goal is convenience and the ability to find an opponent for the game.
