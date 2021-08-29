@@ -7,7 +7,7 @@
 <img alt="Website" src="https://img.shields.io/website?down_color=lightgrey&down_message=offline&style=for-the-badge&up_color=blue&up_message=online&url=https%3A%2F%2Fshields.io">
 www.squashopponent.com.ua<hr>
 
-This is alpha version of the site for testing:
+The version of the site for beta testing:
 www.alpaca00.website<hr>
 
 The idea of this application is to popularize squash in Lviv. 
