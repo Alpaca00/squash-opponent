@@ -1,5 +1,6 @@
 from sqlalchemy import Column, Integer, String, Text
 from opponent_app.models import db
+
 # from sqlalchemy.orm import validates
 # from marshmallow import fields, validate
 
