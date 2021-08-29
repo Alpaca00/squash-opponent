@@ -5,8 +5,8 @@ from ast import literal_eval
 from opponent_app import mail_settings, mail
 
 
-# r = db.Redis(host="redis")  # prod
-r = db.Redis()  # dev
+r = db.Redis(host="redis")  # prod
+# r = db.Redis()  # dev
 
 
 def send_order(subject, body):

@@ -1,5 +1,7 @@
 import os
 
+PG_HOST = os.environ.get('PG_HOST')
+
 
 class BaseConfig:
     SECURITY_LOGIN_URL = "/login"
@@ -24,7 +26,7 @@ class DevConfig(BaseConfig):
 
 
 class ProdConfig(BaseConfig):
-    SQLALCHEMY_DATABASE_URI = "postgresql+psycopg2://user:password@pg:5432/alpaca"
+    SQLALCHEMY_DATABASE_URI = f"postgresql+psycopg2://user:password@{PG_HOST}:5432/alpaca"
 
 
 class TestConfig(BaseConfig):
