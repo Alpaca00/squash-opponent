@@ -4,7 +4,6 @@ from flask_migrate import Migrate
 from flask_security import Security
 from flask_bootstrap import Bootstrap
 from flask_babel import Babel
-# from flask_wtf import CSRFProtect
 
 
 login_manager = LoginManager()
@@ -14,4 +13,3 @@ migrate = Migrate()
 login = LoginManager()
 bootstrap = Bootstrap()
 babel = Babel()
-# csrf = CSRFProtect()
