@@ -4,8 +4,9 @@ import redis as db
 from ast import literal_eval
 from opponent_app import mail_settings, mail
 
+R_HOST = os.environ.get("R_HOST")
 
-r = db.Redis(host="redis")  # prod
+r = db.Redis(host=R_HOST)  # prod
 # r = db.Redis()  # dev
 
 
