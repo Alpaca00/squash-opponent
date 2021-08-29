@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2021-08-29 12:29+0300\n"
+"POT-Creation-Date: 2021-08-29 13:41+0300\n"
 "PO-Revision-Date: 2021-08-29 11:36+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: uk\n"
@@ -18,6 +18,10 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.9.1\n"
+
+#: decorators.py:11 views/register.py:93
+msgid "Please confirm your account!"
+msgstr "Підтвердіть свій обліковий запис!"
 
 #: templates/base.html:8 templates/navbar2.html:6 templates/navbar2.html:7
 msgid "Home"
@@ -152,6 +156,10 @@ msgstr "Вийти"
 msgid "User"
 msgstr "Користувач"
 
+#: templates/user.html:24
+msgid "Hy"
+msgstr "Привіт"
+
 #: templates/finder/content.html:9 templates/finder/content2.html:22
 #: templates/user.html:39
 msgid "Opponent"
@@ -221,6 +229,10 @@ msgstr "Аматор"
 msgid "Enter the optimal date and time of the game:"
 msgstr "Введіть оптимальну дату та час для гри:"
 
+#: templates/user.html:91
+msgid "HISTORY"
+msgstr ""
+
 #: templates/cart/empty.html:26 templates/cart/index.html:32
 #: templates/products/detail.html:35 templates/user_post_offer.html:3
 msgid "Name"
@@ -233,7 +245,7 @@ msgstr "Повідомлення"
 #: templates/user_post_offer.html:33
 #, fuzzy
 msgid "short message"
-msgstr "Повідомлення"
+msgstr "Коротке повідомлення"
 
 #: templates/user_post_offer.html:36
 msgid "SEND"
@@ -414,7 +426,7 @@ msgstr "Платні опоненти"
 
 #: templates/finder/modal_offer.html:6
 msgid "New Offer"
-msgstr "Нова пропозиція"
+msgstr "Пропозиція"
 
 #: templates/gallery/index.html:8
 msgid "Photo Gallery"
@@ -648,7 +660,7 @@ msgstr "Успішно. Незабаром з’явиться у галереї
 msgid "File does not match a format"
 msgstr "Файл не відповідає формату"
 
-#: views/home.py:99
+#: views/home.py:108
 msgid "Invalid username or password."
 msgstr "Неправильне ім'я користувача або пароль."
 
@@ -675,10 +687,6 @@ msgstr "Дякую за регістрацію."
 #: views/register.py:84
 msgid "You have confirmed your account. Thanks!"
 msgstr "Ви підтвердили свій обліковий запис. Дякую!"
-
-#: views/register.py:93
-msgid "Please confirm your account!"
-msgstr "Підтвердіть свій обліковий запис!"
 
 #: views/register.py:105
 msgid "A new confirmation email has been sent."

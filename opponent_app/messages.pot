@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2021-08-12 09:49+0300\n"
+"POT-Creation-Date: 2021-08-29 13:41+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,6 +16,14 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.9.1\n"
+
+#: decorators.py:11 views/register.py:93
+msgid "Please confirm your account!"
+msgstr "Будь-ласка рідтвердіть свій аккаунт!"
+
+#: templates/base.html:8 templates/navbar2.html:6 templates/navbar2.html:7
+msgid "Home"
+msgstr ""
 
 #: templates/content.html:7
 msgid "Last Event"
@@ -62,13 +70,17 @@ msgstr ""
 msgid "Position up to 9"
 msgstr ""
 
-#: templates/content.html:149 templates/content.html:162
-#: templates/content.html:176 templates/content.html:191
+#: templates/content.html:149 templates/content.html:176
+#: templates/content.html:191
 msgid "Name Surname"
 msgstr ""
 
 #: templates/content.html:161
 msgid "Position up to 11"
+msgstr ""
+
+#: templates/content.html:162
+msgid "Fullname"
 msgstr ""
 
 #: templates/content.html:175
@@ -84,168 +96,212 @@ msgid "Waiting Event"
 msgstr ""
 
 #: templates/footer.html:37
-msgid "Copyright © 2021 Oleg Matskiv. All rights reserved."
+msgid "Copyright © 2021. All rights reserved."
 msgstr ""
 
-#: templates/navbar.html:24 templates/navbar.html:25
-msgid "Home"
+#: templates/gmail.html:1
+msgid "Thanks for signing up. Please follow this link to activate your account:"
 msgstr ""
 
-#: templates/navbar.html:29 templates/navbar.html:30
+#: templates/navbar2.html:11 templates/navbar2.html:12
 msgid "Finder-Opponent"
 msgstr ""
 
-#: templates/navbar.html:34 templates/navbar.html:35
+#: templates/navbar2.html:16 templates/navbar2.html:17
+#: templates/products/detail.html:4 templates/products/index.html:4
 msgid "Products"
 msgstr ""
 
-#: templates/navbar.html:39 templates/navbar.html:40
+#: templates/navbar2.html:21 templates/navbar2.html:22
 msgid "Photo-Gallery"
 msgstr ""
 
-#: templates/navbar.html:44 templates/navbar.html:45
+#: templates/navbar2.html:26 templates/navbar2.html:27
 msgid "Video-Gallery"
 msgstr ""
 
-#: templates/cart/empty.html:9 templates/cart/index.html:9
-#: templates/navbar.html:49 templates/navbar.html:50
+#: templates/cart/empty.html:4 templates/cart/empty.html:10
+#: templates/cart/index.html:4 templates/cart/index.html:9
+#: templates/navbar2.html:31 templates/navbar2.html:32
 msgid "Cart"
 msgstr ""
 
-#: templates/navbar.html:54 templates/navbar.html:55
+#: templates/navbar2.html:36 templates/navbar2.html:37
+#: templates/support/index.html:4
 msgid "Support"
 msgstr ""
 
-#: templates/navbar.html:59 templates/navbar.html:60
+#: templates/navbar2.html:41 templates/navbar2.html:42
 msgid "About"
 msgstr ""
 
-#: templates/login/index.html:18 templates/navbar.html:65
-#: templates/navbar.html:66
+#: templates/login/index.html:19 templates/navbar2.html:46
+#: templates/navbar2.html:47
 msgid "Sign In"
 msgstr ""
 
-#: templates/navbar.html:74 templates/navbar.html:75
+#: templates/navbar2.html:53 templates/navbar2.html:54 templates/user.html:18
 msgid "Account"
 msgstr ""
 
-#: templates/navbar.html:78 templates/navbar.html:79
+#: templates/navbar2.html:58 templates/navbar2.html:59
 msgid "Logout"
 msgstr ""
 
-#: templates/user.html:27
-msgid "Squash Player"
+#: templates/user.html:6
+msgid "User"
 msgstr ""
 
-#: templates/user.html:32
+#: templates/user.html:24
+msgid "Hy"
+msgstr ""
+
+#: templates/finder/content.html:9 templates/finder/content2.html:22
+#: templates/user.html:39
+msgid "Opponent"
+msgstr ""
+
+#: templates/user.html:44 templates/user_update.html:34
 msgid "Information"
 msgstr ""
 
-#: templates/support/index.html:17 templates/user.html:35
+#: templates/support/index.html:17 templates/user.html:47
+#: templates/user_post_offer.html:7 templates/user_update.html:37
 msgid "Email"
 msgstr ""
 
-#: templates/user.html:39
+#: templates/user.html:52 templates/user_post_offer.html:11
+#: templates/user_update.html:42
 msgid "Phone"
 msgstr ""
 
-#: templates/user.html:43
+#: templates/user.html:55 templates/user_post_offer.html:14
+#: templates/user_update.html:45
 msgid "Location"
 msgstr ""
 
-#: templates/user.html:46
+#: templates/user.html:57 templates/user_post_offer.html:17
+#: templates/user_update.html:47
 msgid "Lviv"
 msgstr ""
 
-#: templates/user.html:48
+#: templates/user.html:59 templates/user_post_offer.html:19
+#: templates/user_update.html:55
 msgid "DISTRICT"
 msgstr ""
 
-#: templates/user.html:49
+#: templates/user.html:60 templates/user_post_offer.html:20
+#: templates/user_update.html:51 templates/user_update.html:56
 msgid "Sychivskyi"
 msgstr ""
 
-#: templates/user.html:50
+#: templates/user.html:61 templates/user_post_offer.html:21
+#: templates/user_update.html:52 templates/user_update.html:57
 msgid "Zaliznychnyi"
 msgstr ""
 
-#: templates/user.html:51
+#: templates/user.html:62 templates/user_post_offer.html:22
+#: templates/user_update.html:53 templates/user_update.html:58
 msgid "Shevchenkivskyi"
 msgstr ""
 
-#: templates/user.html:55
+#: templates/user.html:65 templates/user_post_offer.html:25
+#: templates/user_update.html:70
 msgid "CATEGORY"
 msgstr ""
 
-#: templates/user.html:56
+#: templates/user.html:66 templates/user_post_offer.html:26
+#: templates/user_update.html:64 templates/user_update.html:71
 msgid "PRO"
 msgstr ""
 
-#: templates/user.html:60
+#: templates/user.html:70 templates/user_post_offer.html:30
+#: templates/user_update.html:68 templates/user_update.html:75
 msgid "AMATEUR"
 msgstr ""
 
-#: templates/user.html:62
+#: templates/user.html:72 templates/user_post_offer.html:34
+#: templates/user_update.html:78
 msgid "Enter the optimal date and time of the game:"
 msgstr ""
 
-#: templates/user.html:64
-msgid "POST"
+#: templates/user.html:91
+msgid "HISTORY"
 msgstr ""
 
-#: templates/user.html:65
-msgid "FINDER OPPONENT"
+#: templates/cart/empty.html:26 templates/cart/index.html:32
+#: templates/products/detail.html:35 templates/user_post_offer.html:3
+msgid "Name"
 msgstr ""
 
-#: templates/cart/empty.html:11 templates/cart/index.html:11
+#: templates/finder/content2.html:8 templates/user_post_offer.html:32
+msgid "Message"
+msgstr ""
+
+#: templates/user_post_offer.html:33
+msgid "short message"
+msgstr ""
+
+#: templates/user_post_offer.html:36
+msgid "SEND"
+msgstr ""
+
+#: templates/user_update.html:17
+msgid "Post Update"
+msgstr ""
+
+#: templates/user_update.html:29
+msgid "Squash Player"
+msgstr ""
+
+#: templates/user_update.html:80
+msgid "UPDATE"
+msgstr ""
+
+#: templates/cart/empty.html:12 templates/cart/index.html:11
 #: templates/products/detail.html:14
 msgid "Product list"
 msgstr ""
 
-#: templates/cart/empty.html:18
+#: templates/cart/empty.html:19
 msgid "Shopping Cart<small> (is empty in your cart)"
 msgstr ""
 
-#: templates/cart/empty.html:25 templates/cart/index.html:32
-#: templates/products/detail.html:35
-msgid "Name"
-msgstr ""
-
-#: templates/cart/empty.html:29 templates/cart/index.html:36
+#: templates/cart/empty.html:30 templates/cart/index.html:36
 #: templates/products/detail.html:39
 msgid "Color"
 msgstr ""
 
-#: templates/cart/empty.html:30
+#: templates/cart/empty.html:31
 msgid "Black"
 msgstr ""
 
-#: templates/cart/empty.html:33 templates/cart/index.html:40
+#: templates/cart/empty.html:34 templates/cart/index.html:40
 #: templates/products/detail.html:46 templates/products/detail.html:49
 msgid "Size"
 msgstr ""
 
-#: templates/cart/empty.html:38 templates/cart/index.html:44
+#: templates/cart/empty.html:39 templates/cart/index.html:44
 #: templates/products/detail.html:63
 msgid "Sex"
 msgstr ""
 
-#: templates/cart/empty.html:43 templates/cart/index.html:54
+#: templates/cart/empty.html:44 templates/cart/index.html:54
 #: templates/products/detail.html:68
 msgid "Quantity"
 msgstr ""
 
-#: templates/cart/empty.html:47 templates/cart/index.html:58
+#: templates/cart/empty.html:48 templates/cart/index.html:58
 #: templates/products/detail.html:72
 msgid "Price"
 msgstr ""
 
-#: templates/cart/empty.html:51 templates/cart/index.html:62
+#: templates/cart/empty.html:52 templates/cart/index.html:62
 #: templates/products/detail.html:76
 msgid "Total"
 msgstr ""
 
-#: templates/cart/empty.html:59
+#: templates/cart/empty.html:60
 msgid "Go to Product list"
 msgstr ""
 
@@ -269,7 +325,8 @@ msgstr ""
 msgid "ENTER YOUR FULL NAME"
 msgstr ""
 
-#: templates/cart/index.html:91 templates/login/register.html:19
+#: templates/cart/index.html:91 templates/login/password_recovery.html:21
+#: templates/login/register.html:21
 msgid "ENTER YOUR EMAIL"
 msgstr ""
 
@@ -297,8 +354,9 @@ msgstr ""
 msgid "ENTER YOUR ZIP CODE"
 msgstr ""
 
-#: templates/cart/index.html:136 templates/login/register.html:40
-#: templates/support/index.html:37
+#: templates/cart/index.html:136 templates/login/new_password.html:35
+#: templates/login/password_recovery.html:28 templates/login/recover.html:28
+#: templates/login/register.html:42 templates/support/index.html:37
 msgid "SUBMIT"
 msgstr ""
 
@@ -306,44 +364,168 @@ msgstr ""
 msgid "T-shirt"
 msgstr ""
 
+#: templates/finder/content.html:27 templates/finder/content2.html:45
+msgid "City:"
+msgstr ""
+
+#: templates/finder/content.html:28 templates/finder/content2.html:46
+msgid "District:"
+msgstr ""
+
+#: templates/finder/content.html:29 templates/finder/content2.html:47
+msgid "Category:"
+msgstr ""
+
+#: templates/finder/content.html:30 templates/finder/content2.html:48
+msgid "Email:"
+msgstr ""
+
+#: templates/finder/content.html:31 templates/finder/content2.html:49
+msgid "Phone:"
+msgstr ""
+
+#: templates/finder/content2.html:10
+msgid "Empty"
+msgstr ""
+
+#: templates/finder/content2.html:26
+msgid "Accept"
+msgstr ""
+
+#: templates/finder/content2.html:28
+msgid "Offer"
+msgstr ""
+
+#: templates/finder/index.html:3
+msgid "Finder-opponent"
+msgstr ""
+
+#: templates/finder/index.html:9
+msgid "Finder opponent"
+msgstr ""
+
+#: templates/finder/index.html:16
+msgid "Booking court:"
+msgstr ""
+
+#: templates/finder/index.html:22
+msgid "Find an opponent for the game"
+msgstr ""
+
+#: templates/finder/index.html:28
+msgid "Paid Opponent"
+msgstr ""
+
+#: templates/finder/modal_offer.html:6
+msgid "New Offer"
+msgstr ""
+
 #: templates/gallery/index.html:8
 msgid "Photo Gallery"
 msgstr ""
 
-#: templates/gallery/index.html:17
+#: templates/gallery/index.html:18
 msgid "You can upload your photos from squash court to our gallery."
 msgstr ""
 
-#: templates/gallery/index.html:19 templates/video_gallery/index.html:31
-msgid "SEND"
+#: templates/gallery/index.html:24
+msgid ""
+"You can upload your squash court photos to our gallery, but you must be "
+"logged in."
 msgstr ""
 
-#: templates/gallery/index.html:60 templates/products/detail.html:107
+#: templates/gallery/index.html:64 templates/products/detail.html:107
 msgid "Our team"
 msgstr ""
 
-#: templates/login/index.html:48
+#: templates/login/index.html:6
+msgid "login"
+msgstr ""
+
+#: templates/login/index.html:51
 msgid "Remember Me"
 msgstr ""
 
-#: templates/login/index.html:57
+#: templates/login/index.html:60
 msgid "Don't have an account?"
 msgstr ""
 
-#: templates/login/index.html:57
+#: templates/login/index.html:60
 msgid "Sign Up"
 msgstr ""
 
-#: templates/login/index.html:60
+#: templates/login/index.html:63
 msgid "Forgot your password?"
 msgstr ""
 
-#: templates/login/register.html:26
+#: templates/login/mail_password_changed.html:1
+msgid "Your password has been successfully changed."
+msgstr ""
+
+#: templates/login/mail_password_changed.html:2
+#: templates/login/mail_recovery_psw.html:4
+msgid "Sincerely, Squash Opponent."
+msgstr ""
+
+#: templates/login/mail_recovery_psw.html:1
+msgid "Your security code:"
+msgstr ""
+
+#: templates/login/mail_recovery_psw.html:2
+msgid "Do not give your security code."
+msgstr ""
+
+#: templates/login/mail_recovery_psw.html:3
+msgid "if you did not ask for a password reset, let us know."
+msgstr ""
+
+#: templates/login/new_password.html:3
+msgid "Password"
+msgstr ""
+
+#: templates/login/new_password.html:8 templates/login/password_recovery.html:8
+#: templates/login/recover.html:8
+msgid "Recovery password"
+msgstr ""
+
+#: templates/login/new_password.html:21
+msgid "ENTER PASSWORD"
+msgstr ""
+
+#: templates/login/new_password.html:28
+msgid "ENTER PASSWORD CONFIRM"
+msgstr ""
+
+#: templates/login/password_recovery.html:3
+msgid "Recovery"
+msgstr ""
+
+#: templates/login/recover.html:3
+msgid "Recover"
+msgstr ""
+
+#: templates/login/recover.html:21
+msgid "ENTER SECURITY CODE"
+msgstr ""
+
+#: templates/login/register.html:3
+msgid "Register"
+msgstr ""
+
+#: templates/login/register.html:8
+msgid "Registration"
+msgstr ""
+
+#: templates/login/register.html:28
 msgid "ENTER YOUR NAME"
 msgstr ""
 
-#: templates/login/register.html:33
+#: templates/login/register.html:35
 msgid "ENTER YOUR PASSWORD"
+msgstr ""
+
+#: templates/order/index.html:4
+msgid "Order"
 msgstr ""
 
 #: templates/order/index.html:11
@@ -444,7 +626,7 @@ msgstr ""
 msgid "The text of the message"
 msgstr ""
 
-#: templates/video_gallery/index.html:20
+#: templates/video_gallery/index.html:7 templates/video_gallery/index.html:20
 msgid "Video Gallery"
 msgstr ""
 
@@ -454,8 +636,64 @@ msgid ""
 "gallery."
 msgstr ""
 
+#: views/finder.py:236
+msgid "Nothing was found for this query."
+msgstr ""
+
 #: views/gallery.py:42 views/video_gallery.py:33
 msgid "Successful. Will soon appear in the gallery."
+msgstr ""
+
+#: views/gallery.py:47
+msgid "File does not match a format"
+msgstr ""
+
+#: views/home.py:108
+msgid "Invalid username or password."
+msgstr ""
+
+#: views/password_recovery.py:38
+msgid "Security code has been sent to the mail."
+msgstr ""
+
+#: views/password_recovery.py:62
+msgid "Wrong security code."
+msgstr ""
+
+#: views/password_recovery.py:79
+msgid "Your password has been changed."
+msgstr ""
+
+#: views/password_recovery.py:88
+msgid "Something went wrong."
+msgstr ""
+
+#: views/register.py:61
+msgid "Thanks for registering"
+msgstr ""
+
+#: views/register.py:84
+msgid "You have confirmed your account. Thanks!"
+msgstr ""
+
+#: views/register.py:105
+msgid "A new confirmation email has been sent."
+msgstr ""
+
+#: views/user_account.py:114
+msgid "Successfully. Your post has been added."
+msgstr ""
+
+#: views/user_account.py:176
+msgid "Successfully. Your post has been deleted."
+msgstr ""
+
+#: views/user_account.py:196
+msgid "Successfully. The offer has been deleted."
+msgstr ""
+
+#: views/user_account.py:217
+msgid "Successfully. The offer has been accepted."
 msgstr ""
 
 #: views/video_gallery.py:36
