@@ -3,7 +3,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="UTF-8">
     <title>
-        user
+        {{ _('User') }}
     </title>
     <link rel="shortcut icon" href="{{ url_for('static', filename='img/squash-ball.png') }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
@@ -21,7 +21,7 @@
             {% if messages %}
                 {{ messages[0] }}
         {% else %}
-       Hy, {{ cur.name }}.
+       {{ _('Hy') }}, {{ cur.name }}.
         {% endif %}
         {% endwith %}
     </div>
@@ -73,7 +73,7 @@
                                         <input id="party" class='row' type="datetime-local" name="partydate" value="2021-09-04T18:30" style='margin-bottom: 15px;' required>
 
 
-                                    <input type="submit" class="post-btn" value="{{ _('POST') }}" style='margin-bottom: 15px;'>
+                                    <input type="submit" class="post-btn" value="POST" style='margin-bottom: 15px;'>
                                 </div>
                                     </form>
 
@@ -88,7 +88,7 @@
 </div>
 <div class="container ls">
 <div class="history-memory" id="his-mem" style="text-align: center;">
-    <h2>HISTORY</h2>
+    <h2>{{ _('HISTORY') }}</h2>
     {% include 'finder/content.html' %}
 </div>
 </div>

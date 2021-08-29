@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block title -%}
-Finder-opponent
+{{ _('Finder-opponent') }}
 {%- endblock %}
 {% block body  -%}
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/finder.css') }}">
@@ -13,19 +13,19 @@ Finder-opponent
         </form>
     </div>
     <div class="alert alert-info" role="alert" style="width:20%;">
-      <a target="_blank" rel="noopener noreferrer" href="http://squasharena.com.ua/#" style="text-decoration: none; color: orange;">Booking court: squasharena.com.ua</a>
+      <a target="_blank" rel="noopener noreferrer" href="http://squasharena.com.ua/#" style="text-decoration: none; color: orange;">{{ _('Booking court:') }} www.squasharena.com.ua</a>
     </div>
    <div class="alert alert-info" role="alert" style="width:60%;">
    <a class="time-now" id="clock" style="text-decoration: none; color: orange;"></a>
    </div>
     <div class="alert alert-info" role="alert" style="width:60%;text-align: center; color: red;">
-        <h5 class="visually-visible" style="text-align: center; color: white;">Find an opponent for the game</h5>
+        <h5 class="visually-visible" style="text-align: center; color: white;">{{ _('Find an opponent for the game') }}</h5>
         {% with messages = get_flashed_messages() %}
                     {% if messages %}
                 <h1 class="display-6">{{ messages[0] }}</h1>
             {% endif %}
         {% endwith %}
-        <h5 class="visually-hidden">Paid Opponent</h5>
+        <h5 class="visually-hidden">{{ _('Paid Opponent') }}</h5>
    </div>
 </div>
 {% include 'finder/content.html' %}

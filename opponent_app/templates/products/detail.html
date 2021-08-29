@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block title -%}
-Products #{{product.id}}
+{{ _('Products') }} #{{product.id}}
 {%- endblock %}
 
 {% block body  -%}
@@ -116,7 +116,7 @@ Products #{{product.id}}
 
 <hr>
 {# Admin area #}
-    {% if current_user.is_authenticated %}
+    {% if current_user.is_authenticated and current_user.name == 'admin' %}
  <div>
      <button id="delete-product" class="btn btn-danger">Delete</button>
  </div>

@@ -6,7 +6,7 @@
     <div class="col-lg-4">
         <div class="card card-margin" style="box-shadow: rgba(3, 102, 214, 0.3) 0px 0px 0px 3px;">
             <div class="card-header no-border">
-                <h5 class="card-title">Opponent</h5>
+                <h5 class="card-title">{{ _('Opponent') }}</h5>
             </div>
                 <div class="card-waiting">
             </div>
@@ -24,11 +24,11 @@
                         </div>
                     </div>
                     <ul class="widget-49-meeting-points" style="list-style-type: circle;">
-                        <li class="widget-49-meeting-item">City:<span>{{ date[3] }}</span></li>
-                        <li class="widget-49-meeting-item">District:<span>{{ date[4] }}</span></li>
-                        <li class="widget-49-meeting-item">Category:<span>{{ date[5] }}</span></li>
-                        <li class="widget-49-meeting-item">Email:<span>{{ date[9] }}</span></li>
-                        <li class="widget-49-meeting-item">Phone:<span>{{ date[6] }}</span></li>
+                        <li class="widget-49-meeting-item">{{ _('City:') }}<span>{{ date[3] }}</span></li>
+                        <li class="widget-49-meeting-item">{{ _('District:') }}<span>{{ date[4] }}</span></li>
+                        <li class="widget-49-meeting-item">{{ _('Category:') }}<span>{{ date[5] }}</span></li>
+                        <li class="widget-49-meeting-item">{{ _('Email:') }}<span>{{ date[9] }}</span></li>
+                        <li class="widget-49-meeting-item">{{ _('Phone:') }}<span>{{ date[6] }}</span></li>
                     </ul>
                     <div class="widget-49-meeting-action" style="margin-top: 15px;">
                              {% if not request.url_rule.endpoint == 'user_account_app.user_account' %}

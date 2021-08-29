@@ -2,16 +2,16 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Error</title>
+    <title>{{ _('Error') }}</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/500.css') }}">
 </head>
 <body>
     <div class="wrapper">
         <div class="box">
             <h1>500</h1>
-            <p>Sorry, it's me, not you.</p>
+            <p>{{ _('Sorry, it's me, not you.')}}</p>
             <p>&#58;&#40;</p>
-            <p><a href="/">Let me try again!</a></p>
+            <p><a href="/">{{ _('Let me try again!') }}</a></p>
         </div>
     </div>
 </body>

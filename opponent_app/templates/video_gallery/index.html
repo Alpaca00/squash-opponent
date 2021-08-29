@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>
         {% block title %}
-        Video Gallery
+        {{ _('Video Gallery') }}
         {% endblock %}
     </title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
@@ -28,7 +28,7 @@
          <div class="form-group">
              <label for="link-for-video"  id='label-text-video' class="form-label">{{ _('You can send us a link to your squash game and we will add it to our gallery.') }}</label>
              <input class="form-control form-control-sm" id='link-for-video' type="text" placeholder="link example: https://www.youtube.com/embed/G3hIexjAb_c" aria-label=".form-control-sm example" name="video-link" required>
-             <button type="submit" class="send-data-btn" style='margin-top: 15px;'><span class="bn39span">{{ _('SEND') }}</span></button>
+             <button type="submit" class="send-data-btn" style='margin-top: 15px;'><span class="bn39span">SEND</span></button>
         </div>
          </form>
     </div>
