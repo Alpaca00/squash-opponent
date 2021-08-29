@@ -1,8 +1,6 @@
 from opponent_app import create_app
-from opponent_app.models import db, TableResult, TableScore, Player
-import datetime
-from opponent_app import db, UserAccount, user_datastore
-from flask_security.utils import hash_password
+from opponent_app.models import TableResult, TableScore, Player
+from opponent_app import db
 
 
 positions = [1, 2, 3, 4]
@@ -82,4 +80,3 @@ for i in range(0, 6):
     table_result_factory(
         date=dates[i], team1=teamsVS[0][i], team2=teamsVS[1][i], score=scores[i]
     )
-

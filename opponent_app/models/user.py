@@ -63,10 +63,11 @@ class User(db.Model):
         ValidateInteger(User.zip_code)
 
 
-roles_users = db.Table('roles_users',
-                       Column('user_account_id', Integer, ForeignKey('users_accounts.id')),
-                       Column('role_id', Integer, ForeignKey('role.id')),
-                       )
+roles_users = db.Table(
+    "roles_users",
+    Column("user_account_id", Integer, ForeignKey("users_accounts.id")),
+    Column("role_id", Integer, ForeignKey("role.id")),
+)
 
 
 class UserAccount(db.Model, UserMixin):
@@ -82,11 +83,13 @@ class UserAccount(db.Model, UserMixin):
     confirmed = db.Column(db.Boolean, nullable=False, default=False)
     confirmed_on = db.Column(db.DateTime, nullable=True)
 
-    users_opponent = db.relationship("UserOpponent", backref="users_accounts", lazy=True)
+    users_opponent = db.relationship(
+        "UserOpponent", backref="users_accounts", lazy=True
+    )
     roles = db.relationship(
         "Role",
         secondary=roles_users,
-        backref=db.backref('users_accounts', lazy='dynamic')
+        backref=db.backref("users_accounts", lazy="dynamic"),
     )
 
     @classmethod
@@ -114,9 +117,12 @@ class UserOpponent(db.Model):
     opponent_date = Column(String(50))
     opponent_phone = Column(String(50))
     user_account_id = Column(Integer, ForeignKey("users_accounts.id"))
-    user_account = db.relationship("UserAccount", overlaps="users_account,users_opponent,users_accounts")
-    offers_opponent = db.relationship("OfferOpponent",  backref="users_opponents", lazy='dynamic')
-
+    user_account = db.relationship(
+        "UserAccount", overlaps="users_account,users_opponent,users_accounts"
+    )
+    offers_opponent = db.relationship(
+        "OfferOpponent", backref="users_opponents", lazy="dynamic"
+    )
 
 
 class OfferOpponent(db.Model):
@@ -126,10 +132,12 @@ class OfferOpponent(db.Model):
     offer_email = Column(String(50))
     offer_phone = Column(String(50))
     offer_category = Column(String(50), nullable=True, default="Amateur")
-    offer_city = Column(String(50), default='Lviv')
+    offer_city = Column(String(50), default="Lviv")
     offer_district = Column(String(50))
     offer_date = Column(String(50))
     offer_accept = Column(Boolean, unique=False, default=False)
     offer_message = Column(Text(), nullable=True)
     user_opponent_id = Column(Integer, ForeignKey("users_opponents.id"))
-    user_opponent = db.relationship("UserOpponent", overlaps="users_opponents,offers_opponent")
+    user_opponent = db.relationship(
+        "UserOpponent", overlaps="users_opponents,offers_opponent"
+    )

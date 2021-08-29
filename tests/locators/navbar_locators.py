@@ -8,4 +8,3 @@ class NavBarLocators:
     class Action:
         btn_action = (By.XPATH, "//*[@id='navbarDropdownMenuLink']")
         btn_login = (By.XPATH, "//*[@id='btn-login-unique']")
-

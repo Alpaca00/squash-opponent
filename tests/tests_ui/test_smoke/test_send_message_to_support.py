@@ -5,8 +5,6 @@ from opponent_app.models.support import SupportMessage
 from tests.locators.support_locators import SupportLocators
 
 
-
-
 SUPPORT = SupportLocators()
 QUESTION = "TEST QUESTION"
 EMAIL = "lvivsquashteam@gmail.com"

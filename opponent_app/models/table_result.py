@@ -2,7 +2,6 @@ from sqlalchemy import Column, Integer, String, Date, ForeignKey, Text
 from opponent_app.models import db
 
 
-
 class TableResult(db.Model):
     __tablename__ = "table_results"
     id = Column(Integer, primary_key=True)
@@ -26,5 +25,5 @@ class Player(db.Model):
     __tablename__ = "players"
     id = Column(Integer, primary_key=True)
     full_name = Column(Text, nullable=False)
-    table_result_id = Column(Integer, ForeignKey('table_results.id'))
-    table_result = db.relationship('TableResult', overlaps="players,table_results")
+    table_result_id = Column(Integer, ForeignKey("table_results.id"))
+    table_result = db.relationship("TableResult", overlaps="players,table_results")

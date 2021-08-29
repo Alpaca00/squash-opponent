@@ -5,16 +5,17 @@ from ast import literal_eval
 from opponent_app import mail_settings, mail
 
 
-r = db.Redis(host="redis")  # prod
-# r = db.Redis()  # dev
+# r = db.Redis(host="redis")  # prod
+r = db.Redis()  # dev
 
 
 def send_order(subject, body):
-    msg = Message(subject=subject,
-                  sender=mail_settings.get("MAIL_USERNAME"),
-                  recipients=["squashopponent@gmail.com"],
-                  body=body
-                  )
+    msg = Message(
+        subject=subject,
+        sender=mail_settings.get("MAIL_USERNAME"),
+        recipients=["squashopponent@gmail.com"],
+        body=body,
+    )
     mail.send(msg)
 
 
@@ -40,4 +41,3 @@ def send_order_data_to_user_email():
         r.delete("user_order_count")
         r.delete("user_order_phone")
         r.delete("user_order_full_name")
-

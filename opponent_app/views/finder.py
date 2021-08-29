@@ -2,6 +2,7 @@ from datetime import datetime
 import calendar
 import humanize
 from flask import request, Blueprint, render_template, g, redirect, url_for, flash
+from flask_babel import gettext
 from opponent_app.models import UserAccount, UserOpponent, OfferOpponent, db
 
 finder_app = Blueprint("finder_app", __name__)
@@ -232,7 +233,7 @@ def search():
             flash_message_for_query(by_opponent_date)
             return search_render(opponent_search=by_opponent_date)
         else:
-            flash("Nothing was found for this query.")
+            flash(gettext("Nothing was found for this query."))
     if request.method == "POST":
         post_offer()
     return redirect(url_for("finder_app.index"))

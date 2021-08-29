@@ -80,7 +80,9 @@ def create_app(environment_name="production"):
     app.register_blueprint(user_account_app, url_prefix="/<lang_code>/account")
     app.register_blueprint(about_app, url_prefix="/<lang_code>/about")
     app.register_blueprint(finder_app, url_prefix="/<lang_code>/finder")
-    app.register_blueprint(recovery_password_app, url_prefix="/<lang_code>/recovery-password")
+    app.register_blueprint(
+        recovery_password_app, url_prefix="/<lang_code>/recovery-password"
+    )
 
     @app.route("/")
     def home():

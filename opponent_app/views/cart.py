@@ -1,8 +1,7 @@
 from typing import Any
 from flask import Blueprint, render_template, request, abort, g
 from loguru import logger
-from sqlalchemy import desc
-from werkzeug.exceptions import BadRequest, RequestTimeout
+from werkzeug.exceptions import BadRequest
 from ast import literal_eval
 from opponent_app.models import Product, db, User, Order
 from opponent_app.views.product import cache

@@ -16,12 +16,12 @@ def sep_data(lst):
 
 @product_app.url_defaults
 def add_language_code(endpoint, values):
-    values.setdefault('lang_code', g.lang_code)
+    values.setdefault("lang_code", g.lang_code)
 
 
 @product_app.url_value_preprocessor
 def pull_lang_code(endpoint, values):
-    g.lang_code = values.pop('lang_code')
+    g.lang_code = values.pop("lang_code")
 
 
 @product_app.route("/")
@@ -30,7 +30,7 @@ def product_list():
     return render_template("products/index.html", products=product)
 
 
-@product_app.route("/<int:product_id>/", methods=['GET', 'DELETE', 'POST'])
+@product_app.route("/<int:product_id>/", methods=["GET", "DELETE", "POST"])
 def product_detail(product_id: int):
     product = Product.query.filter_by(id=product_id).one_or_none()
     if product is None:
@@ -38,7 +38,7 @@ def product_detail(product_id: int):
     if request.method == "POST":
         res = request.values
         data = sep_data(res)
-        cache.setex(name='cart', time=3600, value=str(data[0:5]))
+        cache.setex(name="cart", time=3600, value=str(data[0:5]))
     if request.method == "DELETE":
         product.deleted = True
         db.session.commit()
@@ -52,10 +52,10 @@ def product_detail(product_id: int):
 @product_app.errorhandler(408)
 def handle_request_timeout_error(exception):
     logger.info(exception)
-    return render_template('408.html'), 408
+    return render_template("408.html"), 408
 
 
 @product_app.errorhandler(404)
 def handle_not_found_error(exception):
     logger.info(exception)
-    return render_template('404.html'), 404
+    return render_template("404.html"), 404
