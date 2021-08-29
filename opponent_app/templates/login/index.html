@@ -3,7 +3,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="UTF-8">
     <title>
-        login
+        {{ _('login') }}
     </title>
 	<link rel="shortcut icon" href="{{ url_for('static', filename='img/squash-ball.png') }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
@@ -17,12 +17,14 @@
 		<div class="card-nest">
 			<div class="card-header">
 				<h3>{{ _('Sign In') }}</h3>
+				{# Admin area (feature for new release) #}
+    			{% if current_user.is_authenticated and current_user.name == 'admin' %}
 				<div class="d-flex justify-content-end social_icon" id="social-icon">
-
 					<span><i class="fab fa-facebook-square"></i></span>
 					<span><i class="fab fa-google-plus-square"></i></span>
 					<span><i class="fab fa-twitter-square"></i></span>
 				</div>
+				{% endif %}
 			</div>
 			<div class="card-body">
                 {% with messages = get_flashed_messages() %}
