@@ -1,4 +1,14 @@
-from flask import request, render_template, redirect, url_for, flash, Blueprint, g, current_app, abort, Response
+from flask import (
+    request,
+    render_template,
+    redirect,
+    url_for,
+    flash,
+    Blueprint,
+    g,
+    current_app,
+    abort,
+)
 from flask_admin import Admin, BaseView, AdminIndexView, expose
 from flask_babel import refresh
 from flask_login import current_user, login_user, logout_user
@@ -6,9 +16,9 @@ from flask_security.utils import verify_password
 from flask_admin.contrib.sqla import ModelView
 from sqlalchemy import desc
 from loguru import logger
+from flask_babel import gettext
 from opponent_app.extensions import login_manager
 from opponent_app.helpers import send_order_data_to_user_email
-from opponent_app import babel
 from opponent_app.models import (
     UserAccount,
     TableResult,
@@ -31,17 +41,17 @@ home_app = Blueprint("home_app", __name__)
 
 @home_app.url_defaults
 def add_language_code(endpoint, values):
-    values.setdefault('lang_code', g.lang_code)
+    values.setdefault("lang_code", g.lang_code)
 
 
 @home_app.url_value_preprocessor
 def pull_lang_code(endpoint, values):
-    g.lang_code = values.pop('lang_code')
+    g.lang_code = values.pop("lang_code")
 
 
 @home_app.before_request
 def before_request():
-    if g.lang_code not in current_app.config['LANGUAGES']:
+    if g.lang_code not in current_app.config["LANGUAGES"]:
         abort(404)
 
 
@@ -95,7 +105,7 @@ def login_admin():
                         logger.info("Admin role.")
                         return redirect(url_for("admin.index"))
                 else:
-                    flash("Invalid username or password.")
+                    flash(gettext("Invalid username or password."))
                     return redirect(url_for("home_app.login_admin"))
     return render_template("admin/login_index.html", form=form)
 
@@ -116,7 +126,6 @@ def handle_not_found_error(exception):
 def handle_resource_is_forbidden_error(exception):
     logger.info(exception)
     return render_template("403.html"), 403
-
 
 
 class MyModelView(ModelView):

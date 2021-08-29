@@ -2,6 +2,7 @@ import datetime
 from flask import Blueprint, render_template, request, url_for, redirect, flash, g
 from flask_login import login_required, login_user, current_user
 from flask_security.utils import hash_password
+from flask_babel import gettext
 from opponent_app.models.form import RegisterForm
 from opponent_app.models import db, user_datastore, UserAccount
 from opponent_app.views.validate_form_registration import (
@@ -57,7 +58,7 @@ def register():
                 subject = "Please confirm your email"
                 send_info_by_user(recipient=user.email, subject=subject, template=html)
                 login_user(user)
-                flash("Thanks for registering")
+                flash(gettext("Thanks for registering"))
                 return redirect(url_for("register_app.unconfirmed"))
     except ValidationFormError as err:
         flash(f"{err}")
@@ -80,7 +81,7 @@ def confirm_email(token):
             user.confirmed_on = datetime.datetime.now()
             db.session.add(user)
             db.session.commit()
-            flash("You have confirmed your account. Thanks!", "success")
+            flash(gettext("You have confirmed your account. Thanks!", "success"))
         return redirect(url_for("home_app.index"))
 
 
@@ -89,7 +90,7 @@ def confirm_email(token):
 def unconfirmed():
     if current_user.confirmed:
         return redirect("home_app.index")
-    flash("Please confirm your account!", "warning")
+    flash(gettext("Please confirm your account!", "warning"))
     return render_template("unconfirmed.html")
 
 
@@ -101,7 +102,7 @@ def resend_confirmation():
     html = render_template("gmail.html", confirm_url=confirm_url)
     subject = "Please confirm your email"
     send_info_by_user(recipient=current_user.email, subject=subject, template=html)
-    flash("A new confirmation email has been sent.", "success")
+    flash(gettext("A new confirmation email has been sent.", "success"))
     return redirect(url_for("register_app.unconfirmed"))
 
 

@@ -2,7 +2,8 @@ import random
 import string
 from flask import Blueprint, render_template, request, url_for, redirect, flash, g
 from flask_security.utils import hash_password
-from opponent_app.models import db, user_datastore, UserAccount
+from flask_babel import gettext
+from opponent_app.models import db, UserAccount
 from opponent_app.helpers import mail, mail_settings, Message
 from opponent_app.helpers import r
 
@@ -34,7 +35,7 @@ def password_recovery():
             )
             subject = "Squash Opponent account recovery."
             send_info_by_user(subject=subject, recipient=user.email, template=html)
-            flash("Security code has been sent to the mail.")
+            flash(gettext("Security code has been sent to the mail."))
             return redirect(url_for("recovery_password_app.recover", email=email))
         else:
             flash("Invalid email.")
@@ -58,7 +59,7 @@ def recover(email):
                     url_for("recovery_password_app.change_password", email=email)
                 )
             else:
-                flash("Wrong security code.")
+                flash(gettext("Wrong security code."))
                 r.delete("User_Security_Code")
     return render_template("login/recover.html")
 
@@ -75,7 +76,7 @@ def change_password(email):
             if new_password == password_confirm:
                 user.password = hash_password(new_password)
                 db.session.commit()
-                flash("Your password has been changed.")
+                flash(gettext("Your password has been changed."))
                 html = render_template("login/mail_password_changed.html")
                 send_info_by_user(
                     subject="Your password has been changed.",
@@ -84,7 +85,7 @@ def change_password(email):
                 )
                 return redirect(url_for("login_app.login"))
         else:
-            flash("Something went wrong.")
+            flash(gettext("Something went wrong."))
             r.delete("User_Security_Code")
             return render_template("login/recover.html")
     return render_template("login/new_password.html")

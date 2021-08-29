@@ -40,11 +40,11 @@ def upload_photo():
             img = Image.open(io.BytesIO(images.data))
             img.save(f"opponent_app/static/img/user_photo/{images.name}")
             flash(gettext("Successful. Will soon appear in the gallery."))
-            subject = 'The user uploaded new photos from squash court to our gallery.'
+            subject = "The user uploaded new photos from squash court to our gallery."
             send_info_about_gallery(subject=subject, body=f"Verify {images.name}")
             return render_template("gallery/index.html")
         else:
-            flash("File does not match a format")
+            flash(gettext("File does not match a format"))
             return render_template("gallery/index.html")
 
 
@@ -66,9 +66,10 @@ def validate_image(file_name):
 
 
 def send_info_about_gallery(subject, body):
-    msg = Message(subject=subject,
-                  sender=mail_settings.get("MAIL_USERNAME"),
-                  recipients=["squashopponent@gmail.com"],
-                  body=body
-                  )
+    msg = Message(
+        subject=subject,
+        sender=mail_settings.get("MAIL_USERNAME"),
+        recipients=["squashopponent@gmail.com"],
+        body=body,
+    )
     return mail.send(msg)
