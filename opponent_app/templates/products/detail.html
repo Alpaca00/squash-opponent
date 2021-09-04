@@ -1,9 +1,7 @@
 {% extends 'base.html' %}
-
 {% block title -%}
 {{ _('Products') }} #{{product.id}}
 {%- endblock %}
-
 {% block body  -%}
 <div class="container">
 <h2 id="product-name">{{ product.name_product }}
@@ -12,7 +10,6 @@
     {% endif %}
 </h2>
 <a href="{{ url_for('product_app.product_list') }}" style="text-decoration: none; color: gray;">{{ _('Product list') }}</a><hr>
-
  <div class="cart_section">
      <div class="container-fluid">
          <div class="row">
@@ -52,13 +49,10 @@
                                      </div>
                                      <div class="cart_item_quantity cart_info_col">
                                          <div class="cart_item_title">{{ _('Print') }}</div>
-
                                          <input id="print-value" value="TEAM" data-bs-toggle='tooltip' data-bs-placement='top'
                                                 title='If your select of quantity is greater than one, write each print through a comma and highlight the text.'>
                                             <p id="log">{{ _('You selected:') }}</p>
                                      </div>
-
-
                                       <div class="cart_item_quantity cart_info_col">
                                          <div class="cart_item_title">{{ _('Sex') }}</div>
                                          <div class="cart_item_text" id="select-sex">{{ t_shirt.sex }}</div>
@@ -99,7 +93,6 @@
          </div>
      </div>
  </div>
-
 <div class="modal fade" id="gallery-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-lg">
     <div class="modal-content">
@@ -113,7 +106,6 @@
     </div>
   </div>
 </div>
-
 <hr>
 {# Admin area #}
     {% if current_user.is_authenticated and current_user.name == 'admin' %}
@@ -161,11 +153,24 @@ function logSelection(event) {
         document.querySelector('#total-order2').textContent = resTotal;
         arrPostData.push(resTotal, text, textCol, textQ, log.textContent);
         console.log(arrPostData);
-        const xhr = new XMLHttpRequest();
-        xhr.open("POST", "http://localhost/en/products/9/", true);
-        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
-        xhr.send(arrPostData
+
+        $.ajax({
+        method: 'POST',
+        success: function (res) {
+            console.log(res)
+        },
+        error: function (err) {
+            console.error(err)
+            },
+        complete: function () {
+            const xhr = new XMLHttpRequest();
+            xhr.open("POST", "/en/products/9/");
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
+            xhr.send(arrPostData
             );
+        },
+       })
+
     })
 }
 
@@ -173,29 +178,29 @@ function logSelection(event) {
 document.addEventListener('select', logSelection);
 
 </script>
-<!--<script>-->
+<script>
 
-<!--    $(function () {-->
-<!--    const name = $('#product-name')-->
-<!--    console.log(name.text())-->
+    $(function () {
+    const name = $('#product-name')
+    console.log(name.text())
 
-<!--    $('#delete-product').click(function () {-->
+    $('#delete-product').click(function () {
 
-<!--    $.ajax({-->
-<!--        method: 'DELETE',-->
-<!--        success: function (res) {-->
-<!--            console.log(res)-->
-<!--            console.log(res.data)-->
-<!--        },-->
-<!--        error: function (err) {-->
-<!--            console.error(err)-->
-<!--            },-->
-<!--        complete: function () {-->
-<!--            window.location = '{{ url_for('product_app.product_list') }}'-->
-<!--        },-->
-<!--       })-->
-<!--      })-->
-<!--    });-->
-<!--</script>-->
+    $.ajax({
+        method: 'DELETE',
+        success: function (res) {
+            console.log(res)
+            console.log(res.data)
+        },
+        error: function (err) {
+            console.error(err)
+            },
+        complete: function () {
+            window.location = '{{ url_for('product_app.product_list') }}'
+        },
+       })
+      })
+    });
+</script>
 
 {%- endblock %}
