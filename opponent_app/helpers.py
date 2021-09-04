@@ -2,12 +2,17 @@ import os
 from flask_mail import Message
 import redis as db
 from ast import literal_eval
+from werkzeug.exceptions import abort
+
 from opponent_app import mail_settings, mail
 
 R_HOST = os.environ.get("R_HOST")
 
-r = db.Redis(host=R_HOST)  # prod
-# r = db.Redis()  # dev
+try:
+    # r = db.Redis(host='redis', port=6379, db=0)  # prod
+    r = db.Redis()  # dev
+except db.exceptions.ConnectionError:
+    raise abort(408)
 
 
 def send_order(subject, body):
