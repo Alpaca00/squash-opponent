@@ -66,7 +66,7 @@ def index():
     if request.method == "GET":
         table_result = TableResult.query.order_by(TableResult.position).all()
         table_score = TableScore.query.order_by(desc(TableScore.date)).all()
-        send_order_data_to_user_email()
+        # send_order_data_to_user_email()
         return render_template(
             "base.html",
             result=table_result,
