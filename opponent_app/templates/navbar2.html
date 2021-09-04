@@ -11,11 +11,14 @@
                        data-bs-toggle='tooltip' data-bs-placement='top' title="{{ _('Finder-Opponent') }}"
                        href="{{ url_for('finder_app.index') }}">{{ _('Finder-Opponent') }}</a>
     </li>
+    {# Test area #}
+    {% if current_user.is_authenticated and current_user.name == 'admin' %}
     <li>
        <a class="nav-link {% if request.url_rule.endpoint == 'product_app.product_list' %} active {% endif %}" style="{% if request.url_rule.endpoint == 'product_app.product_list' %} color: white; {% else %} color: gray; {% endif %}"
                        data-bs-toggle='tooltip' data-bs-placement='top' title="{{ _('Products') }}"
                        href="{{ url_for('product_app.product_list') }}">{{ _('Products') }}</a>
     </li>
+    {% endif %}
     <li>
       <a class="nav-link {% if request.url_rule.endpoint == 'gallery_app.gallery_list' %} active {% endif %}" style="{% if request.url_rule.endpoint == 'gallery_app.gallery_list' %} color: white; {% else %} color: gray; {% endif %}"
                        data-bs-toggle='tooltip' data-bs-placement='top' title="{{ _('Photo-Gallery') }}"
@@ -26,11 +29,14 @@
                        data-bs-toggle='tooltip' data-bs-placement='top' title="{{ _('Video-Gallery') }}"
                        href="{{ url_for('video_app.video_list') }}">{{ _('Video-Gallery') }}</a>
     </li>
+    {# Test area #}
+    {% if current_user.is_authenticated and current_user.name == 'admin' %}
     <li>
         <a class="nav-link {% if request.url_rule.endpoint == 'cart_app.empty_list' %} active {% endif %}" style="{% if request.url_rule.endpoint == 'cart_app.empty_list' %} color: white; {% else %} color: gray; {% endif %}"
                        data-bs-toggle='tooltip' data-bs-placement='top' title="{{ _('Cart') }}"
                         href="{{ url_for('cart_app.empty_list') }}">{{ _('Cart') }}</a>
     </li>
+    {% endif %}
     <li>
         <a class="nav-link {% if request.url_rule.endpoint == 'support_app.support_list' %} active {% endif %}" style="{% if request.url_rule.endpoint == 'support_app.support_list' %} color: white; {% else %} color: gray;{% endif %}"
                        data-bs-toggle='tooltip' data-bs-placement='top' title="{{ _('Support') }}"
