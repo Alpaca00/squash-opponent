@@ -12,11 +12,12 @@ services:
       R_HOST: redis
     volumes:
       - /alpaca_web:/app
-    ports:
-      - 8000:8000
+    expose:
+      - 8000
     depends_on:
       - pg
       - redis
+      - nginx
     command: gunicorn -w 1 -b 0.0.0.0:8000 wsgi:app
   pg:
     image: postgres:13.3
@@ -31,6 +32,8 @@ services:
     - 5432:5432
   redis:
     image: redis:6.2
+    expose:
+      - 6379
     ports:
       - 6379:6379
     volumes:
@@ -41,6 +44,4 @@ services:
     restart: always
     build: ./nginx
     ports:
-      - "80:80"
-    depends_on:
-      - app
+      - 80:80
