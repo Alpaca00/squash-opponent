@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, jsonify, abort, g
+from flask import Blueprint, render_template, request, jsonify, abort, g, make_response
 from flask_babel import refresh
 from loguru import logger
 import redis
@@ -10,8 +10,12 @@ cache = redis.Redis()
 
 
 def sep_data(lst):
-    res = [item.split(",") for item in lst]
-    return res[0][::-1]
+    try:
+        res = [item.split(",") for item in lst]
+        return res[0][::-1]
+    except IndexError:
+        return "Exception: Index out of range"
+
 
 
 @product_app.url_defaults
@@ -38,7 +42,12 @@ def product_detail(product_id: int):
     if request.method == "POST":
         res = request.values
         data = sep_data(res)
-        cache.setex(name="cart", time=3600, value=str(data[0:5]))
+        res = make_response("Setting a cookie")
+        res.set_cookie(key='cart', value=str(data[0:5]), max_age=None)
+        try:
+            cache.setex(name="cart", time=300, value=str(data[0:5]))
+        except TypeError:
+            return "The object is not subscriptable"
     if request.method == "DELETE":
         product.deleted = True
         db.session.commit()
