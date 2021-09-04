@@ -27,6 +27,7 @@ class DevConfig(BaseConfig):
 
 class ProdConfig(BaseConfig):
     SQLALCHEMY_DATABASE_URI = f"postgresql+psycopg2://user:password@{PG_HOST}:5432/alpaca"
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 
 class TestConfig(BaseConfig):
