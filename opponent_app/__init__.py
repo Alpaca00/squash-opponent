@@ -66,7 +66,6 @@ def create_app(environment_name="production"):
 
     @app.errorhandler(500)
     def handle_internal_server_error(exception):
-        logger.info(exception)
         return render_template("500.html"), 500
 
     app.register_blueprint(home_app, url_prefix="/<lang_code>")
