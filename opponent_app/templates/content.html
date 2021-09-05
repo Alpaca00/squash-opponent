@@ -1,5 +1,30 @@
-
-
+{% if g.lang_code == "en" %}
+<div class="accordion-item" style="margin-top:20px; margin-bottom: 25px; background-color:#e6e6e6;">
+    <h2 class="accordion-header" id="panelsStayOpen-headingZero">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseZero" aria-expanded="false" aria-controls="panelsStayOpen-collapseZero">
+        {{ _('Join us') }}
+      </button>
+    </h2>
+    <div id="panelsStayOpen-collapseZero" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingZero">
+      <div class="accordion-body">
+        <a href="/en/login"><img src="{{ url_for('static', filename='img/eng_banner.jpg') }}" alt="" class="join-banner-en" style="display: block; margin-left: auto; margin-right: auto;"></a>
+      </div>
+    </div>
+  </div>
+{% else %}
+<div class="accordion-item" style="margin-top:20px; margin-bottom: 25px; background-color:#e6e6e6;">
+    <h2 class="accordion-header" id="panelsStayOpen-headingZero1">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseZero1" aria-expanded="false" aria-controls="panelsStayOpen-collapseZero1">
+        Регіструйтесь
+      </button>
+    </h2>
+    <div id="panelsStayOpen-collapseZero1" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingZero1">
+      <div class="accordion-body">
+        <a href="/uk/login"><img src="{{ url_for('static', filename='img/ukr_banner.jpg') }}" alt="" class="join-banner-ukr" style="display: block; margin-left: auto; margin-right: auto;"></a>
+      </div>
+    </div>
+  </div>
+{% endif %}
 <div class="accordion" id="accordionPanelsStayOpenExample" style="margin-top:25px; margin-bottom: 10px; background-color: gray;">
   <div class="accordion-item">
     <h2 class="accordion-header" id="panelsStayOpen-headingOne">
