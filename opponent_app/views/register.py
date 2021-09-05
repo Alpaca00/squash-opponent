@@ -71,17 +71,17 @@ def confirm_email(token):
     try:
         email = confirm_token(token)
     except:
-        flash("The confirmation link is invalid or has expired.", "danger")
+        flash("Danger. The confirmation link is invalid or has expired.")
     else:
         user = UserAccount.query.filter_by(email=email).first_or_404()
         if user.confirmed:
-            flash("Account already confirmed. Please login.", "success")
+            flash("Account already confirmed. Please login.")
         else:
             user.confirmed = True
             user.confirmed_on = datetime.datetime.now()
             db.session.add(user)
             db.session.commit()
-            flash(gettext("You have confirmed your account. Thanks!", "success"))
+            flash(gettext("Success. You have confirmed your account. Thanks!"))
         return redirect(url_for("home_app.index"))
 
 
@@ -90,7 +90,7 @@ def confirm_email(token):
 def unconfirmed():
     if current_user.confirmed:
         return redirect("home_app.index")
-    flash(gettext("Please confirm your account!", "warning"))
+    flash(gettext("Warning! Please confirm your account!"))
     return render_template("unconfirmed.html")
 
 
@@ -102,7 +102,7 @@ def resend_confirmation():
     html = render_template("gmail.html", confirm_url=confirm_url)
     subject = "Please confirm your email"
     send_info_by_user(recipient=current_user.email, subject=subject, template=html)
-    flash(gettext("A new confirmation email has been sent.", "success"))
+    flash(gettext("Success. A new confirmation email has been sent."))
     return redirect(url_for("register_app.unconfirmed"))
 
 
