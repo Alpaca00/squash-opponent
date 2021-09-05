@@ -9,8 +9,8 @@ from opponent_app import mail_settings, mail
 R_HOST = os.environ.get("R_HOST")
 
 try:
-    # r = db.Redis(host='redis', port=6379, db=0)  # prod
-    r = db.Redis()  # dev
+    r = db.Redis(host='redis', port=6379, db=0)  # prod
+    # r = db.Redis()  # dev
 except db.exceptions.ConnectionError:
     raise abort(408)
 
