@@ -65,9 +65,9 @@
                         href="{{ url_for('user_account_app.logout') }}">{{ _('Logout') }}</a>
     </li>
     {% endif %}
-    <select class="selectpicker" data-width="fit" id="select-option-lang">
-      <option value="{{ url_for(request.endpoint, lang_code='en', post_id=1, product_id=9, cart_id=9, email=1 ) }}">English</option>
-      <option  value="{{ url_for(request.endpoint, lang_code='uk', product_id=9, cart_id=9, post_id=1, email=1 ) }}">Українська</option>
+    <select class="selectpicker" data-width="fit" id="select-option-lang" style="color: gray; background-color: rgba(255, 255, 255, 0.1)">
+      <option value="{{ url_for(request.endpoint, lang_code='en', post_id=1, product_id=9, cart_id=9, email=1 ) }}">US</option>
+      <option  value="{{ url_for(request.endpoint, lang_code='uk', product_id=9, cart_id=9, post_id=1, email=1 ) }}">UA</option>
     </select>
   </ul>
 </nav>
