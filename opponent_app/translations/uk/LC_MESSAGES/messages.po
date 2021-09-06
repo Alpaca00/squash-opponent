@@ -231,7 +231,7 @@ msgstr "Введіть оптимальну дату та час для гри:"
 
 #: templates/user.html:91
 msgid "HISTORY"
-msgstr ""
+msgstr "ІСТОРІЯ"
 
 #: templates/cart/empty.html:26 templates/cart/index.html:32
 #: templates/products/detail.html:35 templates/user_post_offer.html:3
