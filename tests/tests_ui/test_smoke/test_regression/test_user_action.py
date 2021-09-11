@@ -31,7 +31,7 @@ class TestUserAction:
     test_name = "Rino"
     test_password = "qwerty12345"
 
-    # @pytest.mark.create_image
+    @pytest.mark.create_image
     def test_user_can_register(self, user):
         user.open("/").element(self.navbar_locator.Action.btn_action).click().element(
             self.navbar_locator.Action.btn_login
@@ -49,7 +49,7 @@ class TestUserAction:
             self.register_form_locator.submit_btn
         ).click()
 
-    # @pytest.mark.create_image
+    @pytest.mark.create_image
     def test_can_user_login(self, user):
         user.open("/").element(self.navbar_locator.Action.btn_action).click().element(
             self.navbar_locator.Action.btn_login
