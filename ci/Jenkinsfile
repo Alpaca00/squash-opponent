@@ -2,7 +2,13 @@ pipeline {
     agent any
 
     stages {
-        cobertura coberturaReportFile: 'ci/coverage.xml'
+        cobertura coberturaReportFile: 'output/coverage/jest/cobertura-coverage.xml'
+         steps {
+                pip install pipenv
+                pipenv install --ignore-pipfile
+                pipenv run pytest -s -H tests/tests_ui/test_smoke/test_send_offer_to_opponent.py
+                pipenv run pytest -s -H tests/tests_ui/test_smoke/test_app_photo_gallery.py
+            }
     }
      post {
         always {
