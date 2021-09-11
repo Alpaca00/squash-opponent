@@ -54,6 +54,7 @@ def user(request):
             options = webdriver.ChromeOptions()
             if config_param["headless"]:
                 options.add_argument("--headless")
+                options.add_argument("--no-sandbox")
             if config_param["maximized"]:
                 options.add_argument("--maximized")
             browser = Browser(
