@@ -15,6 +15,7 @@ class TestFinderOpponent:
         user.open("/").element(self.navbar_locator.btn_finder_opponent).click()
         assert user.driver.title == "Finder-opponent"
 
+    @pytest.mark.create_image
     def test_make_an_offer_if_already_made(self, user):
         user.open("/en/finder").all(self.finder_opponent_locator.btns_offer)[0].click()
         alert = user.config.driver.switch_to.alert
