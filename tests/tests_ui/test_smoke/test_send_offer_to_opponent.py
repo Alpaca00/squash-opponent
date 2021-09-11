@@ -8,6 +8,7 @@ class TestFinderOpponent:
     navbar_locator = NavBarLocators()
     finder_opponent_locator = FinderOpponentLocators()
 
+    @pytest.mark.skip
     def test_click_on_finder_opponent(self, user):
         user.open("/").element(self.navbar_locator.btn_finder_opponent).hover().should(
             have.exact_text("FINDER-OPPONENT")
