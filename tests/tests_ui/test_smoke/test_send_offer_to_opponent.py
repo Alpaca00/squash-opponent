@@ -8,12 +8,12 @@ class TestFinderOpponent:
     navbar_locator = NavBarLocators()
     finder_opponent_locator = FinderOpponentLocators()
 
-    def test_click_on_finder_opponent(self, user):
-        user.open("/").element(self.navbar_locator.btn_finder_opponent).hover().should(
-            have.exact_text("FINDER-OPPONENT")
-        )
-        user.open("/").element(self.navbar_locator.btn_finder_opponent).click()
-        assert user.driver.title == "Finder-opponent"
+    # def test_click_on_finder_opponent(self, user):
+    #     user.open("/").element(self.navbar_locator.btn_finder_opponent).hover().should(
+    #         have.exact_text("FINDER-OPPONENT")
+    #     )
+    #     user.open("/").element(self.navbar_locator.btn_finder_opponent).click()
+    #     assert user.driver.title == "Finder-opponent"
 
     def test_make_an_offer_if_already_made(self, user):
         user.open("/en/finder").all(self.finder_opponent_locator.btns_offer)[0].click()
