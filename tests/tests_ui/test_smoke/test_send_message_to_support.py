@@ -7,7 +7,7 @@ from tests.locators.support_locators import SupportLocators
 
 SUPPORT = SupportLocators()
 QUESTION = "TEST QUESTION"
-EMAIL = "lvivsquashteam@gmail.com"
+EMAIL = "squashopponent@gmail.com"
 SUBJECT = "TEST SUBJECT"
 TEXT = "TEST TEXT"
 
