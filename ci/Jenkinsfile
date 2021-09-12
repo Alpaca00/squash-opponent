@@ -29,18 +29,19 @@ pipeline {
                 echo 'the job has been finished.'
             }
         }
-    success {
-        mail(from: "squashopponent@gmail.com",
-                to: "squashopponent@gmail.com",
-                subject: "That build passed.",
-                body: "Nothing to see here")
-    }
+//     success {
+//         mail(from: "squashopponent@gmail.com",
+//                 to: "squashopponent@gmail.com",
+//                 subject: "That build passed.",
+//                 body: "Nothing to see here")
+//     }
+//
+//     failure {
+//         mail(from: "squashopponent@gmail.com",
+//                 to: "squashopponent@gmail.com",
+//                 subject: "That build failed!",
+//                 body: "Nothing to see here")
+//     }
 
-    failure {
-        mail(from: "squashopponent@gmail.com",
-                to: "squashopponent@gmail.com",
-                subject: "That build failed!",
-                body: "Nothing to see here")
-    }
   }
 }
