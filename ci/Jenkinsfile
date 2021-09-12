@@ -1,18 +1,46 @@
 pipeline {
     agent any
-
-    stages {
-         steps {
-                cobertura coberturaReportFile: 'output/coverage/jest/cobertura-coverage.xml'
-                pip install pipenv
-                pipenv install --ignore-pipfile
-                pipenv run pytest -s -H "tests/tests_ui/test_smoke/test_send_offer_to_opponent.py"
-                pipenv run pytest -s -H "tests/tests_ui/test_smoke/test_app_photo_gallery.py"
-            }
-    }
-     post {
-        always {
-          step([$class: 'CoberturaPublisher', coberturaReportFile: 'output/coverage/jest/cobertura-coverage.xml'])
+     environment {
+        CHROME_BIN='/usr/bin/google-chrome-stable'
         }
-      }
+    stages {
+        stage('checkout') {
+            steps {
+                checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: '169bae99-5e7b-4942-8431-81dbc58b40e4', url: 'https://github.com/Alpaca00/squash-opponent.git']]])
+            }
+        }
+        stage('build-test') {
+            steps {
+                git branch: 'main', credentialsId: '169bae99-5e7b-4942-8431-81dbc58b40e4', url: 'https://github.com/Alpaca00/squash-opponent.git'
+                script {
+                    sh 'apt-get update && apt-get install -y wget'
+                    sh 'wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -'
+                    echo '"deb http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google.list'
+                    sh 'apt-get update'
+                    sh 'apt-get install -y google-chrome-stable xvfb'
+                    sh 'pip install pipenv'
+                    sh 'pipenv install'
+                    sh 'pipenv run pytest -s -H tests/tests_ui/test_smoke/test_send_offer_to_opponent.py'
+                }
+            }
+        }
+        stage('finish') {
+            steps {
+                echo 'the job has been finished.'
+            }
+        }
+    success {
+        mail(from: "squashopponent@gmail.com",
+                to: "squashopponent@gmail.com",
+                subject: "That build passed.",
+                body: "Nothing to see here")
+    }
+
+    failure {
+        mail(from: "squashopponent@gmail.com",
+                to: "squashopponent@gmail.com",
+                subject: "That build failed!",
+                body: "Nothing to see here")
+    }
+  }
 }
