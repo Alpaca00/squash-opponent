@@ -10,7 +10,7 @@ jobs:
         run: |
           pip install pipenv
           pipenv install --dev
-          pipenv run coverage run -m pytest -s -H tests/tests_ui/test_smoke/test_app_photo_gallery.py
+          pipenv run coverage run -m pytest -sv --cov-config .coveragerc --cov-report xml:coverage.xml --tb=short tests/tests_ui/test_smoke/test_app_photo_gallery.py
           pipenv run coverage report -m
       - name: Upload
         uses: codecov/codecov-action@v2
