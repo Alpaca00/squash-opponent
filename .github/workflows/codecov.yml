@@ -8,9 +8,9 @@ jobs:
         uses: actions/checkout@main
       - name: Test
         run: |
-          gcc -ftest-coverage -fprofile-arcs -O0 -o test test.c lib.c
-          ./tests/tests_ui/test_smoke/test_send_offer_to_opponent.py
-          gcov -abcfu lib.c
+          pip install pipenv
+          pipenv install --dev
+          pipenv run coverage run -m pytest -s -H tests/tests_ui/test_smoke/test_app_photo_gallery.py
       - name: Upload
         uses: codecov/codecov-action@v1
         with:
