@@ -13,7 +13,7 @@ jobs:
           pipenv run coverage run -m pytest -s -H -sv --cov-config .coveragerc --cov-report xml:coverage.xml --tb=short tests/tests_ui/test_smoke/test_app_photo_gallery.py
           pipenv run coverage report -m
       - name: Upload
-        uses: codecov/codecov-action@v2
+        uses: codecov/codecov-action@v1
         with:
           fail_ci_if_error: true
 
