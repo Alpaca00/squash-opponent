@@ -8,17 +8,14 @@ jobs:
         uses: actions/checkout@main
       - name: Test
         run: |
+          gcc -ftest-coverage -fprofile-arcs -O0 -o test test.c lib.c
           pip install pipenv
           pipenv install --dev
-          pipenv run pytest --cov=./tests/tests_ui/test_smoke/test_app_photo_gallery.py --cov-report=xml
+          pipenv run coverage run -m pytest -s -H tests/tests_ui/test_smoke/test_app_photo_gallery.py
+          pipenv run coverage report -m
+          gcov -abcfu lib.c
       - name: Upload
-        uses: codecov/codecov-action@v1
+        uses: codecov/codecov-action@v2
         with:
-          directory: ./coverage/reports/
-          env_vars: OS,PYTHON
           fail_ci_if_error: true
-          files: ./coverage1.xml,./coverage2.xml
-          flags: pytest
-          name: codecov-umbrella
-          path_to_write_report: ./coverage/codecov_report.txt
-          verbose: true
+
