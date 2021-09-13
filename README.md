@@ -7,6 +7,8 @@
 <img alt="Website" src="https://img.shields.io/website?down_color=lightgrey&down_message=offline&style=for-the-badge&up_color=blue&up_message=online&url=https%3A%2F%2Fshields.io">
 www.squashopponent.com.ua<hr>
 
+<a href='http://161.35.199.243:8080/job/sqaush-opponent%20ui%20test/'><img src='http://161.35.199.243:8080/buildStatus/icon?job=sqaush-opponent+ui+test'></a>
+
 The version of the site for beta testing:
 www.alpaca00.website<hr>
 
