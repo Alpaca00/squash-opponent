@@ -11,7 +11,7 @@ pipeline {
         }
         stage('build-test') {
             steps {
-                git branch: 'main', credentialsId: '169bae99-5e7b-4942-8431-81dbc58b40e4', url: 'https://github.com/Alpaca00/squash-opponent.git'
+                git branch: 'main', credentialsId: 'squash_opponent', url: 'https://github.com/Alpaca00/squash-opponent.git'
                 script {
                     sh 'apt-get update && apt-get install -y wget'
                     sh 'wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -'
@@ -20,28 +20,30 @@ pipeline {
                     sh 'apt-get install -y google-chrome-stable xvfb'
                     sh 'pip install pipenv'
                     sh 'pipenv install'
+                    sh 'pipenv install --dev'
                     sh 'pipenv run pytest -s -H tests/tests_ui/test_smoke/test_send_offer_to_opponent.py'
+                    sh 'pipenv run pytest -s -H tests/tests_ui/test_smoke/test_app_photo_gallery.py'
                 }
             }
         }
+        stage('Build image') {
+          steps {
+              withDockerRegistry(credentialsId: 'opponent_docker', url: 'https://registry.hub.docker.com ') {
+                sh 'docker build -t alpaca00/opponent:latest .'
+                sh 'docker login -u $DOCKER_USERNAME --password $DOCKER_PASSWORD'
+                sh 'docker push alpaca00/opponent:latest'
+                sh 'docker image rm alpaca00/opponent'
+                }
+                script {
+                    echo 'Done.'
+                    }
+                }
+            }
         stage('finish') {
             steps {
-                echo 'the job has been finished.'
+                echo 'The job has been finished.'
+
             }
         }
-//     success {
-//         mail(from: "squashopponent@gmail.com",
-//                 to: "squashopponent@gmail.com",
-//                 subject: "That build passed.",
-//                 body: "Nothing to see here")
-//     }
-//
-//     failure {
-//         mail(from: "squashopponent@gmail.com",
-//                 to: "squashopponent@gmail.com",
-//                 subject: "That build failed!",
-//                 body: "Nothing to see here")
-//     }
-
-  }
+    }
 }
