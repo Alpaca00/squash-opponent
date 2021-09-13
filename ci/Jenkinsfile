@@ -23,6 +23,7 @@ pipeline {
                     sh 'pipenv install --dev'
                     sh 'pipenv run pytest -s -H tests/tests_ui/test_smoke/test_send_offer_to_opponent.py'
                     sh 'pipenv run pytest -s -H tests/tests_ui/test_smoke/test_app_photo_gallery.py'
+                    sh 'pipenv run pytest -s -H tests/tests_ui/test_smoke/test_regression/test_user_action.py'
                 }
             }
         }
