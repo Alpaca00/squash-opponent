@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2021-08-29 13:41+0300\n"
+"POT-Creation-Date: 2021-09-14 11:53+0300\n"
 "PO-Revision-Date: 2021-08-29 11:36+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: uk\n"
@@ -20,80 +20,86 @@ msgstr ""
 "Generated-By: Babel 2.9.1\n"
 
 #: decorators.py:11 views/register.py:93
-msgid "Please confirm your account!"
+#, fuzzy
+msgid "Warning! Please confirm your account!"
 msgstr "Підтвердіть свій обліковий запис!"
 
 #: templates/base.html:8 templates/navbar2.html:6 templates/navbar2.html:7
 msgid "Home"
 msgstr "Головна"
 
-#: templates/content.html:7
+#: templates/content.html:5
+#, fuzzy
+msgid "Join us"
+msgstr "Очків"
+
+#: templates/content.html:32
 msgid "Last Event"
 msgstr "Остання подія"
 
-#: templates/content.html:16
+#: templates/content.html:41
 msgid "Lviv Squash Team"
 msgstr "Львівський командний турнір"
 
-#: templates/content.html:21 templates/content.html:87
-#: templates/content.html:88
+#: templates/content.html:46 templates/content.html:112
+#: templates/content.html:113
 msgid "Team"
 msgstr "Команда"
 
-#: templates/content.html:22
+#: templates/content.html:47
 msgid "Points"
 msgstr "Очків"
 
-#: templates/content.html:23
+#: templates/content.html:48
 msgid "Matches"
 msgstr "Матчів"
 
-#: templates/content.html:86
+#: templates/content.html:111
 msgid "Date"
 msgstr "Дата"
 
-#: templates/content.html:89
+#: templates/content.html:114
 msgid "Score"
 msgstr "Рахунок"
 
-#: templates/content.html:137
+#: templates/content.html:162
 msgid "Lviv Junior Tour"
 msgstr "Львівський юніорський турнір"
 
-#: templates/content.html:146
+#: templates/content.html:171
 msgid "Result"
 msgstr "Результат"
 
-#: templates/content.html:147
+#: templates/content.html:172
 msgid "All Junior Categories of Lviv Junior Tour"
 msgstr "Усі категорії юніорів"
 
-#: templates/content.html:148
+#: templates/content.html:173
 msgid "Position up to 9"
 msgstr "До 9 років"
 
-#: templates/content.html:149 templates/content.html:176
-#: templates/content.html:191
+#: templates/content.html:174 templates/content.html:201
+#: templates/content.html:216
 msgid "Name Surname"
 msgstr "Участник"
 
-#: templates/content.html:161
+#: templates/content.html:186
 msgid "Position up to 11"
 msgstr "До 11 років"
 
-#: templates/content.html:162
+#: templates/content.html:187
 msgid "Fullname"
 msgstr "Ім'я та прізвище"
 
-#: templates/content.html:175
+#: templates/content.html:200
 msgid "Position up to 13"
 msgstr "До 13 років"
 
-#: templates/content.html:190
+#: templates/content.html:215
 msgid "Position up to 15"
 msgstr "До 15 років"
 
-#: templates/content.html:209
+#: templates/content.html:234
 msgid "Waiting Event"
 msgstr "Очікується подія"
 
@@ -111,46 +117,62 @@ msgstr ""
 msgid "Finder-Opponent"
 msgstr "Пошук опонента"
 
-#: templates/navbar2.html:16 templates/navbar2.html:17
-#: templates/products/detail.html:4 templates/products/index.html:4
+#: templates/navbar2.html:18 templates/navbar2.html:19
+#: templates/products/detail.html:3 templates/products/index.html:4
 msgid "Products"
 msgstr "Товари"
 
-#: templates/navbar2.html:21 templates/navbar2.html:22
+#: templates/navbar2.html:24 templates/navbar2.html:25
 msgid "Photo-Gallery"
 msgstr "Фото-галерея"
 
-#: templates/navbar2.html:26 templates/navbar2.html:27
+#: templates/navbar2.html:29 templates/navbar2.html:30
 msgid "Video-Gallery"
 msgstr "Відео-галерея"
 
 #: templates/cart/empty.html:4 templates/cart/empty.html:10
 #: templates/cart/index.html:4 templates/cart/index.html:9
-#: templates/navbar2.html:31 templates/navbar2.html:32
+#: templates/navbar2.html:36 templates/navbar2.html:37
 msgid "Cart"
 msgstr "Корзина"
 
-#: templates/navbar2.html:36 templates/navbar2.html:37
+#: templates/navbar2.html:42 templates/navbar2.html:43
 #: templates/support/index.html:4
 msgid "Support"
 msgstr "Підтримка"
 
-#: templates/navbar2.html:41 templates/navbar2.html:42
+#: templates/navbar2.html:47 templates/navbar2.html:48
 msgid "About"
 msgstr "Про сквош"
 
-#: templates/login/index.html:19 templates/navbar2.html:46
-#: templates/navbar2.html:47
+#: templates/login/index.html:19 templates/navbar2.html:52
+#: templates/navbar2.html:53
 msgid "Sign In"
 msgstr "Увійти"
 
-#: templates/navbar2.html:53 templates/navbar2.html:54 templates/user.html:18
+#: templates/navbar2.html:59 templates/navbar2.html:60
+#: templates/unconfirmed.html:5 templates/user.html:18
 msgid "Account"
 msgstr "Обліковий запис"
 
-#: templates/navbar2.html:58 templates/navbar2.html:59
+#: templates/navbar2.html:64 templates/navbar2.html:65
 msgid "Logout"
 msgstr "Вийти"
+
+#: templates/unconfirmed.html:15
+msgid ""
+"You have not confirmed your account. Please check your inbox (and your "
+"spam folder) - you should have received an email with a confirmation "
+"link."
+msgstr ""
+
+#: templates/unconfirmed.html:16
+msgid "Didn't get the email?"
+msgstr ""
+
+#: templates/unconfirmed.html:16
+msgid "Resend"
+msgstr ""
 
 #: templates/user.html:6
 msgid "User"
@@ -234,7 +256,7 @@ msgid "HISTORY"
 msgstr "ІСТОРІЯ"
 
 #: templates/cart/empty.html:26 templates/cart/index.html:32
-#: templates/products/detail.html:35 templates/user_post_offer.html:3
+#: templates/products/detail.html:32 templates/user_post_offer.html:3
 msgid "Name"
 msgstr "Ім'я"
 
@@ -264,7 +286,7 @@ msgid "UPDATE"
 msgstr "UPDATE"
 
 #: templates/cart/empty.html:12 templates/cart/index.html:11
-#: templates/products/detail.html:14
+#: templates/products/detail.html:12
 msgid "Product list"
 msgstr "Список товарів"
 
@@ -273,7 +295,7 @@ msgid "Shopping Cart<small> (is empty in your cart)"
 msgstr "Магазин онлайн (ваша корзина пуста)"
 
 #: templates/cart/empty.html:30 templates/cart/index.html:36
-#: templates/products/detail.html:39
+#: templates/products/detail.html:36
 msgid "Color"
 msgstr "Колір"
 
@@ -282,27 +304,27 @@ msgid "Black"
 msgstr "Чорний"
 
 #: templates/cart/empty.html:34 templates/cart/index.html:40
-#: templates/products/detail.html:46 templates/products/detail.html:49
+#: templates/products/detail.html:43 templates/products/detail.html:46
 msgid "Size"
 msgstr "Розмір"
 
 #: templates/cart/empty.html:39 templates/cart/index.html:44
-#: templates/products/detail.html:63
+#: templates/products/detail.html:57
 msgid "Sex"
 msgstr "Стать"
 
 #: templates/cart/empty.html:44 templates/cart/index.html:54
-#: templates/products/detail.html:68
+#: templates/products/detail.html:62
 msgid "Quantity"
 msgstr "Кількість"
 
 #: templates/cart/empty.html:48 templates/cart/index.html:58
-#: templates/products/detail.html:72
+#: templates/products/detail.html:66
 msgid "Price"
 msgstr "Ціна"
 
 #: templates/cart/empty.html:52 templates/cart/index.html:62
-#: templates/products/detail.html:76
+#: templates/products/detail.html:70
 msgid "Total"
 msgstr "Загально"
 
@@ -310,11 +332,11 @@ msgstr "Загально"
 msgid "Go to Product list"
 msgstr "Перейдіть до списку товарів"
 
-#: templates/cart/index.html:18 templates/products/detail.html:21
+#: templates/cart/index.html:18 templates/products/detail.html:18
 msgid "Shopping Cart<small> (1 item in your cart)"
 msgstr "Магазин онлайн (1 товар у вашій корзині)"
 
-#: templates/cart/index.html:50 templates/products/detail.html:54
+#: templates/cart/index.html:50 templates/products/detail.html:51
 msgid "Print"
 msgstr "Принт"
 
@@ -444,7 +466,7 @@ msgstr ""
 "Ви можете завантажити свої фотографії зі сквош корту в нашу галерею, але "
 "ви повинні увійти в обліковий запис."
 
-#: templates/gallery/index.html:64 templates/products/detail.html:107
+#: templates/gallery/index.html:64 templates/products/detail.html:100
 msgid "Our team"
 msgstr "Наша команда"
 
@@ -528,7 +550,7 @@ msgstr "Реєстрація"
 
 #: templates/login/register.html:28
 msgid "ENTER YOUR NAME"
-msgstr "ВВІДІТЬ ІМЯ"
+msgstr "ВВЕДІТЬ ІМЯ"
 
 #: templates/login/register.html:35
 msgid "ENTER YOUR PASSWORD"
@@ -566,7 +588,7 @@ msgstr "Кількість"
 msgid "Price:"
 msgstr "Ціна"
 
-#: templates/order/index.html:24 templates/products/detail.html:85
+#: templates/order/index.html:24 templates/products/detail.html:79
 msgid "Order Total:"
 msgstr "Загально сума замовлення: "
 
@@ -574,24 +596,24 @@ msgstr "Загально сума замовлення: "
 msgid "Confirm"
 msgstr "Підтвердити"
 
-#: templates/products/detail.html:11 templates/products/index.html:44
+#: templates/products/detail.html:9 templates/products/index.html:44
 #: templates/products/index.html:93
 msgid "New"
 msgstr "Новий"
 
-#: templates/products/detail.html:41
+#: templates/products/detail.html:38
 msgid "Select"
 msgstr "Колір"
 
-#: templates/products/detail.html:58
+#: templates/products/detail.html:54
 msgid "You selected:"
 msgstr "Ви обрали:"
 
-#: templates/products/detail.html:91
+#: templates/products/detail.html:85
 msgid "Back"
 msgstr "Назад"
 
-#: templates/products/detail.html:94
+#: templates/products/detail.html:88
 msgid "Add to cart"
 msgstr "Добавити"
 
@@ -685,11 +707,13 @@ msgid "Thanks for registering"
 msgstr "Дякую за регістрацію."
 
 #: views/register.py:84
-msgid "You have confirmed your account. Thanks!"
+#, fuzzy
+msgid "Success. You have confirmed your account. Thanks!"
 msgstr "Ви підтвердили свій обліковий запис. Дякую!"
 
 #: views/register.py:105
-msgid "A new confirmation email has been sent."
+#, fuzzy
+msgid "Success. A new confirmation email has been sent."
 msgstr "Надіслано новий електронний лист із підтвердженням."
 
 #: views/user_account.py:114
