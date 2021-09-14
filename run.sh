@@ -1,5 +1,5 @@
-export SPS="changes"
-export SECRET_KEY="changes"
+export SPS="Mozi2229659Ozi"
+export SECRET_KEY="6Lf0rL8bAAAAAL0YqesYius-y0iQnYThoR-RWd0s"
 export EMAIL_USERNAME="squashopponent@gmail.com"
 export EMAIL_PASSWORD="changes"
 
