@@ -15,7 +15,7 @@ www.squashopponent.com.ua<hr>
 
 
 **The version of the site for beta testing:**   
-www.alpaca00.website   <img src="https://github.com/Alpaca00/squash-opponent/blob/main/opponent_app/static/img/squash-ball.png" width="22" height="22" alt="ball"/><hr> 
+www.alpaca00.website<hr>
 
 ***The idea of this application is to popularize squash in Lviv. 
 The goal is convenience and the ability to find an opponent for the game.***<hr>
@@ -24,5 +24,7 @@ The goal is convenience and the ability to find an opponent for the game.***<hr>
 Dynamic fun game in the company of like-minded people. 
 A lot of positive emotions and funny situations during the game. 
 You are actively spending time with friends, chatting and exercising at the same time.*** <hr>
+
+<img src="https://github.com/Alpaca00/squash-opponent/blob/main/opponent_app/static/img/eng_banner.jpg" alt="ball"/>
 
 ###### By the way, soon it will be possible to sell sports equipment on our website.
