@@ -1,0 +1,5 @@
+
+ssh root@46.101.139.62
+docker cp 90cd5fc0a561:/var/log/nginx/access.log .
+sh exit
+scp root@46.101.139.62:/root/access.log /home/oleg/python/alpaca_web/tests/logs/access.log
