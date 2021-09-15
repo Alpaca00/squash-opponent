@@ -1,0 +1,15 @@
+{
+  "107.189.31.252": {"DELETE": 0, "GET": 1, "HEAD": 0, "POST": 0, "PUT": 0},
+  "110.153.70.55": {"DELETE": 0, "GET": 1, "HEAD": 0, "POST": 0, "PUT": 0},
+  "162.158.89.199": {"DELETE": 0, "GET": 1, "HEAD": 0, "POST": 0, "PUT": 0},
+  "162.158.89.27": {"DELETE": 0, "GET": 1, "HEAD": 0, "POST": 0, "PUT": 0},
+  "162.158.92.22": {"DELETE": 0, "GET": 1, "HEAD": 0, "POST": 0, "PUT": 0},
+  "162.158.94.206": {"DELETE": 0, "GET": 1, "HEAD": 0, "POST": 0, "PUT": 0},
+  "167.71.206.107": {"DELETE": 0, "GET": 2, "HEAD": 0, "POST": 0, "PUT": 0},
+  "3.233.219.116": {"DELETE": 0, "GET": 0, "HEAD": 1, "POST": 0, "PUT": 0},
+  "45.95.147.10": {"DELETE": 0, "GET": 0, "HEAD": 1, "POST": 0, "PUT": 0},
+  "46.119.169.148": {"DELETE": 0, "GET": 37, "HEAD": 0, "POST": 0, "PUT": 0},
+  "66.249.72.133": {"DELETE": 0, "GET": 1, "HEAD": 0, "POST": 0, "PUT": 0},
+  "66.249.72.66": {"DELETE": 0, "GET": 3, "HEAD": 0, "POST": 0, "PUT": 0},
+  "66.249.72.69": {"DELETE": 0, "GET": 1, "HEAD": 0, "POST": 0, "PUT": 0}
+}
