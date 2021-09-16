@@ -5,7 +5,5 @@ class NavBarLocators:
     btn_photo_gallery = (By.XPATH, "//a[contains(text(), 'Photo-Gallery')]")
     btn_finder_opponent = (By.XPATH, "//a[contains(text(), 'Finder-Opponent')]")
     btn_support = (By.XPATH, "//div[@id='navbarNavDropdown']//a[contains(text(), 'Support')]")
-
-    class Action:
-        btn_action = (By.XPATH, "//*[@id='navbarDropdownMenuLink']")
-        btn_login = (By.XPATH, "//*[@id='btn-login-unique']")
+    btn_login = (By.XPATH, "//*[@id='btn-login-unique']")
+    btn_logout = (By.XPATH, "//a[contains(text(), 'Logout')]")
