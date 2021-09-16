@@ -5,6 +5,8 @@ jobs:
     runs-on: ubuntu-latest
     env:
       PG_PASSWORD: ${{ secrets.PG_PASSWORD }}
+      SPS: ${{ secrets.SPS }}
+      SECRET_KEY: ${{ secrets.SECRET_KEY }}
     steps:
       - name: Fetch
         uses: actions/checkout@main
