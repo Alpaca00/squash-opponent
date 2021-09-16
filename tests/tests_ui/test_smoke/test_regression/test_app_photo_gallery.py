@@ -8,7 +8,7 @@ class TestPhotoGallery:
     navbar_locator = NavBarLocators()
     photo_gallery_locator = PhotoGalleryLocators()
 
-    @pytest.mark.create_image
+    @pytest.mark.build_image
     def test_click_on_photo_gallery(self, user):
         user.open("/").element(self.navbar_locator.btn_photo_gallery).hover().should(
             have.exact_text("PHOTO-GALLERY")
@@ -16,7 +16,7 @@ class TestPhotoGallery:
         user.open("/").element(self.navbar_locator.btn_photo_gallery).click()
         assert user.driver.title == "Gallery"
 
-    @pytest.mark.create_image
+    @pytest.mark.build_image
     @pytest.mark.parametrize("item", [0, 2, 4])
     def test_click_on_image_and_wait_for_the_modal_window(self, user, item):
         user.open("/en/gallery").all(self.photo_gallery_locator.lst_images)[item].click()
