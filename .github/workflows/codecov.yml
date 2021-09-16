@@ -7,6 +7,8 @@ jobs:
       PG_PASSWORD: ${{ secrets.PG_PASSWORD }}
       SPS: ${{ secrets.SPS }}
       SECRET_KEY: ${{ secrets.SECRET_KEY }}
+      EMAIL_USERNAME: ${{ secrets.EMAIL_USERNAME }}
+      EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
     steps:
       - name: Fetch
         uses: actions/checkout@main
