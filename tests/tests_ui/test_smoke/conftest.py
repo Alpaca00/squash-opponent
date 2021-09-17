@@ -45,7 +45,7 @@ def user(request):
                     desired_capabilities={"browserName": config_param["browser"]},
                 ),
                 base_url="http://46.101.139.62/en",
-                timeout=3,
+                timeout=4,
             )
         )
         config.driver = browser
@@ -63,7 +63,7 @@ def user(request):
                         executable_path=ChromeDriverManager().install(), options=options
                     ),
                     base_url="http://alpaca00.website/en",
-                    timeout=3,
+                    timeout=4,
                 )
             )
     yield browser
