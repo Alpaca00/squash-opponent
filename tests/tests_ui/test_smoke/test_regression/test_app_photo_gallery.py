@@ -19,7 +19,7 @@ class TestPhotoGallery:
     @pytest.mark.build_image
     @pytest.mark.parametrize("item", [0, 2, 4])
     def test_click_on_image_and_wait_for_the_modal_window(self, user, item):
-        user.open("/en/gallery").all(self.photo_gallery_locator.lst_images)[item].click()
+        user.open("/gallery").all(self.photo_gallery_locator.lst_images)[item].click()
         user.element(self.photo_gallery_locator.modal_window).should(be.visible)
         model_window_title = user.element(
             self.photo_gallery_locator.modal_window_title

@@ -18,7 +18,7 @@ class TestFinderOpponent:
 
     @pytest.mark.build_image
     def test_make_an_offer_if_already_made(self, user):
-        user.open("/en/finder").all(self.finder_opponent_locator.btns_offer)[0].click()
+        user.open("/finder").all(self.finder_opponent_locator.btns_offer)[0].click()
         alert = user.config.driver.switch_to.alert
         assert alert.text == "You need to wait for the answer of the opponent on the last offer."
         alert.accept()
