@@ -3,7 +3,6 @@ branch = True
 
 [report]
 exclude_lines =
-    raise NoSuchElementException
     raise NotImplementedError
     if 0:
     def __str__
