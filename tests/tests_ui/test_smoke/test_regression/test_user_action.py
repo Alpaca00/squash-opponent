@@ -136,7 +136,7 @@ class TestUserAction:
             ).get(query.size)
             user.element(self.user_card_locator.phone_field).should(
                 be.blank
-            ).type(self.phone_user).element(
+            ).hover().type(self.phone_user).element(
                 self.user_card_locator.location_select
             ).press_enter().type(
                 Keys.ARROW_DOWN
