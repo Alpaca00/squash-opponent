@@ -22,7 +22,7 @@ def pytest_addoption(parser):
         "--url",
         "-U",
         action="store",
-        default="http://46.101.139.62",
+        default="http://alpaca00.website/en",
         help="Base url",
     )
 
@@ -62,7 +62,7 @@ def user(request):
                     driver=webdriver.Chrome(
                         executable_path=ChromeDriverManager().install(), options=options
                     ),
-                    base_url="http://46.101.139.62",
+                    base_url="http://alpaca00.website/en",
                     timeout=3,
                 )
             )
