@@ -17,6 +17,7 @@ jobs:
         run: |
           pip install pipenv
           pipenv install --dev
+          pipenv install loguru="==0.5.3"
           pipenv run coverage run -m pytest -s -H -sv --cov-config .coveragerc --tb=short tests/tests_ui/test_smoke/test_regression/
           pipenv run coverage xml -o coverage.xml
       - name: Upload pytest test results
