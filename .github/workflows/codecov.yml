@@ -9,15 +9,15 @@ jobs:
       SECRET_KEY: ${{ secrets.SECRET_KEY }}
       EMAIL_USERNAME: ${{ secrets.EMAIL_USERNAME }}
       EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
-      USER_PASSWORD:  ${{ secrets.USER_PASSWORD }}
     steps:
       - name: Fetch
         uses: actions/checkout@main
       - name: Test
+        env:
+          USER_PASSWORD:  ${{ secrets.USER_PASSWORD }}
         run: |
           pip install pipenv
           pipenv install --dev
-          export ${{ secrets.USER_PASSWORD }}
           pipenv run coverage run -m pytest -sv -H --cov-config .coveragerc --tb=short tests/tests_ui/test_smoke/test_regression/
           pipenv run coverage xml -o coverage.xml
       - name: Upload pytest test results
