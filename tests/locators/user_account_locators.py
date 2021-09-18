@@ -2,7 +2,7 @@ from selenium.webdriver.common.by import By
 
 
 class UserCardLocators:
-    email_info = (By.XPATH, "//div[@id='user-card-email']/h6")
+    email_info = [(By.XPATH, "//div[@id='user-card-email']/h6"), (By.CSS_SELECTOR, "#user-card-email")]
     phone_field = (By.XPATH, "//input[@id='user-phone']")
     location_select = (By.XPATH, "//select[@id='location-select']")
     category_select = (By.XPATH, "//select[@id='category-select']")
