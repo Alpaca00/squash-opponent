@@ -9,6 +9,13 @@ from tests.locators.navbar_locators import NavBarLocators
 from tests.locators.registration_page_locators import RegistrationFormLocators
 from tests.locators.user_account_locators import UserCardLocators
 
+from selenium import webdriver
+from selenium.common.exceptions import NoSuchElementException
+from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.by import By
+
 
 @pytest.mark.skip(reason="fixture outside the app")
 def app():
@@ -22,6 +29,21 @@ def clean_user_account_db(app):
         message = UserAccount.query.order_by(desc(UserAccount.id)).first()
         db.session.delete(message)
         db.session.commit()
+
+
+def test_if_already_confirmed_user():
+    driver = webdriver.Chrome(executable_path=ChromeDriverManager().install())
+    driver.get("http://alpaca00.website")
+    driver.find_element_by_xpath("//*[@id='btn-login-unique']").click()
+    driver.find_element_by_xpath("//input[@placeholder='email']").send_keys("alpaca00tuha@gmail.com")
+    driver.find_element_by_xpath("//input[@placeholder='password']").send_keys(os.environ["USER_PASSWORD"])
+    driver.find_element_by_xpath("//input[@id='submit-user-login']").click()
+    element = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, "user-card-email")))
+    if element:
+        display_email = driver.find_element_by_xpath("//div[@id='user-card-email']/h6").text
+        assert display_email == "alpaca00tuha@gmail.com"
+    else:
+        raise NoSuchElementException("no matching element")
 
 
 class TestUserAction:
@@ -66,10 +88,10 @@ class TestUserAction:
 
     def query_result_should_have(self, connect_db, rows):
         connect_db.execute(
-                f"""select * from users_accounts a1 left join users_opponents o1 
-                on (a1.id=o1.user_account_id) left join offers_opponents o2 
-                on (o1.id=o2.user_opponent_id) 
-                where user_opponent_id is null 
+                f"""select * from users_accounts a1 left join users_opponents o1
+                on (a1.id=o1.user_account_id) left join offers_opponents o2
+                on (o1.id=o2.user_opponent_id)
+                where user_opponent_id is null
                 and opponent_date='{self.optimal_date}';"""
             )
         connect_db.fetchall()
