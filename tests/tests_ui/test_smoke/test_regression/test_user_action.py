@@ -44,8 +44,9 @@ def test_if_already_confirmed_user_selenium_example():
     driver.find_element_by_xpath("//input[@placeholder='email']").send_keys(
         "alpaca00tuha@gmail.com"
     )
+    env = os.environ.get("USER_PASSWORD")
     driver.find_element_by_xpath("//input[@placeholder='password']").send_keys(
-        os.environ.get("USER_PASSWORD")
+        env
     )
     driver.find_element_by_xpath("//input[@id='submit-user-login']").click()
     elem = driver.find_element_by_xpath("//input[@id='submit-user-login']")
@@ -157,7 +158,8 @@ class TestUserAction:
             ).should(have.exact_text("Resend"))
 
     def test_if_already_confirmed_user(self, user):
-        self.user_login(user=user, email=self.actual_user_email, password=self.USER_PASSWORD)
+        psw_env = self.USER_PASSWORD
+        self.user_login(user=user, email=self.actual_user_email, password=psw_env)
         assert (
             user.all(self.user_card_locator.email_info[1])[0]
             .hover()
@@ -169,8 +171,9 @@ class TestUserAction:
         if not user.config.base_url == "http://alpaca00.website/en":
             pytest.skip("Not the English version of the site.", allow_module_level=True)
         else:
+            psw_env = self.USER_PASSWORD
             self.user_login(
-                user=user, email=self.actual_user_email, password=str(self.USER_PASSWORD)
+                user=user, email=self.actual_user_email, password=psw_env
             )
             before_quantity_post = user.all(
                 self.user_card_locator.History.all_delete_post_btn
