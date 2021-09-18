@@ -48,6 +48,11 @@ def test_if_already_confirmed_user_selenium_example():
         os.environ["USER_PASSWORD"]
     )
     driver.find_element_by_xpath("//input[@id='submit-user-login']").click()
+    elem = driver.find_element_by_xpath("//input[@id='submit-user-login']")
+    title = driver.title
+    print(title)
+    WebDriverWait(driver, 10).until(
+            EC.staleness_of(elem))
     try:
         element = WebDriverWait(driver, 20).until(
             EC.presence_of_element_located((By.CSS_SELECTOR, "#user-card-email h6"))
