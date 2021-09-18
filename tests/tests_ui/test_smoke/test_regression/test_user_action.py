@@ -75,51 +75,51 @@ class TestUserAction:
         connect_db.fetchall()
         return connect_db.rownumber == rows
 
-    # @pytest.mark.build_image
-    # def test_user_can_register(self, user, connect_db):
-    #     if not user.config.base_url == "http://alpaca00.website/en":
-    #         pytest.skip(
-    #             "Not the English version of the site.",
-    #             allow_module_level=True
-    #         )
-    #     else:
-    #         self.registration_user(user)
-    #         connect_db.execute(
-    #             f"""select * from users_accounts a1 full join users_opponents o1 on
-    #             (a1.id=o1.user_account_id) full join offers_opponents o2 on
-    #             (o1.id=o2.user_opponent_id) where email='{self.test_email}';"""
-    #         )
-    #         connect_db.fetchall()
-    #         assert connect_db.rownumber == 1
-    #         connect_db.execute(
-    #             f"delete from users_accounts where email='{self.test_email}';"
-    #         )
-    #         assert user.should(have.url_containing("en/register/unconfirmed"))
-    #         assert user.element(
-    #             self.register_form_locator.ConfirmPageLocators.account_confirm_link
-    #         ).should(have.exact_text("Resend"))
-    #
-    # @pytest.mark.build_image
-    # def test_can_user_login(self, user, connect_db):
-    #     if not user.config.base_url == "http://alpaca00.website/en":
-    #         pytest.skip("Not the English version of the site.", allow_module_level=True)
-    #     else:
-    #         self.registration_user(user)
-    #         user.element(self.navbar_locator.btn_logout).click()
-    #         self.user_login(
-    #             user=user, email=self.test_email, password=self.test_password
-    #         )
-    #         connect_db.execute(
-    #             f"delete from users_accounts where email='{self.test_email}';"
-    #         )
-    #         assert user.should(have.url_containing("en/register/unconfirmed"))
-    #         assert user.element(
-    #             self.register_form_locator.ConfirmPageLocators.account_confirm_link
-    #         ).should(have.exact_text("Resend"))
+    @pytest.mark.build_image
+    def test_user_can_register(self, user, connect_db):
+        if not user.config.base_url == "http://alpaca00.website/en":
+            pytest.skip(
+                "Not the English version of the site.",
+                allow_module_level=True
+            )
+        else:
+            self.registration_user(user)
+            connect_db.execute(
+                f"""select * from users_accounts a1 full join users_opponents o1 on
+                (a1.id=o1.user_account_id) full join offers_opponents o2 on
+                (o1.id=o2.user_opponent_id) where email='{self.test_email}';"""
+            )
+            connect_db.fetchall()
+            assert connect_db.rownumber == 1
+            connect_db.execute(
+                f"delete from users_accounts where email='{self.test_email}';"
+            )
+            assert user.should(have.url_containing("en/register/unconfirmed"))
+            assert user.element(
+                self.register_form_locator.ConfirmPageLocators.account_confirm_link
+            ).should(have.exact_text("Resend"))
+
+    @pytest.mark.build_image
+    def test_can_user_login(self, user, connect_db):
+        if not user.config.base_url == "http://alpaca00.website/en":
+            pytest.skip("Not the English version of the site.", allow_module_level=True)
+        else:
+            self.registration_user(user)
+            user.element(self.navbar_locator.btn_logout).click()
+            self.user_login(
+                user=user, email=self.test_email, password=self.test_password
+            )
+            connect_db.execute(
+                f"delete from users_accounts where email='{self.test_email}';"
+            )
+            assert user.should(have.url_containing("en/register/unconfirmed"))
+            assert user.element(
+                self.register_form_locator.ConfirmPageLocators.account_confirm_link
+            ).should(have.exact_text("Resend"))
 
     def test_if_already_confirmed_user(self, user):
         self.user_login(user=user, email=self.user_email, password=self.user_password)
-        assert user.element(self.user_card_locator.email_info).hover().should(
+        assert user.all(self.user_card_locator.email_info)[0].hover().should(
             have.exact_text(self.user_email)
         )
         user.element(self.navbar_locator.btn_logout).click()
@@ -134,7 +134,7 @@ class TestUserAction:
             before_quantity_post = user.all(
                 self.user_card_locator.History.all_delete_post_btn
             ).get(query.size)
-            user.element(self.user_card_locator.phone_field).hover().should(
+            user.all(self.user_card_locator.phone_field)[0].hover().should(
                 be.blank
             ).hover().type(self.phone_user).element(
                 self.user_card_locator.location_select
