@@ -52,8 +52,8 @@ def test_if_already_confirmed_user_selenium_example():
         EC.presence_of_element_located((By.ID, "user-card-email"))
     )
     if element:
-        display_email = driver.find_element_by_xpath(
-            "//div[@id='user-card-email']/h6"
+        display_email = driver.find_element_by_id(
+            "user-card-email"
         ).text
         assert display_email == "alpaca00tuha@gmail.com"
     else:
@@ -153,7 +153,7 @@ class TestUserAction:
     def test_if_already_confirmed_user(self, user):
         self.user_login(user=user, email=self.user_email, password=self.user_password)
         assert (
-            user.all(self.user_card_locator.email_info)[0]
+            user.all(self.user_card_locator.email_info[1])[0]
             .hover()
             .should(have.exact_text(self.user_email))
         )
