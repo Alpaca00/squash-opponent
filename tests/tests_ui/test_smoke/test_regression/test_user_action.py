@@ -1,3 +1,4 @@
+import os
 import pytest
 from selene import have, be, query
 from selenium.webdriver.common.keys import Keys
@@ -7,13 +8,6 @@ from tests.locators.login_page_locators import LoginLocators
 from tests.locators.navbar_locators import NavBarLocators
 from tests.locators.registration_page_locators import RegistrationFormLocators
 from tests.locators.user_account_locators import UserCardLocators
-
-from selenium import webdriver
-from selenium.common.exceptions import NoSuchElementException, TimeoutException
-from webdriver_manager.chrome import ChromeDriverManager
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.common.by import By
 
 
 @pytest.mark.skip(reason="fixture outside the app")
@@ -30,41 +24,6 @@ def clean_user_account_db(app):
         db.session.commit()
 
 
-def test_if_already_confirmed_user_selenium_example():
-    options = webdriver.ChromeOptions()
-    options.add_argument("--headless")
-    options.add_argument("--no-sandbox")
-    options.add_argument("--maximized")
-    driver = webdriver.Chrome(
-        executable_path=ChromeDriverManager().install(), options=options
-    )
-    driver.get("http://alpaca00.website")
-    driver.find_element_by_xpath("//*[@id='btn-login-unique']").click()
-    driver.find_element_by_xpath("//input[@placeholder='email']").send_keys(
-        "alpaca00tuha@gmail.com"
-    )
-    driver.find_element_by_xpath("//input[@placeholder='password']").send_keys(
-        "Polinezia9"
-    )
-    driver.find_element_by_xpath("//input[@id='submit-user-login']").click()
-    elem = driver.find_element_by_xpath("//input[@id='submit-user-login']")
-    title = driver.title
-    WebDriverWait(driver, 10).until(
-            EC.staleness_of(elem))
-    try:
-        element = WebDriverWait(driver, 20).until(
-            EC.presence_of_element_located((By.CSS_SELECTOR, "#user-card-email h6"))
-        )
-    except TimeoutException:
-        return True
-    finally:
-        display_email = driver.find_element_by_css_selector(
-                "#user-card-email h6"
-        ).text
-        assert title == "User"
-        assert display_email == "alpaca00tuha@gmail.com"
-
-
 class TestUserAction:
     navbar_locator = NavBarLocators()
     login_locator = LoginLocators()
@@ -74,7 +33,7 @@ class TestUserAction:
     test_name = "Test"
     test_password = "qwerty12345"
     actual_user_email = "alpaca00tuha@gmail.com"
-    USER_PASSWORD = "Polinezia9"
+    USER_PASSWORD = os.environ["USER_PASSWORD"]
     phone_user = "+380677667776"
     optimal_date = "2021-09-20T18:00"
 
