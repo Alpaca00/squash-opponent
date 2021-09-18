@@ -5,7 +5,7 @@
 <a href="https://www.digitalocean.com/?refcode=6d28408341ba&utm_campaign=Referral_Invite&utm_medium=Referral_Program&utm_source=badge"><img src="https://web-platforms.sfo2.digitaloceanspaces.com/WWW/Badge%202.svg" alt="DigitalOcean Referral Badge" /></a>
 
 <img alt="Website" src="https://img.shields.io/website?color=blue&down_color=green&down_message=offline&style=for-the-badge&up_color=red&up_message=offline&url=http%3A%2F%2Fsquashopponent.com.ua">  
-www.squashopponent.com.ua<hr>
+:ukraine: www.squashopponent.com.ua<hr>
 
 <a href='http://161.35.199.243:8080/job/sqaush-opponent%20ui%20test/'><img src='http://161.35.199.243:8080/buildStatus/icon?job=sqaush-opponent+ui+test'>    </a><img alt="Docker Automated build" src="https://img.shields.io/docker/automated/jrottenberg/ffmpeg.svg"> <a href="https://codecov.io/gh/Alpaca00/squash-opponent">
   <img src="https://codecov.io/gh/Alpaca00/squash-opponent/branch/main/graph/badge.svg?token=ZSRCNYRWU7"/>
@@ -15,7 +15,7 @@ www.squashopponent.com.ua<hr>
 
 
 **The version of the site for beta testing:**   
-www.alpaca00.website<hr>
+:infinity: www.alpaca00.website<hr>
 
 ***The idea of this application is to popularize squash in Lviv. 
 The goal is convenience and the ability to find an opponent for the game.***<hr>
