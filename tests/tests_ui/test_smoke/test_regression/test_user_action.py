@@ -50,21 +50,21 @@ def test_if_already_confirmed_user_selenium_example():
     driver.find_element_by_xpath("//input[@id='submit-user-login']").click()
     elem = driver.find_element_by_xpath("//input[@id='submit-user-login']")
     title = driver.title
-    print(title)
-    WebDriverWait(driver, 10).until(
-            EC.staleness_of(elem))
-    try:
-        element = WebDriverWait(driver, 20).until(
-            EC.presence_of_element_located((By.CSS_SELECTOR, "#user-card-email h6"))
-        )
-    except TimeoutException:
-        return True
-    finally:
-        display_email = driver.find_element_by_css_selector(
-                "#user-card-email h6"
-        ).text
-        print(display_email)
-        assert display_email == "alpaca00tuha@gmail.com"
+    assert title == "User"
+    # WebDriverWait(driver, 10).until(
+    #         EC.staleness_of(elem))
+    # try:
+    #     element = WebDriverWait(driver, 20).until(
+    #         EC.presence_of_element_located((By.CSS_SELECTOR, "#user-card-email h6"))
+    #     )
+    # except TimeoutException:
+    #     return True
+    # finally:
+    #     display_email = driver.find_element_by_css_selector(
+    #             "#user-card-email h6"
+    #     ).text
+    #     print(display_email)
+    #     assert display_email == "alpaca00tuha@gmail.com"
 
 
 class TestUserAction:
