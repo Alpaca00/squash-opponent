@@ -45,26 +45,25 @@ def test_if_already_confirmed_user_selenium_example():
         "alpaca00tuha@gmail.com"
     )
     driver.find_element_by_xpath("//input[@placeholder='password']").send_keys(
-        os.environ["USER_PASSWORD"]
+        os.environ.get("USER_PASSWORD")
     )
     driver.find_element_by_xpath("//input[@id='submit-user-login']").click()
     elem = driver.find_element_by_xpath("//input[@id='submit-user-login']")
     title = driver.title
     assert title == "User"
-    # WebDriverWait(driver, 10).until(
-    #         EC.staleness_of(elem))
-    # try:
-    #     element = WebDriverWait(driver, 20).until(
-    #         EC.presence_of_element_located((By.CSS_SELECTOR, "#user-card-email h6"))
-    #     )
-    # except TimeoutException:
-    #     return True
-    # finally:
-    #     display_email = driver.find_element_by_css_selector(
-    #             "#user-card-email h6"
-    #     ).text
-    #     print(display_email)
-    #     assert display_email == "alpaca00tuha@gmail.com"
+    WebDriverWait(driver, 10).until(
+            EC.staleness_of(elem))
+    try:
+        element = WebDriverWait(driver, 20).until(
+            EC.presence_of_element_located((By.CSS_SELECTOR, "#user-card-email h6"))
+        )
+    except TimeoutException:
+        return True
+    finally:
+        display_email = driver.find_element_by_css_selector(
+                "#user-card-email h6"
+        ).text
+        assert display_email == "alpaca00tuha@gmail.com"
 
 
 class TestUserAction:
@@ -76,7 +75,7 @@ class TestUserAction:
     test_name = "Test"
     test_password = "qwerty12345"
     actual_user_email = "alpaca00tuha@gmail.com"
-    USER_PASSWORD = os.environ["USER_PASSWORD"]
+    USER_PASSWORD = os.environ.get("USER_PASSWORD")
     phone_user = "+380677667776"
     optimal_date = "2021-09-20T18:00"
 
@@ -171,7 +170,7 @@ class TestUserAction:
             pytest.skip("Not the English version of the site.", allow_module_level=True)
         else:
             self.user_login(
-                user=user, email=self.actual_user_email, password=self.USER_PASSWORD
+                user=user, email=self.actual_user_email, password=str(self.USER_PASSWORD)
             )
             before_quantity_post = user.all(
                 self.user_card_locator.History.all_delete_post_btn
