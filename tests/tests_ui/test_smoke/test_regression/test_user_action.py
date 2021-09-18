@@ -1,5 +1,4 @@
 import os
-import loguru
 import pytest
 from selene import have, be, query
 from selenium.webdriver.common.keys import Keys
@@ -120,7 +119,6 @@ class TestUserAction:
 
     def test_if_already_confirmed_user(self, user):
         self.user_login(user=user, email=self.user_email, password=self.user_password)
-        loguru.logger.info(user.element(self.user_card_locator.email_info).get(query.text))
         assert user.element(self.user_card_locator.email_info).should(
             have.exact_text(self.user_email)
         )
@@ -136,7 +134,6 @@ class TestUserAction:
             before_quantity_post = user.all(
                 self.user_card_locator.History.all_delete_post_btn
             ).get(query.size)
-            loguru.logger.info(user.element(self.user_card_locator.phone_field).get(query.value))
             user.element(self.user_card_locator.phone_field).should(
                 be.blank
             ).hover().type(self.phone_user).element(
