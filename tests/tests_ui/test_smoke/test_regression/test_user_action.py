@@ -31,16 +31,30 @@ def clean_user_account_db(app):
         db.session.commit()
 
 
-def test_if_already_confirmed_user():
-    driver = webdriver.Chrome(executable_path=ChromeDriverManager().install())
+def test_if_already_confirmed_user_selenium_example():
+    options = webdriver.ChromeOptions()
+    options.add_argument("--headless")
+    options.add_argument("--no-sandbox")
+    options.add_argument("--maximized")
+    driver = webdriver.Chrome(
+        executable_path=ChromeDriverManager().install(), options=options
+    )
     driver.get("http://alpaca00.website")
     driver.find_element_by_xpath("//*[@id='btn-login-unique']").click()
-    driver.find_element_by_xpath("//input[@placeholder='email']").send_keys("alpaca00tuha@gmail.com")
-    driver.find_element_by_xpath("//input[@placeholder='password']").send_keys(os.environ["USER_PASSWORD"])
+    driver.find_element_by_xpath("//input[@placeholder='email']").send_keys(
+        "alpaca00tuha@gmail.com"
+    )
+    driver.find_element_by_xpath("//input[@placeholder='password']").send_keys(
+        os.environ["USER_PASSWORD"]
+    )
     driver.find_element_by_xpath("//input[@id='submit-user-login']").click()
-    element = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, "user-card-email")))
+    element = WebDriverWait(driver, 10).until(
+        EC.presence_of_element_located((By.ID, "user-card-email"))
+    )
     if element:
-        display_email = driver.find_element_by_xpath("//div[@id='user-card-email']/h6").text
+        display_email = driver.find_element_by_xpath(
+            "//div[@id='user-card-email']/h6"
+        ).text
         assert display_email == "alpaca00tuha@gmail.com"
     else:
         raise NoSuchElementException("no matching element")
@@ -88,22 +102,19 @@ class TestUserAction:
 
     def query_result_should_have(self, connect_db, rows):
         connect_db.execute(
-                f"""select * from users_accounts a1 left join users_opponents o1
+            f"""select * from users_accounts a1 left join users_opponents o1
                 on (a1.id=o1.user_account_id) left join offers_opponents o2
                 on (o1.id=o2.user_opponent_id)
                 where user_opponent_id is null
                 and opponent_date='{self.optimal_date}';"""
-            )
+        )
         connect_db.fetchall()
         return connect_db.rownumber == rows
 
     @pytest.mark.build_image
     def test_user_can_register(self, user, connect_db):
         if not user.config.base_url == "http://alpaca00.website/en":
-            pytest.skip(
-                "Not the English version of the site.",
-                allow_module_level=True
-            )
+            pytest.skip("Not the English version of the site.", allow_module_level=True)
         else:
             self.registration_user(user)
             connect_db.execute(
@@ -141,8 +152,10 @@ class TestUserAction:
 
     def test_if_already_confirmed_user(self, user):
         self.user_login(user=user, email=self.user_email, password=self.user_password)
-        assert user.all(self.user_card_locator.email_info)[0].hover().should(
-            have.exact_text(self.user_email)
+        assert (
+            user.all(self.user_card_locator.email_info)[0]
+            .hover()
+            .should(have.exact_text(self.user_email))
         )
         user.element(self.navbar_locator.btn_logout).click()
 
