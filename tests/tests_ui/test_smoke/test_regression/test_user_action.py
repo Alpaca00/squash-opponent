@@ -1,4 +1,3 @@
-import os
 import pytest
 from selene import have, be, query
 from selenium.webdriver.common.keys import Keys
@@ -44,14 +43,12 @@ def test_if_already_confirmed_user_selenium_example():
     driver.find_element_by_xpath("//input[@placeholder='email']").send_keys(
         "alpaca00tuha@gmail.com"
     )
-    env = os.environ.get("USER_PASSWORD")
     driver.find_element_by_xpath("//input[@placeholder='password']").send_keys(
-        env
+        "Polinezia9"
     )
     driver.find_element_by_xpath("//input[@id='submit-user-login']").click()
     elem = driver.find_element_by_xpath("//input[@id='submit-user-login']")
     title = driver.title
-    assert title == "User"
     WebDriverWait(driver, 10).until(
             EC.staleness_of(elem))
     try:
@@ -64,6 +61,7 @@ def test_if_already_confirmed_user_selenium_example():
         display_email = driver.find_element_by_css_selector(
                 "#user-card-email h6"
         ).text
+        assert title == "User"
         assert display_email == "alpaca00tuha@gmail.com"
 
 
@@ -76,7 +74,7 @@ class TestUserAction:
     test_name = "Test"
     test_password = "qwerty12345"
     actual_user_email = "alpaca00tuha@gmail.com"
-    USER_PASSWORD = os.environ.get("USER_PASSWORD")
+    USER_PASSWORD = "Polinezia9"
     phone_user = "+380677667776"
     optimal_date = "2021-09-20T18:00"
 
@@ -158,8 +156,7 @@ class TestUserAction:
             ).should(have.exact_text("Resend"))
 
     def test_if_already_confirmed_user(self, user):
-        psw_env = self.USER_PASSWORD
-        self.user_login(user=user, email=self.actual_user_email, password=psw_env)
+        self.user_login(user=user, email=self.actual_user_email, password=self.USER_PASSWORD)
         assert (
             user.all(self.user_card_locator.email_info[1])[0]
             .hover()
@@ -171,9 +168,8 @@ class TestUserAction:
         if not user.config.base_url == "http://alpaca00.website/en":
             pytest.skip("Not the English version of the site.", allow_module_level=True)
         else:
-            psw_env = self.USER_PASSWORD
             self.user_login(
-                user=user, email=self.actual_user_email, password=psw_env
+                user=user, email=self.actual_user_email, password=self.USER_PASSWORD
             )
             before_quantity_post = user.all(
                 self.user_card_locator.History.all_delete_post_btn
