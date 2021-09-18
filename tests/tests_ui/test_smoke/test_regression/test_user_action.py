@@ -10,7 +10,7 @@ from tests.locators.registration_page_locators import RegistrationFormLocators
 from tests.locators.user_account_locators import UserCardLocators
 
 from selenium import webdriver
-from selenium.common.exceptions import NoSuchElementException
+from selenium.common.exceptions import NoSuchElementException, TimeoutException
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -48,17 +48,18 @@ def test_if_already_confirmed_user_selenium_example():
         os.environ["USER_PASSWORD"]
     )
     driver.find_element_by_xpath("//input[@id='submit-user-login']").click()
-    element = WebDriverWait(driver, 20).until(
-        EC.presence_of_element_located((By.CSS_SELECTOR, "#user-card-email h6"))
-    )
-    if element:
+    try:
+        element = WebDriverWait(driver, 20).until(
+            EC.presence_of_element_located((By.CSS_SELECTOR, "#user-card-email h6"))
+        )
+    except TimeoutException:
+        return True
+    finally:
         display_email = driver.find_element_by_css_selector(
-            "#user-card-email h6"
+                "#user-card-email h6"
         ).text
         print(display_email)
         assert display_email == "alpaca00tuha@gmail.com"
-    else:
-        raise NoSuchElementException("no matching element")
 
 
 class TestUserAction:
