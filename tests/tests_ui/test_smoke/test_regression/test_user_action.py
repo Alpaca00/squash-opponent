@@ -71,7 +71,7 @@ class TestUserAction:
     test_name = "Test"
     test_password = "qwerty12345"
     actual_user_email = "alpaca00tuha@gmail.com"
-    user_password = os.environ["USER_PASSWORD"]
+    USER_PASSWORD = os.environ["USER_PASSWORD"]
     phone_user = "+380677667776"
     optimal_date = "2021-09-20T18:00"
 
@@ -153,7 +153,7 @@ class TestUserAction:
             ).should(have.exact_text("Resend"))
 
     def test_if_already_confirmed_user(self, user):
-        self.user_login(user=user, email=self.actual_user_email, password=self.user_password)
+        self.user_login(user=user, email=self.actual_user_email, password=self.USER_PASSWORD)
         assert (
             user.all(self.user_card_locator.email_info[1])[0]
             .hover()
@@ -166,12 +166,14 @@ class TestUserAction:
             pytest.skip("Not the English version of the site.", allow_module_level=True)
         else:
             self.user_login(
-                user=user, email=self.actual_user_email, password=self.user_password
+                user=user, email=self.actual_user_email, password=self.USER_PASSWORD
             )
             before_quantity_post = user.all(
                 self.user_card_locator.History.all_delete_post_btn
             ).get(query.size)
-            user.element(
+            user.all(self.user_card_locator.phone_field)[0].hover().should(
+                be.blank
+            ).hover().type(self.phone_user).element(
                 self.user_card_locator.location_select
             ).press_enter().type(
                 Keys.ARROW_DOWN
