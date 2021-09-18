@@ -49,12 +49,13 @@ def test_if_already_confirmed_user_selenium_example():
     )
     driver.find_element_by_xpath("//input[@id='submit-user-login']").click()
     element = WebDriverWait(driver, 10).until(
-        EC.presence_of_element_located((By.ID, "user-card-email"))
+        EC.presence_of_element_located((By.CSS_SELECTOR, "#user-card-email h6"))
     )
     if element:
-        display_email = driver.find_element_by_id(
-            "user-card-email"
+        display_email = driver.find_element_by_css_selector(
+            "#user-card-email h6"
         ).text
+        print(display_email)
         assert display_email == "alpaca00tuha@gmail.com"
     else:
         raise NoSuchElementException("no matching element")
@@ -68,7 +69,7 @@ class TestUserAction:
     test_email = "test@gmail.com"
     test_name = "Test"
     test_password = "qwerty12345"
-    user_email = "alpaca00tuha@gmail.com"
+    actual_user_email = "alpaca00tuha@gmail.com"
     user_password = os.environ["USER_PASSWORD"]
     phone_user = "+380677667776"
     optimal_date = "2021-09-20T18:00"
@@ -111,98 +112,98 @@ class TestUserAction:
         connect_db.fetchall()
         return connect_db.rownumber == rows
 
-    @pytest.mark.build_image
-    def test_user_can_register(self, user, connect_db):
-        if not user.config.base_url == "http://alpaca00.website/en":
-            pytest.skip("Not the English version of the site.", allow_module_level=True)
-        else:
-            self.registration_user(user)
-            connect_db.execute(
-                f"""select * from users_accounts a1 full join users_opponents o1 on
-                (a1.id=o1.user_account_id) full join offers_opponents o2 on
-                (o1.id=o2.user_opponent_id) where email='{self.test_email}';"""
-            )
-            connect_db.fetchall()
-            assert connect_db.rownumber == 1
-            connect_db.execute(
-                f"delete from users_accounts where email='{self.test_email}';"
-            )
-            assert user.should(have.url_containing("en/register/unconfirmed"))
-            assert user.element(
-                self.register_form_locator.ConfirmPageLocators.account_confirm_link
-            ).should(have.exact_text("Resend"))
-
-    @pytest.mark.build_image
-    def test_can_user_login(self, user, connect_db):
-        if not user.config.base_url == "http://alpaca00.website/en":
-            pytest.skip("Not the English version of the site.", allow_module_level=True)
-        else:
-            self.registration_user(user)
-            user.element(self.navbar_locator.btn_logout).click()
-            self.user_login(
-                user=user, email=self.test_email, password=self.test_password
-            )
-            connect_db.execute(
-                f"delete from users_accounts where email='{self.test_email}';"
-            )
-            assert user.should(have.url_containing("en/register/unconfirmed"))
-            assert user.element(
-                self.register_form_locator.ConfirmPageLocators.account_confirm_link
-            ).should(have.exact_text("Resend"))
+    # @pytest.mark.build_image
+    # def test_user_can_register(self, user, connect_db):
+    #     if not user.config.base_url == "http://alpaca00.website/en":
+    #         pytest.skip("Not the English version of the site.", allow_module_level=True)
+    #     else:
+    #         self.registration_user(user)
+    #         connect_db.execute(
+    #             f"""select * from users_accounts a1 full join users_opponents o1 on
+    #             (a1.id=o1.user_account_id) full join offers_opponents o2 on
+    #             (o1.id=o2.user_opponent_id) where email='{self.test_email}';"""
+    #         )
+    #         connect_db.fetchall()
+    #         assert connect_db.rownumber == 1
+    #         connect_db.execute(
+    #             f"delete from users_accounts where email='{self.test_email}';"
+    #         )
+    #         assert user.should(have.url_containing("en/register/unconfirmed"))
+    #         assert user.element(
+    #             self.register_form_locator.ConfirmPageLocators.account_confirm_link
+    #         ).should(have.exact_text("Resend"))
+    #
+    # @pytest.mark.build_image
+    # def test_can_user_login(self, user, connect_db):
+    #     if not user.config.base_url == "http://alpaca00.website/en":
+    #         pytest.skip("Not the English version of the site.", allow_module_level=True)
+    #     else:
+    #         self.registration_user(user)
+    #         user.element(self.navbar_locator.btn_logout).click()
+    #         self.user_login(
+    #             user=user, email=self.test_email, password=self.test_password
+    #         )
+    #         connect_db.execute(
+    #             f"delete from users_accounts where email='{self.test_email}';"
+    #         )
+    #         assert user.should(have.url_containing("en/register/unconfirmed"))
+    #         assert user.element(
+    #             self.register_form_locator.ConfirmPageLocators.account_confirm_link
+    #         ).should(have.exact_text("Resend"))
 
     def test_if_already_confirmed_user(self, user):
-        self.user_login(user=user, email=self.user_email, password=self.user_password)
+        self.user_login(user=user, email=self.actual_user_email, password=self.user_password)
         assert (
             user.all(self.user_card_locator.email_info[1])[0]
             .hover()
-            .should(have.exact_text(self.user_email))
+            .should(have.exact_text(self.actual_user_email))
         )
         user.element(self.navbar_locator.btn_logout).click()
 
-    def test_can_user_publish_a_post(self, user, connect_db):
-        if not user.config.base_url == "http://alpaca00.website/en":
-            pytest.skip("Not the English version of the site.", allow_module_level=True)
-        else:
-            self.user_login(
-                user=user, email=self.user_email, password=self.user_password
-            )
-            before_quantity_post = user.all(
-                self.user_card_locator.History.all_delete_post_btn
-            ).get(query.size)
-            user.all(self.user_card_locator.phone_field)[0].hover().should(
-                be.blank
-            ).hover().type(self.phone_user).element(
-                self.user_card_locator.location_select
-            ).press_enter().type(
-                Keys.ARROW_DOWN
-            ).press_enter().should(
-                have.value("Sychivskyi")
-            ).element(
-                self.user_card_locator.category_select
-            ).press_enter().type(
-                Keys.ARROW_DOWN
-            ).press_enter().should(
-                have.value("PRO")
-            )
-            user.driver.execute_script(f'$("#party").val("{self.optimal_date}")')
-            user.element(self.user_card_locator.post_btn).click()
-            display = user.element(
-                self.user_card_locator.DisplayAlertInfo.alert_info
-            ).get(query.text)
-            after_quantity_post = user.all(
-                self.user_card_locator.History.all_delete_post_btn
-            ).get(query.size)
-
-            assert self.query_result_should_have(connect_db, 1)
-            assert display == "Successfully. Your post has been added."
-            assert before_quantity_post + 1 == after_quantity_post
-
-            user.all(self.user_card_locator.History.all_delete_post_btn)[-1].click()
-            new_info_on_display = user.element(
-                self.user_card_locator.DisplayAlertInfo.alert_info
-            ).get(query.text)
-
-            assert new_info_on_display == "Successfully. Your post has been deleted."
-            assert self.query_result_should_have(connect_db, 0)
-
-            user.element(self.navbar_locator.btn_logout).click()
+    # def test_can_user_publish_a_post(self, user, connect_db):
+    #     if not user.config.base_url == "http://alpaca00.website/en":
+    #         pytest.skip("Not the English version of the site.", allow_module_level=True)
+    #     else:
+    #         self.user_login(
+    #             user=user, email=self.actual_user_email, password=self.user_password
+    #         )
+    #         before_quantity_post = user.all(
+    #             self.user_card_locator.History.all_delete_post_btn
+    #         ).get(query.size)
+    #         user.all(self.user_card_locator.phone_field)[0].hover().should(
+    #             be.blank
+    #         ).hover().type(self.phone_user).element(
+    #             self.user_card_locator.location_select
+    #         ).press_enter().type(
+    #             Keys.ARROW_DOWN
+    #         ).press_enter().should(
+    #             have.value("Sychivskyi")
+    #         ).element(
+    #             self.user_card_locator.category_select
+    #         ).press_enter().type(
+    #             Keys.ARROW_DOWN
+    #         ).press_enter().should(
+    #             have.value("PRO")
+    #         )
+    #         user.driver.execute_script(f'$("#party").val("{self.optimal_date}")')
+    #         user.element(self.user_card_locator.post_btn).click()
+    #         display = user.element(
+    #             self.user_card_locator.DisplayAlertInfo.alert_info
+    #         ).get(query.text)
+    #         after_quantity_post = user.all(
+    #             self.user_card_locator.History.all_delete_post_btn
+    #         ).get(query.size)
+    #
+    #         assert self.query_result_should_have(connect_db, 1)
+    #         assert display == "Successfully. Your post has been added."
+    #         assert before_quantity_post + 1 == after_quantity_post
+    #
+    #         user.all(self.user_card_locator.History.all_delete_post_btn)[-1].click()
+    #         new_info_on_display = user.element(
+    #             self.user_card_locator.DisplayAlertInfo.alert_info
+    #         ).get(query.text)
+    #
+    #         assert new_info_on_display == "Successfully. Your post has been deleted."
+    #         assert self.query_result_should_have(connect_db, 0)
+    #
+    #         user.element(self.navbar_locator.btn_logout).click()
