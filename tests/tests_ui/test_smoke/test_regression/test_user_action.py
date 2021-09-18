@@ -171,9 +171,7 @@ class TestUserAction:
             before_quantity_post = user.all(
                 self.user_card_locator.History.all_delete_post_btn
             ).get(query.size)
-            user.all(self.user_card_locator.phone_field)[0].hover().should(
-                be.blank
-            ).hover().type(self.phone_user).element(
+            user.element(
                 self.user_card_locator.location_select
             ).press_enter().type(
                 Keys.ARROW_DOWN
