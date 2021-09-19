@@ -11,6 +11,16 @@ class UserCardLocators:
 
     class History:
         all_delete_post_btn = (By.XPATH, "//a[@id='delete-post-opponent']")
+        all_change_post_btn = (By.XPATH, "//a[@id='change-post-opponent']")
+        all_rows_opponent_post_information_phone_text_at_card = (
+            By.XPATH, "//a[@id='change-post-opponent']/../../ul/li[contains(text(),'Phone')]"
+        )
+        all_rows_opponent_post_information_category_text_at_card = (
+            By.XPATH, "//a[@id='change-post-opponent']/../../ul/li[contains(text(),'Category')]"
+        )
+        all_rows_opponent_post_information_district_text_at_card = (
+            By.XPATH, "//a[@id='change-post-opponent']/../../ul/li[contains(text(),'District')]"
+        )
 
     class DisplayAlertInfo:
         alert_info = (By.XPATH, "//*[@class='alert alert-info']")
