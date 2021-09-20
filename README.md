@@ -14,7 +14,7 @@
 <img alt="Website" src="https://img.shields.io/website?color=blue&down_color=green&down_message=online&style=for-the-badge&up_color=red&up_message=offline&url=http%3A%2F%2Falpaca00.website">   
 
 
-**The version of the site for beta testing:**   
+**The version of the website for beta testing:**   
 :infinity: www.alpaca00.website<hr>
 
 ***The idea of this application is to popularize squash in Lviv. 
