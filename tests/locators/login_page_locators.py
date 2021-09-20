@@ -7,3 +7,4 @@ class LoginLocators:
     password_field = (By.XPATH, "//input[@placeholder='password']")
     remember_me_checkbox = (By.XPATH, "//input[@id='remember-me']")
     submit_login = (By.XPATH, "//input[@id='submit-user-login']")
+    flash_message = (By.XPATH, "//div[@id='alert-message']")
