@@ -152,13 +152,15 @@ class TestUserAction:
             ("q", f"{USER_PASSWORD}", "Invalid email."),
             ("", f"{USER_PASSWORD}", "Invalid email."),
             ("alpaca00tuha@gmailcom", f"{USER_PASSWORD}", "Invalid email."),
-            (f"alpaca00tuha$gmail.com", f"{USER_PASSWORD}", "Invalid email."),
+            ("alpaca00tuha$gmail.com", f"{USER_PASSWORD}", "Invalid email."),
             (f"{actual_user_email}", "12345", "Invalid password."),
             (f"{actual_user_email}", "qwerty", "Invalid password."),
             (f"{actual_user_email}", "~!@#$%^&*()_+|\?/.,", "Invalid password."),
             (f"{actual_user_email}", "", "Invalid password."),
             (f"{cache_email.get_more_than_255_characters}", f"{USER_PASSWORD}", "Invalid email."),
             (f"{actual_user_email}", f"{cache_password.get_more_than_255_characters}", "Invalid password."),
+            ("фйцукенгшщзхїфівапроол@gmail.com", f"{cache_password.get_more_than_255_characters}", "Invalid email."),
+            (f"{actual_user_email}", "йцукенгшщзхххччорс", "Invalid password."),
         ],
     )
     def test_incorrect_login(self, user, email, password, expected_result):
