@@ -159,7 +159,7 @@ class TestUserAction:
             (f"{actual_user_email}", "", "Invalid password."),
             (f"{cache_email.get_more_than_255_characters}", f"{USER_PASSWORD}", "Invalid email."),
             (f"{actual_user_email}", f"{cache_password.get_more_than_255_characters}", "Invalid password."),
-            ("фйцукенгшщзхїфівапроол@gmail.com", f"{cache_password.get_more_than_255_characters}", "Invalid email."),
+            ("фйцукенгшщзхїфівапроол@ваов", f"{cache_password.get_more_than_255_characters}", "Invalid email."),
             (f"{actual_user_email}", "йцукенгшщзхххччорс", "Invalid password."),
         ],
     )
