@@ -9,6 +9,7 @@ from tests.locators.login_page_locators import LoginLocators
 from tests.locators.navbar_locators import NavBarLocators
 from tests.locators.registration_page_locators import RegistrationFormLocators
 from tests.locators.user_account_locators import UserCardLocators
+from tests.tests_ui.test_smoke.test_regression.data_generation import Cache
 
 
 @pytest.mark.skip(reason="fixture outside the app")
@@ -26,6 +27,8 @@ def clean_user_account_db(app):
 
 
 class TestUserAction:
+    cache_email = Cache(email=True)
+    cache_password = Cache()
     navbar_locator = NavBarLocators()
     login_locator = LoginLocators()
     register_form_locator = RegistrationFormLocators()
@@ -100,6 +103,7 @@ class TestUserAction:
         user.element(self.user_card_locator.post_btn).click()
         return self
 
+
     @pytest.mark.build_image
     def test_user_can_register(self, user, connect_db):
         if not user.config.base_url == "http://alpaca00.website/en":
@@ -138,6 +142,33 @@ class TestUserAction:
             assert user.element(
                 self.register_form_locator.ConfirmPageLocators.account_confirm_link
             ).should(have.exact_text("Resend"))
+
+
+    @pytest.mark.parametrize(
+        "email, password, expected_result",
+        [
+            ("alpaca00tuhagmail.com", f"{USER_PASSWORD}", "Invalid email."),
+            ("1234567890", f"{USER_PASSWORD}", "Invalid email."),
+            ("q", f"{USER_PASSWORD}", "Invalid email."),
+            ("", f"{USER_PASSWORD}", "Invalid email."),
+            ("alpaca00tuha@gmailcom", f"{USER_PASSWORD}", "Invalid email."),
+            (f"alpaca00tuha$gmail.com", f"{USER_PASSWORD}", "Invalid email."),
+            (f"{actual_user_email}", "12345", "Invalid password."),
+            (f"{actual_user_email}", "qwerty", "Invalid password."),
+            (f"{actual_user_email}", "~!@#$%^&*()_+|\?/.,", "Invalid password."),
+            (f"{actual_user_email}", "", "Invalid password."),
+            (f"{cache_email.get_more_than_255_characters}", f"{USER_PASSWORD}", "Invalid email."),
+            (f"{actual_user_email}", f"{cache_password.get_more_than_255_characters}", "Invalid password."),
+        ],
+    )
+    def test_incorrect_login(self, user, email, password, expected_result):
+        if not user.config.base_url == "http://alpaca00.website/en":
+            pytest.skip("Not the English version of the site.", allow_module_level=True)
+        else:
+            self.user_login(user, email, password)
+            assert user.element(self.login_locator.flash_message).should(
+                have.exact_text(expected_result)
+            )
 
     def test_if_already_confirmed_user(self, user):
         self.user_login(
