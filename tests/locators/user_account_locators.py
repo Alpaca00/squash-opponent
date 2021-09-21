@@ -22,5 +22,20 @@ class UserCardLocators:
             By.XPATH, "//a[@id='change-post-opponent']/../../ul/li[contains(text(),'District')]"
         )
 
+        all_cancel_offer_btn = (By.XPATH, "//*[@id='cancel-post-opponent']")
+        all_delete_offer_btn = (By.XPATH, "//*[@id='agree-post-opponent']")
+        all_rows_offer_information_phone_text_at_card = (
+            By.XPATH, "//*[@id='cancel-post-opponent']/../../ul/li[contains(text(),'Phone')]"
+        )
+        all_rows_offer_information_category_text_at_card = (
+            By.XPATH, "//*[@id='cancel-post-opponent']/../../ul/li[contains(text(),'Category')]"
+        )
+        all_rows_offer_information_district_text_at_card = (
+            By.XPATH, "//*[@id='cancel-post-opponent']/../../ul/li[contains(text(),'District')]"
+        )
+        all_rows_offer_information_email_text_at_card = (
+            By.XPATH, "//*[@id='cancel-post-opponent']/../../ul/li[contains(text(),'Email')]"
+        )
+
     class DisplayAlertInfo:
         alert_info = (By.XPATH, "//*[@class='alert alert-info']")
