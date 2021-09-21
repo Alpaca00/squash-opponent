@@ -5,6 +5,7 @@ from selene.support.conditions import not_
 from selenium.webdriver.common.keys import Keys
 from sqlalchemy import desc
 from opponent_app import db, UserAccount, create_app
+from tests.locators.finder_opponent_locators import FinderOpponentLocators
 from tests.locators.login_page_locators import LoginLocators
 from tests.locators.navbar_locators import NavBarLocators
 from tests.locators.registration_page_locators import RegistrationFormLocators
@@ -33,6 +34,7 @@ class TestUserAction:
     login_locator = LoginLocators()
     register_form_locator = RegistrationFormLocators()
     user_card_locator = UserCardLocators()
+    finder_opponent_locator = FinderOpponentLocators()
     test_email = "test@gmail.com"
     test_name = "Test"
     test_password = "qwerty12345"
@@ -44,17 +46,15 @@ class TestUserAction:
     new_district_for_update = "Zaliznychnyi"
     new_optimal_date_for_update = "2021-10-25T18:00"
 
-    def registration_user(self, user):
+    def registration_user(self, user, email, name, password):
         user.open("/").element(self.navbar_locator.btn_login).click()
         user.element(self.login_locator.sign_up).click()
         user.element(self.register_form_locator.email_field).hover().type(
-            self.test_email
-        ).element(self.register_form_locator.name_field).hover().type(
-            self.test_name
-        ).element(
+            email
+        ).element(self.register_form_locator.name_field).hover().type(name).element(
             self.register_form_locator.password_field
         ).hover().type(
-            self.test_password
+            password
         ).element(
             self.register_form_locator.submit_btn
         ).click()
@@ -103,13 +103,20 @@ class TestUserAction:
         user.element(self.user_card_locator.post_btn).click()
         return self
 
+    def guest_opponent_click_an_offer_btn(self, user):
+        self.user_login(user, self.actual_user_email, self.USER_PASSWORD)
+        self.user_publication_post(user)
+        user.element(self.navbar_locator.btn_finder_opponent).click()
+        return self
 
     @pytest.mark.build_image
     def test_user_can_register(self, user, connect_db):
         if not user.config.base_url == "http://alpaca00.website/en":
             pytest.skip("Not the English version of the site.", allow_module_level=True)
         else:
-            self.registration_user(user)
+            self.registration_user(
+                user, self.test_email, self.test_name, self.test_password
+            )
             connect_db.execute(
                 f"""select * from users_accounts a1 full join users_opponents o1 on
                 (a1.id=o1.user_account_id) full join offers_opponents o2 on
@@ -125,12 +132,61 @@ class TestUserAction:
                 self.register_form_locator.ConfirmPageLocators.account_confirm_link
             ).should(have.exact_text("Resend"))
 
+    @pytest.mark.parametrize(
+        "email, name, password, expected_result",
+        [
+            ("alpaca00tuhagmail.com", f"{test_name}", "qwertyui8", "Invalid email."),
+            ("alpaca00tuha#gmail.com", f"{test_name}", "qwertyui8", "Invalid email."),
+            ("1234567890", f"{test_name}", "qwertyui8", "Invalid email."),
+            ("", f"{test_name}", "qwertyui8", "Invalid email."),
+            ("фівапролджжє", f"{test_name}", "qwertyui8", "Invalid email."),
+            ("q", "", "", "Invalid email."),
+            ("", "", "", "Invalid email."),
+            (
+                f"{actual_user_email}",
+                f"{test_name}",
+                "12345678",
+                "The password must contain more than 8 characters.",
+            ),
+            (
+                f"{actual_user_email}",
+                f"{test_name}",
+                "a",
+                "The password must contain more than 8 characters.",
+            ),
+            (
+                f"{actual_user_email}",
+                f"{test_name}",
+                "",
+                "The password must contain more than 8 characters.",
+            ),
+            (
+                f"{actual_user_email}",
+                f"{test_name}",
+                "!@#$%^&(",
+                "The password must contain more than 8 characters.",
+            ),
+        ],
+    )
+    def test_user_incorrect_register(
+        self, user, email, name, password, expected_result
+    ):
+        if not user.config.base_url == "http://alpaca00.website/en":
+            pytest.skip("Not the English version of the site.", allow_module_level=True)
+        else:
+            self.registration_user(user, email, name, password)
+            assert user.element(self.login_locator.flash_message).should(
+                have.exact_text(expected_result)
+            )
+
     @pytest.mark.build_image
     def test_can_user_login(self, user, connect_db):
         if not user.config.base_url == "http://alpaca00.website/en":
             pytest.skip("Not the English version of the site.", allow_module_level=True)
         else:
-            self.registration_user(user)
+            self.registration_user(
+                user, self.test_email, self.test_name, self.test_password
+            )
             user.element(self.navbar_locator.btn_logout).click()
             self.user_login(
                 user=user, email=self.test_email, password=self.test_password
@@ -142,7 +198,6 @@ class TestUserAction:
             assert user.element(
                 self.register_form_locator.ConfirmPageLocators.account_confirm_link
             ).should(have.exact_text("Resend"))
-
 
     @pytest.mark.parametrize(
         "email, password, expected_result",
@@ -157,9 +212,21 @@ class TestUserAction:
             (f"{actual_user_email}", "qwerty", "Invalid password."),
             (f"{actual_user_email}", "~!@#$%^&*()_+|\?/.,", "Invalid password."),
             (f"{actual_user_email}", "", "Invalid password."),
-            (f"{cache_email.get_more_than_255_characters}", f"{USER_PASSWORD}", "Invalid email."),
-            (f"{actual_user_email}", f"{cache_password.get_more_than_255_characters}", "Invalid password."),
-            ("фйцукенгшщзхїфівапроол@ваов", f"{cache_password.get_more_than_255_characters}", "Invalid email."),
+            (
+                f"{cache_email.get_more_than_255_characters}",
+                f"{USER_PASSWORD}",
+                "Invalid email.",
+            ),
+            (
+                f"{actual_user_email}",
+                f"{cache_password.get_more_than_255_characters}",
+                "Invalid password.",
+            ),
+            (
+                "фйцукенгшщзхїфівапроол@ваов",
+                f"{cache_password.get_more_than_255_characters}",
+                "Invalid email.",
+            ),
             (f"{actual_user_email}", "йцукенгшщзхххччорс", "Invalid password."),
         ],
     )
@@ -335,3 +402,115 @@ class TestUserAction:
             connect_db.execute(
                 f"delete from users_opponents where id={int(update_post_id[0][0])};"
             )
+
+    @pytest.mark.build_image
+    def test_can_guest_opponent_click_an_offer_btn_if_available(self, user):
+        if not user.config.base_url == "http://alpaca00.website/en":
+            pytest.skip("Not the English version of the site.", allow_module_level=True)
+        else:
+            self.guest_opponent_click_an_offer_btn(user)
+            user.all(self.finder_opponent_locator.btns_offer)[-1].should(
+                have.attribute("id").value("offer-show-modal")
+            ).click().element(
+                self.finder_opponent_locator.OfferModalWindow.label
+            ).should(
+                have.exact_text("New Offer")
+            )
+
+    @pytest.mark.build_image
+    def test_can_guest_send_offer(self, user):
+        if not user.config.base_url == "http://alpaca00.website/en":
+            pytest.skip("Not the English version of the site.", allow_module_level=True)
+        else:
+            self.guest_opponent_click_an_offer_btn(user)
+            user.all(self.finder_opponent_locator.btns_offer)[-1].click()
+            user.element(
+                self.finder_opponent_locator.OfferModalWindow.name_field
+            ).should(be.blank.and_(have.attribute("name").value("user_name"))).type(
+                self.test_name
+            ).element(
+                self.finder_opponent_locator.OfferModalWindow.email_field
+            ).should(
+                be.blank.and_(have.attribute("name").value("user_email"))
+            ).type(
+                self.test_email
+            ).element(
+                self.finder_opponent_locator.OfferModalWindow.phone_field
+            ).should(
+                be.blank.and_(have.attribute("name").value("user_phone"))
+            ).type(
+                self.phone_user
+            ).element(
+                self.finder_opponent_locator.OfferModalWindow.location_select
+            ).press_enter().type(
+                Keys.ARROW_DOWN
+            ).type(
+                Keys.ARROW_DOWN
+            ).press_enter().should(
+                have.value(self.new_district_for_update)
+            ).element(
+                self.finder_opponent_locator.OfferModalWindow.category_select
+            ).press_enter().type(
+                Keys.ARROW_DOWN
+            ).type(
+                Keys.ARROW_DOWN
+            ).press_enter().should(
+                have.value("M1")
+            ).element(
+                self.finder_opponent_locator.OfferModalWindow.message_text
+            ).should(
+                be.blank.and_(have.attribute(name="placeholder", value="short message"))
+            ).type(
+                "I'm coming for you"
+            ).should(
+                have.value("I'm coming for you")
+            )
+            user.driver.execute_script(
+                f'dateField=document.getElementById("party");dateField.value="{self.new_optimal_date_for_update}"'
+            )
+            user.element(self.finder_opponent_locator.OfferModalWindow.send_btn).click()
+
+            assert user.all(self.finder_opponent_locator.MessageWidget.label)[
+                -1
+            ].should(have.exact_text("Message"))
+            assert user.all(self.finder_opponent_locator.MessageWidget.text_message)[
+                -1
+            ].should(have.exact_text("I'm coming for you"))
+
+            user.element(self.navbar_locator.btn_account).click()
+            phone_info_at_offer_card = (
+                user.all(
+                    self.user_card_locator.History.all_rows_offer_information_phone_text_at_card
+                )[-1]
+                .get(query.text)
+                .split(":")[1]
+            )
+            district_info_at_offer_card = (
+                user.all(
+                    self.user_card_locator.History.all_rows_offer_information_district_text_at_card
+                )[-1]
+                .get(query.text)
+                .split(":")[1]
+            )
+            category_info_at_offer_card = (
+                user.all(
+                    self.user_card_locator.History.all_rows_offer_information_category_text_at_card
+                )[-1]
+                .get(query.text)
+                .split(":")[1]
+            )
+            email_info_at_offer_card = (
+                user.all(
+                    self.user_card_locator.History.all_rows_offer_information_email_text_at_card
+                )[-1]
+                .get(query.text)
+                .split(":")[1]
+            )
+
+            assert phone_info_at_offer_card == self.phone_user
+            assert district_info_at_offer_card == self.new_district_for_update
+            assert category_info_at_offer_card == "M1"
+            assert email_info_at_offer_card == self.test_email
+
+            user.all(self.user_card_locator.History.all_delete_post_btn)[-1].click()
+            user.element(self.navbar_locator.btn_logout).click()
