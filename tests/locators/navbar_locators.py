@@ -7,3 +7,4 @@ class NavBarLocators:
     btn_support = (By.XPATH, "//div[@id='navbarNavDropdown']//a[contains(text(), 'Support')]")
     btn_login = (By.XPATH, "//*[@id='btn-login-unique']")
     btn_logout = (By.XPATH, "//a[contains(text(), 'Logout')]")
+    btn_account = (By.XPATH, "//a[contains(text(), 'Account')]")
