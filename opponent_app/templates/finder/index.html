@@ -9,13 +9,13 @@
   <h1>{{ _('Finder opponent') }}</h1><hr>
     <div id="wrap">
         <form action="{{ url_for('finder_app.search') }}" method="get" autocomplete="on">
-            <input id="search" name="search" type="text" placeholder="Who're we looking for ? Search by any parameter" style="font-size: 24px;"><input id="search_submit" value="Rechercher" type="submit">
+            <input id="search" name="search" type="text" placeholder="Who're we looking for ?" style="font-size: 18px;"><input id="search_submit" value="Rechercher" type="submit">
         </form>
     </div>
-    <div class="alert alert-info" role="alert" style="width:20%;">
+    <div class="alert alert-info" role="alert" style="width:60%;">
       <a target="_blank" rel="noopener noreferrer" href="http://squasharena.com.ua/#" style="text-decoration: none; color: orange;">{{ _('Booking court:') }} www.squasharena.com.ua</a>
     </div>
-   <div class="alert alert-info" role="alert" style="width:60%;">
+   <div class="alert alert-info" role="alert" style="width:60%;margin-top: 5%;">
    <a class="time-now" id="clock" style="text-decoration: none; color: orange;"></a>
    </div>
     <div class="alert alert-info" role="alert" style="width:60%;text-align: center; color: red;">
