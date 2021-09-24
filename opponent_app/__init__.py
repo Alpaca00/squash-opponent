@@ -38,7 +38,7 @@ from opponent_app.views import (
 )
 
 
-def create_app(environment_name="production"):
+def create_app(environment_name="development"):
     app = Flask(__name__)
     app.config.from_object(configurations[environment_name])
 
