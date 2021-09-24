@@ -118,7 +118,7 @@ class UserOpponent(db.Model):
     opponent_phone = Column(String(50))
     user_account_id = Column(Integer, ForeignKey("users_accounts.id"))
     user_account = db.relationship(
-        "UserAccount", overlaps="users_account,users_opponent,users_accounts"
+        "UserAccount", overlaps="users_accounts, users_opponent,OfferOpponent.user_opponent, queues_opponents"
     )
     offers_opponent = db.relationship(
         "OfferOpponent", backref="users_opponents", lazy="dynamic"
@@ -139,5 +139,23 @@ class OfferOpponent(db.Model):
     offer_message = Column(Text(), nullable=True)
     user_opponent_id = Column(Integer, ForeignKey("users_opponents.id"))
     user_opponent = db.relationship(
-        "UserOpponent", overlaps="users_opponents,offers_opponent"
+        "UserOpponent", overlaps="offers_opponent, users_opponents, offers_opponents"
+    )
+
+
+class QueueOpponent(db.Model):
+    __tablename__ = "queues_opponents"
+    id = Column(Integer, primary_key=True)
+    queue_name = Column(String(50))
+    queue_email = Column(String(50))
+    queue_phone = Column(String(50))
+    queue_category = Column(String(50), nullable=True, default="Amateur")
+    queue_city = Column(String(50), default="Lviv")
+    queue_district = Column(String(50))
+    queue_date = Column(String(50))
+    queue_accept = Column(Boolean, unique=False, default=False)
+    queue_message = Column(Text(), nullable=True)
+    queue_user_opponent_id = Column(Integer, ForeignKey("offers_opponents.id"))
+    queue_user_opponent = db.relationship(
+        "OfferOpponent", overlaps="queue_opponent, users_opponents, queues_opponents"
     )
