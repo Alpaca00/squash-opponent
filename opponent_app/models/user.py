@@ -155,7 +155,7 @@ class QueueOpponent(db.Model):
     queue_date = Column(String(50))
     queue_accept = Column(Boolean, unique=False, default=False)
     queue_message = Column(Text(), nullable=True)
-    queue_user_opponent_id = Column(Integer, ForeignKey("offers_opponents.id"))
-    queue_user_opponent = db.relationship(
+    queue_offer_opponent_id = Column(Integer, ForeignKey("offers_opponents.id"))
+    queue_offer_opponent = db.relationship(
         "OfferOpponent", overlaps="queue_opponent, users_opponents, queues_opponents"
     )
