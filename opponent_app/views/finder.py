@@ -3,7 +3,7 @@ import calendar
 import humanize
 from flask import request, Blueprint, render_template, g, redirect, url_for, flash
 from flask_babel import gettext
-from opponent_app.models import UserAccount, UserOpponent, OfferOpponent, db
+from opponent_app.models import UserAccount, UserOpponent, OfferOpponent, db, QueueOpponent
 
 finder_app = Blueprint("finder_app", __name__)
 
@@ -22,6 +22,7 @@ def pull_lang_code(endpoint, values):
 def index():
     if request.method == "GET":
         opponents = UserAccount.query.join(UserOpponent).all()
+
         dates = []
         for x in opponents:
             for i in x.users_opponent:
@@ -44,6 +45,13 @@ def index():
                     ]
                 )
         offer_data = []
+
+        for x in opponents:
+            for i in range(len(x.users_opponent)):
+                queue_opponent = UserOpponent.query.join(OfferOpponent).filter_by(user_opponent_id=int(dates[i][7])).join(QueueOpponent).all()
+                dates[i].append(len(queue_opponent))
+
+
         offer_opponent = OfferOpponent.query.all()
         if offer_opponent:
             for i in offer_opponent:
@@ -80,6 +88,7 @@ def index():
     return redirect(url_for("finder_app.index"))
 
 
+# todo: if post_offer already exists then make it in the queue table
 def post_offer():
     phone = request.form.get("user_phone")
     name = request.form.get("user_name")
