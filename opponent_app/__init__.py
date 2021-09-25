@@ -20,7 +20,7 @@ from opponent_app.extensions import (
     mail,
     babel,
 )
-from opponent_app.models import db, user_datastore, UserAccount
+from opponent_app.models import db, user_datastore, UserAccount, OfferOpponent, QueueOpponent, UserOpponent
 from opponent_app.views import (
     product_app,
     gallery_app,
