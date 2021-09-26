@@ -28,14 +28,55 @@ for (const btn of allButtons) {
   {% for date2 in offer_data %}
     var id_del = `{{ date2[10] }}`;
      if ( id_del === btn.value ) {
-        modal.remove();
-        alert("You need to wait for the answer of the opponent on the last offer.");
-        window.location.reload();
+        let hiddenIdOffer = document.getElementById("hidden-id");
+        hiddenIdOffer.value = id_del;
     }
   {% endfor %}
 
   });
 }
+
+<!--let modal = document.getElementById("myModal");-->
+<!--let blockBtn = document.getElementById("blockBtn");-->
+<!--let blockBtnReload = document.getElementById("blockBtn");-->
+<!--let allButtons = document.getElementsByClassName("show-modal-btn");-->
+<!--let span = document.getElementsByClassName("close")[0];-->
+<!--let count = 0-->
+
+<!--for (const btn of allButtons) {-->
+<!--  btn.addEventListener('click', function() {-->
+<!--  let userPostId = document.getElementById("id-opponent-user-cart");-->
+<!--  userPostId.value = btn.value;-->
+<!--  modal.style.display = "block";-->
+<!--  let queueQuantity = document.getElementsByClassName("badge rounded-pill bg-info text-dark");-->
+<!--  let messageOffer = document.getElementById("message-for-offer");-->
+
+
+<!--  {% for date2 in offer_data %}-->
+<!--    var btnNum = btn.value-->
+<!--    var id_del = `{{ date2[10] }}`;-->
+<!--     if ( id_del === btnNum) {-->
+<!--          let sizeQ = queueQuantity[count].text;-->
+<!--          let parseSize = parseInt(sizeQ);-->
+<!--          if (parseSize > 1) {-->
+<!--              modal.remove();-->
+<!--              window.location.reload();-->
+<!--              messageOffer.className = "visually-visible";-->
+<!--              messageOffer.style.color = "#ffffff";-->
+<!--              messageOffer.textContent = "You need to wait for the answer of the opponent on the last offer.";-->
+<!--              }-->
+<!--          let hiddenIdOffer = document.getElementById("hidden-id");-->
+<!--          hiddenIdOffer.value = id_del;-->
+<!--    } else {-->
+<!--        count = 0-->
+<!--        blockBtnReload.addEventListener('click', function() {-->
+<!--        window.location.reload();-->
+<!--        });-->
+<!--      }-->
+<!--   count += 1-->
+<!--  {% endfor %}-->
+<!--  });-->
+<!--}-->
 
 span.onclick = function() {
   modal.style.display = "none";
