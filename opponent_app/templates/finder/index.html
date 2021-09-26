@@ -25,7 +25,7 @@
                 <h1 class="display-6">{{ messages[0] }}</h1>
             {% endif %}
         {% endwith %}
-        <h5 class="visually-hidden">{{ _('Paid Opponent') }}</h5>
+        <h5 class="visually-hidden" id="message-for-offer">{{ _('Queue: ') }}</h5>
    </div>
 </div>
 {% include 'finder/content.html' %}
