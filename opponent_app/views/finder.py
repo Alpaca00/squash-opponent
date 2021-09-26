@@ -3,7 +3,13 @@ import calendar
 import humanize
 from flask import request, Blueprint, render_template, g, redirect, url_for, flash
 from flask_babel import gettext
-from opponent_app.models import UserAccount, UserOpponent, OfferOpponent, db, QueueOpponent
+from opponent_app.models import (
+    UserAccount,
+    UserOpponent,
+    OfferOpponent,
+    db,
+    QueueOpponent,
+)
 
 finder_app = Blueprint("finder_app", __name__)
 
@@ -48,9 +54,24 @@ def index():
 
         for x in opponents:
             for i in range(len(x.users_opponent)):
-                queue_opponent = UserOpponent.query.join(OfferOpponent).filter_by(user_opponent_id=int(dates[i][7])).join(QueueOpponent).all()
-                dates[i].append(len(queue_opponent))
-
+                queue_opponent = (
+                    UserOpponent.query.join(OfferOpponent)
+                    .filter_by(user_opponent_id=int(dates[i][7]))
+                    .join(QueueOpponent)
+                    .all()
+                )
+                size = len(queue_opponent)
+                if size >= 1:
+                    size += 1
+                    dates[i].append(size)
+                else:
+                    queue_opponent = (
+                        UserOpponent.query.join(OfferOpponent)
+                        .filter_by(user_opponent_id=int(dates[i][7]))
+                        .all()
+                    )
+                    size = len(queue_opponent)
+                    dates[i].append(size)
 
         offer_opponent = OfferOpponent.query.all()
         if offer_opponent:
@@ -88,8 +109,8 @@ def index():
     return redirect(url_for("finder_app.index"))
 
 
-# todo: if post_offer already exists then make it in the queue table
 def post_offer():
+    id_offer = request.form.get("hidden-id-offer")
     phone = request.form.get("user_phone")
     name = request.form.get("user_name")
     email = request.form.get("user_email")
@@ -98,18 +119,50 @@ def post_offer():
     date = request.form.get("user_partydate")
     message = request.form.get("user_message_text")
     opponent_id = request.form.get("opponent_id_user")
-    offer_opponent = OfferOpponent(
-        offer_phone=phone,
-        offer_name=name,
-        offer_email=email,
-        offer_category=category,
-        offer_city="Lviv",
-        offer_district=district,
-        offer_date=date,
-        user_opponent_id=opponent_id,
-        offer_message=message,
-    )
-    db.session.add(offer_opponent)
+
+    if id_offer is "":
+        offer_opponent = OfferOpponent(
+            offer_phone=phone,
+            offer_name=name,
+            offer_email=email,
+            offer_category=category,
+            offer_city="Lviv",
+            offer_district=district,
+            offer_date=date,
+            user_opponent_id=opponent_id,
+            offer_message=message,
+        )
+        db.session.add(offer_opponent)
+    else:
+        offer_ = (
+            OfferOpponent.query.join(UserOpponent)
+            .filter_by(id=int(id_offer))
+            .join(UserAccount)
+            .one_or_none()
+        )
+        card = (
+            QueueOpponent.query.join(OfferOpponent)
+            .join(UserOpponent)
+            .filter_by(id=int(id_offer))
+            .join(UserAccount)
+            .one_or_none()
+        )
+        if offer_ is not None and card is None:
+            queue_opponent = QueueOpponent(
+                queue_phone=phone,
+                queue_name=name,
+                queue_email=email,
+                queue_category=category,
+                queue_city="Lviv",
+                queue_district=district,
+                queue_date=date,
+                queue_offer_opponent_id=int(offer_.id),
+                queue_message=message,
+            )
+            db.session.add(queue_opponent)
+        if card is not None:
+            flash("You need to wait for the answer of the opponent on the last offer.")
+
     db.session.commit()
     return redirect(url_for("finder_app.index"))
 
@@ -248,9 +301,8 @@ def search():
     return redirect(url_for("finder_app.index"))
 
 
-# for delete outdated posts
+# todo: delete outdated posts
 def time_feed():
     def generate():
         yield datetime.now().strftime("%H:%M:%S")
-
     return generate()

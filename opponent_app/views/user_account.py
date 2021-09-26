@@ -14,7 +14,13 @@ from flask import (
 from flask_babel import gettext
 from flask_login import current_user, logout_user, login_required
 from loguru import logger
-from opponent_app.models import db, UserOpponent, UserAccount, OfferOpponent, QueueOpponent
+from opponent_app.models import (
+    db,
+    UserOpponent,
+    UserAccount,
+    OfferOpponent,
+    QueueOpponent,
+)
 from opponent_app.helpers import mail, mail_settings, Message
 from opponent_app.decorators import check_confirmed
 
@@ -62,8 +68,24 @@ def user_account():
 
         for x in user_history:
             for i in range(len(x.users_opponent)):
-                queue_opponent = UserOpponent.query.join(OfferOpponent).filter_by(user_opponent_id=int(lst_history[i][7])).join(QueueOpponent).all()
-                lst_history[i].append(len(queue_opponent))
+                queue_opponent = (
+                    UserOpponent.query.join(OfferOpponent)
+                    .filter_by(user_opponent_id=int(lst_history[i][7]))
+                    .join(QueueOpponent)
+                    .all()
+                )
+                size = len(queue_opponent)
+                if size >= 1:
+                    size += 1
+                    lst_history[i].append(size)
+                else:
+                    queue_opponent = (
+                        UserOpponent.query.join(OfferOpponent)
+                        .filter_by(user_opponent_id=int(lst_history[i][7]))
+                        .all()
+                    )
+                    size = len(queue_opponent)
+                    lst_history[i].append(size)
 
         offer_data = []
         offer_id = []
@@ -167,7 +189,12 @@ def delete_post_request(post_id: int):
             user_opponent_id=post_id
         ).one_or_none()
 
-        queue_opponent = UserOpponent.query.join(OfferOpponent).filter_by(user_opponent_id=post_id).join(QueueOpponent).one_or_none()
+        queue_opponent = (
+            UserOpponent.query.join(OfferOpponent)
+            .filter_by(user_opponent_id=post_id)
+            .join(QueueOpponent)
+            .one_or_none()
+        )
         if card_opponent is None and card_offer is None:
             abort(404)
         else:
@@ -177,14 +204,21 @@ def delete_post_request(post_id: int):
                 flash(gettext("You need cancel all offers for this post."))
 
             elif card_offer is not None:
-                # send_info_by_user(
-                #     subject="Opponent's post deleted.",
-                #     recipient=card_offer.offer_email,
-                #     body=body,
-                # )
+                send_info_by_user(
+                    subject="Opponent's post deleted.",
+                    recipient=card_offer.offer_email,
+                    body=body,
+                )
 
                 db.session.delete(card_offer)
                 db.session.delete(card_opponent)
+                db.session.commit()
+                flash(gettext("Successfully. Your post has been deleted."))
+            card = (
+                UserOpponent.query.filter_by(id=post_id).join(UserAccount).one_or_none()
+            )
+            if card is not None:
+                db.session.delete(card)
                 db.session.commit()
                 flash(gettext("Successfully. Your post has been deleted."))
         return redirect(url_for("user_account_app.user_account"))
@@ -196,17 +230,19 @@ def cancel_post_offer(post_id: int):
     if request.method == "GET":
         offer_opponent = OfferOpponent.query.filter_by(id=post_id).one_or_none()
         user_opponent_id = offer_opponent.user_opponent_id
-        queue_opponent = QueueOpponent.query.join(OfferOpponent).filter_by(id=post_id).one_or_none()
+        queue_opponent = (
+            QueueOpponent.query.join(OfferOpponent).filter_by(id=post_id).one_or_none()
+        )
 
         if offer_opponent is None:
             abort(404)
         else:
-            # body = f"Sorry, {offer_opponent.user_opponent.user_account.name} canceled your offer\nGame time: {offer_opponent.user_opponent.opponent_date},\nOpponent info:\n{offer_opponent.user_opponent.user_account.name}\n{offer_opponent.user_opponent.user_account.email}\n{offer_opponent.user_opponent.opponent_phone}\n{offer_opponent.user_opponent.opponent_district}\n{offer_opponent.user_opponent.opponent_category}"
-            # send_info_by_user(
-            #     subject="Your offer canceled.",
-            #     recipient=offer_opponent.offer_email,
-            #     body=body,
-            # )
+            body = f"Sorry, {offer_opponent.user_opponent.user_account.name} canceled your offer\nGame time: {offer_opponent.user_opponent.opponent_date},\nOpponent info:\n{offer_opponent.user_opponent.user_account.name}\n{offer_opponent.user_opponent.user_account.email}\n{offer_opponent.user_opponent.opponent_phone}\n{offer_opponent.user_opponent.opponent_district}\n{offer_opponent.user_opponent.opponent_category}"
+            send_info_by_user(
+                subject="Your offer canceled.",
+                recipient=offer_opponent.offer_email,
+                body=body,
+            )
 
             flash(gettext("Successfully. The offer has been deleted."))
 
@@ -223,16 +259,16 @@ def cancel_post_offer(post_id: int):
                 db.session.delete(offer_opponent)
                 db.session.commit()
                 offer_opponent = OfferOpponent(
-                        offer_phone=phone,
-                        offer_name=name,
-                        offer_email=email,
-                        offer_category=category,
-                        offer_city=city,
-                        offer_district=district,
-                        offer_date=date,
-                        user_opponent_id=int(user_opponent_id),
-                        offer_message=message,
-                    )
+                    offer_phone=phone,
+                    offer_name=name,
+                    offer_email=email,
+                    offer_category=category,
+                    offer_city=city,
+                    offer_district=district,
+                    offer_date=date,
+                    user_opponent_id=int(user_opponent_id),
+                    offer_message=message,
+                )
                 db.session.add(offer_opponent)
                 db.session.commit()
             else:
