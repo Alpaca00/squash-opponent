@@ -13,25 +13,25 @@ pipeline {
             steps {
                 git branch: 'main', credentialsId: 'squash_opponent', url: 'https://github.com/Alpaca00/squash-opponent.git'
                 script {
-                    sh 'apt-get update && apt-get install -y wget'
-                    sh 'wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -'
-                    echo '"deb http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google.list'
-                    sh 'apt-get update'
-                    sh 'apt-get install -y google-chrome-stable xvfb'
-                    sh 'pip install pipenv'
-                    sh 'pipenv install'
-                    sh 'pipenv install --dev'
-                    sh 'pipenv run pytest -s -H tests/tests_ui/test_smoke/test_regression/'
+//                     sh 'apt-get update && apt-get install -y wget'
+//                     sh 'wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -'
+//                     echo '"deb http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google.list'
+//                     sh 'apt-get update'
+//                     sh 'apt-get install -y google-chrome-stable xvfb'
+//                     sh 'pip install pipenv'
+//                     sh 'pipenv install'
+//                     sh 'pipenv install --dev'
+//                     sh 'pipenv run pytest -s -H tests/tests_ui/test_smoke/test_regression/'
                 }
             }
         }
         stage('Build image') {
           steps {
               withDockerRegistry(credentialsId: 'opponent_docker', url: 'https://registry.hub.docker.com ') {
-                sh 'docker build -t alpaca00/opponent:latest .'
-                sh 'docker login -u $DOCKER_USERNAME --password $DOCKER_PASSWORD'
-                sh 'docker push alpaca00/opponent:latest'
-                sh 'docker image rm alpaca00/opponent'
+//                 sh 'docker build -t alpaca00/opponent:latest .'
+//                 sh 'docker login -u $DOCKER_USERNAME --password $DOCKER_PASSWORD'
+//                 sh 'docker push alpaca00/opponent:latest'
+//                 sh 'docker image rm alpaca00/opponent'
                 }
                 script {
                     echo 'Done.'

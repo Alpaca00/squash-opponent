@@ -15,10 +15,10 @@ jobs:
         uses: actions/checkout@main
       - name: Test
         run: |
-          pip install pipenv
-          pipenv install --dev
-          pipenv run coverage run -m pytest -sv -H --cov-config .coveragerc --tb=short tests/tests_ui/test_smoke/test_regression/
-          pipenv run coverage xml -o coverage.xml
+#          pip install pipenv
+#          pipenv install --dev
+#          pipenv run coverage run -m pytest -sv -H --cov-config .coveragerc --tb=short tests/tests_ui/test_smoke/test_regression/
+#          pipenv run coverage xml -o coverage.xml
       - name: Upload pytest test results
         uses: codecov/codecov-action@v1
         with:
