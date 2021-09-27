@@ -580,3 +580,7 @@ input[type="submit"]:hover {
   padding-top: 15px;
 }
 
+
+.checked {
+  color: orange;
+}

@@ -48,6 +48,7 @@ def index():
                         i.id,
                         x.name,
                         x.email,
+                        x.count
                     ]
                 )
         offer_data = []

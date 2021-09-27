@@ -82,6 +82,7 @@ class UserAccount(db.Model, UserMixin):
     admin = db.Column(db.Boolean, nullable=False, default=False)
     confirmed = db.Column(db.Boolean, nullable=False, default=False)
     confirmed_on = db.Column(db.DateTime, nullable=True)
+    count = db.Column(Integer, nullable=True)
 
     users_opponent = db.relationship(
         "UserOpponent", backref="users_accounts", lazy=True

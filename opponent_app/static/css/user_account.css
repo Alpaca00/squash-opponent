@@ -625,3 +625,8 @@ ul {
   color: black;
   padding-top: 15px;
 }
+
+
+.checked {
+  color: orange;
+}
