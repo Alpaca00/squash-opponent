@@ -109,6 +109,7 @@ class TestUserAction:
         user.element(self.navbar_locator.btn_finder_opponent).click()
         return self
 
+
     @pytest.mark.build_image
     def test_user_can_register(self, user, connect_db):
         if not user.config.base_url == "http://alpaca00.website/en":
@@ -404,7 +405,7 @@ class TestUserAction:
             )
 
     @pytest.mark.build_image
-    def test_can_guest_opponent_click_an_offer_btn_if_available(self, user):
+    def test_can_guest_opponent_click_an_offer_btn_if_available(self, user, connect_db):
         if not user.config.base_url == "http://alpaca00.website/en":
             pytest.skip("Not the English version of the site.", allow_module_level=True)
         else:
@@ -415,6 +416,9 @@ class TestUserAction:
                 self.finder_opponent_locator.OfferModalWindow.label
             ).should(
                 have.exact_text("New Offer")
+            )
+            connect_db.execute(
+                f"delete from users_opponents where opponent_phone='{self.phone_user}' and opponent_date='{self.optimal_date}';"
             )
 
     @pytest.mark.build_image
