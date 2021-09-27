@@ -201,6 +201,7 @@ def search_render(opponent_search=None, offer_search=None):
                     i.id,
                     x.name,
                     x.email,
+                    x.count,
                 ]
             )
         offer_data = []
