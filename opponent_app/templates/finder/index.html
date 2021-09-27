@@ -7,18 +7,17 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 <div class="container ls">
   <h1>{{ _('Finder opponent') }}</h1><hr>
-    <div id="wrap">
+
+    <div class="alert alert-info" role="alert" style="width:60%;">
+        <a class="time-now" id="clock" style="text-decoration: none; color: orange;"></a>
+         <a target="_blank" rel="noopener noreferrer" href="http://squasharena.com.ua/#" style="text-decoration: none; color: orange;"><p>{{ _('Booking court:') }} www.squasharena.com.ua</p></a>
+    </div>
+     <div id="wrap">
         <form action="{{ url_for('finder_app.search') }}" method="get" autocomplete="on">
             <input id="search" name="search" type="text" placeholder="Who're we looking for ?" style="font-size: 18px;"><input id="search_submit" value="Rechercher" type="submit">
         </form>
     </div>
-    <div class="alert alert-info" role="alert" style="width:60%;">
-      <a target="_blank" rel="noopener noreferrer" href="http://squasharena.com.ua/#" style="text-decoration: none; color: orange;">{{ _('Booking court:') }} www.squasharena.com.ua</a>
-    </div>
-   <div class="alert alert-info" role="alert" style="width:60%;margin-top: 5%;">
-   <a class="time-now" id="clock" style="text-decoration: none; color: orange;"></a>
-   </div>
-    <div class="alert alert-info" role="alert" style="width:60%;text-align: center; color: red;">
+    <div class="alert alert-info" role="alert" style="width:60%;text-align: center;">
         <h5 class="visually-visible" style="text-align: center; color: white;">{{ _('Find an opponent for the game') }}</h5>
         {% with messages = get_flashed_messages() %}
                     {% if messages %}
