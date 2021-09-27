@@ -120,7 +120,7 @@ def post_offer():
     message = request.form.get("user_message_text")
     opponent_id = request.form.get("opponent_id_user")
 
-    if id_offer is "":
+    if id_offer == "":
         offer_opponent = OfferOpponent(
             offer_phone=phone,
             offer_name=name,
