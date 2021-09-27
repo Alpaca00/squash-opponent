@@ -327,7 +327,7 @@ body {
   display: inline-block;
   position: relative;
   height: 50px;
-  float: right;
+  float: auto;
   padding: 0;
   position: relative;
 }
@@ -358,7 +358,7 @@ input[type="text"]:focus:hover {
 }
 
 input[type="text"]:focus {
-  width: 700px;
+  width: 300px;
   z-index: 1;
   border-bottom: 1px solid #BBB;
   cursor: text;
