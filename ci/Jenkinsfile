@@ -22,7 +22,7 @@ pipeline {
                     sh 'pipenv install'
                     sh 'pipenv install --dev'
                     sh 'pipenv run pytest -s -H tests/tests_ui/test_smoke/test_regression/'
-                    sh 'behave --tags=fixture.browser.chrome tests/scenarios/features/opponent_app_user_login.feature'
+                    sh 'pipenv behave --tags=fixture.browser.chrome tests/scenarios/features/opponent_app_user_login.feature'
                 }
             }
         }
