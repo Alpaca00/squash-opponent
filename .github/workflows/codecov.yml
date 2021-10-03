@@ -17,9 +17,9 @@ jobs:
         run: |
           pip install pipenv
           pipenv install --dev
-          pipenv run coverage run -m pytest -sv -H --cov-config .coveragerc --tb=short tests/tests_ui/test_smoke/test_regression/
-          pipenv run coverage xml -o coverage.xml
-          pipenv behave --tags=fixture.browser.chrome tests/scenarios/features/opponent_app_user_login.feature
+#          pipenv run coverage run -m pytest -sv -H --cov-config .coveragerc --tb=short tests/tests_ui/test_smoke/test_regression/
+#          pipenv run coverage xml -o coverage.xml
+          pipenv behave --define hidden=headless --tags=fixture.browser.chrome --tags=ua tests/scenarios/features/*.feature
       - name: Upload pytest test results
         uses: codecov/codecov-action@v1
         with:
