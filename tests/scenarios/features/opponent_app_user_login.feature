@@ -1,4 +1,5 @@
 Feature: user login
+  @ua
   @fixture.browser.chrome
   Scenario: can user login
      Given launch chrome browser
@@ -6,7 +7,7 @@ Feature: user login
         Then I will see the account details
           And close browser
 
-  @slow
+  @ua
   @fixture.browser.chrome
   Scenario: input incorrect login
     Given launch chrome browser and execute steps from scenario can user login, I get Given and When
