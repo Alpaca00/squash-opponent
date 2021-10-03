@@ -22,7 +22,7 @@ pipeline {
                     sh 'pipenv install'
                     sh 'pipenv install --dev'
 //                     sh 'pipenv run pytest -s -H tests/tests_ui/test_smoke/test_regression/'
-                    sh 'pipenv behave --define hidden=headless --tags=fixture.browser.chrome --tags=ua tests/scenarios/features/*.feature'
+                    sh 'pipenv run behave --define hidden=headless --tags=fixture.browser.chrome --tags=ua tests/scenarios/features/*.feature'
                 }
             }
         }
