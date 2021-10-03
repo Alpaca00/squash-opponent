@@ -6,7 +6,7 @@ from .user import User, UserAccount, UserOpponent, user_datastore, OfferOpponent
 from .table_result import TableResult, TableScore, Player
 from .form import RegisterForm, AdminLoginForm
 
-__al__ = [
+__all__ = [
     "db",
     "Product",
     "Gallery",

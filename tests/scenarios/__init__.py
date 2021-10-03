@@ -1,5 +1,5 @@
 from .base_element import BaseElement
 
-__al__ = [
+__all__ = [
     'BaseElement',
 ]
