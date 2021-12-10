@@ -11,7 +11,7 @@ services:
       PG_HOST: pg
       R_HOST: redis
     volumes:
-      - /alpaca_web:/app
+      - /squash-opponent:/app
     expose:
       - 8000
     depends_on:
