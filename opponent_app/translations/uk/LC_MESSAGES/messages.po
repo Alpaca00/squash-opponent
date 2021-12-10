@@ -35,11 +35,11 @@ msgstr "Очків"
 
 #: templates/content.html:32
 msgid "Last Event"
-msgstr "Остання подія"
+msgstr "Lviv Squash Team"
 
 #: templates/content.html:41
 msgid "Lviv Squash Team"
-msgstr "Львівський командний турнір"
+msgstr "Lviv Squash Team"
 
 #: templates/content.html:46 templates/content.html:112
 #: templates/content.html:113
@@ -64,11 +64,11 @@ msgstr "Рахунок"
 
 #: templates/content.html:162
 msgid "Lviv Junior Tour"
-msgstr "Львівський юніорський турнір"
+msgstr "Lviv Junior Tour"
 
 #: templates/content.html:171
 msgid "Result"
-msgstr "Результат"
+msgstr "Результати"
 
 #: templates/content.html:172
 msgid "All Junior Categories of Lviv Junior Tour"
@@ -735,4 +735,8 @@ msgstr "Успішно. Пропозиція була прийнята."
 #: views/video_gallery.py:36
 msgid "Warning. The link is already in our gallery."
 msgstr "Увага. Посилання вже є у нашій галереї."
+
+#: templates/finder/content.html:56
+msgid "The opponents are waiting:"
+msgstr "Опонентів в очікуванні:"
 

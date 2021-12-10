@@ -720,3 +720,6 @@ msgstr ""
 msgid "Warning. The link is already in our gallery."
 msgstr ""
 
+#: templates/finder/content.html:56
+msgid "The opponents are waiting:"
+msgstr "Опонентів в очікуванні:"
