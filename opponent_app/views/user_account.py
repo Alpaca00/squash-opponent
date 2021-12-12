@@ -209,11 +209,11 @@ def delete_post_request(post_id: int):
                 flash(gettext("You need cancel all offers for this post."))
 
             elif card_offer is not None:
-                # send_info_by_user(
-                #     subject="Opponent's post deleted.",
-                #     recipient=card_offer.offer_email,
-                #     body=body,
-                # )
+                send_info_by_user(
+                    subject="Opponent's post deleted.",
+                    recipient=card_offer.offer_email,
+                    body=body,
+                )
 
                 db.session.delete(card_offer)
                 db.session.delete(card_opponent)
@@ -242,12 +242,12 @@ def cancel_post_offer(post_id: int):
         if offer_opponent is None:
             abort(404)
         else:
-            # body = f"Sorry, {offer_opponent.user_opponent.user_account.name} canceled your offer\nGame time: {offer_opponent.user_opponent.opponent_date},\nOpponent info:\n{offer_opponent.user_opponent.user_account.name}\n{offer_opponent.user_opponent.user_account.email}\n{offer_opponent.user_opponent.opponent_phone}\n{offer_opponent.user_opponent.opponent_district}\n{offer_opponent.user_opponent.opponent_category}"
-            # send_info_by_user(
-            #     subject="Your offer canceled.",
-            #     recipient=offer_opponent.offer_email,
-            #     body=body,
-            # )
+            body = f"Sorry, {offer_opponent.user_opponent.user_account.name} canceled your offer\nGame time: {offer_opponent.user_opponent.opponent_date},\nOpponent info:\n{offer_opponent.user_opponent.user_account.name}\n{offer_opponent.user_opponent.user_account.email}\n{offer_opponent.user_opponent.opponent_phone}\n{offer_opponent.user_opponent.opponent_district}\n{offer_opponent.user_opponent.opponent_category}"
+            send_info_by_user(
+                subject="Your offer canceled.",
+                recipient=offer_opponent.offer_email,
+                body=body,
+            )
 
             flash(gettext("Successfully. The offer has been deleted."))
 
@@ -291,12 +291,12 @@ def accept_post_offer(post_id: int):
             abort(404)
         else:
             if not offer_opponent.offer_accept:
-                # body = f"Wow! {offer_opponent.user_opponent.user_account.name} accepted your offer\nGame time: {offer_opponent.user_opponent.opponent_date},\nOpponent info:\n{offer_opponent.user_opponent.user_account.name}\n{offer_opponent.user_opponent.user_account.email}\n{offer_opponent.user_opponent.opponent_phone}\n{offer_opponent.user_opponent.opponent_district}\n{offer_opponent.user_opponent.opponent_category}"
-                # send_info_by_user(
-                #     subject="Your offer accepted.",
-                #     recipient=offer_opponent.offer_email,
-                #     body=body,
-                # )
+                body = f"Wow! {offer_opponent.user_opponent.user_account.name} accepted your offer\nGame time: {offer_opponent.user_opponent.opponent_date},\nOpponent info:\n{offer_opponent.user_opponent.user_account.name}\n{offer_opponent.user_opponent.user_account.email}\n{offer_opponent.user_opponent.opponent_phone}\n{offer_opponent.user_opponent.opponent_district}\n{offer_opponent.user_opponent.opponent_category}"
+                send_info_by_user(
+                    subject="Your offer accepted.",
+                    recipient=offer_opponent.offer_email,
+                    body=body,
+                )
                 offer_opponent.offer_accept = True
                 db.session.commit()
                 flash(gettext("Successfully. The offer has been accepted."))
