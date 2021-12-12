@@ -44,7 +44,10 @@
                     <ul class="widget-49-meeting-points" style="list-style-type: circle;">
                         <li class="widget-49-meeting-item">{{ _('City:') }}<span>{{ offer[6] }}</span></li>
                         <li class="widget-49-meeting-item">{{ _('District:') }}<span>{{ offer[7] }}</span></li>
-                        <li class="widget-49-meeting-item">{{ _('Category:') }}<span>{{ offer[8] }}</span></li>
+                        <li class="widget-49-meeting-item">{{ _('Category:') }}<span class="{% if offer[8] == 'AMATEUR' %}
+                        badge bg-light text-dark {% elif offer[8] == 'M1' %} badge bg-dark {% elif offer[8] == 'M2' %}
+                         badge bg-primary {% elif offer[8] == 'M3' %} badge bg-success text-dark {% else %} badge bg-danger
+                        {% endif %}" >{{ offer[8] }}</span></li>
                         <li class="widget-49-meeting-item">{{ _('Email:') }}<span>{{ offer[5] }}</span></li>
                         <li class="widget-49-meeting-item">{{ _('Phone:') }}<span>{{ offer[3] }}</span></li>
                     </ul>
