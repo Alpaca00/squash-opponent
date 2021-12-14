@@ -1,6 +1,7 @@
-from datetime import datetime
+from datetime import datetime, timedelta
 import calendar
 import humanize
+import loguru
 from flask import request, Blueprint, render_template, g, redirect, url_for, flash
 from flask_babel import gettext
 from opponent_app.models import (
@@ -27,8 +28,8 @@ def pull_lang_code(endpoint, values):
 @finder_app.route("/", methods=["GET", "POST"])
 def index():
     if request.method == "GET":
+        time_perform_remove_old_post()
         opponents = UserAccount.query.join(UserOpponent).all()
-
         dates = []
         for x in opponents:
             for i in x.users_opponent:
@@ -48,11 +49,10 @@ def index():
                         i.id,
                         x.name,
                         x.email,
-                        x.count
+                        x.count,
                     ]
                 )
         offer_data = []
-
         for x in opponents:
             for i in range(len(x.users_opponent)):
                 queue_opponent = (
@@ -303,8 +303,54 @@ def search():
     return redirect(url_for("finder_app.index"))
 
 
-# todo: delete outdated posts
-def time_feed():
-    def generate():
-        yield datetime.now().strftime("%H:%M:%S")
-    return generate()
+@finder_app.route("/search_category/", methods=["GET", "POST"])
+def search_category():
+    if request.method == "GET":
+        query_category = request.args
+        text_search = list(map(str, query_category))[0].upper()
+        by_category_opponent = (
+            UserAccount.query.join(UserOpponent)
+            .filter(UserOpponent.opponent_category.contains(text_search))
+            .all()
+        )
+        if by_category_opponent:
+            flash_message_for_query(by_category_opponent)
+            return search_render(opponent_search=by_category_opponent)
+        else:
+            flash(gettext("Nothing was found for this query."))
+    if request.method == "POST":
+        post_offer()
+    return redirect(url_for("finder_app.index"))
+
+
+def time_perform_remove_old_post():
+    dt = datetime.today() - timedelta(days=1)
+    card_opponent = (
+        UserOpponent.query.filter(UserOpponent.opponent_date.contains(str(dt.date())))
+        .join(UserAccount)
+        .all()
+    )
+    quantity_posts = len(card_opponent)
+    if quantity_posts >= 1:
+        for n in range(quantity_posts):
+            card_offer = OfferOpponent.query.filter_by(
+                user_opponent_id=card_opponent[n].id
+            ).one_or_none()
+            queue_opponent = (
+                UserOpponent.query.join(OfferOpponent)
+                .filter_by(user_opponent_id=card_opponent[n].id)
+                .join(QueueOpponent)
+                .one_or_none()
+            )
+            if queue_opponent:
+                db.session.delete(queue_opponent)
+                db.session.commit()
+                loguru.logger.info(f"Removed queue_opponent.")
+            if card_offer:
+                db.session.delete(card_offer)
+                db.session.commit()
+                loguru.logger.info(f"Removed offer_opponent.")
+            if card_opponent:
+                db.session.delete(card_opponent[n])
+                db.session.commit()
+                loguru.logger.info(f"Removed post_opponent.")
