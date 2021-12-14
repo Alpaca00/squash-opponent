@@ -56,7 +56,7 @@ class TestFinderOpponent:
             ).element(
                 self.finder_opponent_locator.OfferModalWindow.message_text
             ).should(
-                be.blank.and_(have.attribute(name="placeholder", value="short message"))
+                be.blank.and_(have.attribute("placeholder").value("short message"))
             ).type(
                 "I'm coming for you"
             ).should(
