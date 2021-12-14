@@ -44,7 +44,7 @@ def user(request):
                     command_executor="http://{}/wd/hub".format(config_param["remote"]),
                     desired_capabilities={"browserName": config_param["browser"]},
                 ),
-                base_url="http://46.101.139.62/en",
+                base_url="http://65.108.156.9/en",
                 timeout=4,
             )
         )
