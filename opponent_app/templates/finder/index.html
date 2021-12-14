@@ -8,10 +8,9 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <div class="container ls">
   <h1>{{ _('Finder opponent') }}</h1><hr>
-
     <div class="alert alert-info" role="alert" style="width:60%;">
-        <a class="time-now" id="clock" style="text-decoration: none; color: orange;"></a>
-         <a target="_blank" rel="noopener noreferrer" href="http://squasharena.com.ua/#" style="text-decoration: none; color: orange;"><p>{{ _('Booking court:') }} www.squasharena.com.ua</p></a>
+        <a class="time-now" id="clock" style="text-decoration: none; color: lightslategray;"></a>
+         <a target="_blank" rel="noopener noreferrer" href="http://squasharena.com.ua/#" style="text-decoration: none; color: lightslategray;"><p>{{ _('Booking court:') }} www.squasharena.com.ua</p></a>
     </div>
      <div id="wrap">
         <form action="{{ url_for('finder_app.search') }}" method="get" autocomplete="on">
@@ -19,7 +18,7 @@
         </form>
     </div>
     <div class="alert alert-info" role="alert" style="width:60%;text-align: center;">
-        <h5 class="visually-visible" style="text-align: center; color: white;">{{ _('Find an opponent for the game') }}</h5>
+        <h5 class="visually-visible" style="text-align: center; color: lightslategray;">{{ _('Find an opponent for the game') }}</h5>
         {% with messages = get_flashed_messages() %}
                     {% if messages %}
                 <h1 class="display-6">{{ messages[0] }}</h1>
@@ -27,7 +26,17 @@
         {% endwith %}
         <h5 class="visually-hidden" id="message-for-offer">{{ _('Queue: ') }}</h5>
    </div>
+    <form action="{{ url_for('finder_app.search_category') }}" method="get" autocomplete="on">
+        <button type="submit" class="btn btn-danger" name="pro">PRO</button>
+        <button type="submit" class="btn btn-dark" name="m1">M1</button>
+        <button type="submit" class="btn btn-info" name="m2">M2</button>
+        <button type="submit" class="btn btn-success" name="m3">M3</button>
+        <button type="submit" class="btn btn-light" name="amateur">AMATEUR</button>
+    </form>
 </div>
+
+
+
 {% include 'finder/content.html' %}
 <script>
     function doDate() {
@@ -37,5 +46,9 @@
     }
 setInterval(doDate, 1000);
 </script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" ></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.js"></script>
 {%- endblock %}
 
