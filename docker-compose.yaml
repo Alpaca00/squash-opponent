@@ -17,7 +17,7 @@ services:
     depends_on:
       - pg
       - redis
-    command: gunicorn -w 1 -b 0.0.0.0:8000 wsgi:app
+    command: gunicorn -w 1 -b 0.0.0.0:443 wsgi:app
   pg:
     image: postgres:13.3
     environment:
@@ -43,6 +43,6 @@ services:
     restart: always
     build: ./nginx
     ports:
-      - 80:80
+      - 443:443
     depends_on:
       - app
