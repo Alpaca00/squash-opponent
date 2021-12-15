@@ -22,7 +22,7 @@ def pytest_addoption(parser):
         "--url",
         "-U",
         action="store",
-        default="http://alpaca00.website/en",
+        default="https://alpaca00.website/en",
         help="Base url",
     )
 
@@ -41,7 +41,7 @@ def user(request):
         browser = Browser(
             Config(
                 driver=webdriver.Remote(
-                    command_executor="http://{}/wd/hub".format(config_param["remote"]),
+                    command_executor="https://{}/wd/hub".format(config_param["remote"]),
                     desired_capabilities={"browserName": config_param["browser"]},
                 ),
                 base_url="http://65.108.156.9/en",
@@ -62,7 +62,7 @@ def user(request):
                     driver=webdriver.Chrome(
                         executable_path=ChromeDriverManager().install(), options=options
                     ),
-                    base_url="http://alpaca00.website/en",
+                    base_url="https://alpaca00.website/en",
                     timeout=4,
                 )
             )
