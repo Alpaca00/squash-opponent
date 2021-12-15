@@ -28,7 +28,7 @@ def pull_lang_code(endpoint, values):
 @finder_app.route("/", methods=["GET", "POST"])
 def index():
     if request.method == "GET":
-        at_specific_time_to_perform_auto_remove_old_post()
+        perform_auto_remove_old_posts()
         opponents = UserAccount.query.join(UserOpponent).all()
         dates = []
         for x in opponents:
@@ -323,7 +323,7 @@ def search_category():
     return redirect(url_for("finder_app.index"))
 
 
-def at_specific_time_to_perform_auto_remove_old_post():
+def perform_auto_remove_old_posts():
     dt = datetime.today() - timedelta(days=1)
     card_opponent = (
         UserOpponent.query.filter(UserOpponent.opponent_date.contains(str(dt.date())))
