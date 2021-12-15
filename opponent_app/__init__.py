@@ -9,6 +9,7 @@ from flask import (
     current_app,
     abort,
 )
+# from OpenSSL import SSL
 from loguru import logger
 from opponent_app.config import configurations, mail_settings
 from opponent_app.extensions import (
@@ -38,10 +39,15 @@ from opponent_app.views import (
 )
 
 
-def create_app(environment_name="development"):
+# context = SSL.Context(SSL.TLSv1_2_METHOD)
+# context.use_privatekey_file('nginx/ssl/private.key')
+# context.use_certificate_file('nginx/ssl/certificate.crt')
+
+
+def create_app(environment_name="production"):
     app = Flask(__name__)
     app.config.from_object(configurations[environment_name])
-
+    # app.config.update(ssl_context=context)
     db.init_app(app)
     migrate.init_app(app, db)
     login.init_app(app)
