@@ -14,6 +14,7 @@ services:
       - /squash-opponent:/app
     expose:
       - 8000
+      - 443
     depends_on:
       - pg
       - redis
@@ -44,5 +45,6 @@ services:
     build: ./nginx
     ports:
       - 443:443
+      - 80:80
     depends_on:
       - app
