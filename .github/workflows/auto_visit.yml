@@ -1,0 +1,13 @@
+name: daily visit for remove all old oponnent posts # finder.py:31
+
+on:
+  schedule:
+    # Runs "in the first minute for every day"
+    - cron: '1 0 * * *'
+jobs:
+  build:
+    name: update all data in one visit
+    runs-on: ubuntu-latest
+    steps:
+      - name: cURL request
+        run: curl -X GET -d {} https://alpaca00.website/en/finder/
