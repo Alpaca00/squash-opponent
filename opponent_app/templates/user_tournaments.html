@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <title>
+        {{ _('User') }}
+    </title>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='img/squash-ball.png') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/user_account.css') }}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+          integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css">
+</head>
+{% block body -%}
+    {% include 'navbar2.html' %}
+
+    <div class="container ls">
+        <h1>{{ _('Account') }}</h1>
+        <div class="alert alert-info" role="alert" style="width: 40%;">
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {{ messages[0] }}
+                {% else %}
+                    {{ _('Hi') }}, {{ cur.name }}.
+                {% endif %}
+            {% endwith %}
+        </div>
+    </div>
+    <div class="container">
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a class="nav-link {% if request.url_rule.endpoint == 'user_account_app.user_account' %} active {% endif %}"
+                   aria-current="page" href="{{ url_for("user_account_app.user_account") }}"
+                   style="{% if request.url_rule.endpoint == 'user_account_app.user_account' %}
+                       color: #41464b; {% else %} color: gray; {% endif %}">Finder opponent</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {% if request.url_rule.endpoint == 'user_account_app.user_account_tournaments' %} active {% endif %}"
+                   id="tournament-tab" href="{{ url_for("user_account_app.user_account_tournaments") }}"
+                   style="{% if request.url_rule.endpoint == 'user_account_app.user_account_tournaments' %}
+                       color: #41464b; {% else %} color: gray; {% endif %}">Tournaments</a>
+            </li>
+        </ul>
+        <div class="page-content page-container" id="page-content">
+            <div class="padding">
+                <div class="row container d-flex justify-content-left">
+                    <div class="col-xl-6 col-md-12">
+                        <div class="card user-card-full" style="box-shadow: rgba(0, 0, 0, 0.5) 0px 0px 0px 3px;">
+                            <div class="row m-l-0 m-r-0">
+                                <div class="col-sm-4 bg-c-lite-green user-profile"
+                                     style="background-color: #191919;">
+                                    <div class="card-block text-center text-gray">
+                                        <div class="m-b-25"><img
+                                                src="{{ url_for('static', filename='img/squash-ball.png') }}" width="30"
+                                                height="30" class="img-radius" alt="User-Profile-Image"></div>
+                                        <h6 class="f-w-600">{{ cur.name }}</h6>
+                                        <p>{{ _('Tournament') }}</p> <i
+                                            class=" mdi mdi-square-edit-outline feather icon-edit m-t-10 f-16"></i>
+                                    </div>
+                                </div>
+                                <div class="col-sm-8">
+                                    <div class="card-block" style="background-color: white;">
+                                        <h6 class="m-b-20 p-b-5 b-b-default f-w-600">{{ _('Information') }}</h6>
+                                        <div class="row">
+                                            <div class="col-sm-6" id="user-card-email">
+                                                <p class="m-b-10 f-w-600">{{ _('Email') }}</p>
+                                                <h6 class="text-muted f-w-400"
+                                                    style="font-size: 9px;">{{ cur.email }}</h6>
+                                            </div>
+                                            <form method="POST">
+                                                <div class="col-sm-8">
+                                                    <p class="m-b-10 f-w-600">{{ _('Title tournament') }}</p>
+                                                    <input class="form-control form-control-sm" id='title_name'
+                                                           name="title" type="text" placeholder="title name tournament"
+                                                           aria-label=".form-control-sm example" required>
+                                                </div>
+                                                <div class="col-sm-8">
+                                                    <p class="m-b-10 f-w-600">{{ _('Phone') }}</p>
+                                                    <input class="form-control form-control-sm" id='user-phone'
+                                                           name="phone" type="text" placeholder="phone number"
+                                                           aria-label=".form-control-sm example" required>
+                                                </div>
+                                                <h6 class="m-b-20 m-t-40 p-b-5 b-b-default f-w-600">{{ _('Location') }}</h6>
+                                                <div class="row">
+                                                    <p class="m-b-10 f-w-600">{{ _('Lviv') }}</p>
+                                                    <select class="form-select form-select-sm" id='location-select'
+                                                            name="district" style='margin-bottom: 15px;'
+                                                            aria-label=".form-select-sm example" required>
+                                                        <option selected>{{ _('DISTRICT') }}</option>
+                                                        <option value="Sychivskyi">{{ _('Sychivskyi') }}</option>
+                                                        <option value="Zaliznychnyi">{{ _('Zaliznychnyi') }}</option>
+                                                        <option value="Shevchenkivskyi">{{ _('Shevchenkivskyi') }}</option>
+                                                    </select>
+                                                    <div class="cart_item_quantity cart_info_col">
+                                                        <div class="m-b-10 f-w-600">{{ _('Quantity Member') }}</div>
+                                                        <input type="number" id="quantity-member" value="3"
+                                                               name="quantity" min="3" max="16"
+                                                               style="margin-top: 10px; border: solid 2px #fffff; border-radius: 5%; margin:10px;">
+                                                    </div>
+                                                    <select class="form-select form-select-sm" id='category-select'
+                                                            name="category" style='margin-bottom: 10px;'
+                                                            aria-label=".form-select-sm example" required>
+                                                        <option selected>{{ _('CATEGORY') }}</option>
+                                                        <option value="PRO">{{ _('PRO') }}</option>
+                                                        <option value="M1">M1</option>
+                                                        <option value="M2">M2</option>
+                                                        <option value="M3">M3</option>
+                                                        <option value="AMATEUR">{{ _('AMATEUR') }}</option>
+                                                    </select>
+                                                    <label for="party">{{ _('Enter the optimal date and time of the game:') }}</label>
+                                                    <input id="party" class='row' type="datetime-local" name="partydate"
+                                                           value="2021-09-04T18:30" style='margin-bottom: 15px;'
+                                                           required>
+                                                    <input type="submit" class="post-btn" value="POST"
+                                                           style='margin-bottom: 15px;'>
+                                                </div>
+                                            </form>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container ls">
+<div class="history-memory" id="his-mem" style="text-align: center;">
+    <h2>{{ _('HISTORY TOURNAMENTS') }}</h2>
+</div>
+    <hr style="color: black;">
+{% include 'user_tournament_history2.html' %}
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"
+            integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+            crossorigin="anonymous">
+    </script>
+    <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#example').DataTable();
+        });
+    </script>
+
+    <script type="text/javascript">
+        const $categorySelect = document.querySelector('#category-select')
+        const $districtSelect = document.querySelector('#location-select')
+        const $userPhone = document.querySelector('#user-phone')
+        const $optimalDate = document.querySelector('#party')
+
+        const arrPostUserData = [];
+
+        $categorySelect.onchange = function () {
+            arrPostUserData.push(this.value);
+        }
+        $districtSelect.onchange = function () {
+            arrPostUserData.push(this.value);
+        }
+        $userPhone.onchange = function () {
+            arrPostUserData.push(this.value);
+        }
+        $optimalDate.onchange = function () {
+            arrPostUserData.push(this.value);
+        }
+        console.log(arrPostUserData);
+    </script>
+    <script>
+        const triggerTabList = [].slice.call(document.querySelectorAll('#tournament-tab'))
+        triggerTabList.forEach(function (triggerEl) {
+
+            triggerEl.addEventListener('click', function (event) {
+                event.preventDefault()
+                window.location = "{{ url_for("user_account_app.user_account_tournaments") }}"
+            })
+        })
+    </script>
+    {% include 'footer.html' %}
+{% endblock %}
