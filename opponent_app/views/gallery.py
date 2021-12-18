@@ -5,6 +5,7 @@ from PIL import Image
 import io
 from flask import Blueprint, render_template, request, flash, g, url_for
 from flask_babel import gettext
+from loguru import logger
 from opponent_app.helpers import mail, mail_settings, Message
 from opponent_app import db
 from opponent_app.models import Gallery
@@ -73,3 +74,21 @@ def send_info_about_gallery(subject, body):
         body=body,
     )
     return mail.send(msg)
+
+
+@gallery_app.errorhandler(408)
+def handle_request_timeout_error(exception):
+    logger.info(exception)
+    return render_template("408.html"), 408
+
+
+@gallery_app.errorhandler(404)
+def handle_not_found_error(exception):
+    logger.info(exception)
+    return render_template("404.html"), 404
+
+
+@gallery_app.errorhandler(403)
+def handle_resource_is_forbidden_error(exception):
+    logger.info(exception)
+    return render_template("403.html"), 403
