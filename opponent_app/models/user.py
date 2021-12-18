@@ -87,6 +87,10 @@ class UserAccount(db.Model, UserMixin):
     users_opponent = db.relationship(
         "UserOpponent", backref="users_accounts", lazy=True
     )
+    users_members = db.relationship(
+        "UserMember", backref="users_accounts", overlaps="users_accounts,members,users_members"
+    )
+
     roles = db.relationship(
         "Role",
         secondary=roles_users,
@@ -159,4 +163,36 @@ class QueueOpponent(db.Model):
     queue_offer_opponent_id = Column(Integer, ForeignKey("offers_opponents.id"))
     queue_offer_opponent = db.relationship(
         "OfferOpponent", overlaps="queue_opponent, users_opponents, queues_opponents"
+    )
+
+
+class UserMember(db.Model):
+    __tablename__ = "users_members"
+    id = Column(Integer, primary_key=True)
+    member_title = Column(String(50))
+    member_category = Column(String(50), nullable=True, default="Amateur")
+    member_city = Column(String(50), default="Lviv")
+    member_district = Column(String(50))
+    member_date = Column(String(50))
+    member_phone = Column(String(50))
+    member_quantity = Column(String(50))
+    user_id = Column(Integer, ForeignKey("users_accounts.id"), nullable=False)
+    user_account = db.relationship(
+        "UserAccount", overlaps="users_accounts,users_members"
+    )
+    members = db.relationship(
+        "Member", overlaps="members,users_members"
+    )
+
+
+class Member(db.Model):
+    __tablename__ = "members"
+    id = Column(Integer, primary_key=True)
+    tour_member_name = Column(String(50))
+    tour_member_phone = Column(String(50))
+    tour_member_email = Column(String(50))
+    tour_member_accept = Column(Boolean, unique=False, default=False)
+    user_member_id = Column(Integer, ForeignKey("users_members.id"))
+    user_member = db.relationship(
+        "UserMember", overlaps="members,users_members"
     )
