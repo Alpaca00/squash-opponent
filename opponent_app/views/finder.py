@@ -4,12 +4,14 @@ import humanize
 import loguru
 from flask import request, Blueprint, render_template, g, redirect, url_for, flash
 from flask_babel import gettext
+from flask_login import current_user
+
 from opponent_app.models import (
     UserAccount,
     UserOpponent,
     OfferOpponent,
     db,
-    QueueOpponent,
+    QueueOpponent, UserMember, Member,
 )
 
 finder_app = Blueprint("finder_app", __name__)
@@ -323,7 +325,45 @@ def search_category():
     return redirect(url_for("finder_app.index"))
 
 
-def perform_auto_remove_old_posts():
+@finder_app.route("/tournaments/", methods=["GET", "POST"])
+def render_tournaments():
+    if request.method == "GET":
+        tournaments_history = (
+            UserMember.query.join(Member).all()
+        )
+        tournaments_history_lst = []
+        size_members = len(tournaments_history)
+        if size_members >= 1:
+            for i in tournaments_history:
+                convert_dt = datetime.strptime(i.member_date, "%Y-%m-%dT%H:%M")
+                full_month = calendar.month_name[int(convert_dt.date().month)]
+                day_ = humanize.naturaldate(convert_dt.day)
+                time_ = humanize.naturaltime(convert_dt.time())
+                tournaments_history_lst.append(
+                    [
+                        full_month,
+                        day_,
+                        time_,
+                        i.member_category,
+                        i.member_title,
+                        i.member_city,
+                        i.member_district,
+                        i.member_phone,
+                        i.member_quantity,
+                        i.user_account.name,
+                        size_members,
+                    ]
+                )
+        return render_template(
+            "finder/tournaments_content.html", cur=current_user, tournaments=tournaments_history_lst
+        )
+    if request.method == "POST":
+        ...
+    return render_template("finder/tournaments_content.html")
+
+
+# perform from Github Action with cron job
+def perform_auto_remove_old_posts() -> None:
     dt = datetime.today() - timedelta(days=1)
     card_opponent = (
         UserOpponent.query.filter(UserOpponent.opponent_date.contains(str(dt.date())))
