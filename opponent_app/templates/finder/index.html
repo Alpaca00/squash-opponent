@@ -26,14 +26,31 @@
         {% endwith %}
         <h5 class="visually-hidden" id="message-for-offer">{{ _('Queue: ') }}</h5>
    </div>
-    <form action="{{ url_for('finder_app.search_category') }}" method="get" autocomplete="on">
+</div>
+     <div class="container">
+    <ul class="nav nav-tabs">
+    <li class="nav-item">
+        <a class="nav-link {% if request.url_rule.endpoint == 'finder_app.index' %} active {% endif %}"
+        aria-current="page" href="{{ url_for("finder_app.index") }}"
+        style="{% if request.url_rule.endpoint == 'user_account_app.user_account' %}
+           color: #41464b; {% else %} color: lightslategray; {% endif %} background-color: #DDD; border-bottom-color: #DDD;
+                font-size: x-large;">Finder opponent</a>
+     <form action="{{ url_for('finder_app.search_category') }}" method="get" autocomplete="on"
+           style="padding-bottom: 10px; padding-top: 10px;">
         <button type="submit" class="btn btn-danger" name="pro">PRO</button>
         <button type="submit" class="btn btn-dark" name="m1">M1</button>
         <button type="submit" class="btn btn-info" name="m2">M2</button>
         <button type="submit" class="btn btn-success" name="m3">M3</button>
         <button type="submit" class="btn btn-light" name="amateur">AMATEUR</button>
     </form>
-</div>
+    </li>
+            <li class="nav-item">
+        <a class="nav-link {% if request.url_rule.endpoint == 'finder_app.render_tournaments' %} active {% endif %}"
+        id="tournament-tab" href="{{ url_for('finder_app.render_tournaments') }}"
+        style="{% if request.url_rule.endpoint == 'finder_app.render_tournaments' %}
+           color: #41464b; {% else %} color: lightslategray; {% endif %} background-color: #DDD; border-bottom-color: #DDD;
+                font-size: x-large;">Tournaments</a>
+    </li>
 
 
 
@@ -50,5 +67,14 @@ setInterval(doDate, 1000);
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" ></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.js"></script>
-{%- endblock %}
+     <script>
+        const triggerTabList = [].slice.call(document.querySelectorAll('#tournament-tab'))
+        triggerTabList.forEach(function (triggerEl) {
 
+            triggerEl.addEventListener('click', function (event) {
+                event.preventDefault()
+                window.location = "{{ url_for("finder_app.render_tournaments") }}"
+            })
+        })
+    </script>
+{%- endblock %}
