@@ -179,7 +179,7 @@ msgid "User"
 msgstr "Користувач"
 
 #: templates/user.html:24
-msgid "Hy"
+msgid "Hi"
 msgstr "Привіт"
 
 #: templates/finder/content.html:9 templates/finder/content2.html:22
