@@ -2,6 +2,7 @@ from flask import Blueprint, render_template, request, redirect, url_for, flash,
 from flask_login import login_user
 from flask_security.utils import verify_password
 from flask_babel import gettext
+from loguru import logger
 from opponent_app.models import UserAccount
 
 
@@ -38,3 +39,21 @@ def login():
 def flash_message(text):
     flash(gettext(text))
     return render_template("login/index.html")
+
+
+@login_app.errorhandler(408)
+def handle_request_timeout_error(exception):
+    logger.info(exception)
+    return render_template("408.html"), 408
+
+
+@login_app.errorhandler(404)
+def handle_not_found_error(exception):
+    logger.info(exception)
+    return render_template("404.html"), 404
+
+
+@login_app.errorhandler(403)
+def handle_resource_is_forbidden_error(exception):
+    logger.info(exception)
+    return render_template("403.html"), 403
