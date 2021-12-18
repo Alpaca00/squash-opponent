@@ -20,6 +20,7 @@ from opponent_app.models import (
     UserAccount,
     OfferOpponent,
     QueueOpponent,
+    UserMember, Member
 )
 from opponent_app.helpers import mail, mail_settings, Message
 from opponent_app.decorators import check_confirmed
@@ -140,9 +141,15 @@ def user_account():
         )
         db.session.add(opponent)
         db.session.commit()
-        size = UserOpponent.query.join(UserAccount).filter_by(email=current_user.email).all()
-        user_rating = UserAccount.query.filter_by(email=current_user.email).one_or_none()
-        user_rating.count = len(size)
+        size = (
+            UserOpponent.query.join(UserAccount)
+            .filter_by(email=current_user.email)
+            .all()
+        )
+        user_rating = UserAccount.query.filter_by(
+            email=current_user.email
+        ).one_or_none()
+        user_rating.count = len(size)  # update stars rating
         db.session.commit()
         flash(gettext("Successfully. Your post has been added."))
         return redirect(url_for("user_account_app.user_account"))
@@ -314,15 +321,86 @@ def send_info_by_user(subject, recipient, body):
     return mail.send(msg)
 
 
-@user_account_app.errorhandler(404)
-def handle_not_found_error(exception):
-    logger.info(exception)
-    return render_template("404.html"), 404
-
-
 @user_account_app.route("/login", methods=["GET", "POST"])
 @login_required
 def logout():
     if request.method == "GET":
         logout_user()
         return redirect(url_for("login_app.login"))
+
+
+@user_account_app.route("/tournaments", methods=["GET", "POST"])
+@check_confirmed
+def user_account_tournaments():
+    if request.method == "GET":
+        tournaments_history = (
+           UserMember.query.filter_by(user_id=current_user.id).join(Member).all()
+        )
+        tournaments_history_lst = []
+        size_members = len(tournaments_history)
+        if size_members >= 1:
+            for i in tournaments_history:
+                convert_dt = datetime.strptime(i.member_date, "%Y-%m-%dT%H:%M")
+                full_month = calendar.month_name[int(convert_dt.date().month)]
+                day_ = humanize.naturaldate(convert_dt.day)
+                time_ = humanize.naturaltime(convert_dt.time())
+                tournaments_history_lst.append(
+                    [
+                        full_month,
+                        day_,
+                        time_,
+                        i.member_category,
+                        i.member_title,
+                        i.member_city,
+                        i.member_district,
+                        i.member_phone,
+                        i.member_quantity,
+                        current_user.name,
+                        size_members,
+                    ]
+                )
+        return render_template(
+            "user_tournaments.html", cur=current_user, tournaments=tournaments_history_lst
+        )
+    if request.method == "POST":
+        title = request.form.get("title")
+        date_time = request.form.get("partydate")
+        category = request.form.get("category")
+        district = request.form.get("district")
+        phone = request.form.get("phone")
+        quantity = request.form.get("quantity")
+        if title and date_time and category and district and phone and quantity:
+            user_member = UserMember(
+                member_title=title,
+                member_category=category,
+                member_district=district,
+                member_date=date_time,
+                member_phone=phone,
+                member_quantity=quantity,
+                user_id=current_user.id,
+            )
+            db.session.add(user_member)
+            db.session.commit()
+            id_tour = UserMember.query.order_by(UserMember.id.desc()).first()
+            if id_tour:
+                member = Member(
+                    user_member_id=id_tour.id,
+                    tour_member_name=current_user.name,
+                    tour_member_phone=phone,
+                    tour_member_email=current_user.email,
+                    tour_member_accept=True
+                )
+                db.session.add(member)
+                db.session.commit()
+                flash(gettext("Successfully. The tournament has been created."))
+                return render_template("user_tournaments.html", cur=current_user)
+            else:
+                abort(404)
+        else:
+            abort(404)
+
+
+@user_account_app.errorhandler(404)
+def handle_not_found_error(exception):
+    logger.info(exception)
+    return render_template("404.html"), 404
