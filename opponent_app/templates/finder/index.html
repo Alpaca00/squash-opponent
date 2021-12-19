@@ -35,14 +35,7 @@
         style="{% if request.url_rule.endpoint == 'user_account_app.user_account' %}
            color: #41464b; {% else %} color: lightslategray; {% endif %} background-color: #DDD; border-bottom-color: #DDD;
                 font-size: x-large;">Finder opponent</a>
-     <form action="{{ url_for('finder_app.search_category') }}" method="get" autocomplete="on"
-           style="padding-bottom: 10px; padding-top: 10px;">
-        <button type="submit" class="btn btn-danger" name="pro">PRO</button>
-        <button type="submit" class="btn btn-dark" name="m1">M1</button>
-        <button type="submit" class="btn btn-info" name="m2">M2</button>
-        <button type="submit" class="btn btn-success" name="m3">M3</button>
-        <button type="submit" class="btn btn-light" name="amateur">AMATEUR</button>
-    </form>
+
     </li>
             <li class="nav-item">
         <a class="nav-link {% if request.url_rule.endpoint == 'finder_app.render_tournaments' %} active {% endif %}"
@@ -51,7 +44,14 @@
            color: #41464b; {% else %} color: lightslategray; {% endif %} background-color: #DDD; border-bottom-color: #DDD;
                 font-size: x-large;">Tournaments</a>
     </li>
-
+         <form action="{{ url_for('finder_app.search_category') }}" method="get" autocomplete="on"
+           style="padding-bottom: 10px; padding-top: 10px;">
+        <button type="submit" class="btn btn-danger" name="pro">PRO</button>
+        <button type="submit" class="btn btn-dark" name="m1">M1</button>
+        <button type="submit" class="btn btn-info" name="m2">M2</button>
+        <button type="submit" class="btn btn-success" name="m3">M3</button>
+        <button type="submit" class="btn btn-light" name="amateur">AMATEUR</button>
+    </form>
 
 
 {% include 'finder/content.html' %}
