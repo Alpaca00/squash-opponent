@@ -20,10 +20,12 @@ from opponent_app.models import (
     UserAccount,
     OfferOpponent,
     QueueOpponent,
-    UserMember, Member
+    UserMember,
+    Member,
 )
 from opponent_app.helpers import mail, mail_settings, Message
 from opponent_app.decorators import check_confirmed
+from opponent_app.views.common import count_members, render_content_tournaments
 
 user_account_app = Blueprint("user_account_app", __name__)
 
@@ -334,33 +336,11 @@ def logout():
 def user_account_tournaments():
     if request.method == "GET":
         tournaments_history = (
-           UserMember.query.filter_by(user_id=current_user.id).join(Member).all()
+            UserMember.query.filter_by(user_id=current_user.id).join(Member).all()
         )
-        tournaments_history_lst = []
-        size_members = len(tournaments_history)
-        if size_members >= 1:
-            for i in tournaments_history:
-                convert_dt = datetime.strptime(i.member_date, "%Y-%m-%dT%H:%M")
-                full_month = calendar.month_name[int(convert_dt.date().month)]
-                day_ = humanize.naturaldate(convert_dt.day)
-                time_ = humanize.naturaltime(convert_dt.time())
-                tournaments_history_lst.append(
-                    [
-                        full_month,
-                        day_,
-                        time_,
-                        i.member_category,
-                        i.member_title,
-                        i.member_city,
-                        i.member_district,
-                        i.member_phone,
-                        i.member_quantity,
-                        current_user.name,
-                        size_members,
-                    ]
-                )
-        return render_template(
-            "user_tournaments.html", cur=current_user, tournaments=tournaments_history_lst
+        query = db.session.query(Member.user_member_id).all()
+        return render_content_tournaments(
+            tournaments_history, "user_tournaments.html", query
         )
     if request.method == "POST":
         title = request.form.get("title")
@@ -388,7 +368,7 @@ def user_account_tournaments():
                     tour_member_name=current_user.name,
                     tour_member_phone=phone,
                     tour_member_email=current_user.email,
-                    tour_member_accept=True
+                    tour_member_accept=True,
                 )
                 db.session.add(member)
                 db.session.commit()
@@ -398,6 +378,15 @@ def user_account_tournaments():
                 abort(404)
         else:
             abort(404)
+
+
+@user_account_app.route("/tournaments/confirm_members", methods=["GET", "POST"])
+@check_confirmed
+def confirm_members():
+    if request.method == "GET":
+        members = Member.query.join(UserMember).filter_by(user_id=current_user.id).all()
+        return render_template('tournaments_confirm_members.html', members=members)
+    return redirect(url_for("user_account_app.user_account_tournaments"))
 
 
 @user_account_app.errorhandler(404)
