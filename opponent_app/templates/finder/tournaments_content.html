@@ -74,11 +74,11 @@
                 </div>
                 <div class="card-header">{{ table[4] }}</div>
                 <div class="card-body">
-                    <h5 class="card-title">{% if table[10] < table[8] | int %} Open {% endif %}</h5>
+                    <h5 class="card-title">{% if table[10] < table[8] | int %} Open {% else %} Close {% endif %}</h5>
                     <div class="card-waiting">
-                    <span class="badge rounded-pill bg-info text-dark" id="queue-quantity" data-bs-toggle='tooltip'
+                    <span class="badge rounded-pill bg-info text-dark" id="m-quantity" data-bs-toggle='tooltip'
                           data-bs-placement='top'
-                          title="number of members: {{ table[10] }}">Members: {{ table[10] }}</span>
+                          title="number of members: {{ count_members[table[11]] }}">Members: {{ count_members[table[11]] }}</span>
                         <span class="badge rounded-pill bg-danger text-dark" id="max-quantity"
                               data-bs-placement='top'
                               title="max number of members: {{ table[8] }}">Max: {{ table[8] }}</span>
@@ -99,17 +99,23 @@
 
                     <h5 class="card-title">The list of all the players of the {{ table[4] }} tournament</h5>
                     <ol class="lst-opponents">
-                        <li>{{ table[9] }}</li>
+                        {% for member in members %}
+                             {% if member.user_member_id == table[11] %}
+                        <li>{{ member.tour_member_name }}</li>
+                            {% endif %}
+                            {% endfor %}
                     </ol>
+                    {% if not count_members[table[11]] >= table[8] | int %}
                     <div class="widget-49-meeting-action" style="margin-top: 15px; float: right;">
-                        <a href="" class="btn btn-outline-success btn-sm" id="join-tournament">JOIN</a>
+                        <button type="button" class="btn btn-outline-success btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal" value="{{ table[11] }}" id="join-tournament">JOIN</button>
                     </div>
+                    {% endif %}
                 </div>
             </div>
         </div>
     {% endfor %}
     </div>
-
+    {% include 'finder/modal_join.html' %}
     <script>
         function doDate() {
             let currentDate = document.getElementById('clock');
