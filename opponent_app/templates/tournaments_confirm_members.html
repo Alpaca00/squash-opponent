@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <title>
+        {{ _('User') }}
+    </title>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='img/squash-ball.png') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/user_account.css') }}">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css">
+
+</head>
+{% block body  -%}
+{% include 'navbar2.html' %}
+    <div class="container ls">
+     <h1>{{ _('Confirm members') }}</h1>
+    <a href="{{ url_for('user_account_app.user_account_tournaments') }}" style="text-decoration: none; color: burlywood; font-size: x-large;">{{ _('Tournaments') }}</a><hr>
+
+    <div class="alert alert-warning" role="alert" style="width: 40%;">
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {{ messages[0] }}
+        {% else %}
+       {{ _('We send an email to each participant for any of your decisions') }}.
+        {% endif %}
+        {% endwith %}
+    </div>
+</div>
+    <div class="container">
+      <div class="table-responsive" >
+      <table class="table table-fit mt-5 table-warning table-striped" >
+        <thead>
+          <tr style="color: #2E5156">
+            <th scope="col">#</th>
+            <th scope="col">FULL NAME</th>
+            <th scope="col">PHONE</th>
+            <th scope="col">EMAIL</th>
+            <th scope="col">CONFIRM</th>
+            <th scope="col">ACTIONS</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for member in members %}
+          <tr>
+            <th scope="row">{{ loop.index }}</th>
+            <td>{{ member.tour_member_name }}</td>
+            <td>{{ member.tour_member_phone }}</td>
+            <td>{{ member.tour_member_email }}</td>
+            <td>{{ member.tour_member_accept }}</td>
+            <td >
+                 {% if member.tour_member_accept == False %}
+              <div class="d-flex flex-row  mb-3">
+                <div ><button type="button" class="btn">
+                  <i class="material-icons text-danger">delete</i>
+                </button></div>
+                  <div ><button type="button" class="btn">
+                  <i class="material-icons text-success">accept</i>
+                </button></div>
+                   {% endif %}
+              </div>
+            </td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    </div>
+    {% include 'footer.html' %}
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+{%- endblock %}
