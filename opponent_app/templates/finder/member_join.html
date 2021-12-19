@@ -1,0 +1,21 @@
+<form method="POST">
+    <div class="hidden_id-cls">
+        <input type="hidden" id='hidden-id-join' name="hidden-id-offer" value="0">
+    </div>
+    <div class="col-sm-8" style="margin-right: auto;">
+        <p class="m-b-10 f-w-600" style="font-size: 18px; color: white;">{{ _('FULL NAME') }}</p>
+           <input class="form-control form-control-sm" id='user-name' name="user_name" placeholder="full name" aria-label=".form-control-sm example" style="input { outline: none; }" required>
+    </div>
+    <div class="col-sm-8" style="margin-right: auto;">
+        <p class="m-b-10 f-w-600" style="font-size: 18px; color: white; padding-top: 5px;">{{ _('EMAIL') }}</p>
+           <input class="form-control form-control-sm" id='user-email' name="user_email" placeholder="email" aria-label=".form-control-sm example" style="input {outline: none;}" required>
+    </div>
+    <div class="col-sm-8" style="margin-right: auto;">
+        <p class="m-b-10 f-w-600" style="font-size: 18px; color: white; padding-top: 5px;">{{ _('PHONE') }}</p>
+           <input class="form-control form-control-sm" id='user-phone' name="user_phone" placeholder="phone number" aria-label=".form-control-sm example" style="input { outline: none; }" required>
+    </div>
+    <div class="widget-49-meeting-action" style="margin-top: 15px; float: right;">
+        <input class="visually-hidden" value="" id="id-opponent-user-cart" name="opponent_id_user">
+        <input type="submit" id="blockBtn" class="btn btn-dark" value="{{ _('SEND') }}" style='all: unset; color: white; font-size: 20px; cursor: pointer;'>
+    </div>
+</form>
