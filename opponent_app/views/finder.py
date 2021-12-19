@@ -1,18 +1,28 @@
 from datetime import datetime, timedelta
 import calendar
 import humanize
-import loguru
-from flask import request, Blueprint, render_template, g, redirect, url_for, flash
+from loguru import logger
+from flask import (
+    request,
+    Blueprint,
+    render_template,
+    g,
+    redirect,
+    url_for,
+    flash,
+    abort,
+)
 from flask_babel import gettext
-from flask_login import current_user
-
 from opponent_app.models import (
     UserAccount,
     UserOpponent,
     OfferOpponent,
     db,
-    QueueOpponent, UserMember, Member,
+    QueueOpponent,
+    UserMember,
+    Member,
 )
+from opponent_app.views.common import render_content_tournaments
 
 finder_app = Blueprint("finder_app", __name__)
 
@@ -328,37 +338,33 @@ def search_category():
 @finder_app.route("/tournaments/", methods=["GET", "POST"])
 def render_tournaments():
     if request.method == "GET":
-        tournaments_history = (
-            UserMember.query.join(Member).all()
-        )
-        tournaments_history_lst = []
-        size_members = len(tournaments_history)
-        if size_members >= 1:
-            for i in tournaments_history:
-                convert_dt = datetime.strptime(i.member_date, "%Y-%m-%dT%H:%M")
-                full_month = calendar.month_name[int(convert_dt.date().month)]
-                day_ = humanize.naturaldate(convert_dt.day)
-                time_ = humanize.naturaltime(convert_dt.time())
-                tournaments_history_lst.append(
-                    [
-                        full_month,
-                        day_,
-                        time_,
-                        i.member_category,
-                        i.member_title,
-                        i.member_city,
-                        i.member_district,
-                        i.member_phone,
-                        i.member_quantity,
-                        i.user_account.name,
-                        size_members,
-                    ]
-                )
-        return render_template(
-            "finder/tournaments_content.html", cur=current_user, tournaments=tournaments_history_lst
+        tournaments_history = UserMember.query.join(Member).all()
+        query = db.session.query(Member.user_member_id).all()
+        return render_content_tournaments(
+            tournaments_history, "finder/tournaments_content.html", query
         )
     if request.method == "POST":
-        ...
+        tournament_id = request.form.get("hidden-id-offer")
+        phone = request.form.get("user_phone")
+        name = request.form.get("user_name")
+        email = request.form.get("user_email")
+        if tournament_id != "" and phone != "" and name != "" and email != "":
+            member_join = Member(
+                user_member_id=tournament_id,
+                tour_member_name=name,
+                tour_member_phone=phone,
+                tour_member_email=email,
+            )
+            db.session.add(member_join)
+            db.session.commit()
+            flash(
+                gettext(
+                    "You will be able to join the tournament after confirming the organizer."
+                )
+            )
+            return redirect(url_for("finder_app.render_tournaments"))
+        else:
+            abort(404)
     return render_template("finder/tournaments_content.html")
 
 
@@ -385,12 +391,18 @@ def perform_auto_remove_old_posts() -> None:
             if queue_opponent:
                 db.session.delete(queue_opponent)
                 db.session.commit()
-                loguru.logger.info(f"Removed queue_opponent.")
+                logger.info(f"Removed queue_opponent.")
             if card_offer:
                 db.session.delete(card_offer)
                 db.session.commit()
-                loguru.logger.info(f"Removed offer_opponent.")
+                logger.info(f"Removed offer_opponent.")
             if card_opponent:
                 db.session.delete(card_opponent[n])
                 db.session.commit()
-                loguru.logger.info(f"Removed post_opponent.")
+                logger.info(f"Removed post_opponent.")
+
+
+@finder_app.errorhandler(404)
+def handle_not_found_error(exception):
+    logger.info(exception)
+    return render_template("404.html"), 404
