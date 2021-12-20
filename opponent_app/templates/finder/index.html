@@ -21,7 +21,7 @@
         <h5 class="visually-visible" style="text-align: center; color: lightslategray;">{{ _('Find an opponent for the game') }}</h5>
         {% with messages = get_flashed_messages() %}
                     {% if messages %}
-                <h1 class="display-6">{{ messages[0] }}</h1>
+                <h3 class="display-6">{{ messages[0] }}</h3>
             {% endif %}
         {% endwith %}
         <h5 class="visually-hidden" id="message-for-offer">{{ _('Queue: ') }}</h5>
@@ -32,9 +32,9 @@
     <li class="nav-item">
         <a class="nav-link {% if request.url_rule.endpoint == 'finder_app.index' %} active {% endif %}"
         aria-current="page" href="{{ url_for("finder_app.index") }}"
-        style="{% if request.url_rule.endpoint == 'user_account_app.user_account' %}
+        style="{% if request.url_rule.endpoint == 'finder_app.index' %}
            color: #41464b; {% else %} color: lightslategray; {% endif %} background-color: #DDD; border-bottom-color: #DDD;
-                font-size: x-large;">Finder opponent</a>
+                font-size: x-large;">{{ _('Finder opponent') }}</a>
 
     </li>
             <li class="nav-item">
@@ -42,10 +42,10 @@
         id="tournament-tab" href="{{ url_for('finder_app.render_tournaments') }}"
         style="{% if request.url_rule.endpoint == 'finder_app.render_tournaments' %}
            color: #41464b; {% else %} color: lightslategray; {% endif %} background-color: #DDD; border-bottom-color: #DDD;
-                font-size: x-large;">Tournaments</a>
+                font-size: x-large;">{{ _('Tournaments') }}</a>
     </li>
          <form action="{{ url_for('finder_app.search_category') }}" method="get" autocomplete="on"
-           style="padding-bottom: 10px; padding-top: 10px;">
+           style="padding-bottom: 10px; padding-top: 10px; margin: auto;">
         <button type="submit" class="btn btn-danger" name="pro">PRO</button>
         <button type="submit" class="btn btn-dark" name="m1">M1</button>
         <button type="submit" class="btn btn-info" name="m2">M2</button>
