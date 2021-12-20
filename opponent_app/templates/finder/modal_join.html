@@ -1,47 +1,45 @@
 <div class="modal" id="myModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content" style="background-color: #212529;">
-        <span class="close" style="margin-left: auto;">&times;</span>
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel" style="color: white;">{{ _('Join up') }}</h5>
-      </div>
-      <div class="modal-body">
-        {% include 'finder/member_join.html' %}
-      </div>
-      <div class="modal-footer">
-
-      </div>
+    <div class="modal-dialog">
+        <div class="modal-content" style="background-color: #212529;">
+            <span class="close" style="margin-left: auto;">&times;</span>
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel" style="color: white;">{{ _('Join up') }}</h5>
+            </div>
+            <div class="modal-body">
+                {% include 'finder/member_join.html' %}
+            </div>
+            <div class="modal-footer"></div>
+        </div>
     </div>
-  </div>
 </div>
 <script>
-let modal2 = document.getElementById("myModal2");
-let blockBtn2 = document.getElementById("blockBtn");
-let allButtons2 = document.getElementsByClassName("btn btn-outline-success btn-sm");
-let span2 = document.getElementsByClassName("close")[0];
+    let modal2 = document.getElementById("myModal2");
+    let blockBtn2 = document.getElementById("blockBtn");
+    let allButtons2 = document.getElementsByClassName("btn btn-outline-success btn-sm");
+    let span2 = document.getElementsByClassName("close")[0];
 
-for (const btn of allButtons2) {
-  btn.addEventListener('click', function() {
-  let userPostId = document.getElementById("id-opponent-user-cart");
-  userPostId.value = btn.value;
-  modal2.style.display = "block";
-  {% for t in modals_ids %}
-    var id_del = `{{ t[0] }}`;
-     if ( id_del === btn.value ) {
-        let hiddenIdOffer = document.getElementById("hidden-id-join");
-        hiddenIdOffer.value = id_del;
+    for (const btn of allButtons2) {
+        btn.addEventListener('click', function () {
+            let userPostId = document.getElementById("id-opponent-user-cart");
+            userPostId.value = btn.value;
+            modal2.style.display = "block";
+            {% for t in modals_ids %}
+                var id_del = `{{ t[0] }}`;
+                if (id_del === btn.value) {
+                    let hiddenIdOffer = document.getElementById("hidden-id-join");
+                    hiddenIdOffer.value = id_del;
+                }
+            {% endfor %}
+
+        });
     }
-  {% endfor %}
+    span2.onclick = function () {
+        modal2.style.display = "none";
+    }
 
-  });
-}
-span2.onclick = function() {
-  modal2.style.display = "none";
-}
-
-window.onclick = function(event) {
-  if (event.target == modal2) {
-    modal2.style.display = "none";
-  }
-}
+    window.onclick = function (event) {
+        if (event.target == modal2) {
+            modal2.style.display = "none";
+        }
+    }
 </script>
