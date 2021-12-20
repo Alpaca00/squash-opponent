@@ -385,8 +385,52 @@ def user_account_tournaments():
 def confirm_members():
     if request.method == "GET":
         members = Member.query.join(UserMember).filter_by(user_id=current_user.id).all()
-        return render_template('tournaments_confirm_members.html', members=members)
+        return render_template("user_tournaments_confirm_members.html", members=members)
     return redirect(url_for("user_account_app.user_account_tournaments"))
+
+
+@user_account_app.route(
+    "/tournaments/confirm_members/confirm/<confirm_id>/<confirm>",
+    methods=["GET", "POST"],
+)
+@check_confirmed
+def actions_tournament(confirm_id: id, confirm: str):
+    if request.method == "GET":
+        member = Member.query.filter_by(id=confirm_id).one_or_none()
+        if not member:
+            abort(404)
+        else:
+            if member.tour_member_accept is False and confirm == "accept":
+                body = (
+                    "Wow! Your request to participate in the tournament has been confirmed."
+                    "\n https://alpaca00.website/finder/tournaments/"
+                )
+                send_info_by_user(
+                    subject="Your offer accepted.",
+                    recipient=member.tour_member_email,
+                    body=body,
+                )
+                member.tour_member_accept = True
+                db.session.commit()
+                flash(gettext("Successfully. The member has been accepted."))
+                return redirect(url_for("user_account_app.confirm_members"))
+            elif member.tour_member_accept is False and confirm == "delete":
+                body = (
+                    "Sorry! Your request to participate in the tournament has been denied."
+                    "\n https://alpaca00.website/finder/tournaments/"
+                )
+                send_info_by_user(
+                    subject="Your offer denied.",
+                    recipient=member.tour_member_email,
+                    body=body,
+                )
+                db.session.delete(member)
+                db.session.commit()
+                flash(gettext("Successfully. The member has been deleted."))
+                return redirect(url_for("user_account_app.confirm_members"))
+            else:
+                abort(404)
+    return redirect(url_for("user_account_app.confirm_members"))
 
 
 @user_account_app.errorhandler(404)
