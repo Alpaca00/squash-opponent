@@ -43,30 +43,32 @@
             </div>
             <div class="card-header">{{ table[4] }}</div>
             <div class="card-body">
-                <h5 class="card-title">{% if table[10] < table[8] | int %} Open {% endif %}</h5>
+                <h5 class="card-title">{% if count_members[table[11]] >= table[8] | int %} {{ _('Closed') }} {% else %}
+                    {{ _('Open') }} {% endif %}</h5>
                 <div class="card-waiting">
                     <span class="badge rounded-pill bg-info text-dark" id="queue-quantity" data-bs-toggle='tooltip'
                           data-bs-placement='top'
-                          title="number of members: {{ count_members[table[11]] }}">Members: {{ count_members[table[11]] }}</span>
+                          title="{{ _('number of members:') }} {{ count_members[table[11]] }}">{{ _('Members:') }} {{ count_members[table[11]] }}</span>
                     <span class="badge rounded-pill bg-danger text-dark" id="max-quantity"
                           data-bs-placement='top'
-                          title="max number of members: {{ table[8] }}">Max: {{ table[8] }}</span>
+                          title="{{ _('max number of members:') }} {{ table[8] }}">{{ _('Max:') }} {{ table[8] }}</span>
                     <span class="badge rounded-pill bg-info text-dark" id="mem-district"
                           data-bs-placement='top'
-                          title="location: {{ table[5] }}, {{ table[6] }}">District: {{ table[6] }}</span>
+                          title="{{ _('location:') }} {{ table[5] }}, {{ table[6] }}">{{ _('District:') }}{{ table[6] }}</span>
                 </div>
                 <div class="card-deck">
             <span class="badge rounded-pill bg-info text-dark"
-                  data-bs-placement='top' title="name of organizer">{{ table[9] }}</span>
+                  data-bs-placement='top' title="{{ _('name of organizer') }}">{{ table[9] }}</span>
                     <span class="badge rounded-pill bg-danger text-dark"
-                          data-bs-placement='top' title="phone number of organizer">{{ table[7] }}</span>
+                          data-bs-placement='top' title="{{ _('phone number of organizer') }}">{{ table[7] }}</span>
                     <span class="badge rounded-pill bg-danger text-dark"
-                          data-bs-placement='top' title="time of tournament">{{ table[2] }}</span>
+                          data-bs-placement='top' title="{{ _('time of tournament') }}">{{ table[2] }}</span>
                     <span class="badge rounded-pill bg-danger text-dark"
-                          data-bs-placement='top' title="date of tournament">{{ table[1] }}-{{ table[0] }}</span>
+                          data-bs-placement='top'
+                          title="{{ _('date of tournament') }}">{{ table[1] }}-{{ table[0] }}</span>
                 </div>
 
-                <h5 class="card-title">The list of all the players of the {{ table[4] }} tournament</h5>
+                <h5 class="card-title">{{ _('The list of all the players of the') }} {{ table[4] }} {{ _('tournament') }}</h5>
                 <ol class="lst-opponents">
                     {% for member in members %}
                         {% if member.user_member_id == table[11] %}
@@ -75,8 +77,9 @@
                     {% endfor %}
                 </ol>
                 <div class="widget-49-meeting-action" style="margin-top: 15px; float: right;">
-                        <a href="{{ url_for('user_account_app.confirm_members') }}" class="btn btn-outline-success btn-sm" value="{{ table[11] }}" id="accept-members">SHOW</a>
-                    </div>
+                    <a href="{{ url_for('user_account_app.confirm_members') }}" class="btn btn-outline-success btn-sm"
+                       value="{{ table[11] }}" id="accept-members">SHOW</a>
+                </div>
             </div>
         </div>
     </div>
