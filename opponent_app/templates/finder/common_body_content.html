@@ -5,14 +5,14 @@
                aria-current="page" href="{{ url_for("finder_app.index") }}"
                style="{% if request.url_rule.endpoint == 'user_account_app.user_account' %}
                    color: #41464b; {% else %} color: lightslategray; {% endif %} background-color: #DDD; border-bottom-color: #DDD;
-                       font-size: x-large;">Finder opponent</a>
+                       font-size: x-large;">{{ _('Finder opponent') }}</a>
         </li>
         <li class="nav-item">
             <a class="nav-link {% if request.url_rule.endpoint == 'finder_app.render_tournaments' %} active {% endif %}"
                id="tournament-tab" href="{{ url_for('finder_app.render_tournaments') }}"
                style="{% if request.url_rule.endpoint == 'finder_app.render_tournaments' %}
                    color: #41464b; {% else %} color: lightslategray; {% endif %} background-color: #DDD; border-bottom-color: #DDD;
-                       font-size: x-large;">Tournaments</a>
+                       font-size: x-large;">{{ _('Tournaments') }}</a>
         </li>
     </ul>
 </div>
