@@ -44,7 +44,7 @@ from opponent_app.views import (
 # context.use_certificate_file('nginx/ssl/certificate.crt')
 
 
-def create_app(environment_name="development"):
+def create_app(environment_name="production"):
     app = Flask(__name__)
     app.config.from_object(configurations[environment_name])
     # app.config.update(ssl_context=context)
