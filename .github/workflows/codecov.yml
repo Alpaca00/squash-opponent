@@ -19,7 +19,7 @@ jobs:
         run: |
           pip install pipenv
           pipenv install --dev
-          pipenv run coverage run -m pytest -m "regression" -sv -H --cov-config .coveragerc --tb=short
+          pipenv run coverage run -m pytest -v -m "regression" -sv --cov-config .coveragerc --tb=short
           pipenv run coverage xml -o coverage.xml
       - name: Upload pytest test results
         uses: codecov/codecov-action@v1
