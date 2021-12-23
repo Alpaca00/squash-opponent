@@ -200,7 +200,7 @@ class TestUserAction:
                 self.register_form_locator.ConfirmPageLocators.account_confirm_link
             ).should(have.exact_text("Resend"))
 
-    @pytest.mark.regression
+    @pytest.mark.smoke
     @pytest.mark.parametrize(
         "email, password, expected_result",
         [
@@ -241,7 +241,7 @@ class TestUserAction:
                 have.exact_text(expected_result)
             )
 
-    @pytest.mark.regression
+    @pytest.mark.smoke
     def test_if_already_confirmed_user(self, user):
         self.user_login(
             user=user, email=self.actual_user_email, password=self.USER_PASSWORD
@@ -253,7 +253,7 @@ class TestUserAction:
         )
         user.element(self.navbar_locator.btn_logout).click()
 
-    @pytest.mark.regression
+    @pytest.mark.smoke
     def test_can_user_publish_a_post(self, user, connect_db):
         if not user.config.base_url == "https://alpaca00.website/en":
             pytest.skip("Not the English version of the site.", allow_module_level=True)
@@ -286,7 +286,7 @@ class TestUserAction:
 
             user.element(self.navbar_locator.btn_logout).click()
 
-    @pytest.mark.regression
+    @pytest.mark.smoke
     def test_can_user_update_a_post(self, user, connect_db):
         if not user.config.base_url == "https://alpaca00.website/en":
             pytest.skip("Not the English version of the site.", allow_module_level=True)
@@ -328,7 +328,7 @@ class TestUserAction:
                 f"delete from users_opponents where id={int(post_id[0][0])};"
             )
 
-    @pytest.mark.regression
+    @pytest.mark.smoke
     def test_user_update_a_post(self, user, connect_db):
         if not user.config.base_url == "https://alpaca00.website/en":
             pytest.skip("Not the English version of the site.", allow_module_level=True)
@@ -406,7 +406,7 @@ class TestUserAction:
                 f"delete from users_opponents where id={int(update_post_id[0][0])};"
             )
 
-    @pytest.mark.regression
+    @pytest.mark.smoke
     def test_can_guest_opponent_click_an_offer_btn_if_available(self, user, connect_db):
         if not user.config.base_url == "https://alpaca00.website/en":
             pytest.skip("Not the English version of the site.", allow_module_level=True)
@@ -423,7 +423,7 @@ class TestUserAction:
                 f"delete from users_opponents where opponent_phone='{self.phone_user}' and opponent_date='{self.optimal_date}';"
             )
 
-    @pytest.mark.regression
+    @pytest.mark.smoke
     def test_can_guest_send_offer(self, user):
         if not user.config.base_url == "https://alpaca00.website/en":
             pytest.skip("Not the English version of the site.", allow_module_level=True)
