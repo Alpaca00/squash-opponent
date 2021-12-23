@@ -1,5 +1,6 @@
 import loguru
 from selene import be, have, query
+from selenium import webdriver
 from selenium.webdriver import Chrome
 
 from selenium.common.exceptions import (
@@ -10,9 +11,15 @@ from selene.api import Browser, Config
 from furl import furl
 from webdriver_manager.chrome import ChromeDriverManager
 
+
+options = webdriver.ChromeOptions()
+options.add_argument("--headless")
 driver = Browser(
     Config(
-        driver=Chrome(executable_path=ChromeDriverManager().install()),
+        driver=Chrome(
+            executable_path=ChromeDriverManager().install(),
+            options=options
+        ),
         base_url="https://alpaca00.website/en",
         timeout=4,
     )
