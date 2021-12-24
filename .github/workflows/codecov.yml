@@ -11,6 +11,8 @@ jobs:
       EMAIL_USERNAME: ${{ secrets.EMAIL_USERNAME }}
       EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
       HOST: ${{ secrets.HOST }}
+      USER_EMAIL: ${{ secrets.USER_EMAIL }}
+      USERNAME_ADMIN: ${{ secrets.USERNAME_ADMIN }}
     steps:
       - name: Fetch
         uses: actions/checkout@main
@@ -19,8 +21,8 @@ jobs:
         run: |
           pip install pipenv
           pipenv install --dev
-          pipenv run coverage run -m pytest -sv --cov-config .coveragerc --tb=short -v -m "regression"
-          pipenv run coverage run -m pytest -sv -H --cov-config .coveragerc --tb=short -v -m "smoke"
+          pipenv run coverage run -m pytest -sv --cov-config .coveragerc -v -m "regression"
+          pipenv run coverage run -m pytest -sv -H --cov-config .coveragerc -v -m "smoke"
           pipenv run coverage xml -o coverage.xml
       - name: Upload pytest test results
         uses: codecov/codecov-action@v1
