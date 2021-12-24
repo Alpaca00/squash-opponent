@@ -22,9 +22,11 @@ jobs:
         run: |
           pip install pipenv
           pipenv install --dev
+          pipenv install psycopg2-binary
           pipenv run coverage run -m pytest -sv --cov-config .coveragerc tests/tests_ui/tests_regression/
           pipenv run coverage run -m pytest -sv -H --cov-config .coveragerc tests/tests_ui/test_smoke/test_regression/
           pipenv run coverage xml -o coverage.xml
+#          sudo ln -s /var/run/postgresql/.s.PGSQL.5432 /tmp/.s.PGSQL.5432          
       - name: Upload pytest test results
         uses: codecov/codecov-action@v1
         with:
