@@ -4,7 +4,7 @@ from tests.scenarios.data_ import TEST_DATA
 
 
 @given(
-    'launch chrome browser and execute steps from scenario can user login, I get Given and When'
+    'Launch chrome browser and execute steps from scenario can user login, I get Given and When'
 )
 def launch_browser(context):
     context.execute_steps(

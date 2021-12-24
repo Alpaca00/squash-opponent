@@ -15,15 +15,15 @@ class Locator:
     user_account: object = UserCardLocators()
 
 
-@given("launch chrome browser")
+@given("Launch chrome browser")
 def launch_browser(context):
     context.locator = Locator()
     context.user_login = BaseElement(driver=context.browser, base_url=None)
 
 
-@when("open home page at opponent web application of internationalization UA")
+@when("Open home page at opponent web application of internationalization UA")
 def open_url(context):
-    url = "http://alpaca00.website/uk"
+    url = "https://alpaca00.website/uk"
     context.user_login.base_url = url
 
 
@@ -49,6 +49,6 @@ def account_details(context):
         assert user_will_see_the_text
 
 
-@then("close browser")
+@then("Close browser")
 def close_browser(context):
     context.user_login.driver.quit()
