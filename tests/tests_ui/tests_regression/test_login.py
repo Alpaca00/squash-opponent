@@ -11,7 +11,7 @@ class TestLogin:
     def test_correct_login(self):
         user = LoginPage()
         user.login(self.dt.CorrectLogin.email, self.dt.CorrectLogin.pw)
-        # user.page_is_visible(self.dt.CorrectLogin.exp_result)
+        user.page_is_visible(self.dt.CorrectLogin.exp_result)
         user.verify_endpoint(self.dt.CorrectLogin.endpoint)
 
     @pytest.mark.regression
