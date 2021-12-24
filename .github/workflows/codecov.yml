@@ -17,8 +17,6 @@ jobs:
     steps:
       - name: Fetch
         uses: actions/checkout@main
-      - name: Export env
-        run: env
       - name: Test runner pytest
 #        if: "contains(github.event.head_commit.message, 'CONDITION PYTEST')"
         run: |
