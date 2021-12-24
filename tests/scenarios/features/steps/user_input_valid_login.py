@@ -38,7 +38,7 @@ def account_details(context):
         user._click(context.locator.navbar.btn_login)
         user._input(context.locator.login_page.email_field, TEST_DATA["valid"]["EMAIL"])
         user._input(
-            context.locator.login_page.password_field, TEST_DATA["valid"]["USER_PASSWORD"]
+            context.locator.login_page.password_field, TEST_DATA["valid"]["USER_PASSWORD_BE"]
         )
         user._click(context.locator.login_page.submit_login)
         user_will_see_the_text = user._text_is_displayed(
