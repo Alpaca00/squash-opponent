@@ -13,6 +13,7 @@ jobs:
       HOST: ${{ secrets.HOST }}
       USER_EMAIL: ${{ secrets.USER_EMAIL }}
       USERNAME_ADMIN: ${{ secrets.USERNAME_ADMIN }}
+      PASSWORD_ADMIN: ${{ secrets.PASSWORD_ADMIN }}
     steps:
       - name: Fetch
         uses: actions/checkout@main
