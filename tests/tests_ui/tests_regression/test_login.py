@@ -1,6 +1,6 @@
 import pytest
 from tests.src.pages.login_page import LoginPage, SignPage, RecoveryPasswordPage
-from tests.tests_ui.regression.data_tests.data_login import DataLogin
+from tests.tests_ui.tests_regression.data_tests.data_login import DataLogin
 
 
 class TestLogin:
