@@ -23,6 +23,7 @@ jobs:
           pip install pipenv
           pipenv install --dev
           pipenv install psycopg2-binary
+          ln -s /tmp/.s.PGSQL.5432 /var/run/postgresql/.s.PGSQL.5432
           pipenv run coverage run -m pytest -sv --cov-config .coveragerc tests/tests_ui/tests_regression/
           pipenv run coverage run -m pytest -sv -H --cov-config .coveragerc tests/tests_ui/test_smoke/test_regression/
           pipenv run coverage xml -o coverage.xml
