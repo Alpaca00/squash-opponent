@@ -18,4 +18,4 @@ class DataLogin:
     class RecoveryPassword:
         email = 'test00000000@gmail.com'
         exp_result = 'Security code has been sent to the mail.'
-        endpoint = '/recovery-password/test00000000%gmail.com'
+        endpoint = 'recover/test00000000%40gmail.com'
