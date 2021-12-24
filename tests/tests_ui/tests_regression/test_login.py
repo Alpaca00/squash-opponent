@@ -15,6 +15,7 @@ class TestLogin:
         user.verify_endpoint(self.dt.CorrectLogin.endpoint)
 
     @pytest.mark.regression
+    @pytest.mark.dependency()
     def test_sign_up(self):
         user = SignPage()
         user.sign_page()
@@ -23,7 +24,7 @@ class TestLogin:
         user.verify_endpoint(self.dt.SignUp.endpoint)
 
     @pytest.mark.regression
-    @pytest.mark.dependency(depends=["test_sign_up"])
+    @pytest.mark.dependency(depends=["TestLogin::test_sign_up"])
     def test_recovery_password(self, connect_db):
         db = connect_db
         user = RecoveryPasswordPage()
@@ -33,5 +34,6 @@ class TestLogin:
         user.verify_endpoint(self.dt.RecoveryPassword.endpoint)
 
         db.execute(f"delete from users_accounts where email='{self.dt.SignUp.email}';")
+        user.quit()
 
 
