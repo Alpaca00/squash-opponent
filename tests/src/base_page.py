@@ -92,6 +92,9 @@ class BasePage:
         url = furl(self.url).add(path="/login/").url
         self.open_url(url)
 
+    def quit(self):
+        self.browser.quit()
+
     def __str__(self) -> str:
         return f"Path: {furl(self.url).path}.\nAnchor element locator: {self.anchor_element_loc}"
 
