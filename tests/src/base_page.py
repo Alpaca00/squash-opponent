@@ -56,6 +56,10 @@ class BasePage:
             elem.click()
         return self
 
+    def set_datetime(self, optimal_datetime):
+        self.browser.driver.execute_script(f'$("#party").val("{optimal_datetime}")')
+        return self
+
     def is_visible(self, chain=False):
         visible_element = self.element(self.anchor_element_loc).matching(be.visible)
         if not chain:
