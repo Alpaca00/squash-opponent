@@ -10,6 +10,7 @@ class Button(BasePage):
         self.locator = (
             f"//input[contains(@value, '{locator}')] |"
             f"//a[contains(text(), '{locator}')] |"
+            f"//a[contains(., '{locator}')] |"
             f"//button[contains(text(), '{locator}')] "
         )
 
