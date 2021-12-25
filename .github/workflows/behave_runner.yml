@@ -2,7 +2,7 @@ name: Behave
 on: [push, pull_request]
 jobs:
   run:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     env:
       PG_PASSWORD: ${{ secrets.PG_PASSWORD }}
       USER_PASSWORD_BE: ${{ secrets.USER_PASSWORD_BE }}
@@ -15,7 +15,6 @@ jobs:
         uses: actions/checkout@main
       - name: Test runner behave
         run: |
-            export=USER_PASSWORD_BE
             pip install pipenv
             pipenv install --dev
             pipenv run behave --define hidden=headless --tags=fixture.browser.chrome --tags=ua tests/scenarios/features/*.feature
