@@ -1,5 +1,6 @@
 from tests.src import BasePage
 from tests.src.components.finder_opponent_tab import FinderOpponentTab
+from tests.src.components.tournaments_tab import TournamentsTab
 from tests.src.elements.button import action
 
 
@@ -25,3 +26,7 @@ class AccountPage(BasePage):
         FinderOpponentTab(phone, district, category, datetime_).fill_form()
         return self
 
+    @action('POST')
+    def autocomplete_tournaments_form(self, title, phone, district, quantity_member, category, datetime_):
+        TournamentsTab(title, phone, district, quantity_member, category, datetime_).fill_form()
+        return self
