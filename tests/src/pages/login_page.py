@@ -19,15 +19,17 @@ class LoginPage(CommonSteps):
 
     @action("Sign Up")
     def sign_page(self):
-        if not self.browser.driver.current_url.endswith('/register/'):
-            self.browser.open(self.url + '/login/')
+        self.login_url('/register/')
         return self
 
     @action("Forgot your password?")
     def recovery_password_page(self):
-        if not self.browser.driver.current_url.endswith('/recovery-password/'):
-            self.browser.open(self.url + '/login/')
+        self.login_url('/recovery-password/')
         return self
+
+    def login_url(self, path: str):
+        if not self.browser.driver.current_url.endswith(path):
+            self.browser.open(self.url + '/login/')
 
 
 class SignPage(LoginPage):
