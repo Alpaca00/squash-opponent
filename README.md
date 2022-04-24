@@ -7,7 +7,7 @@
 <img alt="Website" src="https://img.shields.io/website?color=blue&down_color=green&down_message=offline&style=for-the-badge&up_color=red&up_message=offline&url=http%3A%2F%2Fsquashopponent.com.ua">
 :ukraine: www.squashopponent.com.ua<hr>
 
-<img src='http://161.35.199.243:8080/buildStatus/icon?job=sqaush-opponent+ui+test'>    </a><img alt="Docker Automated build" src="https://img.shields.io/docker/automated/jrottenberg/ffmpeg.svg"> <a href="https://codecov.io/gh/Alpaca00/squash-opponent">
+</a><img alt="Docker Automated build" src="https://img.shields.io/docker/automated/jrottenberg/ffmpeg.svg"> <a href="https://codecov.io/gh/Alpaca00/squash-opponent">
   <img src="https://codecov.io/gh/Alpaca00/squash-opponent/branch/main/graph/badge.svg?token=ZSRCNYRWU7"/>
 </a>  <img alt="GitHub Workflow Status" src="https://img.shields.io/github/workflow/status/alpaca00/squash-opponent/Codecov?label=tests&logo=Github&logoColor=red"> 
 
