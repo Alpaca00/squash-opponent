@@ -75,12 +75,3 @@ class JPath:
             return xpath.values(
                 obj=self.response.json(), glob=glob, separator=separator
             )
-
-
-if __name__ == '__main__':
-    request = ApiRequest(
-        "http://127.0.0.1:5000/api/v1",
-        "/get-all-publications?from_date=07-06-2022&to_date=07-06-2022"
-    ).get()
-    x = JPath(request).values('data/*/id')
-    print(len(x))
