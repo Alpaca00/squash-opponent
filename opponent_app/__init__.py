@@ -7,10 +7,13 @@ from flask import (
     url_for,
     redirect,
     current_app,
-    abort,
+    abort, jsonify,
 )
 # from OpenSSL import SSL
 from loguru import logger
+
+from opponent_app.api_v1 import health_api, get_user_publications_api, get_all_publications_api, get_all_tournaments_api
+
 from opponent_app.config import configurations, mail_settings
 from opponent_app.extensions import (
     login_manager,
@@ -21,7 +24,14 @@ from opponent_app.extensions import (
     mail,
     babel,
 )
-from opponent_app.models import db, user_datastore, UserAccount, OfferOpponent, QueueOpponent, UserOpponent
+from opponent_app.models import (
+    db,
+    user_datastore,
+    UserAccount,
+    OfferOpponent,
+    QueueOpponent,
+    UserOpponent
+)
 from opponent_app.views import (
     product_app,
     gallery_app,
@@ -87,6 +97,18 @@ def create_app(environment_name="production"):
     app.register_blueprint(finder_app, url_prefix="/<lang_code>/finder")
     app.register_blueprint(
         recovery_password_app, url_prefix="/<lang_code>/recovery-password"
+    )
+    app.register_blueprint(
+        health_api, url_prefix="/api/v1/check-health"
+    )
+    app.register_blueprint(
+        get_user_publications_api, url_prefix="/api/v1/get-user-publications"
+    )
+    app.register_blueprint(
+        get_all_publications_api, url_prefix="/api/v1/get-all-publications"
+    )
+    app.register_blueprint(
+        get_all_tournaments_api, url_prefix="/api/v1/get-all-tournaments"
     )
 
     @app.route("/")
