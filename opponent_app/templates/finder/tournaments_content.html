@@ -9,12 +9,17 @@
     <div class="container ls">
         <h1>{{ _('Tournamets') }}</h1>
         <hr>
-        <div class="alert alert-info" role="alert" style="width:60%;">
-            <a class="time-now" id="clock" style="text-decoration: none; color: lightslategray;"></a>
-            <a target="_blank" rel="noopener noreferrer" href="http://squasharena.com.ua/#"
-               style="text-decoration: none; color: lightslategray;"><p>{{ _('Booking court:') }}
-                www.squasharena.com.ua</p></a>
-        </div>
+<div class="col-md-2" style="padding: 10px;">
+    <div class="card bg-dark text-white">
+     <h3 class="card-title text-center">
+       <div class="d-flex flex-wrap justify-content-center mt-2">
+        <a><span class="badge hours"></span></a> :
+        <a><span class="badge min"></span></a> :
+        <a><span class="badge sec"></span></a>
+       </div>
+      </h3>
+    </div>
+</div>
         <div class="alert alert-info" role="alert" style="width:60%;text-align: center;">
             <h5 class="visually-visible"
                 style="text-align: center; color: lightslategray;">{{ _('Find a tournament') }}</h5>
@@ -120,6 +125,22 @@
     {% endfor %}
     </div>
     {% include 'finder/modal_join.html' %}
+    <script>
+$(document).ready(function() {
+    setInterval( function() {
+    var hours = new Date().getHours();
+    $(".hours").html(( hours < 10 ? "0" : "" ) + hours);
+    }, 1000);
+    setInterval( function() {
+    var minutes = new Date().getMinutes();
+    $(".min").html(( minutes < 10 ? "0" : "" ) + minutes);
+    },1000);
+    setInterval( function() {
+    var seconds = new Date().getSeconds();
+    $(".sec").html(( seconds < 10 ? "0" : "" ) + seconds);
+    },1000);
+    });
+</script>
     <script>
         function doDate() {
             let currentDate = document.getElementById('clock');

@@ -1,7 +1,8 @@
 FROM jenkins/jenkins:latest
 USER root
 RUN apt-get update
-RUN apt-get install -y python3.8-pip
+
+RUN apt-get -y install python3-pip
 RUN pip install --upgrade pip
 RUN pip install pipenv
 

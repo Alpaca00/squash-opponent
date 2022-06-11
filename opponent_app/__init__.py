@@ -12,7 +12,8 @@ from flask import (
 # from OpenSSL import SSL
 from loguru import logger
 
-from opponent_app.api_v1 import health_api, get_user_publications_api, get_all_publications_api, get_all_tournaments_api
+from opponent_app.api_v1 import health_api, get_user_publications_api, get_all_publications_api, \
+    get_all_tournaments_api, create_publication_api
 
 from opponent_app.config import configurations, mail_settings
 from opponent_app.extensions import (
@@ -109,6 +110,9 @@ def create_app(environment_name="production"):
     )
     app.register_blueprint(
         get_all_tournaments_api, url_prefix="/api/v1/get-all-tournaments"
+    )
+    app.register_blueprint(
+        create_publication_api, url_prefix="/api/v1/create-publication"
     )
 
     @app.route("/")

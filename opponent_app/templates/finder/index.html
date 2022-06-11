@@ -8,10 +8,17 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <div class="container ls">
   <h1>{{ _('Finder opponent') }}</h1><hr>
-    <div class="alert alert-info" role="alert" style="width:60%;">
-        <a class="time-now" id="clock" style="text-decoration: none; color: lightslategray;"></a>
-         <a target="_blank" rel="noopener noreferrer" href="http://squasharena.com.ua/#" style="text-decoration: none; color: lightslategray;"><p>{{ _('Booking court:') }} www.squasharena.com.ua</p></a>
-    </div>
+<div class="col-md-2" style="padding: 10px;">
+<div class="card bg-dark text-white">
+<h3 class="card-title text-center">
+<div class="d-flex flex-wrap justify-content-center mt-2">
+<a><span class="badge hours"></span></a> :
+<a><span class="badge min"></span></a> :
+<a><span class="badge sec"></span></a>
+</div>
+</h3>
+</div>
+</div>
      <div id="wrap">
         <form action="{{ url_for('finder_app.search') }}" method="get" autocomplete="on">
             <input id="search" name="search" type="text" placeholder="Who're we looking for ?" style="font-size: 18px;"><input id="search_submit" value="Rechercher" type="submit">
@@ -62,6 +69,22 @@
     currentDate.innerHTML = `<b>${current}</b> `;
     }
 setInterval(doDate, 1000);
+</script>
+    <script>
+$(document).ready(function() {
+setInterval( function() {
+var hours = new Date().getHours();
+$(".hours").html(( hours < 10 ? "0" : "" ) + hours);
+}, 1000);
+setInterval( function() {
+var minutes = new Date().getMinutes();
+$(".min").html(( minutes < 10 ? "0" : "" ) + minutes);
+},1000);
+setInterval( function() {
+var seconds = new Date().getSeconds();
+$(".sec").html(( seconds < 10 ? "0" : "" ) + seconds);
+},1000);
+});
 </script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" ></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" ></script>

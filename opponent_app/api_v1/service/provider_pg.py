@@ -1,9 +1,15 @@
+from datetime import datetime
 from typing import Union, List, Dict, Any
+from flask_security.utils import hash_password
 from sqlalchemy import and_
 from sqlalchemy.exc import SQLAlchemyError
 from opponent_app.api_v1.helpers.error_codes import ErrorCode
-from opponent_app.models.user import UserOpponent, UserAccount, OfferOpponent, UserMember, Member
+from opponent_app.models.user import (
+    UserOpponent, UserAccount, OfferOpponent,
+    UserMember, Member, db, user_datastore
+)
 from opponent_app.api_v1.helpers.exceptions import InternalError
+
 
 Response = Union[List[Dict[str, Any]], dict]
 
@@ -155,3 +161,33 @@ class ProviderPG:
             return ErrorCode.db_connection_error()
         except InternalError:
             return ErrorCode.opponent_not_found()
+
+    @classmethod
+    def create_publication(cls, data):
+        try:
+            user = UserAccount.query.filter_by(email=data.email).one_or_none()
+            if user is None:
+                user_datastore.create_user(
+                    email=data.email,
+                    name=data.name,
+                    password=hash_password(data.password),
+                    registered_on=datetime.now(),
+                    confirmed=False,
+                )
+                db.session.commit()
+            user_ = UserAccount.query.filter_by(email=data.email).first_or_404()
+            opponent = UserOpponent(
+                opponent_category=data.category,
+                opponent_city="Lviv",  # data.city
+                opponent_district=data.district,
+                opponent_phone=data.phone,
+                opponent_date=data.date+"T"+data.time_,
+                user_account_id=user_.id
+            )
+            db.session.add(opponent)
+            db.session.commit()
+            return {'Successful': True}
+        except SQLAlchemyError as e:
+            error = str(e.__dict__)
+            print(error)
+            return ErrorCode.db_connection_error()
