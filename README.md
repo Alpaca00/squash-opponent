@@ -13,7 +13,7 @@
 
 **QA env:** https://alpaca00.website/en/
 
-https://lviv-squash-team.com.ua
+[lviv-squash-team.com.ua](https://lviv-squash-team.com.ua/en)
 
 **Welcomes everyone! Follow to group chat that squash-opponent-bot is a part of.
 Send a message or select options. If you have Telegram, you can contact. Welcome bot right now.**
