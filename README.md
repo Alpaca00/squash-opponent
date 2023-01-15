@@ -11,10 +11,9 @@
 
 <img alt="Website" src="https://img.shields.io/website?color=blue&down_color=green&down_message=online&style=for-the-badge&up_color=red&up_message=offline&url=http%3A%2F%2Falpaca00.website">   
 
+**QA env:** https://alpaca00.website/en/
 
-**The version of the website for beta testing:**
-
-☮️ https://alpaca00.website/en/
+https://lviv-squash-team.com.ua
 
 **Welcomes everyone! Follow to group chat that squash-opponent-bot is a part of.
 Send a message or select options. If you have Telegram, you can contact. Welcome bot right now.**
