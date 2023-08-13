@@ -2,6 +2,6 @@ from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
 
-__al__ = [
+__all__ = [
     "db",
 ]

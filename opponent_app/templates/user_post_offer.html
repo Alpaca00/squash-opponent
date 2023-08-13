@@ -4,38 +4,46 @@
     </div>
     <div class="col-sm-10" style="margin-right: auto;">
         <p class="m-b-10 f-w-600" style="font-size: 22px;">{{ _('Name') }}</p>
-           <input class="form-control form-control-sm" id='user-name' name="user_name" placeholder="full name" aria-label=".form-control-sm example" style="input { outline: none; }" required>
+        <input class="form-control form-control-sm" id='user-name' name="user_name" placeholder="full name"
+               aria-label=".form-control-sm example" style="input { outline: none; }" required>
     </div>
     <div class="col-sm-10" style="margin-right: auto;">
         <p class="m-b-10 f-w-600" style="font-size: 22px;">{{ _('Email') }}</p>
-           <input class="form-control form-control-sm" id='user-email' name="user_email" placeholder="email" aria-label=".form-control-sm example" style="input { outline: none; }" required>
+        <input class="form-control form-control-sm" id='user-email' name="user_email" placeholder="email"
+               aria-label=".form-control-sm example" style="input { outline: none; }" required>
     </div>
     <div class="col-sm-10" style="margin-right: auto;">
         <p class="m-b-10 f-w-600" style="font-size: 22px;">{{ _('Phone') }}</p>
-           <input class="form-control form-control-sm" id='user-phone' name="user_phone" placeholder="phone number" aria-label=".form-control-sm example" style="input { outline: none; }" required>
+        <input class="form-control form-control-sm" id='user-phone' name="user_phone" placeholder="phone number"
+               aria-label=".form-control-sm example" style="input { outline: none; }" required>
     </div>
     <h6 class="m-b-20 m-t-40 p-b-5 b-b-default f-w-600" style="margin-top:10px;">{{ _('Location') }}</h6>
-       <div class="row">
-           <input class="visually-hidden" value="" id="id-opponent-user-cart" name="opponent_id_user">
-         <p class="m-b-10 f-w-600" style="font-size: 22px;">{{ _('Lviv') }}</p>
-         <select class="form-select form-select-sm" id='location-select' name="user_district" style='margin-bottom: 15px;' aria-label=".form-select-sm example" required>
-           <option selected>{{ _('DISTRICT') }}</option>
-           <option value="Sychivskyi">{{ _('Sychivskyi') }}</option>
-           <option value="Zaliznychnyi">{{ _('Zaliznychnyi') }}</option>
-           <option value="Shevchenkivskyi">{{ _('Shevchenkivskyi') }}</option>
-         </select>
-         <select class="form-select form-select-sm" id='category-select' name="user_category" style='margin-bottom: 15px;' aria-label=".form-select-sm example" required>
-           <option selected>{{ _('CATEGORY') }}</option>
-           <option value="PRO">{{ _('PRO') }}</option>
-           <option value="M1">M1</option>
-           <option value="M2">M2</option>
-           <option value="M2">M3</option>
-           <option value="AMATEUR">{{ _('AMATEUR') }}</option>
-         </select>
-           <h6 class="m-b-20 m-t-40 p-b-5 b-b-default f-w-600" style="margin-top: 5px;">{{ _('Message') }}</h6>
-            <textarea id="message-text" class="text" name="user_message_text" maxlength="30" placeholder="{{ _('short message') }}"></textarea>
-         <label for="party" style="margin-top: 5px;">{{ _('Enter the optimal date and time of the game:') }}</label>
-          <input id="party" class='row' type="datetime-local" name="user_partydate" value="2021-09-04T18:30" style='margin: 15px; width: 300px;' required>
-           <input type="submit" id="blockBtn" class="btn btn-dark" value="{{ _('SEND') }}" style='all: unset; margin-left: auto; color: black; font-size: 25px; cursor: pointer;'>
-       </div>
+    <div class="row">
+        <input class="visually-hidden" value="" id="id-opponent-user-cart" name="opponent_id_user">
+        <p class="m-b-10 f-w-600" style="font-size: 22px;">{{ _('Lviv') }}</p>
+        <select class="form-select form-select-sm" id='location-select' name="user_district"
+                style='margin-bottom: 15px;' aria-label=".form-select-sm example" required>
+            <option selected>{{ _('DISTRICT') }}</option>
+            <option value="Sychivskyi">{{ _('Sychivskyi') }}</option>
+            <option value="Zaliznychnyi">{{ _('Zaliznychnyi') }}</option>
+            <option value="Shevchenkivskyi">{{ _('Shevchenkivskyi') }}</option>
+        </select>
+        <select class="form-select form-select-sm" id='category-select' name="user_category"
+                style='margin-bottom: 15px;' aria-label=".form-select-sm example" required>
+            <option selected>{{ _('CATEGORY') }}</option>
+            <option value="PRO">{{ _('PRO') }}</option>
+            <option value="M1">M1</option>
+            <option value="M2">M2</option>
+            <option value="M2">M3</option>
+            <option value="AMATEUR">{{ _('AMATEUR') }}</option>
+        </select>
+        <h6 class="m-b-20 m-t-40 p-b-5 b-b-default f-w-600" style="margin-top: 5px;">{{ _('Message') }}</h6>
+        <textarea id="message-text" class="text" name="user_message_text" maxlength="30"
+                  placeholder="{{ _('short message') }}"></textarea>
+        <label for="party" style="margin-top: 5px;">{{ _('Enter the optimal date and time of the game:') }}</label>
+        <input id="party" class='row' type="datetime-local" name="user_partydate" value="2021-09-04T18:30"
+               style='margin: 15px; width: 300px;' required>
+        <input type="submit" id="blockBtn" class="btn btn-dark" value="{{ _('SEND') }}"
+               style='all: unset; margin-left: auto; color: black; font-size: 25px; cursor: pointer;'>
+    </div>
 </form>

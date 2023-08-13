@@ -1,29 +1,45 @@
+from ast import literal_eval
 from typing import Any
-from flask import Blueprint, render_template, request, abort, g
+
+from flask import Blueprint, abort, g, render_template, request
 from loguru import logger
 from werkzeug.exceptions import BadRequest
-from ast import literal_eval
-from opponent_app.models import Product, db, User, Order
+
+from opponent_app.models import Order, Product, User, db
 from opponent_app.views.product import cache
 
 cart_app = Blueprint("cart_app", __name__)
-id: Any = None
+id: Any = None  # noqa
 
 
 @cart_app.url_defaults
-def add_language_code(endpoint, values):
+def add_language_code(endpoint, values) -> None:  # noqa
+    """Add language code to url.
+
+    :param endpoint: endpoint name
+    :param values: url values
+    """
     values.setdefault("lang_code", g.lang_code)
 
 
 @cart_app.url_value_preprocessor
-def pull_lang_code(endpoint, values):
+def pull_lang_code(endpoint, values) -> None:  # noqa
+    """Pull language code from url.
+
+    :param endpoint: endpoint name
+    :param values: url values
+    """
     g.lang_code = values.pop("lang_code")
 
 
 @cart_app.route("/<int:cart_id>/", methods=["GET", "POST"])
-def cart_list(cart_id: int):
-    global id, cart_items
-    id = cart_id
+def cart_list(cart_id: int) -> str:
+    """Render cart page.
+
+    :param cart_id: cart id from url
+    """
+    global id, cart_items  # noqa
+    id = cart_id  # noqa
     if cart_id is None:
         raise BadRequest(f"Invalid product id #{cart_id}")
     cart = Product.query.filter_by(id=cart_id).one_or_none()
@@ -94,7 +110,11 @@ def cart_list(cart_id: int):
 
 
 @cart_app.route("/")
-def empty_list(id_cart=None):
+def empty_list(id_cart=None) -> str:  # noqa
+    """Render empty cart page.
+
+    :param id_cart: cart id from url
+    """
     id_cart = id
     if id_cart is None:
         return render_template("cart/empty.html")
@@ -103,6 +123,10 @@ def empty_list(id_cart=None):
 
 
 @cart_app.errorhandler(408)
-def handle_request_timeout_error(exception):
+def handle_request_timeout_error(exception) -> tuple:
+    """Handle request timeout error.
+
+    :param exception: exception
+    """
     logger.info(exception)
     return render_template("408.html"), 408

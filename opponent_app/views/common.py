@@ -1,12 +1,18 @@
 import calendar
 from datetime import datetime
+
 import humanize
 from flask import render_template
 from flask_login import current_user
-from opponent_app.models import db, Member, UserMember
+
+from opponent_app.models import Member, UserMember, db
 
 
 def count_members(query: db) -> dict:
+    """Count members every tournament.
+
+    :param query: query expression
+    """
     ordinary_members = []
     for value in map(list, query):
         ordinary_members.append(value[0])
@@ -21,6 +27,12 @@ def count_members(query: db) -> dict:
 def render_content_tournaments(
     history: db.query_expression, render_html: str, query: db.query_expression
 ) -> render_template:
+    """Render content tournaments.
+
+    :param history: query expression
+    :param render_html: html template
+    :param query: query expression
+    """
     tournaments_history_lst = []
     modals_ids = []
     tournament_members = Member.query.join(UserMember).all()

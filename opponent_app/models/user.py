@@ -1,20 +1,27 @@
 import re
+
+from flask_security import RoleMixin, SQLAlchemyUserDatastore, UserMixin
+from flask_validator import ValidateEmail, ValidateInteger, ValidateString, Validator
 from loguru import logger
-from sqlalchemy import Column, Integer, String, ForeignKey, Boolean, Text
-from flask_security import SQLAlchemyUserDatastore, UserMixin, RoleMixin
-from flask_validator import (
-    Validator,
-    ValidateInteger,
-    ValidateString,
-    ValidateEmail,
-)
+from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, Text
+
 from opponent_app.models import db
 
 
 class ValidatePhone(Validator):
+    """Validate phone number.
+
+    Examples:
+        >> ValidatePhone.check_value("+380501234567")
+        True
+    """
     REGEX = r"^(?:\+38)?(?:\([0-9]{3}\D)[ .-]?[0-9]{3}[ .-]?[0-9]{2}[ .-]?[0-9]{2}|[0-9]{3}[ .-]?[0-9]{3}[ .-]?[0-9]{2}[ .-]?[0-9]{2}|[0-9]{3}[0-9]{7}$gm"
 
-    def check_value(self, value):
+    def check_value(self, value) -> bool:
+        """Check value.
+
+        :param value: phone number to validate, e.g. +380501234567
+        """
         if re.findall(self.REGEX, value):
             logger.info(value)
             return True
@@ -23,7 +30,12 @@ class ValidatePhone(Validator):
 
 
 class ValidatePassword(Validator):
-    def check_value(self, value):
+    """Validate password."""
+    def check_value(self, value) -> bool:
+        """Check value.
+
+        :param value: password to validate, e.g. Password1
+        """
         if (
             not re.findall("\d", value)
             and not re.findall("[A-Z]", value)
@@ -38,7 +50,9 @@ class ValidatePassword(Validator):
 
 
 class User(db.Model):
-    __tablename__ = "users"
+    """User model for storing users."""
+
+    __tablename__ = "users"  # noqa
     id = Column(Integer, primary_key=True)
     full_name = Column(String(255), nullable=False)
     email = Column(String(33), nullable=False)
@@ -53,6 +67,7 @@ class User(db.Model):
 
     @classmethod
     def __declare_last__(cls):
+        """Validate user fields."""
         ValidateString(User.full_name)
         ValidateEmail(User.email)
         ValidatePhone(User.phone)
@@ -71,7 +86,9 @@ roles_users = db.Table(
 
 
 class UserAccount(db.Model, UserMixin):
-    __tablename__ = "users_accounts"
+    """UserAccount model for storing users."""
+
+    __tablename__ = "users_accounts"  # noqa
     id = Column(Integer, primary_key=True)
     name = Column(String(255), nullable=False)
     email = Column(String(33), nullable=False, unique=True)
@@ -88,7 +105,9 @@ class UserAccount(db.Model, UserMixin):
         "UserOpponent", backref="users_accounts", lazy=True
     )
     users_members = db.relationship(
-        "UserMember", backref="users_accounts", overlaps="users_accounts,members,users_members"
+        "UserMember",
+        backref="users_accounts",
+        overlaps="users_accounts,members,users_members",
     )
 
     roles = db.relationship(
@@ -99,12 +118,15 @@ class UserAccount(db.Model, UserMixin):
 
     @classmethod
     def __declare_last__(cls):
+        """Validate user fields."""
         ValidateString(UserAccount.name)
         ValidateEmail(UserAccount.email)
         ValidatePassword(UserAccount.password)
 
 
 class Role(db.Model, RoleMixin):
+    """Role model for storing roles."""
+
     id = Column(Integer, primary_key=True)
     name = Column(String(40))
     description = Column(String(255))
@@ -114,7 +136,9 @@ user_datastore = SQLAlchemyUserDatastore(db, UserAccount, Role)
 
 
 class UserOpponent(db.Model):
-    __tablename__ = "users_opponents"
+    """UserOpponent model for storing users."""
+
+    __tablename__ = "users_opponents"  # noqa
     id = Column(Integer, primary_key=True)
     opponent_category = Column(String(50), nullable=True, default="Amateur")
     opponent_city = Column(String(50))
@@ -123,7 +147,8 @@ class UserOpponent(db.Model):
     opponent_phone = Column(String(50))
     user_account_id = Column(Integer, ForeignKey("users_accounts.id"))
     user_account = db.relationship(
-        "UserAccount", overlaps="users_accounts, users_opponent,OfferOpponent.user_opponent, queues_opponents"
+        "UserAccount",
+        overlaps="users_accounts, users_opponent,OfferOpponent.user_opponent, queues_opponents",
     )
     offers_opponent = db.relationship(
         "OfferOpponent", backref="users_opponents", lazy="dynamic"
@@ -131,7 +156,8 @@ class UserOpponent(db.Model):
 
 
 class OfferOpponent(db.Model):
-    __tablename__ = "offers_opponents"
+    """OfferOpponent model for storing offers."""
+    __tablename__ = "offers_opponents"  # noqa
     id = Column(Integer, primary_key=True)
     offer_name = Column(String(50))
     offer_email = Column(String(50))
@@ -144,12 +170,15 @@ class OfferOpponent(db.Model):
     offer_message = Column(Text(), nullable=True)
     user_opponent_id = Column(Integer, ForeignKey("users_opponents.id"))
     user_opponent = db.relationship(
-        "UserOpponent", overlaps="offers_opponent, users_opponents, offers_opponents"
+        "UserOpponent",
+        overlaps="offers_opponent, users_opponents, offers_opponents",
     )
 
 
 class QueueOpponent(db.Model):
-    __tablename__ = "queues_opponents"
+    """QueueOpponent model for storing queues."""
+
+    __tablename__ = "queues_opponents"  # noqa
     id = Column(Integer, primary_key=True)
     queue_name = Column(String(50))
     queue_email = Column(String(50))
@@ -162,12 +191,15 @@ class QueueOpponent(db.Model):
     queue_message = Column(Text(), nullable=True)
     queue_offer_opponent_id = Column(Integer, ForeignKey("offers_opponents.id"))
     queue_offer_opponent = db.relationship(
-        "OfferOpponent", overlaps="queue_opponent, users_opponents, queues_opponents"
+        "OfferOpponent",
+        overlaps="queue_opponent, users_opponents, queues_opponents",
     )
 
 
 class UserMember(db.Model):
-    __tablename__ = "users_members"
+    """UserMember model for storing users."""
+
+    __tablename__ = "users_members"  # noqa
     id = Column(Integer, primary_key=True)
     member_title = Column(String(50))
     member_category = Column(String(50), nullable=True, default="Amateur")
@@ -180,19 +212,17 @@ class UserMember(db.Model):
     user_account = db.relationship(
         "UserAccount", overlaps="users_accounts,users_members"
     )
-    members = db.relationship(
-        "Member", overlaps="members,users_members"
-    )
+    members = db.relationship("Member", overlaps="members,users_members")
 
 
 class Member(db.Model):
-    __tablename__ = "members"
+    """Member model for storing members."""
+
+    __tablename__ = "members"  # noqa
     id = Column(Integer, primary_key=True)
     tour_member_name = Column(String(50))
     tour_member_phone = Column(String(50))
     tour_member_email = Column(String(50))
     tour_member_accept = Column(Boolean, unique=False, default=False)
     user_member_id = Column(Integer, ForeignKey("users_members.id"))
-    user_member = db.relationship(
-        "UserMember", overlaps="members,users_members"
-    )
+    user_member = db.relationship("UserMember", overlaps="members,users_members")

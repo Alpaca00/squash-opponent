@@ -1,9 +1,11 @@
-from sqlalchemy import Column, Integer, String, Date, ForeignKey, Text
+from sqlalchemy import Column, Date, ForeignKey, Integer, String, Text
+
 from opponent_app.models import db
 
 
 class TableResult(db.Model):
-    __tablename__ = "table_results"
+    """TableResult model for storing table results."""
+    __tablename__ = "table_results"  # noqa
     id = Column(Integer, primary_key=True)
     position = Column(Integer, nullable=False)
     team = Column(String, nullable=False)
@@ -13,7 +15,8 @@ class TableResult(db.Model):
 
 
 class TableScore(db.Model):
-    __tablename__ = "table_scores"
+    """TableScore model for storing table scores."""
+    __tablename__ = "table_scores"  # noqa
     id = Column(Integer, primary_key=True)
     date = Column(Date, nullable=False)
     team1 = Column(String, nullable=False)
@@ -22,8 +25,11 @@ class TableScore(db.Model):
 
 
 class Player(db.Model):
-    __tablename__ = "players"
+    """Player model for storing players."""
+    __tablename__ = "players"  # noqa
     id = Column(Integer, primary_key=True)
     full_name = Column(Text, nullable=False)
     table_result_id = Column(Integer, ForeignKey("table_results.id"))
-    table_result = db.relationship("TableResult", overlaps="players,table_results")
+    table_result = db.relationship(
+        "TableResult", overlaps="players,table_results"
+    )

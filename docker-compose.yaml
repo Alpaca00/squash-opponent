@@ -6,36 +6,39 @@ services:
       dockerfile: Dockerfile
       context: ""
     image: alpaca00/opponent
-    env_file: var.env
+    env_file: .env
     environment:
       PG_HOST: pg
       R_HOST: redis
     volumes:
-      - /squash-opponent:/app
+      - /Users/alpaca/projects/squash-opponent:/app
     expose:
       - 8000
       - 443
+    ports:
+      - "8000:8000"
+      - "443:443"
     depends_on:
       - pg
       - redis
-    command: gunicorn -w 1 -b 0.0.0.0:443 wsgi:app
+    command: gunicorn -w 1 -b 0.0.0.0:8000 wsgi:app
   pg:
     image: postgres:13.3
     environment:
-      POSTGRES_DB: alpaca
-      POSTGRES_USER: user
-      POSTGRES_PASSWORD: password
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       PGDATA: /var/lib/postgresql/data/pgdata
     volumes:
     - ./data/pgdata:/var/lib/postgresql/data/pgdata
     ports:
-    - 5432:5432
+    - "5432:5432"
   redis:
     image: redis:6.2
     expose:
       - 6379
     ports:
-      - 6379:6379
+      - "6379:6379"
     volumes:
       - ./config/redis-docker/redis.conf:/redis.conf
     command: [ "redis-server", "/redis.conf" ]
@@ -44,7 +47,7 @@ services:
     restart: always
     build: ./nginx
     ports:
-      - 443:443
-      - 80:80
+      - "443:443"
+      - "80:80"
     depends_on:
       - app

@@ -194,7 +194,7 @@
         console.log(arrPostUserData);
     </script>
     <script>
-        var triggerTabList = [].slice.call(document.querySelectorAll('#tournament-tab'))
+        let triggerTabList = [].slice.call(document.querySelectorAll('#tournament-tab'));
         triggerTabList.forEach(function (triggerEl) {
 
             triggerEl.addEventListener('click', function (event) {
