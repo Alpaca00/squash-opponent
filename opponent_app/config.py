@@ -31,10 +31,7 @@ class DevConfig(BaseConfig):
 
 class ProdConfig(BaseConfig):
     """Production configuration."""
-    # SQLALCHEMY_DATABASE_URI = f"postgresql+psycopg2://user:password@{PG_HOST}:5432/alpaca"
-    SQLALCHEMY_DATABASE_URI = (
-        f"postgresql+psycopg2://user:password@127.0.0.1:5432/alpaca"
-    )
+    SQLALCHEMY_DATABASE_URI = f"postgresql+psycopg2://user:password@{PG_HOST}:5432/alpaca"
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 

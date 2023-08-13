@@ -11,7 +11,7 @@ services:
       PG_HOST: pg
       R_HOST: redis
     volumes:
-      - /Users/alpaca/projects/squash-opponent:/app
+      - squash-opponent:/app
     expose:
       - 8000
       - 443

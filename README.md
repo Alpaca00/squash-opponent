@@ -7,6 +7,29 @@ Open source project for students or anyone who wants to learn how to create a we
 [lviv-squash-team.com.ua](https://lviv-squash-team.com.ua/en)
 
 
+### Installation
+
+#### Add .env file to the root directory and fill it with the following data:
+
+```shell
+SPS="your salt for password hashing"
+SECRET_KEY="your secret key"
+EMAIL_USERNAME="your username for email"
+EMAIL_PASSWORD="your password for email"
+PG_HOST="pg"
+R_HOST="redis"
+POSTGRES_DB="postgres database name"
+POSTGRES_USER="postgres user"
+POSTGRES_PASSWORD="password for postgres user"
+```
+
+#### Run the following commands:
+
+```shell
+docker-compose up
+```
+
+
 **Welcomes everyone! Follow to group chat that squash-opponent-bot is a part of.
 Send a message or select options. If you have Telegram, you can contact. Welcome bot right now.**
 
