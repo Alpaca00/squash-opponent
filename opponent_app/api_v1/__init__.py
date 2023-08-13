@@ -1,5 +1,0 @@
-from opponent_app.api_v1.controller.check_health_api import health_api
-from opponent_app.api_v1.controller.get_user_publications import get_user_publications_api
-from opponent_app.api_v1.controller.get_all_publications import get_all_publications_api
-from opponent_app.api_v1.controller.get_all_tournaments import get_all_tournaments_api
-from opponent_app.api_v1.controller.create_publication import create_publication_api

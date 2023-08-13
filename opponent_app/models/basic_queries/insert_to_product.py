@@ -1,6 +1,8 @@
 from dataclasses import dataclass
+
 from app import app
-from opponent_app.models import db, Product, TShirt
+
+from opponent_app.models import Product, TShirt, db
 
 
 @dataclass

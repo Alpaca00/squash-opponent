@@ -4,9 +4,5 @@ WORKDIR /my_app
 
 COPY . .
 
-RUN /usr/local/bin/python -m pip install --upgrade pip && pip install pipenv
-
-RUN pipenv install --system --deploy --ignore-pipfile
-RUN pipenv install
-
-CMD ["/bin/bash", "run.sh"]
+RUN /usr/local/bin/python -m pip install --upgrade pip \
+    && pip install -r requirements.txt

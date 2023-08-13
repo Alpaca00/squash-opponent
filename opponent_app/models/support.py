@@ -1,4 +1,5 @@
 from sqlalchemy import Column, Integer, String, Text
+
 from opponent_app.models import db
 
 # from sqlalchemy.orm import validates
@@ -6,7 +7,8 @@ from opponent_app.models import db
 
 
 class SupportMessage(db.Model):
-    __tablename__ = "messages"
+    """SupportMessage model for storing messages."""
+    __tablename__ = "messages"  # noqa
     id = Column(Integer, primary_key=True)
     question = Column(String, nullable=False)
     email = Column(String, nullable=False)

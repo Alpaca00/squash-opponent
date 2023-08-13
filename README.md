@@ -1,19 +1,34 @@
+### Lviv Squash Team
 
-<img alt="GitHub" src="https://img.shields.io/github/license/alpaca00/squash-opponent?color=aas">  <img src="https://img.shields.io/badge/code%20style-black-000000.svg" />  <img alt="GitHub Pipenv locked dependency version (branch)" src="https://img.shields.io/github/pipenv/locked/dependency-version/alpaca00/squash-opponent/dev/black/main?color=white">  <img alt="GitHub Pipenv locked dependency version" src="https://img.shields.io/github/pipenv/locked/dependency-version/metabolize/rq-dashboard-on-heroku/flask"> 
+Open source project for students or anyone who wants to learn how to create a web application using Flask or automate testing using WebDriver.
 
-
-<a href="https://www.digitalocean.com/?refcode=6d28408341ba&utm_campaign=Referral_Invite&utm_medium=Referral_Program&utm_source=badge"><img src="https://web-platforms.sfo2.digitaloceanspaces.com/WWW/Badge%202.svg" alt="DigitalOcean Referral Badge" /></a>
-
-
-</a><img alt="Docker Automated build" src="https://img.shields.io/docker/automated/jrottenberg/ffmpeg.svg"> <a href="https://codecov.io/gh/Alpaca00/squash-opponent">
-  <img src="https://codecov.io/gh/Alpaca00/squash-opponent/branch/main/graph/badge.svg?token=ZSRCNYRWU7"/>
-</a>  <img alt="GitHub Workflow Status" src="https://img.shields.io/github/workflow/status/alpaca00/squash-opponent/Codecov?label=tests&logo=Github&logoColor=red"> 
-
-<img alt="Website" src="https://img.shields.io/website?color=blue&down_color=green&down_message=online&style=for-the-badge&up_color=red&up_message=offline&url=http%3A%2F%2Falpaca00.website">   
-
-**QA env:** https://alpaca00.website/en/
+<img alt="GitHub" src="https://img.shields.io/github/license/alpaca00/squash-opponent?color=aas">  <img src="https://img.shields.io/badge/code%20style-black-000000.svg"  alt=""/> <img alt="Docker Automated build" src="https://img.shields.io/docker/automated/jrottenberg/ffmpeg.svg">
 
 [lviv-squash-team.com.ua](https://lviv-squash-team.com.ua/en)
+
+
+### Installation
+
+#### Add .env file to the root directory and fill it with the following data:
+
+```shell
+SPS="your salt for password hashing"
+SECRET_KEY="your secret key"
+EMAIL_USERNAME="your username for email"
+EMAIL_PASSWORD="your password for email"
+PG_HOST="pg"
+R_HOST="redis"
+POSTGRES_DB="postgres database name"
+POSTGRES_USER="postgres user"
+POSTGRES_PASSWORD="password for postgres user"
+```
+
+#### Run the following commands:
+
+```shell
+docker-compose up
+```
+
 
 **Welcomes everyone! Follow to group chat that squash-opponent-bot is a part of.
 Send a message or select options. If you have Telegram, you can contact. Welcome bot right now.**

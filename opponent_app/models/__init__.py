@@ -1,13 +1,19 @@
 from .database import db
-from .product import Product, TShirt, Order
+from .form import AdminLoginForm, RegisterForm
 from .gallery import Gallery
-from .video_gallery import VideoGallery
+from .product import Order, Product, TShirt
+from .table_result import Player, TableResult, TableScore
 from .user import (
-    User, UserAccount, UserOpponent, user_datastore,
-    OfferOpponent, QueueOpponent, UserMember, Member
+    Member,
+    OfferOpponent,
+    QueueOpponent,
+    User,
+    UserAccount,
+    UserMember,
+    UserOpponent,
+    user_datastore,
 )
-from .table_result import TableResult, TableScore, Player
-from .form import RegisterForm, AdminLoginForm
+from .video_gallery import VideoGallery
 
 __all__ = [
     "db",
@@ -28,5 +34,5 @@ __all__ = [
     "OfferOpponent",
     "QueueOpponent",
     "UserMember",
-    "Member"
+    "Member",
 ]

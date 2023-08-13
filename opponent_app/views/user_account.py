@@ -1,138 +1,150 @@
 import calendar
 from datetime import datetime
+
 import humanize
-from flask import (
-    Blueprint,
-    render_template,
-    request,
-    url_for,
-    g,
-    redirect,
-    abort,
-    flash,
-)
+from flask import Blueprint, abort, flash, g, redirect, render_template, request, url_for
 from flask_babel import gettext
-from flask_login import current_user, logout_user, login_required
+from flask_login import current_user, login_required, logout_user
 from loguru import logger
+
+from opponent_app.decorators import check_confirmed
+from opponent_app.helpers import Message, mail, mail_settings
 from opponent_app.models import (
-    db,
-    UserOpponent,
-    UserAccount,
+    Member,
     OfferOpponent,
     QueueOpponent,
+    UserAccount,
     UserMember,
-    Member,
+    UserOpponent,
+    db,
 )
-from opponent_app.helpers import mail, mail_settings, Message
-from opponent_app.decorators import check_confirmed
-from opponent_app.views.common import count_members, render_content_tournaments
+from opponent_app.views.common import render_content_tournaments
 
 user_account_app = Blueprint("user_account_app", __name__)
 
 
 @user_account_app.url_defaults
-def add_language_code(endpoint, values):
+def add_language_code(endpoint, values) -> None:  # noqa
+    """Add language code to url.
+
+    :param endpoint: endpoint name
+    :param values: url values
+    """
     values.setdefault("lang_code", g.lang_code)
 
 
 @user_account_app.url_value_preprocessor
-def pull_lang_code(endpoint, values):
+def pull_lang_code(endpoint, values) -> None:  # noqa
+    """Pull language code from url.
+
+    :param endpoint: endpoint name
+    :param values: url values
+    """
     g.lang_code = values.pop("lang_code")
+
+
+def format_opponent_datetime(opponent_date) -> tuple:
+    """Format opponent date and time."""
+    convert_dt = datetime.strptime(opponent_date, "%Y-%m-%dT%H:%M")
+    abbr_month = calendar.month_abbr[int(convert_dt.date().month)]
+    day_ = humanize.naturaldate(convert_dt.day)
+    time_ = humanize.naturaltime(convert_dt.time())
+    return abbr_month, day_, time_
+
+
+def get_user_opponent_history(user_id):
+    """Get user's opponent history."""
+    user_history = (
+        UserAccount.query.filter_by(id=user_id)
+        .join(UserOpponent)
+        .all()
+    )
+    lst_history = []
+    for x in user_history:
+        for i in x.users_opponent:
+            abr_month, day_, time_ = format_opponent_datetime(i.opponent_date)
+            lst_history.append([
+                abr_month,
+                day_,
+                time_,
+                i.opponent_city,
+                i.opponent_district,
+                i.opponent_category,
+                i.opponent_phone,
+                i.id,
+                x.name,
+                x.email,
+                x.count,
+            ])
+    return lst_history
+
+
+def get_queue_size(user_opponent_id):
+    """Get queue size."""
+    queue_opponent = (
+        UserOpponent.query.join(OfferOpponent)
+        .filter_by(user_opponent_id=user_opponent_id)
+        .join(QueueOpponent)
+        .all()
+    )
+    size = len(queue_opponent)
+    return size
+
+
+def get_offer_data():
+    """Get offer data."""
+    offer_data = []
+    offer_id = []
+    offer_opponent = OfferOpponent.query.join(UserOpponent).all()
+    if offer_opponent is not None:
+        for i in offer_opponent:
+            abr_month, day_, time_ = format_opponent_datetime(i.offer_date)
+            offer_id.append(i.offer_accept)
+            offer_data.append([
+                abr_month,
+                day_,
+                time_,
+                i.offer_phone,
+                i.offer_name,
+                i.offer_email,
+                i.offer_city,
+                i.offer_district,
+                i.offer_category,
+                i.offer_phone,
+                i.user_opponent_id,
+                i.id,
+                i.offer_accept,
+                i.offer_message,
+            ])
+    return offer_data, offer_id, offer_opponent
 
 
 @user_account_app.route("/", methods=["GET", "POST"])
 @check_confirmed
 def user_account():
+    """User account page."""
     if request.method == "GET":
-        user_history = (
-            UserAccount.query.filter_by(id=current_user.id).join(UserOpponent).all()
-        )
-        lst_history = []
-        for x in user_history:
-            for i in x.users_opponent:
-                convert_dt = datetime.strptime(i.opponent_date, "%Y-%m-%dT%H:%M")
-                abr_month = calendar.month_abbr[int(convert_dt.date().month)]
-                day_ = humanize.naturaldate(convert_dt.day)
-                time_ = humanize.naturaltime(convert_dt.time())
-                lst_history.append(
-                    [
-                        abr_month,
-                        day_,
-                        time_,
-                        i.opponent_city,
-                        i.opponent_district,
-                        i.opponent_category,
-                        i.opponent_phone,
-                        i.id,
-                        x.name,
-                        x.email,
-                        x.count,
-                    ]
-                )
-
-        for x in user_history:
-            for i in range(len(x.users_opponent)):
-                queue_opponent = (
-                    UserOpponent.query.join(OfferOpponent)
-                    .filter_by(user_opponent_id=int(lst_history[i][7]))
-                    .join(QueueOpponent)
-                    .all()
-                )
-                size = len(queue_opponent)
-                if size >= 1:
-                    size += 1
-                    lst_history[i].append(size)
-                else:
-                    queue_opponent = (
-                        UserOpponent.query.join(OfferOpponent)
-                        .filter_by(user_opponent_id=int(lst_history[i][7]))
-                        .all()
-                    )
-                    size = len(queue_opponent)
-                    lst_history[i].append(size)
-
-        offer_data = []
-        offer_id = []
-        offer_opponent = OfferOpponent.query.join(UserOpponent).all()
-        if offer_opponent is not None:
-            for i in offer_opponent:
-                convert_dt = datetime.strptime(i.offer_date, "%Y-%m-%dT%H:%M")
-                abr_month = calendar.month_abbr[int(convert_dt.date().month)]
-                day_ = humanize.naturaldate(convert_dt.day)
-                time_ = humanize.naturaltime(convert_dt.time())
-                offer_id.append(i.offer_accept)
-                offer_data.append(
-                    [
-                        abr_month,
-                        day_,
-                        time_,
-                        i.offer_phone,
-                        i.offer_name,
-                        i.offer_email,
-                        i.offer_city,
-                        i.offer_district,
-                        i.offer_category,
-                        i.offer_phone,
-                        i.user_opponent_id,
-                        i.id,
-                        i.offer_accept,
-                        i.offer_message,
-                    ]
-                )
+        user_history = get_user_opponent_history(current_user.id)
+        for item in user_history:
+            size = get_queue_size(int(item[7]))
+            item.append(size)
+        offer_data, offer_id, offer_opponent = get_offer_data()
         return render_template(
             "user.html",
             cur=current_user,
             opponents=user_history,
-            dates=lst_history,
+            dates=user_history,
             offer_data=offer_data,
             offer_id=offer_id,
             offer_opponent=offer_opponent,
         )
+
     if request.method == "POST":
-        date_time = request.form.get("partydate")
+        date_time = request.form.get("partydate")  # noqa
         category = request.form.get("category")
         district = request.form.get("district")
         phone = request.form.get("phone")
+
         opponent = UserOpponent(
             opponent_category=category,
             opponent_city="Lviv",
@@ -143,26 +155,26 @@ def user_account():
         )
         db.session.add(opponent)
         db.session.commit()
-        size = (
-            UserOpponent.query.join(UserAccount)
-            .filter_by(email=current_user.email)
-            .all()
-        )
-        user_rating = UserAccount.query.filter_by(
-            email=current_user.email
-        ).one_or_none()
-        user_rating.count = len(size)  # update stars rating
+
+        size = UserOpponent.query.join(UserAccount).filter_by(email=current_user.email).all()
+        user_rating = UserAccount.query.filter_by(email=current_user.email).one_or_none()
+        user_rating.count = len(size)
         db.session.commit()
+
         flash(gettext("Successfully. Your post has been added."))
         return redirect(url_for("user_account_app.user_account"))
+
     return render_template("user.html", cur=current_user)
 
 
 @user_account_app.route("/update/<post_id>", methods=["GET", "POST", "DELETE"])
 def update_post_request(post_id: int):
+    """Update post request."""
     if request.method == "POST":
         card_opponent = (
-            UserOpponent.query.filter_by(id=post_id).join(UserAccount).one_or_none()
+            UserOpponent.query.filter_by(id=post_id)
+            .join(UserAccount)
+            .one_or_none()
         )
         if card_opponent is None:
             abort(404)
@@ -175,7 +187,9 @@ def update_post_request(post_id: int):
             return redirect(url_for("user_account_app.user_account"))
     if request.method == "GET":
         card_opponent = (
-            UserOpponent.query.filter_by(id=post_id).join(UserAccount).one_or_none()
+            UserOpponent.query.filter_by(id=post_id)
+            .join(UserAccount)
+            .one_or_none()
         )
         if card_opponent is None:
             abort(404)
@@ -195,9 +209,12 @@ def update_post_request(post_id: int):
 
 @user_account_app.route("/delete/<post_id>", methods=["GET", "POST", "DELETE"])
 def delete_post_request(post_id: int):
+    """Delete post request."""
     if request.method == "GET":
         card_opponent = (
-            UserOpponent.query.filter_by(id=post_id).join(UserAccount).one_or_none()
+            UserOpponent.query.filter_by(id=post_id)
+            .join(UserAccount)
+            .one_or_none()
         )
         card_offer = OfferOpponent.query.filter_by(
             user_opponent_id=post_id
@@ -214,7 +231,6 @@ def delete_post_request(post_id: int):
         else:
             body = f"Sorry, {card_opponent.user_account.name} deleted this post\nGame time: {card_opponent.opponent_date},\nOpponent info:\n{card_opponent.user_account.name}\n{card_opponent.user_account.email}\n{card_opponent.opponent_phone}\n{card_opponent.opponent_district}\n{card_opponent.opponent_category}"
             if queue_opponent is not None:
-
                 flash(gettext("You need cancel all offers for this post."))
 
             elif card_offer is not None:
@@ -229,7 +245,9 @@ def delete_post_request(post_id: int):
                 db.session.commit()
                 flash(gettext("Successfully. Your post has been deleted."))
             card = (
-                UserOpponent.query.filter_by(id=post_id).join(UserAccount).one_or_none()
+                UserOpponent.query.filter_by(id=post_id)
+                .join(UserAccount)
+                .one_or_none()
             )
             if card is not None:
                 db.session.delete(card)
@@ -241,11 +259,14 @@ def delete_post_request(post_id: int):
 
 @user_account_app.route("/cancel/<post_id>", methods=["GET", "POST", "DELETE"])
 def cancel_post_offer(post_id: int):
+    """Cancel post offer."""
     if request.method == "GET":
         offer_opponent = OfferOpponent.query.filter_by(id=post_id).one_or_none()
         user_opponent_id = offer_opponent.user_opponent_id
         queue_opponent = (
-            QueueOpponent.query.join(OfferOpponent).filter_by(id=post_id).one_or_none()
+            QueueOpponent.query.join(OfferOpponent)
+            .filter_by(id=post_id)
+            .one_or_none()
         )
 
         if offer_opponent is None:
@@ -294,6 +315,7 @@ def cancel_post_offer(post_id: int):
 
 @user_account_app.route("/accept/<post_id>", methods=["GET", "POST", "DELETE"])
 def accept_post_offer(post_id: int):
+    """Accept post offer."""
     if request.method == "GET":
         offer_opponent = OfferOpponent.query.filter_by(id=post_id).one_or_none()
         if offer_opponent is None:
@@ -314,6 +336,7 @@ def accept_post_offer(post_id: int):
 
 
 def send_info_by_user(subject, recipient, body):
+    """Send info by user."""
     msg = Message(
         subject=subject,
         sender=mail_settings.get("MAIL_USERNAME"),
@@ -326,6 +349,7 @@ def send_info_by_user(subject, recipient, body):
 @user_account_app.route("/login", methods=["GET", "POST"])
 @login_required
 def logout():
+    """Logout."""
     if request.method == "GET":
         logout_user()
         return redirect(url_for("login_app.login"))
@@ -334,6 +358,7 @@ def logout():
 @user_account_app.route("/tournaments", methods=["GET", "POST"])
 @check_confirmed
 def user_account_tournaments():
+    """User account tournaments."""
     if request.method == "GET":
         tournaments_history = (
             UserMember.query.filter_by(user_id=current_user.id).join(Member).all()
@@ -361,7 +386,7 @@ def user_account_tournaments():
             )
             db.session.add(user_member)
             db.session.commit()
-            id_tour = UserMember.query.order_by(UserMember.id.desc()).first()
+            id_tour = UserMember.query.order_by(UserMember.id.desc()).first()  # noqa
             if id_tour:
                 member = Member(
                     user_member_id=id_tour.id,
@@ -383,9 +408,14 @@ def user_account_tournaments():
 @user_account_app.route("/tournaments/confirm_members", methods=["GET", "POST"])
 @check_confirmed
 def confirm_members():
+    """Confirm members."""
     if request.method == "GET":
-        members = Member.query.join(UserMember).filter_by(user_id=current_user.id).all()
-        return render_template("user_tournaments_confirm_members.html", members=members)
+        members = (
+            Member.query.join(UserMember).filter_by(user_id=current_user.id).all()
+        )
+        return render_template(
+            "user_tournaments_confirm_members.html", members=members
+        )
     return redirect(url_for("user_account_app.user_account_tournaments"))
 
 
@@ -395,6 +425,7 @@ def confirm_members():
 )
 @check_confirmed
 def actions_tournament(confirm_id: id, confirm: str):
+    """Actions tournament."""
     if request.method == "GET":
         member = Member.query.filter_by(id=confirm_id).one_or_none()
         if not member:
@@ -435,5 +466,6 @@ def actions_tournament(confirm_id: id, confirm: str):
 
 @user_account_app.errorhandler(404)
 def handle_not_found_error(exception):
+    """Handle not found error."""
     logger.info(exception)
     return render_template("404.html"), 404

@@ -1,9 +1,10 @@
 import os
 
-PG_HOST = os.environ.get('PG_HOST')
+PG_HOST = os.environ.get("PG_HOST")
 
 
 class BaseConfig:
+    """Base configuration."""
     SECURITY_LOGIN_URL = "/login"
     SECURITY_LOGOUT_URL = "/account/logout"
     SECURITY_REGISTER_URL = "/register"
@@ -21,16 +22,21 @@ class BaseConfig:
 
 
 class DevConfig(BaseConfig):
-    SQLALCHEMY_DATABASE_URI = "postgresql+psycopg2://user:password@0.0.0.0:5432/alpaca"
+    """Development configuration."""
+    SQLALCHEMY_DATABASE_URI = (
+        "postgresql+psycopg2://user:password@0.0.0.0:5432/alpaca"
+    )
     SQLALCHEMY_TRACK_MODIFICATIONS = True
 
 
 class ProdConfig(BaseConfig):
+    """Production configuration."""
     SQLALCHEMY_DATABASE_URI = f"postgresql+psycopg2://user:password@{PG_HOST}:5432/alpaca"
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 
 class TestConfig(BaseConfig):
+    """Test configuration."""
     TESTING = True
 
 

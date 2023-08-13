@@ -1,75 +1,92 @@
-
 <nav style="background-color: black;">
-  <ul>
-    <li>
-      <a class="nav-link {% if request.url_rule.endpoint == 'home_app.index' %} active {% endif %}" style="{% if request.url_rule.endpoint == 'home_app.index' %} color: white; {% else %} color: gray; {% endif %}" aria-current="page"
-                       data-bs-toggle='tooltip' data-bs-placement='top' title="{{ _('Home') }}"
-                       href="{{ url_for('home_app.index') }}">{{ _('Home') }}</a>
-    </li>
-    <li>
-       <a class="nav-link {% if request.url_rule.endpoint == 'finder_app.index' %} active {% endif %}" style="{% if request.url_rule.endpoint == 'finder_app.index' %} color: white; {% else %} color: gray; {% endif %}" aria-current="page"
-                       data-bs-toggle='tooltip' data-bs-placement='top' title="{{ _('Finder-Opponent') }}"
-                       href="{{ url_for('finder_app.index') }}">{{ _('Finder-Opponent') }}</a>
-    </li>
-    {# Test area #}
-    {% if current_user.is_authenticated and current_user.name == 'admin' %}
-    <li>
-       <a class="nav-link {% if request.url_rule.endpoint == 'product_app.product_list' %} active {% endif %}" style="{% if request.url_rule.endpoint == 'product_app.product_list' %} color: white; {% else %} color: gray; {% endif %}"
-                       data-bs-toggle='tooltip' data-bs-placement='top' title="{{ _('Products') }}"
-                       href="{{ url_for('product_app.product_list') }}">{{ _('Products') }}</a>
-    </li>
-    {% endif %}
-    <li>
-      <a class="nav-link {% if request.url_rule.endpoint == 'gallery_app.gallery_list' %} active {% endif %}" style="{% if request.url_rule.endpoint == 'gallery_app.gallery_list' %} color: white; {% else %} color: gray; {% endif %}"
-                       data-bs-toggle='tooltip' data-bs-placement='top' title="{{ _('Photo-Gallery') }}"
-                       href="{{ url_for('gallery_app.gallery_list') }}">{{ _('Photo-Gallery') }}</a>
-    </li>
-    <li>
-      <a class="nav-link {% if request.url_rule.endpoint == 'video_app.video_list' %} active {% endif %}" style="{% if request.url_rule.endpoint == 'video_app.video_list' %} color: white; {% else %} color: gray; {% endif %}"
-                       data-bs-toggle='tooltip' data-bs-placement='top' title="{{ _('Video-Gallery') }}"
-                       href="{{ url_for('video_app.video_list') }}">{{ _('Video-Gallery') }}</a>
-    </li>
-    {# Test area #}
-    {% if current_user.is_authenticated and current_user.name == 'admin' %}
-    <li>
-        <a class="nav-link {% if request.url_rule.endpoint == 'cart_app.empty_list' %} active {% endif %}" style="{% if request.url_rule.endpoint == 'cart_app.empty_list' %} color: white; {% else %} color: gray; {% endif %}"
-                       data-bs-toggle='tooltip' data-bs-placement='top' title="{{ _('Cart') }}"
-                        href="{{ url_for('cart_app.empty_list') }}">{{ _('Cart') }}</a>
-    </li>
-    {% endif %}
-    <li>
-        <a class="nav-link {% if request.url_rule.endpoint == 'support_app.support_list' %} active {% endif %}" style="{% if request.url_rule.endpoint == 'support_app.support_list' %} color: white; {% else %} color: gray;{% endif %}"
-                       data-bs-toggle='tooltip' data-bs-placement='top' title="{{ _('Support') }}"
-                        href="{{ url_for('support_app.support_list') }}">{{ _('Support') }}</a>
-    </li>
-    <li>
-        <a class="nav-link {% if request.url_rule.endpoint == 'about_app.about' %} active {% endif %}" style="{% if request.url_rule.endpoint == 'about_app.about' %} color: white; {% else %} color: gray; {% endif %}"
-                       data-bs-toggle='tooltip' data-bs-placement='top' title="{{ _('About') }}"
-                        href="{{ url_for('about_app.about') }}">{{ _('About') }}</a>
-    </li>
-     {% if not current_user.is_authenticated %}
-    <li>
-        <a class="nav-link" data-bs-toggle='tooltip' data-bs-placement='top' title="{{ _('Sign In') }}" id='btn-login-unique'
-                        href="{{ url_for('login_app.login') }}">{{ _('Sign In') }}</a>
-    </li>
-    {% endif %}
-    {% if current_user.is_authenticated %}
-    <li>
-      <a class="nav-link {% if request.url_rule.endpoint == 'user_account_app.user_account' %} active {% endif %}" style="{% if request.url_rule.endpoint == 'user_account_app.user_account' %} color: white; {% else %} color: gray;{% endif %}"
-                       data-bs-toggle='tooltip' data-bs-placement='top' title="{{ _('Account') }}"
-                        href="{{ url_for('user_account_app.user_account') }}">{{ _('Account') }}</a>
-    </li>
-    <li>
-      <a class="nav-link" style="{% if request.url_rule.endpoint != 'user_account_app.logout' %} color: white; {% else %} color: gray;{% endif %}"
-                       data-bs-toggle='tooltip' data-bs-placement='top' title="{{ _('Logout') }}"
-                        href="{{ url_for('user_account_app.logout') }}">{{ _('Logout') }}</a>
-    </li>
-    {% endif %}
-    <select class="selectpicker" data-width="fit" id="select-option-lang" style="color: gray; background-color: rgba(255, 255, 255, 0.1)">
-      <option value="{{ url_for(request.endpoint, lang_code='en', post_id=1, product_id=9, cart_id=9, email=1 ) }}">US</option>
-      <option  value="{{ url_for(request.endpoint, lang_code='uk', product_id=9, cart_id=9, post_id=1, email=1 ) }}">UA</option>
-    </select>
-  </ul>
+    <ul>
+        <li>
+            <a class="nav-link {% if request.url_rule.endpoint == 'home_app.index' %} active {% endif %}"
+               style="{% if request.url_rule.endpoint == 'home_app.index' %} color: white; {% else %} color: gray; {% endif %}"
+               aria-current="page"
+               data-bs-toggle='tooltip' data-bs-placement='top' title="{{ _('Home') }}"
+               href="{{ url_for('home_app.index') }}">{{ _('Home') }}</a>
+        </li>
+        <li>
+            <a class="nav-link {% if request.url_rule.endpoint == 'finder_app.index' %} active {% endif %}"
+               style="{% if request.url_rule.endpoint == 'finder_app.index' %} color: white; {% else %} color: gray; {% endif %}"
+               aria-current="page"
+               data-bs-toggle='tooltip' data-bs-placement='top' title="{{ _('Finder-Opponent') }}"
+               href="{{ url_for('finder_app.index') }}">{{ _('Finder-Opponent') }}</a>
+        </li>
+        {# Test area #}
+        {% if current_user.is_authenticated and current_user.name == 'admin' %}
+            <li>
+                <a class="nav-link {% if request.url_rule.endpoint == 'product_app.product_list' %} active {% endif %}"
+                   style="{% if request.url_rule.endpoint == 'product_app.product_list' %} color: white; {% else %} color: gray; {% endif %}"
+                   data-bs-toggle='tooltip' data-bs-placement='top' title="{{ _('Products') }}"
+                   href="{{ url_for('product_app.product_list') }}">{{ _('Products') }}</a>
+            </li>
+        {% endif %}
+        <li>
+            <a class="nav-link {% if request.url_rule.endpoint == 'gallery_app.gallery_list' %} active {% endif %}"
+               style="{% if request.url_rule.endpoint == 'gallery_app.gallery_list' %} color: white; {% else %} color: gray; {% endif %}"
+               data-bs-toggle='tooltip' data-bs-placement='top' title="{{ _('Photo-Gallery') }}"
+               href="{{ url_for('gallery_app.gallery_list') }}">{{ _('Photo-Gallery') }}</a>
+        </li>
+        <li>
+            <a class="nav-link {% if request.url_rule.endpoint == 'video_app.video_list' %} active {% endif %}"
+               style="{% if request.url_rule.endpoint == 'video_app.video_list' %} color: white; {% else %} color: gray; {% endif %}"
+               data-bs-toggle='tooltip' data-bs-placement='top' title="{{ _('Video-Gallery') }}"
+               href="{{ url_for('video_app.video_list') }}">{{ _('Video-Gallery') }}</a>
+        </li>
+        {# Test area #}
+        {% if current_user.is_authenticated and current_user.name == 'admin' %}
+            <li>
+                <a class="nav-link {% if request.url_rule.endpoint == 'cart_app.empty_list' %} active {% endif %}"
+                   style="{% if request.url_rule.endpoint == 'cart_app.empty_list' %} color: white; {% else %} color: gray; {% endif %}"
+                   data-bs-toggle='tooltip' data-bs-placement='top' title="{{ _('Cart') }}"
+                   href="{{ url_for('cart_app.empty_list') }}">{{ _('Cart') }}</a>
+            </li>
+        {% endif %}
+        <li>
+            <a class="nav-link {% if request.url_rule.endpoint == 'support_app.support_list' %} active {% endif %}"
+               style="{% if request.url_rule.endpoint == 'support_app.support_list' %} color: white; {% else %} color: gray;{% endif %}"
+               data-bs-toggle='tooltip' data-bs-placement='top' title="{{ _('Support') }}"
+               href="{{ url_for('support_app.support_list') }}">{{ _('Support') }}</a>
+        </li>
+        <li>
+            <a class="nav-link {% if request.url_rule.endpoint == 'about_app.about' %} active {% endif %}"
+               style="{% if request.url_rule.endpoint == 'about_app.about' %} color: white; {% else %} color: gray; {% endif %}"
+               data-bs-toggle='tooltip' data-bs-placement='top' title="{{ _('About') }}"
+               href="{{ url_for('about_app.about') }}">{{ _('About') }}</a>
+        </li>
+        {% if not current_user.is_authenticated %}
+            <li>
+                <a class="nav-link" data-bs-toggle='tooltip' data-bs-placement='top' title="{{ _('Sign In') }}"
+                   id='btn-login-unique'
+                   href="{{ url_for('login_app.login') }}">{{ _('Sign In') }}</a>
+            </li>
+        {% endif %}
+        {% if current_user.is_authenticated %}
+            <li>
+                <a class="nav-link {% if request.url_rule.endpoint == 'user_account_app.user_account' %} active {% endif %}"
+                   style="{% if request.url_rule.endpoint == 'user_account_app.user_account' %} color: white; {% else %} color: gray;{% endif %}"
+                   data-bs-toggle='tooltip' data-bs-placement='top' title="{{ _('Account') }}"
+                   href="{{ url_for('user_account_app.user_account') }}">{{ _('Account') }}</a>
+            </li>
+            <li>
+                <a class="nav-link"
+                   style="{% if request.url_rule.endpoint != 'user_account_app.logout' %} color: white; {% else %} color: gray;{% endif %}"
+                   data-bs-toggle='tooltip' data-bs-placement='top' title="{{ _('Logout') }}"
+                   href="{{ url_for('user_account_app.logout') }}">{{ _('Logout') }}</a>
+            </li>
+        {% endif %}
+        <select class="selectpicker" data-width="fit" id="select-option-lang"
+                style="color: gray; background-color: rgba(255, 255, 255, 0.1)">
+            <option value="{{ url_for(request.endpoint, lang_code='en', post_id=1, product_id=9, cart_id=9, email=1 ) }}">
+                US
+            </option>
+            <option value="{{ url_for(request.endpoint, lang_code='uk', product_id=9, cart_id=9, post_id=1, email=1 ) }}">
+                UA
+            </option>
+        </select>
+    </ul>
 </nav>
 
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"
@@ -77,10 +94,10 @@
         crossorigin="anonymous">
 </script>
 <script>
-document.getElementById('select-option-lang').addEventListener('click', function() {
-  const select = document.getElementById('select-option-lang');
-  const option = select.options[select.selectedIndex];
-  window.location = option.value;
-});
+    document.getElementById('select-option-lang').addEventListener('click', function () {
+        const select = document.getElementById('select-option-lang');
+        const option = select.options[select.selectedIndex];
+        window.location = option.value;
+    });
 </script>
 

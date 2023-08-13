@@ -1,20 +1,25 @@
-from sqlalchemy import Column, Integer, String, Boolean, ForeignKey, Float
+from sqlalchemy import Boolean, Column, Float, ForeignKey, Integer, String
+
 from opponent_app.models import db
 
 
 class Product(db.Model):
-    __tablename__ = "products"
+    """Product model for storing products."""
+    __tablename__ = "products"  # noqa
     id = Column(Integer, primary_key=True)
     name = Column(String, nullable=False)
     price = Column(String)
     is_new = Column(Boolean, nullable=False, default=False)
     add = Column(Boolean, nullable=False, default=False, server_default="false")
-    deleted = Column(Boolean, nullable=False, default=False, server_default="false")
+    deleted = Column(
+        Boolean, nullable=False, default=False, server_default="false"
+    )
     t_shirts = db.relationship("TShirt", backref="products", lazy=True)
 
 
 class TShirt(db.Model):
-    __tablename__ = "t_shirts"
+    """TShirt model for storing t-shirts."""
+    __tablename__ = "t_shirts"  # noqa
     id = Column(Integer, primary_key=True)
     name = Column(String, nullable=False)
     color = Column(String, nullable=False)
@@ -26,7 +31,8 @@ class TShirt(db.Model):
 
 
 class Order(db.Model):
-    __tablename__ = "orders"
+    """Order model for storing orders."""
+    __tablename__ = "orders"  # noqa
     id = Column(Integer, primary_key=True)
     name_product = Column(String, nullable=False)
     print = Column(String, nullable=False)

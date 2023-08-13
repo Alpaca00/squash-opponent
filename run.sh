@@ -1,10 +1,11 @@
-export SPS="Mozi2229659Ozi"
-export SECRET_KEY="6Lf0rL8bAAAAAL0YqesYius-y0iQnYThoR-RWd0s"
+export SPS="Mozilo2229659Ozi"
+export SECRET_KEY="52fsd5f4sd5gegrg5g-5dsa-dad5"
 export EMAIL_USERNAME="squashopponent@gmail.com"
-export EMAIL_PASSWORD="changes"
+export EMAIL_PASSWORD="squashopponent123"
 
-#echo run development app
-#FLASK_ENV=development FLASK_APP="opponent_app:create_app" flask run --host=0.0.0.0
+echo run development app
+#pipenv shell
+FLASK_ENV=development FLASK_APP="opponent_app:create_app" flask run --host=0.0.0.0
 
 #echo production version
 #echo run wsgi app heroku

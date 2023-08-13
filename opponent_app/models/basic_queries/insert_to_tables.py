@@ -1,7 +1,5 @@
-from opponent_app import create_app
-from opponent_app.models import TableResult, TableScore, Player
-from opponent_app import db
-
+from opponent_app import create_app, db
+from opponent_app.models import Player, TableResult, TableScore
 
 positions = [1, 2, 3, 4]
 teams = ["Anchors", "Warriors", "Snails", "Gladiators"]
