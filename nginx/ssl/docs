@@ -1,0 +1,2 @@
+Note: (zerossl)
+cat certificate.crt ca_bundle.crt >> certificate.crt

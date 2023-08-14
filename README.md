@@ -4,12 +4,12 @@ Open source project for students or anyone who wants to learn how to create a we
 
 <img alt="GitHub" src="https://img.shields.io/github/license/alpaca00/squash-opponent?color=aas">  <img src="https://img.shields.io/badge/code%20style-black-000000.svg"  alt=""/> <img alt="Docker Automated build" src="https://img.shields.io/docker/automated/jrottenberg/ffmpeg.svg">
 
-[lviv-squash-team.com.ua](https://lviv-squash-team.com.ua/en)
+#### _Recourse:_ [lviv-squash-team.com.ua](https://lviv-squash-team.com.ua/en)
 
 
 ### Installation
 
-#### Add .env file to the root directory and fill it with the following data:
+#### Add ``.env`` file to the root directory and fill it with the following data:
 
 ```shell
 SPS="your salt for password hashing"
@@ -29,11 +29,17 @@ POSTGRES_PASSWORD="password for postgres user"
 docker-compose up
 ```
 
+<hr>
 
-**Welcomes everyone! Follow to group chat that squash-opponent-bot is a part of.
+### Telegram bot
+
+**Follow to group chat that squash-opponent-bot is a part of.
 Send a message or select options. If you have Telegram, you can contact. Welcome bot right now.**
 
-🤖 https://t.me/SquashOpponentBot
+🤖 [BOT](https://t.me/SquashOpponentBot)
+
+
+### About the project
 
 ***The idea of this application is to popularize squash in Lviv. 
 The goal is convenience to find an opponent for the game.***

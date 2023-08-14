@@ -11,7 +11,7 @@ services:
       PG_HOST: pg
       R_HOST: redis
     volumes:
-      - squash-opponent:/app
+      - /squash-opponent:/app
     expose:
       - 8000
       - 443
@@ -21,7 +21,7 @@ services:
     depends_on:
       - pg
       - redis
-    command: gunicorn -w 1 -b 0.0.0.0:8000 wsgi:app
+    command: gunicorn -w 1 -b 0.0.0.0:443 wsgi:app
   pg:
     image: postgres:13.3
     environment:

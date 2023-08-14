@@ -1,64 +1,63 @@
 import sys
-from flask import (
-    Flask,
-    render_template,
-    g,
-    request,
-    url_for,
-    redirect,
-    current_app,
-    abort, jsonify,
-)
-# from OpenSSL import SSL
-from loguru import logger
+from typing import Literal
 
-from opponent_app.public_api import health_api, get_user_publications_api, get_all_publications_api, \
-    get_all_tournaments_api, create_publication_api
+from flask import Flask, g, redirect, render_template, request, url_for
+from loguru import logger
 
 from opponent_app.config import configurations, mail_settings
 from opponent_app.extensions import (
-    login_manager,
-    security,
-    migrate,
-    login,
-    bootstrap,
-    mail,
     babel,
+    bootstrap,
+    login,
+    login_manager,
+    mail,
+    migrate,
+    security,
 )
 from opponent_app.models import (
-    db,
-    user_datastore,
-    UserAccount,
     OfferOpponent,
     QueueOpponent,
-    UserOpponent
+    UserAccount,
+    UserOpponent,
+    db,
+    user_datastore,
+)
+from opponent_app.public_api import (
+    create_publication_api,
+    get_all_publications_api,
+    get_all_tournaments_api,
+    get_user_publications_api,
+    health_api,
 )
 from opponent_app.views import (
-    product_app,
-    gallery_app,
-    video_app,
+    about_app,
+    admin,
     cart_app,
+    finder_app,
+    gallery_app,
+    home_app,
     login_app,
+    product_app,
+    recovery_password_app,
     register_app,
     support_app,
     user_account_app,
-    home_app,
-    admin,
-    about_app,
-    finder_app,
-    recovery_password_app,
+    video_app,
 )
 
 
-# context = SSL.Context(SSL.TLSv1_2_METHOD)
-# context.use_privatekey_file('nginx/ssl/private.key')
-# context.use_certificate_file('nginx/ssl/certificate.crt')
+def create_app(
+    environment_name: Literal[
+        "production", "development", "testing"
+    ] = "production"
+) -> Flask:
+    """Create a Flask application using the app factory pattern.
 
-
-def create_app(environment_name="production"):
+    :param environment_name: The name of the environment to use.
+    :return: A Flask application.
+    """
     app = Flask(__name__)
     app.config.from_object(configurations[environment_name])
-    # app.config.update(ssl_context=context)
     db.init_app(app)
     migrate.init_app(app, db)
     login.init_app(app)
@@ -72,17 +71,24 @@ def create_app(environment_name="production"):
     admin.init_app(app)
 
     @babel.localeselector
-    def get_locale():
+    def get_locale() -> str:
+        """Get the language code from the request header."""
         if not g.get("lang_code", None):
-            g.lang_code = request.accept_languages.best_match(app.config["LANGUAGES"])
+            g.lang_code = request.accept_languages.best_match(
+                app.config["LANGUAGES"]
+            )
         return g.lang_code
 
     logger.add(
-        sys.stderr, format="{time} {level} {message}", filter="my_module", level="INFO"
+        sys.stderr,
+        format="{time} {level} {message}",
+        filter="my_module",
+        level="INFO",
     )
 
     @app.errorhandler(500)
-    def handle_internal_server_error(exception):
+    def handle_internal_server_error(exception):  # noqa
+        """Handle internal server errors."""
         return render_template("500.html"), 500
 
     app.register_blueprint(home_app, url_prefix="/<lang_code>")
@@ -99,9 +105,7 @@ def create_app(environment_name="production"):
     app.register_blueprint(
         recovery_password_app, url_prefix="/<lang_code>/recovery-password"
     )
-    app.register_blueprint(
-        health_api, url_prefix="/api/v1/check-health"
-    )
+    app.register_blueprint(health_api, url_prefix="/api/v1/check-health")
     app.register_blueprint(
         get_user_publications_api, url_prefix="/api/v1/get-user-publications"
     )
@@ -117,10 +121,11 @@ def create_app(environment_name="production"):
 
     @app.route("/")
     def home():
+        """Redirect to the home page."""
         g.lang_code = request.accept_languages.best_match(app.config["LANGUAGES"])
         return redirect(url_for("home_app.index"))
 
     return app
 
 
-import opponent_app.views
+import opponent_app.views  # noqa
