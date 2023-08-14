@@ -1,2 +1,5 @@
 Note: (zerossl)
 cat certificate.crt ca_bundle.crt >> certificate.crt
+
+Note: (dns-certbot)
+https://www.digitalocean.com/community/tutorials/how-to-acquire-a-let-s-encrypt-certificate-using-dns-validation-with-acme-dns-certbot-on-ubuntu-18-04
