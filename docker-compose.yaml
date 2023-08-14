@@ -42,7 +42,7 @@ services:
     volumes:
       - ./config/redis-docker/redis.conf:/redis.conf
     command: [ "redis-server", "/redis.conf" ]
-  nginx-ss1-proxy:
+  nginx-ssl-proxy:
     image: danieldent/nginx-ssl-proxy
     container_name: nginx
     restart: always
