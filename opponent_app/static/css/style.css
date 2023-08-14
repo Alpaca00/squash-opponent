@@ -2,35 +2,39 @@
 @import url(https://raw.github.com/FortAwesome/Font-Awesome/master/docs/assets/css/font-awesome.min.css);
 
 body {
-	background: #DDD;
-	font-size: 15px;
+    background: #DDD;
+    font-size: 15px;
 }
+
 #wrap {
-  margin: 50px 100px;
-  display: inline-block;
-  position: relative;
-  height: 50px;
-  float: right;
-  padding: 0;
-  position: relative;
+    margin: 50px 100px;
+    display: inline-block;
+    position: relative;
+    height: 50px;
+    float: right;
+    padding: 0;
+    position: relative;
 }
 
 
-img{
+img {
     max-width: 100%;
 }
-.gallery{
-    background: linear-gradient( rgba(0, 0, 0, 0.5) 100%, rgba(0, 0, 0, 0.5)100%);
+
+.gallery {
+    background: linear-gradient(rgba(0, 0, 0, 0.5) 100%, rgba(0, 0, 0, 0.5) 100%);
     padding: 80px 0;
 }
-.gallery img{
+
+.gallery img {
     background-color: #ffffff;
     padding: 15px;
     width: 100%;
-    box-shadow: 0 0 15px rgba(0,0,0,0.3);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
     cursor: pointer;
 }
-#gallery-modal .modal-img{
+
+#gallery-modal .modal-img {
     width: 100%;
 }
 
@@ -39,8 +43,8 @@ img{
 }
 
 html, body {
-  width: 100%;
-  height: 100%;
+    width: 100%;
+    height: 100%;
 }
 
 
@@ -49,27 +53,29 @@ html, body {
 }
 
 .album {
-    background: linear-gradient( rgba(0, 0, 0, 0.5) 100%, rgba(0, 0, 0, 0.5)100%);
+    background: linear-gradient(rgba(0, 0, 0, 0.5) 100%, rgba(0, 0, 0, 0.5) 100%);
     margin-bottom: 35px;
 }
 
-.btn a{
+.btn a {
     color: yellow;
     text-decoration: none;
 }
-#add-product{
 
-  position: relative;
-  top: -350px;
-  right: -650px;
+#add-product {
+
+    position: relative;
+    top: -350px;
+    right: -650px;
 
 }
+
 #back-list-id {
     text-decoration: none;
 }
 
 .desc-text {
-    background: linear-gradient( rgba(0, 0, 0, 0.9) 90%, rgba(0, 0, 0, 0.9)90%), url("/static/img/desc.png");
+    background: linear-gradient(rgba(0, 0, 0, 0.9) 90%, rgba(0, 0, 0, 0.9) 90%), url("/static/img/desc.png");
 }
 
 .lead {
@@ -180,7 +186,6 @@ ul {
     -o-transform: translateY(4px);
     transform: translateY(4px)
 }
-
 
 
 .cart_item_total {
@@ -299,6 +304,7 @@ ul {
 #total-order {
     color: #d63384;
 }
+
 #total-order2 {
     color: #d63384;
 }
@@ -316,35 +322,35 @@ ul {
 }
 
 
-.container-login{
-background-image: url("/static/img/cort-ref.jpg");
-height: 100%;
-align-content: center;
+.container-login {
+    background-image: url("/static/img/cort-ref.jpg");
+    height: 100%;
+    align-content: center;
 }
 
-.card-nest{
-margin-top: auto;
-margin-bottom: auto;
-background-color: rgba(0,0,0,0.5) !important;
+.card-nest {
+    margin-top: auto;
+    margin-bottom: auto;
+    background-color: rgba(0, 0, 0, 0.5) !important;
 }
 
-.social_icon span{
-font-size: 45px;
-margin-left: 10px;
-color: #FFC312;
+.social_icon span {
+    font-size: 45px;
+    margin-left: 10px;
+    color: #FFC312;
 }
 
-.social_icon span:hover{
-color: white;
-cursor: pointer;
+.social_icon span:hover {
+    color: white;
+    cursor: pointer;
 }
 
-.card-header h3{
-color: white;
+.card-header h3 {
+    color: white;
 }
 
 
-.input-group-prepend span{
+.input-group-prepend span {
     font-size: 25px;
     height: 15px
 
@@ -354,7 +360,8 @@ color: white;
     margin-right: 5px;
 
 }
-.form-control{
+
+.form-control {
 
     height: 40px;
     width: 95%;
@@ -363,124 +370,125 @@ color: white;
 }
 
 
-input:focus{
-outline: 0 0 0 0  !important;
-box-shadow: 0 0 0 0 !important;
+input:focus {
+    outline: 0 0 0 0 !important;
+    box-shadow: 0 0 0 0 !important;
 
 }
 
-.remember{
-color: white;
+.remember {
+    color: white;
 }
 
-.remember input
-{
-width: 20px;
-height: 20px;
-margin-left: 15px;
-margin-right: 5px;
+.remember input {
+    width: 20px;
+    height: 20px;
+    margin-left: 15px;
+    margin-right: 5px;
 }
 
-.login_btn{
-color: black;
-background-color: #FFC312;
-width: 100px;
+.login_btn {
+    color: black;
+    background-color: #FFC312;
+    width: 100px;
 }
 
-.login_btn:hover{
-color: black;
-background-color: white;
+.login_btn:hover {
+    color: black;
+    background-color: white;
 }
 
-.links{
-color: white;
+.links {
+    color: white;
 }
 
-.links a{
-margin-left: 4px;
+.links a {
+    margin-left: 4px;
 }
 
-#social-icon{
+#social-icon {
     cursor: pointer;
     font-size: 18px;
 }
 
 
-
 #reg-form {
-  width: 50%;
-  margin: 60px auto;
-  background: #efefef;
-  padding: 60px 120px 80px 120px;
-  text-align: center;
-  -webkit-box-shadow: 2px 2px 3px rgba(0,0,0,0.1);
-  box-shadow: 2px 2px 3px rgba(0,0,0,0.1);
+    width: 50%;
+    margin: 60px auto;
+    background: #efefef;
+    padding: 60px 120px 80px 120px;
+    text-align: center;
+    -webkit-box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1);
+    box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1);
 }
+
 label {
-  display: block;
-  position: relative;
-  margin: 40px 0px;
+    display: block;
+    position: relative;
+    margin: 40px 0px;
 }
+
 .label-txt {
-  position: absolute;
-  top: -1.6em;
-  padding: 10px;
-  font-family: sans-serif;
-  font-size: .8em;
-  letter-spacing: 1px;
-  color: rgb(120,120,120);
-  transition: ease .3s;
+    position: absolute;
+    top: -1.6em;
+    padding: 10px;
+    font-family: sans-serif;
+    font-size: .8em;
+    letter-spacing: 1px;
+    color: rgb(120, 120, 120);
+    transition: ease .3s;
 }
+
 .input {
-  width: 100%;
-  padding: 10px;
-  background: transparent;
-  border: none;
-  outline: none;
+    width: 100%;
+    padding: 10px;
+    background: transparent;
+    border: none;
+    outline: none;
 }
 
 .line-box {
-  position: relative;
-  width: 100%;
-  height: 2px;
-  background: #BCBCBC;
+    position: relative;
+    width: 100%;
+    height: 2px;
+    background: #BCBCBC;
 }
 
 .line {
-  position: absolute;
-  width: 0%;
-  height: 2px;
-  top: 0px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: #8BC34A;
-  transition: ease .6s;
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    top: 0px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #8BC34A;
+    transition: ease .6s;
 }
 
 .input:focus + .line-box .line {
-  width: 100%;
+    width: 100%;
 }
 
 .label-active {
-  top: -3em;
+    top: -3em;
 }
 
 button {
-  display: inline-block;
-  padding: 12px 24px;
-  background: rgb(220,220,220);
-  font-weight: bold;
-  color: rgb(120,120,120);
-  border: none;
-  outline: none;
-  border-radius: 3px;
-  cursor: pointer;
-  transition: ease .3s;
+    display: inline-block;
+    padding: 12px 24px;
+    background: rgb(220, 220, 220);
+    font-weight: bold;
+    color: rgb(120, 120, 120);
+    border: none;
+    outline: none;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: ease .3s;
 }
 
 button:hover {
-  background: #8BC34A;
-  color: #ffffff;
+    background: #8BC34A;
+    color: #ffffff;
 }
 
 .sidebar {
@@ -491,191 +499,205 @@ button:hover {
 
 }
 
-.sidebar li .submenu{
-	list-style: none;
-	margin: 0;
-	padding: 0;
-	padding-left: 1rem;
-	padding-right: 1rem;
+.sidebar li .submenu {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    padding-left: 1rem;
+    padding-right: 1rem;
 }
 
 
-.g-recaptcha{
+.g-recaptcha {
     padding: 12px 24px;
 }
 
 .visible {
-  visibility: visible !important;
+    visibility: visible !important;
 }
+
 .invisible {
-  visibility: hidden !important;
+    visibility: hidden !important;
 }
 
 @import "bootstrap/scss/utilities";
 
-$utilities: (
-"visibility": (
-      property: visibility,
-      class: null,
-      values: (
-        visible: visible,
-        invisible: hidden,
-      )
-    )
-);
+$
+utilities:
+
+(
+"visibility"
+:
+
+(
+property: visibility,
+class: null,
+values:
+
+(
+visible: visible,
+invisible: hidden,
+
+)
+)
+)
+;
 
 .modal {
-  display: none;
-  position: fixed;
-  z-index: 1;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgb(0,0,0);
-  background-color: rgba(0,0,0,0.4);
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.4);
 }
 
 
 .modal-content {
-  background: white;
-  margin: 5% auto;
-  padding: 20px;
-  border: 1px solid #888;
-  width: 80%;
-  height: 15%;
-  color: black;
-}
-
-
-.close {
-  color: #aaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-  color: black;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-#contact{
-  margin-left: 100%;
-
-}
-.contact-ref{
-    text-decoration: none;
-    color: white;
-}
-
-#info-text{
+    background: white;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    height: 15%;
     color: black;
 }
 
 
-.en_lang{
-	position: absolute
-	top: -9999px
-	left: -9999px
-	}
-.lang_buttons{
-	text-align: right
-	}
-.button{
-		display: inline-block
-		text-decoration: none
-		border: 1px solid gray
-		padding: 5px 15px
-		margin-top: 20px
-		margin-right: 0
-		}
-.en_lang{
-		position: absolute
-		top: -9999px
-		left: -9999px
-		}
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#contact {
+    margin-left: 100%;
+
+}
+
+.contact-ref {
+    text-decoration: none;
+    color: white;
+}
+
+#info-text {
+    color: black;
+}
 
 
+.en_lang {
+    position: absolute
+    top: -9999px
+    left: -9999px
+}
+
+.lang_buttons {
+    text-align: right
+}
+
+.button {
+    display: inline-block
+    text-decoration: none
+    border: 1px solid gray
+    padding: 5px 15px
+    margin-top: 20px
+    margin-right: 0
+}
+
+.en_lang {
+    position: absolute
+    top: -9999px
+    left: -9999px
+}
 
 
 .send-data-btn {
-  background-image: linear-gradient(135deg, #008aff, #86d472);
-  margin-left: auto;
-  border-radius: 6px;
-  box-sizing: border-box;
-  color: #ffffff;
-  display: block;
-  height: 45px;
-  font-size: 1.4em;
-  font-weight: 600;
-  padding: 4px;
-  position: relative;
-  text-decoration: none;
-  width: 5em;
-  z-index: 2;
+    background-image: linear-gradient(135deg, #008aff, #86d472);
+    margin-left: auto;
+    border-radius: 6px;
+    box-sizing: border-box;
+    color: #ffffff;
+    display: block;
+    height: 45px;
+    font-size: 1.4em;
+    font-weight: 600;
+    padding: 4px;
+    position: relative;
+    text-decoration: none;
+    width: 5em;
+    z-index: 2;
 }
 
 .send-data-btn:hover {
-  color: #fff;
+    color: #fff;
 }
 
 .send-data-btn .bn39span {
-  align-items: center;
-  background: #0e0e10;
-  border-radius: 6px;
-  display: flex;
-  justify-content: center;
-  height: 100%;
-  transition: background 0.5s ease;
-  width: 100%;
+    align-items: center;
+    background: #0e0e10;
+    border-radius: 6px;
+    display: flex;
+    justify-content: center;
+    height: 100%;
+    transition: background 0.5s ease;
+    width: 100%;
 }
 
 .bn39:hover .bn39span {
-  background: transparent;
+    background: transparent;
 }
+
 }
 
 
 @import url(https://fonts.googleapis.com/css?family=Open+Sans);
 
 nav {
-  max-width: 960px;
+    max-width: 960px;
 
-  mask-image: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, #ffffff 25%, #ffffff 75%, rgba(255, 255, 255, 0) 100%);
-  margin: 0 auto;
-  padding: 60px 0;
+    mask-image: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, #ffffff 25%, #ffffff 75%, rgba(255, 255, 255, 0) 100%);
+    margin: 0 auto;
+    padding: 60px 0;
 }
 
 nav ul {
-  text-align: center;
+    text-align: center;
 
-  background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.2) 25%, rgba(255, 255, 255, 0.2) 75%, rgba(255, 255, 255, 0) 100%);
-  box-shadow: 0 0 25px rgba(0, 0, 0, 0.1), inset 0 0 1px rgba(255, 255, 255, 0.6);
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.2) 25%, rgba(255, 255, 255, 0.2) 75%, rgba(255, 255, 255, 0) 100%);
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.1), inset 0 0 1px rgba(255, 255, 255, 0.6);
 }
 
 nav ul li {
-  display: inline-block;
+    display: inline-block;
 }
 
 nav ul li a {
-  padding: 18px;
-  font-family: "Open Sans";
-  font-weight: bolder;
-  text-transform:uppercase;
-  color: rgba(0, 35, 122, 0.5);
-  font-size: 11px;
-  text-decoration: none;
-  display: block;
+    padding: 18px;
+    font-family: "Open Sans";
+    font-weight: bolder;
+    text-transform: uppercase;
+    color: rgba(0, 35, 122, 0.5);
+    font-size: 11px;
+    text-decoration: none;
+    display: block;
 }
 
 nav ul li a:hover {
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1), inset 0 0 1px rgba(255, 255, 255, 0.6);
-  background: rgba(255, 255, 255, 0.1);
-  color: rgba(0, 35, 122, 0.7);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1), inset 0 0 1px rgba(255, 255, 255, 0.6);
+    background: rgba(255, 255, 255, 0.1);
+    color: rgba(0, 35, 122, 0.7);
 }
 
 
